@@ -2,6 +2,7 @@
 
 ## Hub-specific group name patterns
 
+**Id:** 4398139f-ba65-4e6a-a7b3-03b3630f6d25  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** project agent notes (`AGENTS.md`); hub `GetGroupName` helpers; `SignalRNotificationService`  
@@ -25,6 +26,7 @@ Frontend: `frontend/src/services/signalrService.ts` (`connectTo*Hub`, `joinElect
 
 ## MainHub status vs role groups
 
+**Id:** 15a379ed-f1bc-4a32-8cc4-a7fe712c5cba  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #227 fix; `SignalRNotificationService.SendElectionUpdateAsync`; `MainHub.JoinElection`  
@@ -37,9 +39,10 @@ Frontend: `frontend/src/services/signalrService.ts` (`connectTo*Hub`, `joinElect
 
 ## Election teller name list (MainHub `tellersChanged`)
 
+**Id:** f8e458fa-1726-49f0-b7c0-0d62fea526ac  
 **Status:** active  
-**Evidence:** confirmed (issue #287)  
-**Source:** issue #287 (teller-name list slice); Teller 1/2 already persist via `Teller` + Tellers page  
+**Evidence:** confirmed  
+**Source:** issue #287 (teller-name list slice); Teller 1/2 already persist via `Teller` + Tellers page (evidence: issue #287)  
 **Revisit when:** teller names need FrontDesk-only fan-out, or the list grows large enough that a thin refetch is required
 
 Entering a name in Teller 1 or Teller 2 creates (or no-ops) a row on the existing election `Teller` table. Clearing the dropdown only clears this browser session’s selection (`useActiveTellers` / localStorage). It does **not** delete the election name. Admin delete stays on the existing Tellers page (`TellersListPage` + `TellerForm`).
@@ -56,6 +59,7 @@ Live distribution uses MainHub **base** group `Main{electionGuid}` and camelCase
 
 ## MainHub multi-election dashboard listen (JoinElections)
 
+**Id:** 95c5741d-e14e-466a-aa86-feae16783989  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #230; v3 `JoinAll` / `Public/JoinMainHubAll`; `MainHub.JoinElections` / `LeaveElections`  
@@ -72,10 +76,12 @@ Live distribution uses MainHub **base** group `Main{electionGuid}` and camelCase
 
 **Rejected alternative:** leave multi-join membership for the whole SPA session without leave-on-navigate. Rejected — would keep clients in many groups after leaving the list; v3 scoped multi-listen to the elections list.
 
-### Who owns Main vs FrontDesk membership
+## Who owns Main vs FrontDesk membership
 
+**Id:** ce71f670-abc2-494e-8684-9b934ea3bb55  
 **Status:** active  
-**Evidence:** confirmed (issue #242 — guest stage redirects stopped after leaving ballots)
+**Evidence:** confirmed  
+**Source:** issue #242 — guest stage redirects stopped after leaving ballots  
 
 - **Main hub** (`joinElection` / `leaveElection`): owned by `electionStore` / `MainLayout` for the active election session (`statusChanged`, computer code, guest close-out).
 - **Main hub multi-listen** (`joinDashboardElections` / `leaveDashboardElections`): owned by `DashboardPage` for known tellers only (issue #230).
@@ -90,6 +96,7 @@ Live distribution uses MainHub **base** group `Main{electionGuid}` and camelCase
 
 ## No election-scoped OnlineVotingHub (ballot totals)
 
+**Id:** bacadf81-7987-42d0-a9be-84cd55b066f7  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** maintainer review of unused scaffold vs v3 `AllVotersHub` / `VoterPersonalHub`; issue #233  
@@ -101,6 +108,7 @@ There is still no `/hubs/online-voting` hub and no `online-election-{guid}` grou
 
 ## Online voter hubs (AllVoters + VoterPersonal) — issue #233
 
+**Id:** 52a0297e-105e-41e9-b080-82644f2e6c24  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #233; v3 `AllVotersHub` / `VoterPersonalHub`; preferred thin-signal shape above  
@@ -133,6 +141,7 @@ Online voters use two authenticated hubs (policy `OnlineVoter` — JWT claims `v
 
 ## VoterCodeHub — live login-code delivery status (issue #229)
 
+**Id:** 1811432d-67fb-4017-a1a7-a631e4fde669  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #229; product decision 2026-09-20 (live status for SMS/voice and email; do not skip); v3 `VoterCodeHub` (`setStatus` / `final`); owner comment that the channel is downstream of SMS-pumping gates  
@@ -163,6 +172,7 @@ v4 request/verify stays HTTP. After a send is **actually attempted**, `requestCo
 
 ## No anonymous public results display
 
+**Id:** 239fbceb-3bea-4797-abae-cb4bb5eb84cc  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** product decision (maintainer)  
@@ -176,6 +186,7 @@ Election detail over HTTP follows the same rule: `GET /api/Elections/{guid}/stat
 
 ## FrontDeskHub event catalog
 
+**Id:** 7cb3b69a-1416-4a32-8b96-2496bada5bb7  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #232 fix; `SignalRNotificationService` FrontDesk methods; `peopleStore` / `FrontDeskPage` listeners  
@@ -206,6 +217,7 @@ Group: `FrontDesk{electionGuid}`.
 
 ## FrontDesk `reloadPage` vs full browser reload (#228)
 
+**Id:** 12512466-5167-49e1-8997-93be2773980f  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #228; v3 used `location.reload()` after ballot import; v4 prefers soft re-fetch  
@@ -219,6 +231,7 @@ Group: `FrontDesk{electionGuid}`.
 
 ## Import hub event catalog (#226)
 
+**Id:** 60f311a8-de19-47b6-8a87-e573e5d7c937  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #226; `SignalRNotificationService` import methods; `importStore` / `PeopleImportPage` listeners  

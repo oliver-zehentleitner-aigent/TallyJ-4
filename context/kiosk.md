@@ -1,15 +1,17 @@
 # Kiosk voting
 
-## Status: active
-
-## Evidence: confirmed (TallyJ-3.0 `VoterCodeHelper.GenerateKioskCode` / `EditPerson` copy; issue #182)
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** TallyJ-3.0 `VoterCodeHelper.GenerateKioskCode` / `EditPerson` copy; issue #182  
 
 Kiosk is the path for voters without email or phone. A teller enables it on Setup, mints a short code from the person record, and the voter types that code on a shared browser.
 
 ## Login window is 15 minutes and teller-renewed
 
+**Id:** 9ba42aac-9edf-4aef-b9cb-360db06828ce  
 **Status:** active  
-**Evidence:** confirmed (v3 Setup: “Make or renew a Kiosk Code” / “Code will expire after 15 minutes.”; issue #182)
+**Evidence:** confirmed  
+**Source:** v3 Setup: “Make or renew a Kiosk Code” / “Code will expire after 15 minutes.”; issue #182  
 
 `POST /api/People/{guid}/generateKioskCode` mints a code if the person has none, or keeps the same `Person.KioskCode` and refreshes `OnlineVoter.VerifyCodeDate`. Direct kiosk login (`voterId === verifyCode`, including `K_` prefix) succeeds only while that stamp is less than 15 minutes old. Opening person details does not mint a code and does not start the clock.
 
@@ -23,8 +25,10 @@ v3’s login helper used a 10-minute constant while the UI said 15. v4 follows t
 
 ## Shared kiosk browser must not keep the previous voter
 
+**Id:** df6e2735-50de-4e4b-9e98-c3d01d93140c  
 **Status:** active  
-**Evidence:** confirmed (issue #182; v3 cookie was non-persistent)
+**Evidence:** confirmed  
+**Source:** issue #182; v3 cookie was non-persistent  
 
 Kiosk login uses the same httpOnly `voter_token` cookie as other online voters. After a non-draft kiosk submit the login window is closed (`VerifyCode` / `VerifyCodeDate` cleared) so the same code cannot open a **new** session. `Person.KioskCode` stays so the current JWT can still find the row (status / a same-request write). The ballot page then logs out and the confirmation page is a handoff (`?kiosk=1`) with no “back to my elections.”
 
@@ -40,8 +44,10 @@ v4 submit does not empty `Person.KioskCode`; empty is the v3 used-code sentinel 
 
 ## Login window is election-scoped
 
+**Id:** 93885246-fefa-402e-8a45-1076f0c01c9b  
 **Status:** active  
-**Evidence:** inferred (`IX_PersonKioskCode` is `(ElectionGuid, KioskCode)`; `OnlineVoter.VoterId` is globally unique)
+**Evidence:** inferred  
+**Source:** `IX_PersonKioskCode` is `(ElectionGuid, KioskCode)`; `OnlineVoter.VoterId` is globally unique  
 
 `Person.KioskCode` letters may repeat across elections. The 15-minute window lives on an `OnlineVoter` row keyed `{normalizedLetters}.{electionGuid:N}` (type C) — the same string `KioskCodeLifetime.ToVoterId` returns, e.g. `SMART.` plus 32 hex digits. Mint/renew/submit in election A must not stamp or clear election B. A kiosk submit must use a scoped id whose parsed election matches `dto.ElectionGuid`; otherwise it is refused and no pending ballot is created. Auth of the typed letters binds the single open window; if two open elections both have a live window for those letters, login is refused with `voting.auth.verify.voterNotFound` rather than picking `FirstOrDefault`.
 
@@ -53,8 +59,10 @@ Front Desk personal notify targets `ToVoterId(election, letters)` so `VoterPerso
 
 ## Setup toggle writes `K` on `VotingMethods`
 
+**Id:** e7d442de-8a37-41a2-b04a-fd737da67499  
 **Status:** active  
-**Evidence:** inferred (v3 `VotingMethodsContains(Kiosk)`; v4 already gated person-form kiosk UI on that string)
+**Evidence:** inferred  
+**Source:** v3 `VotingMethodsContains(Kiosk)`; v4 already gated person-form kiosk UI on that string  
 
 The Setup switch adds or removes `K` (or the `KI` alias) without replacing the other tokens. Turning kiosk on also sets `UseOnlineVoting`, because kiosk auth uses the same open-window rule as email/phone.
 

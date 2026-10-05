@@ -2,6 +2,7 @@
 
 ## Dual response wrappers
 
+**Id:** 09294dd2-80a5-4806-a7b0-c963c0321892  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** project agent notes (`AGENTS.md`)  
@@ -18,6 +19,7 @@ Two response patterns are in active use:
 
 ## OpenAPI TypeScript client regeneration
 
+**Id:** a3edfe7d-c661-441f-8a47-b18e853bd245  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** project agent notes (`AGENTS.md`); `frontend/openApi/config.backend.ts`  
@@ -31,6 +33,7 @@ Backend DTO/controller/route changes require regenerating the frontend client (`
 
 ## Generated client error shape (hey-api)
 
+**Id:** d9ea0e2b-6504-4b4b-89bb-8c43defc4111  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** `frontend/src/api/gen/configService/client/client.gen.ts` (`throw jsonError`); incident on Calculate Tally showing raw `elections.stageChangeError.*|count=N`  

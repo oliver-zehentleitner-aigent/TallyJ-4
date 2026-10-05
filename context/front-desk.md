@@ -2,9 +2,10 @@
 
 ## Ballot Not Received is a hide-received filter
 
+**Id:** a196ba42-f6b2-44b6-a274-9012b7c9eca5  
 **Status:** active  
-**Evidence:** confirmed (v3 Front Desk `#ifNoBallot`)  
-**Source:** TallyJ-3.0 `Site/Views/Before/FrontDesk.cshtml` + `.cshtml.less` (`.NoBallot .Voter:not(.VM-)`)  
+**Evidence:** confirmed  
+**Source:** TallyJ-3.0 `Site/Views/Before/FrontDesk.cshtml` + `.cshtml.less` (`.NoBallot .Voter:not(.VM-)`) (evidence: v3 Front Desk `#ifNoBallot`)  
 **Revisit when:** election setup exposes checklist flags as first-class mailed-ballot tracking
 
 v3’s **Ballot Not Received** checkbox hid everyone whose voting method was set (ballot received / recorded). Combined with a checklist/flag, that showed who was flagged (for example mailed a ballot) but still had no method.
@@ -15,8 +16,10 @@ The checkbox is an extra filter on the current list: hide rows with a voting met
 
 ## Front Desk method codes and mixed-method switch
 
+**Id:** c40905c4-dda1-44f4-9fcd-9a61dc9967fd  
 **Status:** active  
-**Evidence:** inferred (issue #194; Person.VotingMethod varchar(1); reports/analyzer already used P/M/D/O/K/I)  
+**Evidence:** inferred  
+**Source:** issue #194; Person.VotingMethod varchar(1); reports/analyzer already used P/M/D/O/K/I  
 **Revisit when:** election setup exposes VotingMethods as first-class checkboxes instead of a string
 
 `Person.VotingMethod` is a single letter: **P** in person, **M** mailed, **D** dropped off, **C** called in, **O** online, **K** kiosk, **I** imported, **1/2/3** custom. Election setup may store the same letters concatenated (`PMD`) or comma-separated aliases (`IP,OL`). Front Desk buttons come from that string except **O** — Online is voter-initiated, so tellers cannot check anyone in as Online (that would count a Front Desk registration with no ballot). Empty setup defaults to P/M/D. The English word “In Person” is not code `I` — `I` is Imported.
@@ -37,9 +40,10 @@ Online ballots stay voter-initiated. Tellers do not create ballots at the Online
 
 ## Roll Call and envelope pages are not v4 product pages
 
+**Id:** 4d5f8864-b352-4f13-a724-b87d102b19d6  
 **Status:** active  
-**Evidence:** inferred (v3 menu vs v4 routes; `docs/Hubs-v3-vs-v4.md`)  
-**Source:** TallyJ-3.0 `Site/Views/menu.xml` (Roll Call / Sort Envelopes require `BallotProcess=Roll`); v4 has no `BallotProcess` setting  
+**Evidence:** inferred  
+**Source:** TallyJ-3.0 `Site/Views/menu.xml` (Roll Call / Sort Envelopes require `BallotProcess=Roll`); v4 has no `BallotProcess` setting (evidence: v3 menu vs v4 routes; `docs/Hubs-v3-vs-v4.md`)  
 **Revisit when:** a projector roll-call display or envelope-sort workflow is requested
 
 v3 Roll Call and Sort Envelopes existed only for the Roll ballot process. Count Envelopes was `Ballots/Reconcile`. v4 has no Roll process, no Front Desk roll-call or envelope-count routes, and **RollCallHub is deferred**.
@@ -50,9 +54,10 @@ v3 Roll Call and Sort Envelopes existed only for the Roll ballot process. Count 
 
 ## Front Desk checked-in count matches analysis voted
 
+**Id:** e6c4dc57-d36e-4a6b-86b2-0b633b78ce62  
 **Status:** active  
-**Evidence:** inferred (issue #185 count-match leftover)  
-**Source:** issue #185; [reports.md](reports.md)
+**Evidence:** inferred  
+**Source:** issue #185; [reports.md](reports.md) (evidence: issue #185 count-match leftover)  
 
 Header stats and `IsCheckedIn` used `RegistrationTime` only. Accept-all does not set that field, so processed online voters were missing from Front Desk while analysis and reconciliation counted them.
 
@@ -66,9 +71,10 @@ Unregister (and other desk-registration undo) stays on `RegistrationTime`. Accep
 
 ## Repeatable desk method while registration is open
 
+**Id:** 65bb3048-44a6-4fee-b206-59e1d5ce68b2  
 **Status:** active  
-**Evidence:** confirmed (Glen, issue #336, 2026-09-13)  
-**Source:** issue #336 after #186 / #334 / #335  
+**Evidence:** confirmed  
+**Source:** issue #336 after #186 / #334 / #335 (evidence: maintainer, issue #336, 2026-09-13)  
 **Revisit when:** tellers need in-place method buttons without Unregister
 
 A pending online row (Draft / Submitted) can be superseded by a desk method. Check-in still withdraws that row (same #186 path). After that, the teller may change the desk method until registration is done.
@@ -85,9 +91,10 @@ Processing / Processed stay refused. Unregister is still not offered without `Re
 
 ## Registration-done is the Finalized write lock
 
+**Id:** 8835686e-dce7-46a5-835d-a93237dd21b7  
 **Status:** active  
-**Evidence:** confirmed (existing `ElectionFinalizedWriteGuard`; Glen, issue #336)  
-**Source:** [election-state.md](election-state.md); `FrontDeskService` check-in / Unregister / flags / envelope  
+**Evidence:** confirmed  
+**Source:** [election-state.md](election-state.md); `FrontDeskService` check-in / Unregister / flags / envelope (evidence: existing `ElectionFinalizedWriteGuard`; maintainer, issue #336)  
 
 There is no separate “end registration” switch. Head tellers already lock people and ballot writes by advancing to **Finalized** (`ElectionFinalizedWriteGuard`). Check-in and Unregister already throw `elections.finalizedWriteBlocked`. The overlay uses that same stage: method, Unregister, and flag writes are not actionable while `electionStage === Finalized`. The notice reuses `elections.finalizedWriteBlocked` (same phrase as the API).
 
@@ -99,9 +106,10 @@ Leaving Finalized (confirmed FullTeller stage change) is what reopens those writ
 
 ## Accept-all vs Front Desk same-moment race
 
+**Id:** aa9a6bfb-bde4-438e-b09b-4ba786f8962a  
 **Status:** active  
-**Evidence:** confirmed (issue #336 second slice; SQLite `Issue336AcceptAllFrontDeskRaceTests`)  
-**Source:** issue #336 leftover after #337  
+**Evidence:** confirmed  
+**Source:** issue #336 leftover after #337 (evidence: issue #336 second slice; SQLite `Issue336AcceptAllFrontDeskRaceTests`)  
 **Revisit when:** Accept-all or check-in grows a third writer of `OnlineVotingInfo.Status`
 
 Committed order already had one counted vote: check-in first withdraws Draft/Submitted and Accept-all skips; Accept-all first to **Processing** / **Processed** and Front Desk refuses (`alreadyProcessingOnline` / `alreadyAcceptedOnline`); pass 2 drops the row if a desk method is already recorded; withdraw + Unregister leaves Accept-all nothing.
@@ -120,10 +128,12 @@ True same-moment `Task.WhenAll` of Accept-all + check-in (plus paper entry overl
 
 ## Front Desk SMS column is the phone P-row hint
 
+**Id:** b92ef9bf-bb5b-4e71-9fe6-c66cf41801a7  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 leftover; [sms-eligibility.md](sms-eligibility.md) tenth slice  
-**Revisit when:** Front Desk should open person detail for Set OK / Block
+**Revisit when:** Front Desk should open person detail for Set OK / Block  
+**See:** sms-eligibility.md#front-desk--people-list-sms-hint-tenth-slice — 747af2a6-4ff3-4aa9-954f-b30eb4fb1771 — as of 2026-10-05
 
 Eligible-voter rows include a compact `PhoneOnlineVoter` hint (never-seen / imported / OK / block reason) for people who have a phone. Lookup is P-row scoped; a non-P occupant’s status is not shown. The raw phone is not added to the Front Desk DTO. Set OK / Block stays on person detail — row-click is still check-in.
 

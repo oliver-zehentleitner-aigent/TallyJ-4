@@ -1,8 +1,8 @@
 # Online Ballot Acceptance & Name Resolution
 
-## Status: active
-
-## Evidence: confirmed (issues #188 / #169 / #187 / #256; v3 BallotNormal Find flow)
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** issues #188 / #169 / #187 / #256; v3 BallotNormal Find flow  
 
 Highest-risk functionality. Random name resolution and online acceptance introduce failure modes that did not exist (or were rare) in paper-only flows.
 
@@ -12,8 +12,10 @@ Treat online ballot paths with the same rigor as core analysis. Prefer explicit 
 
 ## Draft autosave vs Submitted
 
+**Id:** e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1  
 **Status:** active  
-**Evidence:** confirmed (Glen, #303 UAT; voter ballot page)
+**Evidence:** confirmed  
+**Source:** maintainer, #303 UAT; voter ballot page  
 
 While the voter fills names, the ballot page silently autosaves to `OnlineVotingInfo` as status **Draft** (payload in `ListPool`). Reload restores those votes. Draft is not Accept-all pending and does not inflate monitor Submitted counts. Clearing the last name overwrites that saved payload (empty Draft, or payload-only if already Submitted) so leave/return does not restore names the voter just removed. Empty `Votes` is allowed on submit validation for that overwrite. A first visit with no names still does not create a Draft. Monitor `TotalOnlineBallots` is Submitted + Processing + Processed — Draft is not in that total or in pending.
 
@@ -29,8 +31,10 @@ Once a row is **Submitted**, later autosaves (reload restore, notify toggle, or 
 
 ## Accept-all of pending online ballots
 
+**Id:** c3306353-19d3-43ed-9aa1-2c7b358a5936  
 **Status:** active  
-**Evidence:** confirmed (issue #188, Glen; v3 `ElectionHelper.ProcessOnlineBallots`)
+**Evidence:** confirmed  
+**Source:** issue #188, maintainer; v3 `ElectionHelper.ProcessOnlineBallots`  
 
 A voter submit stores a pending payload on `OnlineVotingInfo` (status `Submitted`). It does not create a regular `Ballot`. Submit (create or update a pending online ballot) is refused while the election is Finalized (`voting.submit.finalized`), even if the online window is still open. Window-based open/close still applies when the election is not Finalized.
 
@@ -71,10 +75,13 @@ Rows that already have a `BallotGuid` from the older submit-creates-ballot path 
 
 **Reason:** pending votes stay changeable until a teller accepts them; accepted votes become ordinary ballots with no remaining online payload.
 
-### Automated coverage for submit → Accept-all → counts
+## Automated coverage for submit → Accept-all → counts
 
+**Id:** 70da22e7-4629-4117-9bb6-1fb851d56d6f  
 **Status:** active  
-**Evidence:** confirmed (issue #169 remaining; HTTP integration in `OnlineVotingBallotFlowTests`)
+**Evidence:** confirmed  
+**Source:** issue #169 remaining; HTTP integration in `OnlineVotingBallotFlowTests`  
+**See:** election-state.md#concurrent-tellers-automated-coverage-is-sqlite-not-a-browser-driver — c05fa083-2ae0-4c1c-889c-18b9644d53bc — as of 2026-10-05
 
 Issue #169 is the test script for this process, not a second product build. Coverage is the HTTP integration path (voter submit → teller Accept-all → monitor/summary counts, ListPool wipe, OL regular ballot, tally) plus the existing Accept-all service tests and monitor Vitest counts. That HTTP test uses the shared SQLite `CustomWebApplicationFactory`, which is relational, so it exercises the `ExecuteUpdate` claim that in-memory unit tests skip.
 
@@ -88,8 +95,10 @@ Two tellers at once (paper create + Accept-all + Front Desk) is issue #191, not 
 
 ## Pending vs accepted on the monitor (counts only)
 
+**Id:** 7cefe595-8f02-4f93-8a87-1975f6201818  
 **Status:** active  
-**Evidence:** confirmed (issue #188 remaining slice; Glen, PR #296)
+**Evidence:** confirmed  
+**Source:** issue #188 remaining slice; maintainer, PR #296  
 
 > Superseded 2026-09: a named pending/accepted row list (person + WhenStatus) was rejected — see below.
 
@@ -117,8 +126,10 @@ No person name, email, phone, kiosk, voter id, row id, or WhenStatus is returned
 
 ## Mixed methods: do not accept a second ballot
 
+**Id:** c08032e9-fd86-441f-ba6b-1e17b4111196  
 **Status:** active  
-**Evidence:** inferred (issue #194; Accept-all still creates an OL ballot unless skipped; Front Desk check-in used to ignore online status)
+**Evidence:** inferred  
+**Source:** issue #194; Accept-all still creates an OL ballot unless skipped; Front Desk check-in used to ignore online status  
 
 If a voter submits online and then votes another way, the Front Desk method wins for that person: the pending Draft/Submitted row is withdrawn on check-in. Accept-all also skips (and removes) leftover Submitted/Processing rows when the person already has P/M/D/C/I/K/1/2/3. Online submit is refused after those methods. Processed online still locks cannot-vote and refuses Front Desk check-in.
 
@@ -132,8 +143,10 @@ Kiosk on Front Desk is a recorded method (`K`), counted separately from Online. 
 
 ## Monitor: 5-minute close countdown
 
+**Id:** 29034508-1d83-4704-bc64-7f7e20d71096  
 **Status:** active  
-**Evidence:** confirmed (issue #184 remaining slice; v3 `Monitor.cshtml` / `closeOnline`)
+**Evidence:** confirmed  
+**Source:** issue #184 remaining slice; v3 `Monitor.cshtml` / `closeOnline`  
 
 The Monitor Progress Online Voting panel leads with **Open** / **Closing soon** / **Closed**, a relative close line, and a `m:ss` clock in the last five minutes. Full tellers can **Schedule close in 5 minutes** (firm — `OnlineCloseIsEstimate = false`), **Close now** (one second ago, estimate unchanged), or **Open for 5 minutes** when already closed (estimate unchanged). Those buttons call the existing online-window API; they do not invent a second close path.
 
@@ -147,8 +160,10 @@ v3 used “Expected to close” when the close was an estimate and “Will close
 
 ## Monitor: connected online voters (sessions, not names)
 
+**Id:** 9896b319-c335-419a-ac05-5057ca6de81e  
 **Status:** active  
-**Evidence:** confirmed (issue #184 remaining slice; Draft autosave exists for restore only; v3 `AllVotersHub` docs in `docs/Hubs-in-v3.md` have no connection-count API and no named composing list)
+**Evidence:** confirmed  
+**Source:** issue #184 remaining slice; Draft autosave exists for restore only; v3 `AllVotersHub` docs in `docs/Hubs-in-v3.md` have no connection-count API and no named composing list  
 
 v3 Monitor (this repo’s hub docs) pushed online window changes via FrontDeskHub. It did not document a named “who is building a ballot” list, and v3 `AllVotersHub` was a global notify group with no membership-count API.
 
@@ -172,9 +187,10 @@ The count is same-host in-memory. Two app servers do not share it. Auto-refresh 
 
 ## Monitor Online Voting layout (status, then action, then counts)
 
+**Id:** 1d98c5c1-96a3-42cb-a566-70bfbd70d5d9  
 **Status:** active  
-**Evidence:** confirmed (issue #345; monitor UAT screenshot of stacked boxes)  
-**Source:** issue #345
+**Evidence:** confirmed  
+**Source:** issue #345 (evidence: issue #345; monitor UAT screenshot of stacked boxes)  
 
 The Online Voting block used a header Accept-all, a bordered descriptions row (total / pending / accepted / “enabled”), a separate colored **Closing** box that repeated “Online voting is Open/Closed”, then two more bordered tables (sessions; pending vs accepted) and two anonymity notes. Head tellers could not see window state and the next action at a glance.
 
@@ -198,8 +214,10 @@ Setup **enabled** is not the operational status. It is shown only when online vo
 
 ## Accept-all audit record
 
+**Id:** ceee6717-4409-4c5b-87d3-455db781ffd7  
 **Status:** active  
-**Evidence:** confirmed (issue #188 remaining slice; `SecurityAuditLogs` replaced `Logs` / C_Log in `20260713054353_MergeLogsIntoSecurityAuditLogs`)
+**Evidence:** confirmed  
+**Source:** issue #188 remaining slice; `SecurityAuditLogs` replaced `Logs` / C_Log in `20260713054353_MergeLogsIntoSecurityAuditLogs`  
 
 Each successful Accept-all persists one operational `SecurityAuditLog` row: who accepted (logged-in teller `UserId`, plus `DisplayName` when the account has one), when, and pending / accepted counts before and after that run. A teller may Accept-all more than once; each run is its own row. Failed runs and overlapping 409 refusals do not write a success audit.
 
@@ -219,8 +237,10 @@ The audit stores teller user id and optional display name only. It does not stor
 
 ## Teller resolution of free-text names
 
+**Id:** cc708475-3db0-47a8-a03e-efc448ec9268  
 **Status:** active  
-**Evidence:** confirmed (issue #256, v3 `BallotNormal.cshtml.js` `findWithRawVotePart`; Glen on issue #187)
+**Evidence:** confirmed  
+**Source:** issue #256, v3 `BallotNormal.cshtml.js` `findWithRawVotePart`; maintainer on issue #187  
 
 In TallyJ, **random name** means a vote on an **online ballot** (selection process random / both) where the voter typed a name. It is not paper teller entry and not a general people-search feature. After Accept-all, those lines become regular votes; tellers resolve the typed name on that ballot — they do not get a new empty line. Import mismatches reuse the same `OnlineVoteRaw` payload; that is not a paper random-name flow.
 
@@ -243,8 +263,10 @@ In TallyJ, **random name** means a vote on an **online ballot** (selection proce
 
 ## Teller-created ballots stay off the Online location
 
+**Id:** 0efd493f-0abb-47f4-95bf-d2f967e1540f  
 **Status:** active  
-**Evidence:** confirmed (issue #287; maintainer)
+**Evidence:** confirmed  
+**Source:** issue #287; maintainer  
 
 The reserved location is only for voter-initiated ballots (computer code `OL`). Identify it by `LocationTypeCode` / `LocationType.Online`, never by the display name. Names are user-facing and translated; the English word “Online” is not a stable key.
 
@@ -266,8 +288,10 @@ The typed Online location is added when setup enables online voting, and removed
 
 ## Reserved location display (Online and Imported)
 
+**Id:** c400f5ef-292a-446c-8e35-cee95be9ee24  
 **Status:** active  
-**Evidence:** confirmed (issue #287; Glen, 4 Sep 2026; Imported parity, Glen, #303 UAT)
+**Evidence:** confirmed  
+**Source:** issue #287; maintainer, 4 Sep 2026; Imported parity, maintainer, #303 UAT  
 
 Online and Imported are both reserved `LocationType` rows. Identity is the type code, never the stored name. Display uses the current-language label (`locations.typeOnline` / `locations.typeImported` via `formatLocationLabel` / `LocationDisplayHelper`). The stored `Name` is a fallback for reports and logs, not what tellers edit.
 
@@ -291,8 +315,10 @@ The ballots report projects location name + type with `AsNoTracking` instead of 
 
 ## Online and imported ballot codes
 
+**Id:** 5d6a1f72-a02d-4b2f-bd48-ad982f02225f  
 **Status:** active  
-**Evidence:** confirmed (issue #256 follow-up; v3 used `OL` / `IM`)
+**Evidence:** confirmed  
+**Source:** issue #256 follow-up; v3 used `OL` / `IM`  
 
 Online ballots use reserved computer code `OL` and a per-location sequence (`OL1`, `OL2`, …). Imported ballots use `IM`. Tellers see **Online 3** / **Imported 3**, not `OL3` or `WW0`.
 
@@ -308,8 +334,10 @@ A missing name or spoiled vote (U01 / U02) is applied **to the selected line**. 
 
 ## Name selection process codes
 
+**Id:** f42026a2-8b80-405d-b08b-31d5434da878  
 **Status:** active  
-**Evidence:** confirmed (voter ballot page, seed data, `OnlineElectionInfoDto`)
+**Evidence:** confirmed  
+**Source:** voter ballot page, seed data, `OnlineElectionInfoDto`  
 
 v4 stores `OnlineSelectionProcess` as `A` (list), `B` (random / free text), or `C` (both). v3 stored `L` / `R` / `B` for the same three modes.
 

@@ -2,6 +2,7 @@
 
 ## AgeGroup is not stored
 
+**Id:** d585fe81-960b-4d0f-8aa9-4613a5d8458a  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** maintainer decision after review of eligibility vs leftover v2/v3 metadata  
@@ -17,6 +18,7 @@ The column, person DTOs, form dropdown, and unused turnout-by-age breakdown were
 
 ## Person eligibility is stored as a short code
 
+**Id:** 3e3a9ae9-4412-4ef9-bb10-3e2929d94a57  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #263  
@@ -32,9 +34,10 @@ GUIDs stay on `IneligibleReasonEnum` only so old JSON packages and v2/v3 XML can
 
 ## Cannot mark cannot-vote after a ballot is accepted
 
+**Id:** 5d447e9c-d56d-4f09-86f3-0ba09933baee  
 **Status:** active  
-**Evidence:** confirmed (v3 `EditPerson.updateReasons`; issue #171)  
-**Source:** TallyJ-3.0 `Site/Views/Setup/EditPerson.cshtml.js` (`updateReasons(!!VotingMethod)`); v4 write gate in `PeopleService.UpdatePersonAsync`  
+**Evidence:** confirmed  
+**Source:** TallyJ-3.0 `Site/Views/Setup/EditPerson.cshtml.js` (`updateReasons(!!VotingMethod)`); v4 write gate in `PeopleService.UpdatePersonAsync` (evidence: v3 `EditPerson.updateReasons`; issue #171)  
 **Revisit when:** pending online ballots (not yet accepted) should also lock eligibility, or paper “accepted” should mean a `Ballot` row instead of Front Desk `VotingMethod`
 
 v3 disabled eligibility options with `CanVote === false` once the person had a voting method. The person-form tip said they cannot change to a non-voting option after voting. v4 only had the Finalized write lock (#308) — tellers could still set X/R reasons after check-in or Accept-all.
@@ -49,9 +52,10 @@ The API throws `people.cannotMarkCannotVoteAfterVoted` before copying fields. Pe
 
 ## Guest tellers add people only when Can Add People is on
 
+**Id:** 72c0df24-e281-4b4b-803e-1b5242c703a8  
 **Status:** active  
-**Evidence:** confirmed (v3 ExtraSetting GA / `Election.GuestTellersCanAddPeople`; issue #186)  
-**Source:** TallyJ-3.0 `PeopleModel.SavePerson`, `BallotNormal.cshtml.js` `prepareReasons`, Setup “Can Add People?”  
+**Evidence:** confirmed  
+**Source:** TallyJ-3.0 `PeopleModel.SavePerson`, `BallotNormal.cshtml.js` `prepareReasons`, Setup “Can Add People?” (evidence: v3 ExtraSetting GA / `Election.GuestTellersCanAddPeople`; issue #186)  
 **Revisit when:** a logged-in assistant role is added that is neither guest nor full teller
 
 v3 had no special “Name not in the List” spoil GUID. The ballot spoiled-reason dropdown started with an optgroup **Name not in the List**: either “Add new name (including spoiled)” when `GuestTellersCanAddPeople` was on, or “(Ask head teller to add required name)” when it was off. Adding an eligible person is a valid vote. Known/full tellers could always add. Guests could add only when that election flag was on (default off).
@@ -64,9 +68,10 @@ v4 already had `BallotAddPersonPanel` (U01 / U02 / create person). The missing p
 
 ## Confidential voters are ordinary people named Confidential X
 
+**Id:** e2225935-2bda-4308-b35d-895ac46c7444  
 **Status:** active  
-**Evidence:** confirmed (Glen product correction on #186 / PR #334; no Confidential feature in v3 code)  
-**Source:** v3 convention (Add New Person + Front Desk check-in)  
+**Evidence:** confirmed  
+**Source:** v3 convention (Add New Person + Front Desk check-in) (evidence: maintainer product correction on #186 / PR #334; no Confidential feature in v3 code)  
 **Revisit when:** a jurisdiction asks for a first-class anonymous-voter type
 
 There is no Confidential person type and no Analyze step for them. Tellers add `Confidential 1`, `Confidential 2`, and so on as normal eligible people and check them in. Calculated Eligible Voters and In Person go up the same as for any other person. Analyze does not mention confidential.

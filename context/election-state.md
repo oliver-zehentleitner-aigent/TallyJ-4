@@ -1,7 +1,8 @@
 # Election State Management & Teller Coordination
 
-## Status: active
-## Evidence: confirmed (issue #172)
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** issue #172  
 
 “Move all tellers to this state” and related coordination must be reliable. Multi-teller environments are the normal real-world case, not an edge case.
 
@@ -13,8 +14,10 @@ Treat state changes as high-consequence operations. Prefer clear, atomic transit
 
 ## Lock after analysis is the Finalized stage
 
+**Id:** 878a188a-c68b-4274-8488-e337ee479362  
 **Status:** active  
-**Evidence:** inferred (issue #172 names; implementation in `ElectionService.ChangeElectionStageAsync`); people/ballot write gate and online-submit refusal confirmed by issue #308
+**Evidence:** inferred  
+**Source:** inferred (issue #172 names; implementation in `ElectionService.ChangeElectionStageAsync`); people/ballot write gate and online-submit refusal confirmed by issue #308  
 
 There is no separate `Locked` flag. After analysis is complete and counts reconcile, advancing to **Finalized** is the lock:
 
@@ -40,8 +43,10 @@ There is no separate `Locked` flag. After analysis is complete and counts reconc
 
 ## “Move all tellers to this state” is the stage broadcast
 
+**Id:** 3535467f-d73b-40c1-84e5-21e2dd34028f  
 **Status:** active  
-**Evidence:** inferred (issue #172 names; no separate move-tellers API); FullTeller opt-in confirmed by issue #310
+**Evidence:** inferred  
+**Source:** inferred (issue #172 names; no separate move-tellers API); FullTeller opt-in confirmed by issue #310  
 
 Changing stage is the move. `ChangeElectionStageAsync` persists the stage and broadcasts `statusChanged` on MainHub. Remote `electionStore` clients update `currentStage`.
 
@@ -60,8 +65,10 @@ There is no separate “Move all tellers to this state” button or endpoint.
 
 ## GuestTeller page on stage change
 
+**Id:** dda5a858-1d0a-4ac3-b5ea-662cf95e3644  
 **Status:** active  
-**Evidence:** confirmed (issue #242)
+**Evidence:** confirmed  
+**Source:** issue #242  
 
 When election stage changes, GuestTellers are redirected to the stage’s primary work page (same idea as “move all tellers to this state” for navigation):
 
@@ -84,8 +91,10 @@ Implementation:
 
 ## Teller 1/2 names vs the election teller list
 
+**Id:** a0267983-42e3-4d0f-8eaa-4c9461565f66  
 **Status:** active  
-**Evidence:** confirmed (issue #287)
+**Evidence:** confirmed  
+**Source:** issue #287  
 
 Teller 1 and Teller 2 on the ballot listing and an open ballot are **browser-session** selections (shipped in #290). The **election teller list** is separate: typing a name adds it to `Teller` for that election; both dropdowns show that list alphabetically; SignalR `tellersChanged` (MainHub) updates other teller computers; clearing a dropdown does not remove the name. Only the admin Tellers page deletes a name.
 
@@ -93,8 +102,10 @@ Teller 1 and Teller 2 on the ballot listing and an open ballot are **browser-ses
 
 ## Session Teller 1/2 on an open ballot
 
+**Id:** 57f811e5-7cc8-438e-a6cc-ac108e47379e  
 **Status:** active  
-**Evidence:** confirmed (issue #287)
+**Evidence:** confirmed  
+**Source:** issue #287  
 
 Teller 1 and Teller 2 shown while a ballot is open are the same browser-session inputs as on the ballot listing (localStorage via `useActiveTellers`). Changing them on the ballot updates those session globals; they are not editors of that ballot’s stored `teller1`/`teller2` fields.
 
@@ -108,9 +119,10 @@ Implementation:
 
 ## Concurrent tellers: automated coverage is SQLite, not a browser driver
 
+**Id:** c05fa083-2ae0-4c1c-889c-18b9644d53bc  
 **Status:** active  
-**Evidence:** inferred (issue #191 leftover; tests named under #191)  
-**Source:** issue #191; same SQLite two-context approach as #336 / Accept-all CAS  
+**Evidence:** inferred  
+**Source:** issue #191; same SQLite two-context approach as #336 / Accept-all CAS (evidence: issue #191 leftover; tests named under #191)  
 **Revisit when:** a Playwright (or other browser) path is adopted as standard, or paper numbering grows a unique/CAS constraint
 
 Two tellers on two computers is the normal election, not an edge case. Multi-teller SignalR visibility is already shipped. #191 leftover is proving that concurrent **writes** stay consistent: paper ballot rows, Accept-all, and Front Desk.

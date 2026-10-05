@@ -2,6 +2,7 @@
 
 ## Three explicit actions, not a wizard
 
+**Id:** 61abd86e-a37a-465f-94a1-d6d8b12f06b0  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #241; maintainer review of the Import People page  
@@ -19,6 +20,7 @@ Upload auto-selects the new file and scrolls to mapping. Mapping is **file colum
 
 ## Parse preview is per-column samples, not the first N rows
 
+**Id:** cc385bfb-b4b8-4240-97f1-071b84bc5476  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** mapping UI review; `2021-04-22-with units.csv` has empty MiddleName / FormerName / Nickname on the first rows  
@@ -30,6 +32,7 @@ The file bytes are already stored on the import row. The parse endpoint still co
 
 ## Header auto-match ignores punctuation and accents
 
+**Id:** eb948c15-f058-4bfe-9901-b3d43f282907  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** `"Baha'i ID"` failed to map to TallyJ Baha'i ID because aliases were compared as raw strings (`baha'iid` ≠ `bahaiid` / `baha'i id`)
@@ -40,6 +43,7 @@ Each TallyJ field is assigned to at most one file column. If two headers are val
 
 ## Mapping must be saved before load
 
+**Id:** f32ffe59-b3c8-4735-80d2-ae2f2f7f080a  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** `PeopleImportService.ImportPeopleAsync` requires `ColumnsToRead`
@@ -52,9 +56,10 @@ Skip messages use the spreadsheet's own row number (Excel row 12 after headers o
 
 ## Hard spaces from Excel/Word are regular spaces
 
+**Id:** 49cd9178-f84d-4435-b881-6a27375d8885  
 **Status:** active  
-**Evidence:** inferred (v3 import bug class named on #170; Excel/Word emit U+00A0)  
-**Source:** issue #170  
+**Evidence:** inferred  
+**Source:** issue #170 (evidence: v3 import bug class named on #170; Excel/Word emit U+00A0)  
 **Revisit when:** another Unicode space (e.g. ideographic) shows up in real files
 
 Import cells replace NBSP (`U+00A0`) and narrow NBSP (`U+202F`) with a normal space, then trim. A cell that is only hard spaces is empty — missing First/Last Name skips the row; empty eligibility stays fully eligible. Mid-name hard spaces become a real space (`Mary Jane`) so search and uniqueness match what the teller sees.
@@ -65,9 +70,10 @@ Import cells replace NBSP (`U+00A0`) and narrow NBSP (`U+202F`) with a normal sp
 
 ## Empty files and invalid lines do not abort the load
 
+**Id:** 596058c3-8938-4a8c-9a3e-65be1f442184  
 **Status:** active  
-**Evidence:** confirmed (controller already refused 0-byte upload; import skips validation failures without `errorsFound`)  
-**Source:** issue #170; `PeopleImportController.UploadFile`; `PeopleImportService.ImportPeopleAsync`  
+**Evidence:** confirmed  
+**Source:** issue #170; `PeopleImportController.UploadFile`; `PeopleImportService.ImportPeopleAsync` (evidence: controller already refused 0-byte upload; import skips validation failures without `errorsFound`)  
 **Revisit when:** import gains a fail-fast / all-or-nothing option
 
 A 0-byte upload is refused (`No file provided`) in both the controller and `UploadFileAsync`. A file that parses to no rows (empty bytes, whitespace, or headers only) can still be mapped; execute succeeds with zero people added.
@@ -78,9 +84,10 @@ Invalid data rows (blank names, hard-space-only names, jagged/unquoted junk) inc
 
 ## People list export is the package + voter reports
 
+**Id:** bdb97d14-f591-4772-b3c5-407f86b309f4  
 **Status:** active  
-**Evidence:** inferred (no People-page CSV download in v4; #170 asked to test export, not add one)  
-**Source:** issue #170  
+**Evidence:** inferred  
+**Source:** issue #170 (evidence: no People-page CSV download in v4; #170 asked to test export, not add one)  
 **Revisit when:** tellers need a CSV that round-trips through Import People
 
 v4 does not download a people CSV from People Management. The people list leaves the system as:
@@ -95,6 +102,7 @@ The Reporting page only offers Print; the unused `reporting.exportCSV` strings a
 
 ## Eligibility import uses person-form codes, not four invented statuses
 
+**Id:** a7a174a2-1ea0-4064-a98e-c582b7f36a78  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #262  
