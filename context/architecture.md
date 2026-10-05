@@ -2,6 +2,7 @@
 
 ## Single backend host after domain consolidation
 
+**Id:** c64c71f5-797d-4204-87d0-d459938dc06b  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** project agent notes (`AGENTS.md`); domain consolidation, May 2025  
@@ -15,6 +16,7 @@ The previous `Backend.Domain` and `Backend.Application` projects were fully merg
 
 ## Social preview URLs are static and pinned to production
 
+**Id:** 3cdc2a17-78bd-4178-888f-4fc00ba3c15a  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** production host in `ClientEnvResolver` tests (`https://v4.tallyj.com`); UAT host `https://uat.v4.tallyj.com`; `MapFallbackToFile` serves `index.html` for unknown routes  

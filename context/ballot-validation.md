@@ -1,7 +1,8 @@
 # Ballot Validation & Pre-Finalization Integrity
 
-## Status: active
-## Evidence: confirmed (issues #189 / #190)
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** issues #189 / #190  
 
 Validation must catch problems *before* analysis or finalization. Catching errors only at report time is too late.
 
@@ -18,8 +19,10 @@ Prefer explicit failure and clear recovery paths over silent best-effort accepta
 
 ## Count reconciliation report (issue #190)
 
+**Id:** 20743a60-9337-4e2e-93d7-d08ab12f5134  
 **Status:** active  
-**Evidence:** inferred (issue #190 remaining items + current v4 data model; v3 Reconcile page is not in this repo)
+**Evidence:** inferred  
+**Source:** issue #190 remaining items + current v4 data model; v3 Reconcile page is not in this repo  
 
 Tellers need **which rows** do not reconcile before Analyze and Finalize — not only the existing finalization summary blockers (missing analysis, outstanding/review ballots, unresolved ties). Those gates stay. This report is a live count check, not a second readiness system: `ElectionCountReconciliation` is called from the same Analyze/Finalize path (`TallyService.Calculate*` and `ElectionStageFinalizationReadiness`).
 

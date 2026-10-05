@@ -1,11 +1,12 @@
 # Rich locale entries
 
+## Leaves keep text and provenance together
+
+**Id:** c8e71dd9-b423-4625-9c3a-487bcf302d5a  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #359  
 **Revisit when:** a translator UI or an external translation memory is added
-
-## Leaves keep text and provenance together
 
 Editable locale JSON stores each message as `{ t, s, w }` so a later AI pass can refresh machine drafts without overwriting a human edit, and so a translation can be seen as stale when English changes. vue-i18n still receives plain strings.
 
@@ -18,6 +19,12 @@ Editable locale JSON stores each message as `{ t, s, w }` so a later AI pass can
 **Rejected alternative:** status labels such as `"AI Draft"` in the JSON. Codes stay stable for tools. This change does not add UI labels.
 
 ## AI may refresh only `ai` drafts
+
+**Id:** cf424972-df92-4563-9e31-e5877733ae2a  
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** issue #359  
+**Revisit when:** a translator UI or an external translation memory is added
 
 When English text changes, bump that key's `w`. An AI sync may rewrite a non-English `t` only when `s` is `ai` and that locale's `w` is older than the English `w`. It must not overwrite `human` or `approved`. Those stay as written and are flagged stale for a person. No sync tool or translator UI is part of this change.
 

@@ -2,9 +2,10 @@
 
 ## Duplicate copies settings, people, and locations — not ballots or runtime state
 
+**Id:** 49d031ca-8491-4c54-bdd8-10c37ed9976d  
 **Status:** active  
-**Evidence:** confirmed (issue #193 first slice)  
-**Source:** issue #193; v4 `CreateElectionAsync` / `JoinElectionUser` ownership; v3 `ElectionHelper.Copy` (commented; guest tellers denied; SQL `CloneElection`)  
+**Evidence:** confirmed  
+**Source:** issue #193; v4 `CreateElectionAsync` / `JoinElectionUser` ownership; v3 `ElectionHelper.Copy` (commented; guest tellers denied; SQL `CloneElection`) (evidence: issue #193 first slice)  
 **Revisit when:** copy scope needs ballots
 
 `POST /api/Elections/{guid}/duplicateElection` creates a new election from one the caller already owns. The copy gets a new `ElectionGuid`, `ShowAsTest = true`, stage `SettingUp`, and the same ownership row create uses (`JoinElectionUser` Role `Admin`). People and locations are copied with new GUIDs. Person phones go through `EnsureOnlineVotersForPhonesAsync` (same helper as person create/import). Ballots, results, computers, tellers, online votes (`OnlineVotingInfo`), SMS logs, and analysis rows are not copied. Check-in / envelope / teller-name / `HasOnlineBallot` fields on people are cleared. Teller access (`ListedForPublicAsOf`) starts closed. The online window starts closed: `OnlineWhenOpen` / `OnlineWhenClose` are cleared and `UseOnlineVoting` is false. `GetAvailableElectionsAsync` does not filter `ShowAsTest` and treats `UseOnlineVoting` plus a null window as open, so leaving those copied would list the test copy to the same phone/email/kiosk voters. A teller can turn online voting back on and set a window.
@@ -19,9 +20,10 @@
 
 ## Teller pages show a persistent Test Election banner
 
+**Id:** 7c5462d9-a134-4f8c-bebb-b490e7801870  
 **Status:** active  
-**Evidence:** confirmed (issue #193 second slice; UAT: gather orange, not error red)  
-**Source:** issue #193; PR #284 UAT  
+**Evidence:** confirmed  
+**Source:** issue #193; PR #284 UAT (evidence: issue #193 second slice; UAT: gather orange, not error red)  
 **Revisit when:** voter-facing chrome is added
 
 While a teller is on an election-scoped route (`/elections/:id/…`) whose `currentElection.showAsTest` is true, MainLayout shows a full-width “Test Election” strip between the fixed header and main content. It reads the existing `Election.ShowAsTest` / `showAsTest` field — no new column. Hidden when there is no current election, `showAsTest` is false or null, or the route has no election id (Dashboard, Profile, create). Leftover `currentElection` after leaving a test election does not keep the banner up. Voter pages use PublicLayout and do not get this chrome.
@@ -40,17 +42,20 @@ Colors are an explicit pair (white on `--color-stage-gather`, the same burnt ora
 
 ## Default copy name
 
+**Id:** 8c1d875b-0f9c-4e56-97c1-b47cbdb382be  
 **Status:** active  
-**Evidence:** inferred (v3 copy was “copy of …” in the issue hunches; no live v3 `CloneElection` script in the TallyJ-3.0 repo)  
+**Evidence:** inferred  
+**Source:** v3 copy was “copy of …” in the issue hunches; no live v3 `CloneElection` script in the TallyJ-3.0 repo  
 **Verification:** uncorroborated against a runnable v3 clone
 
 When the client omits a name, the service uses `Copy of {source name}` (trimmed user name otherwise; truncated to 150 characters).
 
 ## Reset wipes runtime data only on ShowAsTest elections
 
+**Id:** 9b11b606-9bae-4fbf-b31e-53500c33c325  
 **Status:** active  
-**Evidence:** confirmed for the test-only gate (issue #193; `ShowAsTest` must be true). Inferred for wipe list, `SettingUp`, and window-close matching duplicate (no live v3 reset found).  
-**Source:** issue #193; v4 `DuplicateElectionAsync` wipe/start list; `GetAvailableElectionsAsync` null-window rule  
+**Evidence:** inferred  
+**Source:** issue #193; v4 `DuplicateElectionAsync` wipe/start list; `GetAvailableElectionsAsync` null-window rule (evidence: confirmed for the test-only gate (issue #193; `ShowAsTest` must be true). Inferred for wipe list, `SettingUp`, and window-close matching duplicate (no live v3 reset found).)  
 **Verification:** uncorroborated against a runnable v3 reset (TallyJ-3.0 search did not find `ResetElection` / `CloneElection` / equivalent)  
 **Revisit when:** reset scope needs import files or messages, or a v3 reset script is found
 

@@ -14,7 +14,9 @@ Mid-session, working on a Python service. The retry logic for an external API ca
     ```markdown
     ## Retry mechanism (updated 2026-07-10)
 
-    **Status:** active
+    **Id:** 1d2f3afc-6bb8-4c19-bec2-6cc29a51a9df
+    **Type:** decision
+        **Status:** active
     **Evidence:** confirmed
     **Source:** stated directly by the user during the change
 
@@ -36,4 +38,4 @@ Mid-session, working on a Python service. The retry logic for an external API ca
 
 - Doesn't write a comprehensive explanation of the entire order flow — only the part relevant to this change.
 - Doesn't ask the user unnecessary clarifying questions when the rationale was already stated directly in the conversation.
-- Doesn't commit the change to git automatically (per core rule 10) — it's staged as a working-tree edit unless the user says to commit.
+- Doesn't commit the change to git automatically (per core rule 7) — it's staged as a working-tree edit unless the user says to commit.

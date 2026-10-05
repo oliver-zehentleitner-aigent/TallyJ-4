@@ -1,7 +1,8 @@
 # Election Analysis Engine
 
-## Status: active
-## Evidence: confirmed (maintainer + issue #168)
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** maintainer + issue #168  
 
 The core analysis engine is the highest-risk component in TallyJ v4. It must produce correct results against known-good v3 data and handle ties, mixed voting methods, and edge cases.
 
@@ -19,9 +20,10 @@ Risk-first: prove analysis correctness before polishing secondary features or UI
 
 ## v3 comparison is a harness, not an engine rewrite
 
+**Id:** de0b2500-5a5c-46fa-be7d-0cf7eba6b4a8  
 **Status:** active  
-**Evidence:** confirmed (issue #168 remaining checklist; no v3 packages in this repo)  
-**Source:** issue #168  
+**Evidence:** confirmed  
+**Source:** issue #168 (evidence: issue #168 remaining checklist; no v3 packages in this repo)  
 **Revisit when:** 2–3 known-good v3 packages (simple + ties + extras) are added under `Backend.Tests/Fixtures/V3AnalysisComparison/known-good-v3/`
 
 Remaining #168 work is import → Analyze → diff of `ResultSummary`, `ResultTies`, and person counts. The analyzer, tie-break, and extras handling already exist (#198 is the product follow-up). Report HTML/PDF vs v3 is #185.
@@ -38,9 +40,10 @@ Remaining #168 work is import → Analyze → diff of `ResultSummary`, `ResultTi
 
 ## Tie-break counts: save, 0, and unset
 
+**Id:** 41bc2d5c-90a3-4e98-8b4d-27615fc7fec2  
 **Status:** active  
-**Evidence:** confirmed (v3 `SaveTieCounts` + `ElectionAnalyzerCore`; issue #198 remaining items)  
-**Source:** issue #198; TallyJ-3.0 `Analyze.cshtml.js` `saveTieCounts` and `ElectionAnalyzerCore.AnalyzeTieGroup`  
+**Evidence:** confirmed  
+**Source:** issue #198; TallyJ-3.0 `Analyze.cshtml.js` `saveTieCounts` and `ElectionAnalyzerCore.AnalyzeTieGroup` (evidence: v3 `SaveTieCounts` + `ElectionAnalyzerCore`; issue #198 remaining items)  
 **Revisit when:** known-good v3 packages with extras/tie-break land for #168
 
 v3 always re-ran analysis after saving tie-break counts (the Analyze button is “Save Counts & Re-run Analysis”). It sent every input, including 0 (blank was coerced to 0). All-0 was accepted and stayed unresolved because every member still had the same count. After a required-tie analysis, v3 filled missing `TieBreakCount` with 0, so default and explicit 0 were the same.
@@ -62,9 +65,10 @@ v3 always re-ran analysis after saving tie-break counts (the Analyze button is �
 
 ## Analyze manual voter counts persist M without re-running Analyze
 
+**Id:** 113c7b29-ae99-4ded-ae04-3b13dccc5f97  
 **Status:** active  
-**Evidence:** confirmed (v3 `AfterController.SaveManual` / `ResultsModel.SaveManualResults`; issue #186)  
-**Source:** TallyJ-3.0 Analyze count table (Calculated / Override / Final); v4 count-reconciliation gate  
+**Evidence:** confirmed  
+**Source:** TallyJ-3.0 Analyze count table (Calculated / Override / Final); v4 count-reconciliation gate (evidence: v3 `AfterController.SaveManual` / `ResultsModel.SaveManualResults`; issue #186)  
 **Revisit when:** Analyze is allowed to run without a reconciled Front Desk vs ballot report
 
 v3’s Analyze page had Eligible Voters and method counts (In Person, Dropped Off, Mailed In, Called In, custom) with an Override column. Save Values wrote `ResultType = M`. Online and Imported stayed calculated-only. Analyzer `CombineCalcAndManualSummaries` already applies `manual ?? calculated` into Final.

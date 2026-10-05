@@ -1,13 +1,12 @@
 # Paid SMS / voice / WhatsApp destination eligibility
 
-## Status: active
+## In-code gate before any paid provider
 
-## Evidence: confirmed
-
+**Id:** 1371035d-9f3b-4db1-9709-6d98503272b8  
+**Status:** active  
+**Evidence:** confirmed  
 **Source:** issue #254 (maintainer); July 555-range send incident described there  
 **Revisit when:** NANP reserved-range rules change
-
-## In-code gate before any paid provider
 
 Paid verification (SMS / voice / WhatsApp) must not call Twilio or GreenAPI for reserved, fictional, or malformed destinations. The July incident was ~80 attempts to 555-style numbers that still incurred tiny Twilio charges — the existing “registered in an open election” check does not stop an election owner from loading those numbers and opening the window.
 
@@ -26,6 +25,12 @@ The check runs at the start of `RequestVerificationCodeAsync` for phone + paid d
 **Rejected alternative:** reject only `555-01xx` and allow other 555 NPA/NXX. The incident and the issue call out area code 555 and exchange 555, with `555-01xx` as the most important subset.
 
 ## Durable `OnlineVoter.SmsStatus` (second slice)
+
+**Id:** e49ea17f-8271-4164-8bc2-fffcccb76b73  
+**Status:** active  
+**Evidence:** confirmed  
+**Source:** issue #254 (maintainer); July 555-range send incident described there  
+**Revisit when:** NANP reserved-range rules change
 
 `OnlineVoter` is the global phone-status store (key remains `VoterId`, E.164 when `VoterIdType` is `"P"`). Person is per-election; the same phone can appear in many elections, so eligibility cannot live only on Person.
 
@@ -62,6 +67,7 @@ Skip logs method + status only (no raw phone or email). Voter-facing message reu
 
 ## Ensure phone `OnlineVoter` on Person write (third slice)
 
+**Id:** 8f477db8-3d22-49c8-9dd2-0226b4f29fc0  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 (maintainer)  
@@ -85,6 +91,7 @@ Skip logs method + status only (no raw phone or email). Voter-facing message reu
 
 ## Person detail phone OnlineVoter status (fourth slice)
 
+**Id:** e8fb74dd-b103-414f-8595-db88bf7fd8fa  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 (maintainer); this slice’s lookup rule  
@@ -104,6 +111,7 @@ No phone (null/whitespace) → `PhoneOnlineVoter` is null and the UI hides the b
 
 ## Twilio status-callback auto-learn (fifth slice)
 
+**Id:** a3fd6326-00db-4cab-964d-a3a386e4e277  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 (maintainer); this slice’s callback rules  
@@ -145,9 +153,10 @@ Logs: method + status/code only. No raw phone or other PII.
 
 ## Person detail recent SmsLog (sixth slice)
 
+**Id:** d7d89021-883c-462f-9424-5ab7812c7072  
 **Status:** active  
-**Evidence:** confirmed (surface); inferred (lookup / limit details)  
-**Source:** issue #254 Person UI “optional recent SmsLog”; existing +/- phone keys from the fifth slice  
+**Evidence:** inferred  
+**Source:** issue #254 Person UI “optional recent SmsLog”; existing +/- phone keys from the fifth slice (evidence: confirmed (surface); inferred (lookup / limit details))  
 **Revisit when:** Front Desk should show recent SmsLog (it does not; person detail does)
 
 Person detail (`PersonPhoneOnlineVoterDto.RecentSmsLogs`) shows up to five newest `SmsLog` rows for that Person phone. Lookup is the stored phone plus the +/- E.164 variant (`TwilioSmsStatusHelper.VoterIdLookupKeys` / `SmsLogPhoneHelper.FindRecentForPhoneAsync`). Not election-scoped and not by `PersonGuid` — verification SMS often has neither. Logs are about the phone, so they are attached even when there is no P row (never seen). No phone → `PhoneOnlineVoter` stays null (no log block).
@@ -166,6 +175,7 @@ DTO fields: `SentDate`, `LastDate`, `LastStatus`, `ErrorCode`. No phone and no S
 
 ## Send-side SmsLog insert + StatusCallback (seventh slice)
 
+**Id:** eae6a7e5-8904-4eeb-afb8-49d01a486c54  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 leftover after #325; v3 `TwilioHelper.SendSmsAsync` / `SendVoice` insert + `twilio-CallbackUrl`  
@@ -189,9 +199,10 @@ The callback still never inserts (fifth slice). Failure auto-learn still uses Tw
 
 ## Teller manual SmsStatus (eighth slice)
 
+**Id:** 5830cb54-1ca0-4239-9b7d-017a12ccd97d  
 **Status:** active  
-**Evidence:** confirmed (privilege model from existing People routes); inferred (Ensure-if-missing on set)  
-**Source:** issue #254 leftover after #327; PeopleController `[Authorize]` (same as UpdatePerson)  
+**Evidence:** inferred  
+**Source:** issue #254 leftover after #327; PeopleController `[Authorize]` (same as UpdatePerson) (evidence: confirmed (privilege model from existing People routes); inferred (Ensure-if-missing on set))  
 **Revisit when:** WhatsApp / GreenAPI #255
 
 Person detail can set `OnlineVoter.SmsStatus` on the phone P row (`VoterId == Person.Phone` and `VoterIdType == "P"`). Values are `"OK"` (unblock) or a short block reason (max 50 after trim). Null/unchecked is not set here. Lowercase `ok` is stored as `"OK"` so it cannot accidentally become a block reason (`AllowsPaidSend` is exact `"OK"`).
@@ -216,9 +227,10 @@ Logs: method + status only. No raw phone or other PII.
 
 ## Set `SmsStatus` OK from delivered callback (ninth slice)
 
+**Id:** e8f31b8f-6f20-4f91-912e-b4489a5f26f6  
 **Status:** active  
-**Evidence:** confirmed (leftover after #327; Twilio success statuses)  
-**Source:** issue #254 leftover after send-side SmsLog + StatusCallback; this slice’s SID + overwrite rules  
+**Evidence:** confirmed  
+**Source:** issue #254 leftover after send-side SmsLog + StatusCallback; this slice’s SID + overwrite rules (evidence: leftover after #327; Twilio success statuses)  
 **Revisit when:** WhatsApp / GreenAPI #255
 
 A successful Twilio StatusCallback now sets the matching phone P row to `"OK"` so a never-seen or previously blocked phone is not stuck until a teller clicks Set OK.
@@ -250,9 +262,10 @@ Logs: method + status only. No raw phone or other PII. Same signature gate as th
 
 ## Front Desk / people list SMS hint (tenth slice)
 
+**Id:** 747af2a6-4ff3-4aa9-954f-b30eb4fb1771  
 **Status:** active  
-**Evidence:** confirmed (P-row contract from person detail); inferred (compact list vocabulary)  
-**Source:** issue #254 leftover after #331; person-detail lookup rule  
+**Evidence:** inferred  
+**Source:** issue #254 leftover after #331; person-detail lookup rule (evidence: confirmed (P-row contract from person detail); inferred (compact list vocabulary))  
 **Revisit when:** Front Desk should open person detail for Set OK / Block
 
 People list (`PersonListDto.PhoneOnlineVoter`) and Front Desk (`FrontDeskVoterDto.PhoneOnlineVoter`) show a compact phone SMS hint for people who have a phone. Same P-row contract as person detail: `VoterId == Person.Phone` and `VoterIdType == "P"`. A non-P occupant of that `VoterId` is never seen (`HasPhoneRow` false; that row’s `SmsStatus` is not shown). No phone → the property is null and the cell is empty / a dash.
@@ -275,6 +288,7 @@ Batch lookup is `FindPhoneOnlineVotersAsync` (P rows only) so Front Desk / peopl
 
 ## Durable `OnlineVoter.WhatsAppStatus` (first slice of #255)
 
+**Id:** 05042a1b-df05-431b-a4cb-54c010a34613  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #255 (maintainer); provider comment that v4 stays on GreenAPI  
@@ -306,6 +320,7 @@ Person detail shows unchecked / OK / reason from the P-row lookup, same pattern 
 
 ## Bulk check selected WhatsApp (second slice of #255)
 
+**Id:** 52223ff6-c04e-428e-ab68-2ea9700d12aa  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #255 leftover after #339; this slice’s check-selected contract  
@@ -329,6 +344,7 @@ Selected people are checked even if they already have a status — the teller ch
 
 ## Head-teller WhatsApp notify queue (third slice of #255)
 
+**Id:** 9683c025-00a2-42c1-b872-46cbea674126  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #255 leftover after #340; v3 `SendHeadTellerMessage` / `AbortQueue`; this slice’s send rule  
@@ -352,9 +368,10 @@ No live SignalR progress (#229). The UI polls a per-run summary (sent / skipped 
 
 ## Front Desk / people list WhatsApp hint (fourth slice of #255)
 
+**Id:** 35718c77-593c-433a-a459-40f1a7ca680f  
 **Status:** active  
-**Evidence:** confirmed (P-row contract and batch lookup from the SMS list hint); inferred (compact WhatsApp vocabulary matches person detail)  
-**Source:** issue #255 leftover after #341; SMS list-hint contract from the tenth #254 slice  
+**Evidence:** inferred  
+**Source:** issue #255 leftover after #341; SMS list-hint contract from the tenth #254 slice (evidence: confirmed (P-row contract and batch lookup from the SMS list hint); inferred (compact WhatsApp vocabulary matches person detail))  
 **Revisit when:** optional rename of `PersonPhoneSmsHintDto`, or SignalR #229
 
 People list (`PersonListDto.PhoneOnlineVoter`) and Front Desk (`FrontDeskVoterDto.PhoneOnlineVoter`) show a compact WhatsApp column on the **same** `PeopleTable` / Front Desk voters table as the SMS column. Same P-row contract: `VoterId == Person.Phone` and `VoterIdType == "P"`. A non-P occupant of that `VoterId` is never seen (`HasPhoneRow` false; that row’s `WhatsAppStatus` is not shown). No phone → `PhoneOnlineVoter` is null and the cell is empty / a dash. Front Desk still does not expose the raw phone.
@@ -373,6 +390,7 @@ Compact WhatsApp cell: reason (`no-wa`, `check-failed`, other short code) / OK /
 
 ## Notify People list “Has WhatsApp” filter (fifth slice of #255)
 
+**Id:** efe047c4-2d62-4db1-9233-41cd16912c3c  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #255 leftover after #343; v3 Notify “Has WhatsApp” filter; this slice’s list-hint rule  

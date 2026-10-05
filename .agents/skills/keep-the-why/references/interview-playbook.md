@@ -37,14 +37,14 @@ Low-risk, easily-reconstructible, low-weight gaps can wait or be skipped if time
 ## After the interview
 
 - Summarize each answer back and get it confirmed before writing it down as "confirmed" — don't rely on your own paraphrase being accurate. This is a factual check (did I get the story right), not the same thing as the permission-to-write check below.
-- Free narration especially doesn't get written down unfiltered just because it was said out loud: extract the decision-forks first, run them through Evidence (rule 2) and the proportionality gate (rule 13) same as any other candidate, then apply the project's `capture-confirmation` setting before anything actually lands in `context/`, exactly as configured — see "The confirmation model" in `setup.md`.
+- Free narration especially doesn't get written down unfiltered just because it was said out loud: extract the decision-forks first, run them through Evidence (rule 2) and the proportionality gate (rule 10) same as any other candidate, then apply the project's `capture-confirmation` setting before anything actually lands in `context/`, exactly as configured — see "The confirmation model" in `setup.md`.
 - When several candidates come out of one session at once, `confirmation-flow` (personal, `sequential` or `batch`) decides whether they're confirmed one at a time or reviewed together as a list — whichever the developer set, not whichever seems to fit the situation better.
 - Write up answers into the relevant topic files immediately, while detail is fresh, same as continuous capture.
 - If some prepared questions didn't get answered (time ran out, the person didn't know either), leave them visibly as open/unknown in the relevant topic file rather than dropping them silently — a documented open question is still more useful than one that quietly disappears.
 
 ## Consent, recall, and evidence
 
-- Don't commit raw transcripts or recordings — extract the rationale into the normal topic-file structure (see Core rule 9: session narrative doesn't belong in `context/`, only the objective reasoning does).
+- Don't commit raw transcripts or recordings — extract the rationale into the normal topic-file structure (see Core rule 7: session narrative doesn't belong in `context/`, only the objective reasoning does).
 - Get explicit agreement before recording or transcribing a conversation, if that's how the session is being captured.
 - A person's recollection is confirmed *that they said it*, not automatically confirmed as objective fact — memory is fallible, especially years after the fact. Note it as their stated account; cross-check against repository evidence where practical.
 - When memory and repository evidence disagree (they remember it one way, the git history or code shows another), don't quietly pick one — record both and flag the conflict openly, same as any other source disagreement (`retrospective-analysis.md`).
