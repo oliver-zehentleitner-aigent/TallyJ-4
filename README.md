@@ -10,7 +10,7 @@ TallyJ 4 is a full-stack election management and ballot tallying system for Bah√
 - `Backend.Tests/` - xUnit unit and integration tests
 - `frontend/` - Vue 3 + TypeScript SPA
 - `docs/` - deployment documentation only
-- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); browsable on the [dashboard](https://glittle.github.io/TallyJ-4/dashboard/live/))
+- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); readable on the [site](https://glittle.github.io/TallyJ-4/) and the [dashboard](https://glittle.github.io/TallyJ-4/dashboard/live/))
 - `.zenflow/tasks/` - historical planning and reverse-engineering artifacts; useful for background, but not the source of truth for current commands or runtime configuration
 
 ## Local development

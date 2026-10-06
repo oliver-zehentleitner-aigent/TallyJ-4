@@ -3,6 +3,7 @@
 ## Leaves keep text and provenance together
 
 **Id:** c8e71dd9-b423-4625-9c3a-487bcf302d5a  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #359  
@@ -21,6 +22,7 @@ Editable locale JSON stores each message as `{ t, s, w }` so a later AI pass can
 ## AI may refresh only `ai` drafts
 
 **Id:** cf424972-df92-4563-9e31-e5877733ae2a  
+**Type:** constraint  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #359  

@@ -1,25 +1,33 @@
 name: ktw-dashboard
 
+# Keep the Why site on GitHub Pages: context/ rendered as pages
+# (.github/keep-the-why-site/), plus the dashboard on /dashboard/live/ —
+# context/ with its Git history, the live badges and state.json.
+# Pull requests touching it build only, as a check; a push to main (or a
+# manual run) builds and deploys. Pages must be set to "GitHub Actions" as
+# its source (Settings → Pages → Build and deployment → Source).
+
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - "context/**"
+      - ".keep-the-why"
+      - ".github/keep-the-why-site/**"
+      - ".github/workflows/ktw-dashboard.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.event.pull_request.number || 'deploy' }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -27,11 +35,29 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - run: |
+      - name: Build the context/ pages into site/
+        run: |
+          pip install --quiet "mkdocs>=1.6.1,<2" "mkdocs-material>=9.7"
+          mkdocs build -f .github/keep-the-why-site/mkdocs.yml
+      - name: Export the Keep the Why dashboard into site/dashboard/live
+        run: |
           pip install --quiet keep-the-why-dashboard
           ktw-dashboard --export site/dashboard/live .
+          test -s site/dashboard/live/index.html
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -9,6 +9,7 @@ Kiosk is the path for voters without email or phone. A teller enables it on Setu
 ## Login window is 15 minutes and teller-renewed
 
 **Id:** 9ba42aac-9edf-4aef-b9cb-360db06828ce  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** v3 Setup: “Make or renew a Kiosk Code” / “Code will expire after 15 minutes.”; issue #182  
@@ -26,6 +27,7 @@ v3’s login helper used a 10-minute constant while the UI said 15. v4 follows t
 ## Shared kiosk browser must not keep the previous voter
 
 **Id:** df6e2735-50de-4e4b-9e98-c3d01d93140c  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #182; v3 cookie was non-persistent  
@@ -45,6 +47,7 @@ v4 submit does not empty `Person.KioskCode`; empty is the v3 used-code sentinel 
 ## Login window is election-scoped
 
 **Id:** 93885246-fefa-402e-8a45-1076f0c01c9b  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** `IX_PersonKioskCode` is `(ElectionGuid, KioskCode)`; `OnlineVoter.VoterId` is globally unique  
@@ -60,6 +63,7 @@ Front Desk personal notify targets `ToVoterId(election, letters)` so `VoterPerso
 ## Setup toggle writes `K` on `VotingMethods`
 
 **Id:** e7d442de-8a37-41a2-b04a-fd737da67499  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** v3 `VotingMethodsContains(Kiosk)`; v4 already gated person-form kiosk UI on that string  

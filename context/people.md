@@ -3,6 +3,7 @@
 ## AgeGroup is not stored
 
 **Id:** d585fe81-960b-4d0f-8aa9-4613a5d8458a  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** maintainer decision after review of eligibility vs leftover v2/v3 metadata  
@@ -19,6 +20,7 @@ The column, person DTOs, form dropdown, and unused turnout-by-age breakdown were
 ## Person eligibility is stored as a short code
 
 **Id:** 3e3a9ae9-4412-4ef9-bb10-3e2929d94a57  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #263  
@@ -35,6 +37,7 @@ GUIDs stay on `IneligibleReasonEnum` only so old JSON packages and v2/v3 XML can
 ## Cannot mark cannot-vote after a ballot is accepted
 
 **Id:** 5d447e9c-d56d-4f09-86f3-0ba09933baee  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** TallyJ-3.0 `Site/Views/Setup/EditPerson.cshtml.js` (`updateReasons(!!VotingMethod)`); v4 write gate in `PeopleService.UpdatePersonAsync` (evidence: v3 `EditPerson.updateReasons`; issue #171)  
@@ -53,6 +56,7 @@ The API throws `people.cannotMarkCannotVoteAfterVoted` before copying fields. Pe
 ## Guest tellers add people only when Can Add People is on
 
 **Id:** 72c0df24-e281-4b4b-803e-1b5242c703a8  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** TallyJ-3.0 `PeopleModel.SavePerson`, `BallotNormal.cshtml.js` `prepareReasons`, Setup “Can Add People?” (evidence: v3 ExtraSetting GA / `Election.GuestTellersCanAddPeople`; issue #186)  
@@ -69,6 +73,7 @@ v4 already had `BallotAddPersonPanel` (U01 / U02 / create person). The missing p
 ## Confidential voters are ordinary people named Confidential X
 
 **Id:** e2225935-2bda-4308-b35d-895ac46c7444  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** v3 convention (Add New Person + Front Desk check-in) (evidence: maintainer product correction on #186 / PR #334; no Confidential feature in v3 code)  

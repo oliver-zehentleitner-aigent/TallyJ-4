@@ -3,6 +3,7 @@
 ## JWT user id claim lookup on .NET 10
 
 **Id:** 59d4555d-e5b4-4c12-a6e2-246895efaf15  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** project agent notes (`AGENTS.md`)  
@@ -21,6 +22,7 @@ User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst("sub")?.Value
 ## Online-voter session is a distinct httpOnly cookie
 
 **Id:** b3f354b1-54e8-45dc-b562-7dc5cbc56269  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #250; CodeQL `js/clear-text-storage-of-sensitive-data` on `voter_token` / `voter_id` in localStorage; teller cookie pattern in `SecureCookieMiddleware`  
@@ -49,6 +51,7 @@ Online voters use the same JWT claims as before (`voterType=online`, `voterId`, 
 ## IdP-first teller signup (issue #347)
 
 **Id:** 2ed5c466-f555-4b97-8c5d-754a9fecd205  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #347; product decision 2026-09-16 (maintainer)  
@@ -69,6 +72,7 @@ Testing/Development accept the same `dev-google:{email}` credential as voter Goo
 ## SuperAdmin one-time invite for local email/password signup (issue #347 leftover)
 
 **Id:** 3f670597-82d5-4528-8136-e462929335e8  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #347 leftover after #348; product rule for communities that cannot use Google  
@@ -91,6 +95,7 @@ Communities that cannot use Google get a **one-time invite link**, not open regi
 ## Proxy-aware auth rate limits (issue #192 leftover)
 
 **Id:** 6c66be65-d553-4625-a555-08c1f10a66bf  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #192 remaining work; PR #328 review — leftmost XFF is client-spoofable; Azure Front Door docs (append socket IP)  
@@ -134,6 +139,7 @@ The same in-memory middleware still owns the limits. Account `POST /api/auth/log
 ## Distinct voter verify error keys (issue #192 leftover)
 
 **Id:** 0cf32f17-32a1-45fc-a73e-2adc5a2d3a8b  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #192 remaining checklist; existing `{ error }` 400 bodies and `messageKey` i18n keys; `OnlineVoter.VerifyCodeDate` is not cleared on success  
@@ -219,6 +225,7 @@ Guest tellers sign in with `POST /api/auth/teller-login` and the election's shar
 ## Pre-auth voter-code delivery channel (issue #229)
 
 **Id:** 25430887-ee58-442f-bf90-34105b5781d9  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #229 security notes; v3 VoterCodeHub used a short client key; 2026-09-20 product decision to ship live status  

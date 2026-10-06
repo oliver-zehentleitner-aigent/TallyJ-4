@@ -3,6 +3,7 @@
 ## VotersByArea 18+ / 18–21 use V01, not AgeGroup
 
 **Id:** 9cb1b5ec-5f84-4a2d-a64b-e60155df3ddb  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #185 remaining checklist; TallyJ-3.0 `Site/Reports/VotersByArea.cshtml` (evidence: issue #185 names the columns; AgeGroup was removed — see [people.md](people.md))  
@@ -22,6 +23,7 @@ v3’s **Eligible and Voted by Area** table labeled the CanVote total **Adults**
 ## One-click download is the existing report list as CSV zip
 
 **Id:** 5e71f356-394a-4284-bf96-73ddfb94aea8  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #185; TallyJ-3.0 `Site/Views/After/Reports.cshtml` (evidence: issue #185 “if missing”; v3 Reports page is print + per-report CSV only)  
@@ -36,6 +38,7 @@ v3 had no “download all”. v4 already had print and a separate advanced expor
 ## Vote counts show `/ tie-break` only when a count was entered
 
 **Id:** 3bffd907-8743-4f14-8ef9-3c18493b4c7d  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #198; [election-analysis.md](election-analysis.md) (evidence: follows #198 unset vs explicit 0; #322 persist/analyze already shipped)  
@@ -50,6 +53,7 @@ Main and Votes-by-* reports used to append `" / " + TieBreakCount` whenever `Tie
 ## Front Desk / ballots / analysis share one voted rule
 
 **Id:** 73ec28be-455a-41b2-b14b-954b4922c518  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #185; [ballot-validation.md](ballot-validation.md); [online-ballots.md](online-ballots.md) (evidence: issue #185 “verify counts match”; Accept-all does not set `VotingMethod` or `RegistrationTime`)  

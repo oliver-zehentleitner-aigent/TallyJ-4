@@ -13,6 +13,7 @@ Treat online ballot paths with the same rigor as core analysis. Prefer explicit 
 ## Draft autosave vs Submitted
 
 **Id:** e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** maintainer, #303 UAT; voter ballot page  
@@ -32,6 +33,7 @@ Once a row is **Submitted**, later autosaves (reload restore, notify toggle, or 
 ## Accept-all of pending online ballots
 
 **Id:** c3306353-19d3-43ed-9aa1-2c7b358a5936  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #188, maintainer; v3 `ElectionHelper.ProcessOnlineBallots`  
@@ -78,6 +80,7 @@ Rows that already have a `BallotGuid` from the older submit-creates-ballot path 
 ## Automated coverage for submit → Accept-all → counts
 
 **Id:** 70da22e7-4629-4117-9bb6-1fb851d56d6f  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #169 remaining; HTTP integration in `OnlineVotingBallotFlowTests`  
@@ -96,6 +99,7 @@ Two tellers at once (paper create + Accept-all + Front Desk) is issue #191, not 
 ## Pending vs accepted on the monitor (counts only)
 
 **Id:** 7cefe595-8f02-4f93-8a87-1975f6201818  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #188 remaining slice; maintainer, PR #296  
@@ -127,6 +131,7 @@ No person name, email, phone, kiosk, voter id, row id, or WhenStatus is returned
 ## Mixed methods: do not accept a second ballot
 
 **Id:** c08032e9-fd86-441f-ba6b-1e17b4111196  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #194; Accept-all still creates an OL ballot unless skipped; Front Desk check-in used to ignore online status  
@@ -144,6 +149,7 @@ Kiosk on Front Desk is a recorded method (`K`), counted separately from Online. 
 ## Monitor: 5-minute close countdown
 
 **Id:** 29034508-1d83-4704-bc64-7f7e20d71096  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #184 remaining slice; v3 `Monitor.cshtml` / `closeOnline`  
@@ -161,6 +167,7 @@ v3 used “Expected to close” when the close was an estimate and “Will close
 ## Monitor: connected online voters (sessions, not names)
 
 **Id:** 9896b319-c335-419a-ac05-5057ca6de81e  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #184 remaining slice; Draft autosave exists for restore only; v3 `AllVotersHub` docs in `docs/Hubs-in-v3.md` have no connection-count API and no named composing list  
@@ -188,6 +195,7 @@ The count is same-host in-memory. Two app servers do not share it. Auto-refresh 
 ## Monitor Online Voting layout (status, then action, then counts)
 
 **Id:** 1d98c5c1-96a3-42cb-a566-70bfbd70d5d9  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #345 (evidence: issue #345; monitor UAT screenshot of stacked boxes)  
@@ -215,6 +223,7 @@ Setup **enabled** is not the operational status. It is shown only when online vo
 ## Accept-all audit record
 
 **Id:** ceee6717-4409-4c5b-87d3-455db781ffd7  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #188 remaining slice; `SecurityAuditLogs` replaced `Logs` / C_Log in `20260713054353_MergeLogsIntoSecurityAuditLogs`  
@@ -238,6 +247,7 @@ The audit stores teller user id and optional display name only. It does not stor
 ## Teller resolution of free-text names
 
 **Id:** cc708475-3db0-47a8-a03e-efc448ec9268  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #256, v3 `BallotNormal.cshtml.js` `findWithRawVotePart`; maintainer on issue #187  
@@ -264,6 +274,7 @@ In TallyJ, **random name** means a vote on an **online ballot** (selection proce
 ## Teller-created ballots stay off the Online location
 
 **Id:** 0efd493f-0abb-47f4-95bf-d2f967e1540f  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #287; maintainer  
@@ -289,6 +300,7 @@ The typed Online location is added when setup enables online voting, and removed
 ## Reserved location display (Online and Imported)
 
 **Id:** c400f5ef-292a-446c-8e35-cee95be9ee24  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #287; maintainer, 4 Sep 2026; Imported parity, maintainer, #303 UAT  
@@ -316,6 +328,7 @@ The ballots report projects location name + type with `AsNoTracking` instead of 
 ## Online and imported ballot codes
 
 **Id:** 5d6a1f72-a02d-4b2f-bd48-ad982f02225f  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #256 follow-up; v3 used `OL` / `IM`  
@@ -335,6 +348,7 @@ A missing name or spoiled vote (U01 / U02) is applied **to the selected line**. 
 ## Name selection process codes
 
 **Id:** f42026a2-8b80-405d-b08b-31d5434da878  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** voter ballot page, seed data, `OnlineElectionInfoDto`  

@@ -20,6 +20,7 @@ Prefer explicit failure and clear recovery paths over silent best-effort accepta
 ## Count reconciliation report (issue #190)
 
 **Id:** 20743a60-9337-4e2e-93d7-d08ab12f5134  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #190 remaining items + current v4 data model; v3 Reconcile page is not in this repo  

@@ -3,6 +3,7 @@
 ## Ballot Not Received is a hide-received filter
 
 **Id:** a196ba42-f6b2-44b6-a274-9012b7c9eca5  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** TallyJ-3.0 `Site/Views/Before/FrontDesk.cshtml` + `.cshtml.less` (`.NoBallot .Voter:not(.VM-)`) (evidence: v3 Front Desk `#ifNoBallot`)  
@@ -17,6 +18,7 @@ The checkbox is an extra filter on the current list: hide rows with a voting met
 ## Front Desk method codes and mixed-method switch
 
 **Id:** c40905c4-dda1-44f4-9fcd-9a61dc9967fd  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #194; Person.VotingMethod varchar(1); reports/analyzer already used P/M/D/O/K/I  
@@ -41,6 +43,7 @@ Online ballots stay voter-initiated. Tellers do not create ballots at the Online
 ## Roll Call and envelope pages are not v4 product pages
 
 **Id:** 4d5f8864-b352-4f13-a724-b87d102b19d6  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** TallyJ-3.0 `Site/Views/menu.xml` (Roll Call / Sort Envelopes require `BallotProcess=Roll`); v4 has no `BallotProcess` setting (evidence: v3 menu vs v4 routes; `docs/Hubs-v3-vs-v4.md`)  
@@ -55,6 +58,7 @@ v3 Roll Call and Sort Envelopes existed only for the Roll ballot process. Count 
 ## Front Desk checked-in count matches analysis voted
 
 **Id:** e6c4dc57-d36e-4a6b-86b2-0b633b78ce62  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #185; [reports.md](reports.md) (evidence: issue #185 count-match leftover)  
@@ -72,6 +76,7 @@ Unregister (and other desk-registration undo) stays on `RegistrationTime`. Accep
 ## Repeatable desk method while registration is open
 
 **Id:** 65bb3048-44a6-4fee-b206-59e1d5ce68b2  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #336 after #186 / #334 / #335 (evidence: maintainer, issue #336, 2026-09-13)  
@@ -92,6 +97,7 @@ Processing / Processed stay refused. Unregister is still not offered without `Re
 ## Registration-done is the Finalized write lock
 
 **Id:** 8835686e-dce7-46a5-835d-a93237dd21b7  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** [election-state.md](election-state.md); `FrontDeskService` check-in / Unregister / flags / envelope (evidence: existing `ElectionFinalizedWriteGuard`; maintainer, issue #336)  
@@ -107,6 +113,7 @@ Leaving Finalized (confirmed FullTeller stage change) is what reopens those writ
 ## Accept-all vs Front Desk same-moment race
 
 **Id:** aa9a6bfb-bde4-438e-b09b-4ba786f8962a  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #336 leftover after #337 (evidence: issue #336 second slice; SQLite `Issue336AcceptAllFrontDeskRaceTests`)  
@@ -129,6 +136,7 @@ True same-moment `Task.WhenAll` of Accept-all + check-in (plus paper entry overl
 ## Front Desk SMS column is the phone P-row hint
 
 **Id:** b92ef9bf-bb5b-4e71-9fe6-c66cf41801a7  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #254 leftover; [sms-eligibility.md](sms-eligibility.md) tenth slice  

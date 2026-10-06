@@ -21,6 +21,7 @@ Risk-first: prove analysis correctness before polishing secondary features or UI
 ## v3 comparison is a harness, not an engine rewrite
 
 **Id:** de0b2500-5a5c-46fa-be7d-0cf7eba6b4a8  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #168 (evidence: issue #168 remaining checklist; no v3 packages in this repo)  
@@ -41,6 +42,7 @@ Remaining #168 work is import → Analyze → diff of `ResultSummary`, `ResultTi
 ## Tie-break counts: save, 0, and unset
 
 **Id:** 41bc2d5c-90a3-4e98-8b4d-27615fc7fec2  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #198; TallyJ-3.0 `Analyze.cshtml.js` `saveTieCounts` and `ElectionAnalyzerCore.AnalyzeTieGroup` (evidence: v3 `SaveTieCounts` + `ElectionAnalyzerCore`; issue #198 remaining items)  
@@ -66,6 +68,7 @@ v3 always re-ran analysis after saving tie-break counts (the Analyze button is �
 ## Analyze manual voter counts persist M without re-running Analyze
 
 **Id:** 113c7b29-ae99-4ded-ae04-3b13dccc5f97  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** TallyJ-3.0 Analyze count table (Calculated / Override / Final); v4 count-reconciliation gate (evidence: v3 `AfterController.SaveManual` / `ResultsModel.SaveManualResults`; issue #186)  

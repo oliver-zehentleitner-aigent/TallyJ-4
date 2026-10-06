@@ -3,6 +3,7 @@
 ## Dark hairlines must win over later `:root` remaps
 
 **Id:** 823d1f54-cdc6-43d0-8f2b-0cabb90a5dcb  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #285 leftover after PR #293; `style.less` import order is `tokens.less` → `tokens-dark.less` → `element-plus.less`  
@@ -19,6 +20,7 @@ Dark tokens now live on `html.dark` (0,1,1). The later `:root` block no longer r
 ## Dark theme hairlines follow the light-mode scale
 
 **Id:** 0faedcdc-7832-447d-9ab0-e35b208c1a15  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #285 (dashboard/setup screenshots); `tokens-dark.less` previously mapped `--el-border-color-extra-light` to `--color-gray-400`  
@@ -31,6 +33,7 @@ Dark `--color-border` / `--color-border-subtle` are low-opacity primary-200 so h
 ## Dark current-page chip is fill plus light text
 
 **Id:** ac1d2f22-940f-487e-aeb2-a1c087621019  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #285 current-menu highlight; PR review of the `#2563a8` + orange pairing  
@@ -47,6 +50,7 @@ Dark `--color-border` / `--color-border-subtle` are low-opacity primary-200 so h
 ## Election-stage chips use fill tokens, not light-only white
 
 **Id:** 7308864a-faae-4226-8df5-55d7f823c091  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #285; `StageControl.vue` had `#fff` / `#dcdfe6` / `#606266`  
@@ -59,6 +63,7 @@ Unselected stage buttons are `<button class="stage-control__seg">` with CSS fill
 ## Names use `--color-text-link`, not `--el-color-primary`
 
 **Id:** 95d387c9-d866-466f-bb7d-2aebf7bf3dd3  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #285 names-list contrast; People table uses `el-button type="primary" link`  
@@ -71,6 +76,7 @@ Unselected stage buttons are `<button class="stage-control__seg">` with CSS fill
 ## Leftover screens use the same tokens (Front Desk / voter / profile / join)
 
 **Id:** ffa02eb3-c78f-4bae-b975-762704681a55  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #285 follow-up after PR #354; local hex on Front Desk filters, voter elections/ballot, Profile QR, Teller join, CardSkeleton, tie cards  
@@ -98,6 +104,7 @@ Light `--color-orange-50` stays `#fff5eb`. Light chip inactive fill is still whi
 ## Warning banners and leftover fills use semantic tokens
 
 **Id:** 6f960578-449c-4c61-a23f-dc3b0987c8f6  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #285 follow-up after PR #356; AppSidebar / LandingPage had a `:root.dark` hex override that did not cover LanguageFlagsSelector or the sidebar status link  
@@ -120,6 +127,7 @@ Audit-log filters use `--el-fill-color-light` (light gray-50 `#f9fafb`, dark gra
 ## Branch badge and audit muted dashes use shared tokens
 
 **Id:** 0eb2305d-0796-44ee-9380-cab851812c2c  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #285 follow-up after the warning/fill/inverse slice (`81eda682`); `App.vue` `.bottomCorner` was `#f0f0f0` / `#666`; Audit Logs `.text-muted` was `#909399`  
