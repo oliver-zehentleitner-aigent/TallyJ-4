@@ -6,6 +6,12 @@
 
 Kiosk is the path for voters without email or phone. A teller enables it on Setup, mints a short code from the person record, and the voter types that code on a shared browser.
 
+### Related
+
+- [Auth](auth.md) (voter cookie)
+- [Online ballots](online-ballots.md)
+- [People records](people.md)
+
 ## Login window is 15 minutes and teller-renewed
 
 **Id:** 9ba42aac-9edf-4aef-b9cb-360db06828ce  
@@ -69,9 +75,3 @@ Front Desk personal notify targets `ToVoterId(election, letters)` so `VoterPerso
 **Source:** v3 `VotingMethodsContains(Kiosk)`; v4 already gated person-form kiosk UI on that string  
 
 The Setup switch adds or removes `K` (or the `KI` alias) without replacing the other tokens. Turning kiosk on also sets `UseOnlineVoting`, because kiosk auth uses the same open-window rule as email/phone.
-
-## Related
-
-- Auth (voter cookie)
-- Online ballots
-- People records

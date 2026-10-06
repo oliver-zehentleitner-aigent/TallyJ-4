@@ -10,6 +10,11 @@ Highest-risk functionality. Random name resolution and online acceptance introdu
 
 Treat online ballot paths with the same rigor as core analysis. Prefer explicit failure and recovery over silent best-effort behavior.
 
+### Related
+
+- [Ballot validation](ballot-validation.md)
+- [Election state management](election-state.md)
+
 ## Draft autosave vs Submitted
 
 **Id:** e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1  
@@ -356,8 +361,3 @@ A missing name or spoiled vote (U01 / U02) is applied **to the selected line**. 
 v4 stores `OnlineSelectionProcess` as `A` (list), `B` (random / free text), or `C` (both). v3 stored `L` / `R` / `B` for the same three modes.
 
 **Rejected alternative:** keep v3's `L`/`R`/`B` letters. Existing v4 elections, seeders, and the voter UI already use `A`/`B`/`C`.
-
-## Related
-
-- Ballot validation
-- Election state management
