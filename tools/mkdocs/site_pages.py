@@ -3,6 +3,8 @@
 - README.md becomes the home page (index.md).
 - Every topic file in context/ becomes /context/<name>/ ("Why it is built
   this way", recorded with Keep the Why - https://keepthewhy.com).
+- tools/mkdocs/extra.css becomes assets/extra.css (extra_css in mkdocs.yml),
+  so the site's styling stays out of docs/.
 
 Both are generated at build time from the files themselves, so there is no
 copy under docs/ to keep in sync. A relative link that points at a file the
@@ -22,6 +24,7 @@ from mkdocs.structure.pages import Page
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTEXT_DIR = REPO_ROOT / "context"
+EXTRA_CSS = Path(__file__).resolve().parent / "extra.css"
 BLOB = "https://github.com/glittle/TallyJ-4/blob/main/"
 
 # context/ scaffolding, not topic files: the on-disk README and the agent guards.
@@ -34,7 +37,7 @@ LINK = re.compile(r"(\]\()([^)\s#]+)(#[^)\s]*)?(\))")
 
 
 def on_config(config: MkDocsConfig) -> MkDocsConfig:
-    config.watch.extend([str(CONTEXT_DIR), str(REPO_ROOT / "README.md")])
+    config.watch.extend([str(CONTEXT_DIR), str(REPO_ROOT / "README.md"), str(EXTRA_CSS)])
     return config
 
 
@@ -43,6 +46,7 @@ def on_files(files: Files, config: MkDocsConfig) -> Files:
     readme = REPO_ROOT / "README.md"
     files.append(File.generated(config, "index.md", content=readme.read_text(encoding="utf-8")))
     SOURCES["index.md"] = "README.md"
+    files.append(File.generated(config, "assets/extra.css", content=EXTRA_CSS.read_text(encoding="utf-8")))
     for path in sorted(CONTEXT_DIR.glob("*.md")):
         if path.name in NOT_PAGES:
             continue
