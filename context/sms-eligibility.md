@@ -1,5 +1,11 @@
 # Paid SMS / voice / WhatsApp destination eligibility
 
+### Related
+
+- [auth.md](auth.md) — voter JWT claims (separate from paid-destination rules)
+- [`docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md`](../docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md) — requestCode flow and SMS pumping
+- Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity
+
 ## In-code gate before any paid provider
 
 **Id:** 1371035d-9f3b-4db1-9709-6d98503272b8  
@@ -429,9 +435,3 @@ Selection, Check WhatsApp, and Send WhatsApp still use the current `selectedGuid
 **Rejected alternative:** change send rules so the filter selects who can be sent. Rejected — send already skips non-OK; the filter is only for finding known-yes numbers.
 
 **Not in this slice:** SignalR #229, optional rename of `PersonPhoneSmsHintDto`, live GreenAPI, Front Desk filter, email/SMS blast.
-
-## Related
-
-- [auth.md](auth.md) — voter JWT claims (separate from paid-destination rules)
-- `docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md` — requestCode flow and SMS pumping
-- Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity

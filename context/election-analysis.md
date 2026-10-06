@@ -15,8 +15,8 @@ The core analysis engine is the highest-risk component in TallyJ v4. It must pro
 Risk-first: prove analysis correctness before polishing secondary features or UI.
 
 ### Related
-- Ballot validation (must catch problems before analysis)
-- Election state management (analysis only runs in appropriate states)
+- [Ballot validation](ballot-validation.md) (must catch problems before analysis)
+- [Election state management](election-state.md) (analysis only runs in appropriate states)
 
 ## v3 comparison is a harness, not an engine rewrite
 

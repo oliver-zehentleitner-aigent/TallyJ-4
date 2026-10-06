@@ -13,9 +13,9 @@ Once an election moves past certain states, correcting bad ballot data becomes e
 Prefer explicit failure and clear recovery paths over silent best-effort acceptance of questionable ballots.
 
 ### Related
-- Front Desk flows
-- Online ballot acceptance
-- Election analysis engine
+- [Front Desk flows](front-desk.md)
+- [Online ballot acceptance](online-ballots.md)
+- [Election analysis engine](election-analysis.md)
 
 ## Count reconciliation report (issue #190)
 
