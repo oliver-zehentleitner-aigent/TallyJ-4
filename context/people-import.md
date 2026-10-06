@@ -3,6 +3,7 @@
 ## Three explicit actions, not a wizard
 
 **Id:** 61abd86e-a37a-465f-94a1-d6d8b12f06b0  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #241; maintainer review of the Import People page  
@@ -21,6 +22,7 @@ Upload auto-selects the new file and scrolls to mapping. Mapping is **file colum
 ## Parse preview is per-column samples, not the first N rows
 
 **Id:** cc385bfb-b4b8-4240-97f1-071b84bc5476  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** mapping UI review; `2021-04-22-with units.csv` has empty MiddleName / FormerName / Nickname on the first rows  
@@ -33,6 +35,7 @@ The file bytes are already stored on the import row. The parse endpoint still co
 ## Header auto-match ignores punctuation and accents
 
 **Id:** eb948c15-f058-4bfe-9901-b3d43f282907  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** `"Baha'i ID"` failed to map to TallyJ Baha'i ID because aliases were compared as raw strings (`baha'iid` ≠ `bahaiid` / `baha'i id`)
@@ -44,6 +47,7 @@ Each TallyJ field is assigned to at most one file column. If two headers are val
 ## Mapping must be saved before load
 
 **Id:** f32ffe59-b3c8-4735-80d2-ae2f2f7f080a  
+**Type:** constraint  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** `PeopleImportService.ImportPeopleAsync` requires `ColumnsToRead`
@@ -57,6 +61,7 @@ Skip messages use the spreadsheet's own row number (Excel row 12 after headers o
 ## Hard spaces from Excel/Word are regular spaces
 
 **Id:** 49cd9178-f84d-4435-b881-6a27375d8885  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #170 (evidence: v3 import bug class named on #170; Excel/Word emit U+00A0)  
@@ -71,6 +76,7 @@ Import cells replace NBSP (`U+00A0`) and narrow NBSP (`U+202F`) with a normal sp
 ## Empty files and invalid lines do not abort the load
 
 **Id:** 596058c3-8938-4a8c-9a3e-65be1f442184  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #170; `PeopleImportController.UploadFile`; `PeopleImportService.ImportPeopleAsync` (evidence: controller already refused 0-byte upload; import skips validation failures without `errorsFound`)  
@@ -85,6 +91,7 @@ Invalid data rows (blank names, hard-space-only names, jagged/unquoted junk) inc
 ## People list export is the package + voter reports
 
 **Id:** bdb97d14-f591-4772-b3c5-407f86b309f4  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #170 (evidence: no People-page CSV download in v4; #170 asked to test export, not add one)  
@@ -103,6 +110,7 @@ The Reporting page only offers Print; the unused `reporting.exportCSV` strings a
 ## Eligibility import uses person-form codes, not four invented statuses
 
 **Id:** a7a174a2-1ea0-4064-a98e-c582b7f36a78  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #262  

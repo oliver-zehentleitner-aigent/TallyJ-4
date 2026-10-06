@@ -15,6 +15,7 @@ Treat state changes as high-consequence operations. Prefer clear, atomic transit
 ## Lock after analysis is the Finalized stage
 
 **Id:** 878a188a-c68b-4274-8488-e337ee479362  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** inferred (issue #172 names; implementation in `ElectionService.ChangeElectionStageAsync`); people/ballot write gate and online-submit refusal confirmed by issue #308  
@@ -44,6 +45,7 @@ There is no separate `Locked` flag. After analysis is complete and counts reconc
 ## “Move all tellers to this state” is the stage broadcast
 
 **Id:** 3535467f-d73b-40c1-84e5-21e2dd34028f  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** inferred (issue #172 names; no separate move-tellers API); FullTeller opt-in confirmed by issue #310  
@@ -66,6 +68,7 @@ There is no separate “Move all tellers to this state” button or endpoint.
 ## GuestTeller page on stage change
 
 **Id:** dda5a858-1d0a-4ac3-b5ea-662cf95e3644  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #242  
@@ -92,6 +95,7 @@ Implementation:
 ## Teller 1/2 names vs the election teller list
 
 **Id:** a0267983-42e3-4d0f-8eaa-4c9461565f66  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #287  
@@ -103,6 +107,7 @@ Teller 1 and Teller 2 on the ballot listing and an open ballot are **browser-ses
 ## Session Teller 1/2 on an open ballot
 
 **Id:** 57f811e5-7cc8-438e-a6cc-ac108e47379e  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #287  
@@ -120,6 +125,7 @@ Implementation:
 ## Concurrent tellers: automated coverage is SQLite, not a browser driver
 
 **Id:** c05fa083-2ae0-4c1c-889c-18b9644d53bc  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #191; same SQLite two-context approach as #336 / Accept-all CAS (evidence: issue #191 leftover; tests named under #191)  

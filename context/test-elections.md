@@ -3,6 +3,7 @@
 ## Duplicate copies settings, people, and locations — not ballots or runtime state
 
 **Id:** 49d031ca-8491-4c54-bdd8-10c37ed9976d  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #193; v4 `CreateElectionAsync` / `JoinElectionUser` ownership; v3 `ElectionHelper.Copy` (commented; guest tellers denied; SQL `CloneElection`) (evidence: issue #193 first slice)  
@@ -21,6 +22,7 @@
 ## Teller pages show a persistent Test Election banner
 
 **Id:** 7c5462d9-a134-4f8c-bebb-b490e7801870  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #193; PR #284 UAT (evidence: issue #193 second slice; UAT: gather orange, not error red)  
@@ -43,6 +45,7 @@ Colors are an explicit pair (white on `--color-stage-gather`, the same burnt ora
 ## Default copy name
 
 **Id:** 8c1d875b-0f9c-4e56-97c1-b47cbdb382be  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** v3 copy was “copy of …” in the issue hunches; no live v3 `CloneElection` script in the TallyJ-3.0 repo  
@@ -53,6 +56,7 @@ When the client omits a name, the service uses `Copy of {source name}` (trimmed 
 ## Reset wipes runtime data only on ShowAsTest elections
 
 **Id:** 9b11b606-9bae-4fbf-b31e-53500c33c325  
+**Type:** decision  
 **Status:** active  
 **Evidence:** inferred  
 **Source:** issue #193; v4 `DuplicateElectionAsync` wipe/start list; `GetAvailableElectionsAsync` null-window rule (evidence: confirmed for the test-only gate (issue #193; `ShowAsTest` must be true). Inferred for wipe list, `SettingUp`, and window-close matching duplicate (no live v3 reset found).)  
