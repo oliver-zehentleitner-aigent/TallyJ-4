@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/">
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/DEPLOYMENT/">
       
       
-        <link rel="prev" href="../V3_ANALYSIS_COMPARISON/">
+        <link rel="prev" href="../MIGRATION_GUIDE/">
       
+      
+        <link rel="next" href="../VOTER_AUTHENTICATION_IMPLEMENTATION/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>Context index - TallyJ 4</title>
+        <title>Deployment - TallyJ 4</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#context-index" class="md-skip">
+        <a href="#deployment-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Context index
+              Deployment
             
           </span>
         </div>
@@ -284,8 +286,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -296,11 +300,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -321,7 +325,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -448,10 +452,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../DEPLOYMENT/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -467,6 +498,281 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-deployment-shape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported deployment shape
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-deployment checklist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-deployment checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-backend-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required backend configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-frontend-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required frontend configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backend-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply migrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-behind-a-reverse-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host behind a reverse proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-assets-into-the-backend-publish-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy assets into the backend publish output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#social-preview-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Social preview origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smoke-tests-after-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoke tests after deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Smoke tests after deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operational notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-this-file-current-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep this file current when
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -738,8 +1044,6 @@
       
   
   
-    
-  
   
   
     
@@ -752,11 +1056,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -777,7 +1081,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -792,37 +1096,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Context index
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
         
   
   
@@ -838,422 +1115,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        B
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        C
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#d" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        D
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#e" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        E
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#f" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        F
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#g" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        G
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#h" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        H
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#i" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        I
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#j" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        J
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        K
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#l" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        L
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#m" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        M
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#n" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        N
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#p" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        P
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Q
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#r" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        R
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#s" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        S
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        T
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#u" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        U
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#v" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        V
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#w" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        W
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        X
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#y" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Y
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#z" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Z
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1321,10 +1182,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
+  <a href="#supported-deployment-shape" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0
+        Supported deployment shape
       
     </span>
   </a>
@@ -1332,10 +1193,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#pre-deployment-checklist" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1
+        Pre-deployment checklist
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pre-deployment checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-backend-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required backend configuration
       
     </span>
   </a>
@@ -1343,10 +1254,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#required-frontend-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2
+        Required frontend configuration
       
     </span>
   </a>
@@ -1354,10 +1265,149 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#backend-deployment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3
+        Backend deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publish
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply migrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-behind-a-reverse-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host behind a reverse proxy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-assets-into-the-backend-publish-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copy assets into the backend publish output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#social-preview-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Social preview origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smoke-tests-after-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Smoke tests after deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Smoke tests after deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker status
       
     </span>
   </a>
@@ -1365,10 +1415,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#operational-notes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4
+        Operational notes
       
     </span>
   </a>
@@ -1376,340 +1426,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#keep-this-file-current-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        B
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        C
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#d" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        D
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#e" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        E
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#f" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        F
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#g" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        G
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#h" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        H
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#i" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        I
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#j" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        J
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        K
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#l" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        L
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#m" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        M
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#n" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        N
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#p" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        P
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Q
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#r" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        R
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#s" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        S
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        T
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#u" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        U
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#v" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        V
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#w" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        W
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#x" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        X
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#y" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Y
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#z" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Z
+        Keep this file current when
       
     </span>
   </a>
@@ -1732,85 +1452,154 @@
                   
 
 
+  
+  
 
-<h1 id="context-index">Context index<a class="headerlink" href="#context-index" title="Permanent link">&para;</a></h1>
-<p>Lean index of project <em>why</em> knowledge. Load a topic file only when the work touches that area.</p>
-<h2 id="0">0<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
-<h2 id="1">1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<h2 id="2">2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<h2 id="3">3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<h2 id="4">4<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<h2 id="5">5<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<h2 id="6">6<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
-<h2 id="7">7<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<h2 id="8">8<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
-<h2 id="9">9<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
-<h2 id="a">A<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
+
+<h1 id="deployment-guide">Deployment guide<a class="headerlink" href="#deployment-guide" title="Permanent link">&para;</a></h1>
+<p>This is the canonical deployment document for the current repository.</p>
+<h2 id="supported-deployment-shape">Supported deployment shape<a class="headerlink" href="#supported-deployment-shape" title="Permanent link">&para;</a></h2>
+<p>TallyJ 4 is deployed as two pieces:</p>
+<ol>
+<li>SQL Server database</li>
+<li>ASP.NET Core backend — it serves both the API and the compiled frontend static files</li>
+</ol>
+<h2 id="pre-deployment-checklist">Pre-deployment checklist<a class="headerlink" href="#pre-deployment-checklist" title="Permanent link">&para;</a></h2>
+<h3 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="api-contracts/">api-contracts.md</a> — dual API response wrappers and OpenAPI client regeneration</li>
-<li><a href="architecture/">architecture.md</a> — single backend host after domain consolidation; where code lives; social preview URLs are static HTML pinned to production</li>
-<li><a href="auth/">auth.md</a> — JWT identity claims (<code>sub</code> / <code>NameIdentifier</code>); teller vs online-voter cookie transport; IdP-first teller signup; SuperAdmin one-time invite for local email/password</li>
+<li><code>dotnet build</code> passes for <code>backend/Backend.csproj</code></li>
+<li>database migrations are reviewed and ready to apply</li>
+<li>production secrets are stored outside source control</li>
+<li>CORS and frontend base URL are configured for the target domain</li>
+<li>optional integrations are configured only if needed</li>
 </ul>
-<h2 id="b">B<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
+<h3 id="frontend">Frontend<a class="headerlink" href="#frontend" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="ballot-validation/">ballot-validation.md</a> — pre-finalization integrity; count-reconciliation report before Analyze/Finalize</li>
+<li><code>npm run check</code> passes</li>
+<li><code>npm run test:run</code> passes</li>
+<li>production environment variables are set</li>
+<li>the built app points at the production backend URL</li>
 </ul>
-<h2 id="c">C<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
-<h2 id="d">D<a class="headerlink" href="#d" title="Permanent link">&para;</a></h2>
-<h2 id="e">E<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
+<h3 id="infrastructure">Infrastructure<a class="headerlink" href="#infrastructure" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="election-analysis/">election-analysis.md</a> — core analysis engine; risk-first correctness vs v3</li>
-<li><a href="election-state/">election-state.md</a> — teller coordination, Finalized write lock, and #191 concurrent-teller SQLite coverage</li>
+<li>SQL Server is reachable from the backend</li>
+<li>TLS termination is in place</li>
+<li>logs are collected</li>
+<li>database backup and restore procedures are tested</li>
 </ul>
-<h2 id="f">F<a class="headerlink" href="#f" title="Permanent link">&para;</a></h2>
+<h2 id="required-backend-configuration">Required backend configuration<a class="headerlink" href="#required-backend-configuration" title="Permanent link">&para;</a></h2>
+<p>The backend reads standard ASP.NET Core configuration sources. At minimum, set:</p>
 <ul>
-<li><a href="front-desk/">front-desk.md</a> - Ballot Not Received filter; method codes (P not I); pending-online withdraw on method switch; Unregister + re-check-in while open; Finalized is registration-done; Accept-all vs check-in race; Roll Call / envelope pages not in v4</li>
+<li><code>ConnectionStrings__TallyJ4</code></li>
+<li><code>Jwt__Key</code></li>
+<li><code>Jwt__Issuer</code></li>
+<li><code>Jwt__Audience</code></li>
+<li><code>ClientEnv__frontendUrl</code> (public SPA origin used in emails, OAuth redirects, and CORS)</li>
+<li><code>ClientEnv__env</code> (Sentry/client environment advertised at <code>/clientEnv.json</code>. Set <strong><code>uat</code></strong> on UAT and <strong><code>production</code></strong> on production. If this is unset or still <code>development</code> outside Development/Testing, the host infers <code>uat</code> when <code>ClientEnv__frontendUrl</code> is <code>https://uat.v4.tallyj.com</code>, otherwise <code>production</code>. Local Development/Testing keep <code>development</code>.)</li>
 </ul>
-<h2 id="g">G<a class="headerlink" href="#g" title="Permanent link">&para;</a></h2>
-<h2 id="h">H<a class="headerlink" href="#h" title="Permanent link">&para;</a></h2>
-<h2 id="i">I<a class="headerlink" href="#i" title="Permanent link">&para;</a></h2>
+<p>Common optional settings:</p>
 <ul>
-<li><a href="i18n-rich-entries/">i18n-rich-entries.md</a> — locale leaves are <code>{ t, s, w }</code>; runtime and bundles see text only; AI must not overwrite human or approved</li>
-<li><a href="i18n/">i18n.md</a> — html <code>dir</code> with locale; version label is one string (Persian uses بتا); public/voter RTL vs Element Plus RTL CSS</li>
+<li><code>Google__ClientId</code></li>
+<li><code>Google__ClientSecret</code></li>
+<li><code>Email__*</code></li>
+<li><code>Twilio__*</code> (optional <code>Twilio__StatusCallbackUrl</code> is the full public <code>POST /api/Public/smsStatus</code> URL Twilio should call; otherwise <code>ClientEnv:apiUrl</code> or <code>ClientEnv:frontendUrl</code> plus that path)</li>
+<li><code>GreenApi__*</code></li>
+<li><code>Telegram__*</code></li>
+<li><code>SuperAdmin__Emails</code></li>
 </ul>
-<h2 id="j">J<a class="headerlink" href="#j" title="Permanent link">&para;</a></h2>
-<h2 id="k">K<a class="headerlink" href="#k" title="Permanent link">&para;</a></h2>
+<p>Prefer environment variables, secret stores, or deployment-platform secret management.</p>
+<h2 id="required-frontend-configuration">Required frontend configuration<a class="headerlink" href="#required-frontend-configuration" title="Permanent link">&para;</a></h2>
+<p>At minimum, configure:</p>
+<div class="highlight"><pre><span></span><code>VITE_API_URL=https://api.example.com
+</code></pre></div>
+<p>Optional variables such as <code>VITE_SENTRY_DSN</code> and analytics flags should be set only when those services are active.</p>
+<h2 id="backend-deployment">Backend deployment<a class="headerlink" href="#backend-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="publish">Publish<a class="headerlink" href="#publish" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>publish<span class="w"> </span>backend/Backend.csproj<span class="w"> </span>-c<span class="w"> </span>Release<span class="w"> </span>-o<span class="w"> </span>backend/publish
+</code></pre></div>
+<h3 id="apply-migrations">Apply migrations<a class="headerlink" href="#apply-migrations" title="Permanent link">&para;</a></h3>
+<p>Run migrations against the production database before or during deployment:</p>
+<div class="highlight"><pre><span></span><code>dotnet<span class="w"> </span>ef<span class="w"> </span>database<span class="w"> </span>update<span class="w"> </span>--project<span class="w"> </span>backend/Backend.csproj
+</code></pre></div>
+<h3 id="host-behind-a-reverse-proxy">Host behind a reverse proxy<a class="headerlink" href="#host-behind-a-reverse-proxy" title="Permanent link">&para;</a></h3>
+<p>The backend is a standard ASP.NET Core application and can be hosted behind IIS, nginx, or another reverse proxy.</p>
+<p>The important requirement is that the externally visible frontend origin and the backend CORS configuration agree.</p>
+<h2 id="frontend-deployment">Frontend deployment<a class="headerlink" href="#frontend-deployment" title="Permanent link">&para;</a></h2>
+<p>The backend serves the compiled frontend from a folder that sits <strong>inside</strong> its working directory.  The folder name depends on the target environment:</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>wwwroot folder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UAT</td>
+<td><code>wwwroot-uat</code></td>
+</tr>
+<tr>
+<td>Production</td>
+<td><code>wwwroot-prod</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
+<p>Use the npm script that matches the target environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>frontend
+npm<span class="w"> </span>ci
+
+<span class="c1"># Build (includes merging per-locale JSONs into bundled/ for production language support)</span>
+npm<span class="w"> </span>run<span class="w"> </span>build
+</code></pre></div>
+<h3 id="copy-assets-into-the-backend-publish-output">Copy assets into the backend publish output<a class="headerlink" href="#copy-assets-into-the-backend-publish-output" title="Permanent link">&para;</a></h3>
+<p>After building, copy the contents of <code>frontend/dist/</code> into the corresponding webroot folder inside the backend publish directory <strong>before</strong> deploying:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># From the repository root.</span>
+<span class="c1"># UAT example — point the preview card at the UAT origin first</span>
+node<span class="w"> </span>frontend/scripts/set-og-origin.mjs<span class="w"> </span>https://uat.v4.tallyj.com<span class="w"> </span>frontend/dist/index.html
+cp<span class="w"> </span>-r<span class="w"> </span>frontend/dist/<span class="w"> </span>backend/publish/wwwroot-uat/
+
+<span class="c1"># Production example — leave https://v4.tallyj.com in index.html</span>
+cp<span class="w"> </span>-r<span class="w"> </span>frontend/dist/<span class="w"> </span>backend/publish/wwwroot-prod/
+</code></pre></div>
+<p>Then deploy <code>backend/publish/</code> to the server.  The backend detects the environment from its command-line path and automatically selects the correct folder to serve static files from.</p>
+<h3 id="social-preview-origin">Social preview origin<a class="headerlink" href="#social-preview-origin" title="Permanent link">&para;</a></h3>
+<p><code>frontend/index.html</code> pins <code>og:url</code> and <code>og:image</code> at <code>https://v4.tallyj.com</code> (production). UAT is <code>https://uat.v4.tallyj.com</code>. Crawlers do not run JavaScript, so the origin is not chosen in the browser. A production publish of <code>frontend/dist</code> should keep those production URLs. The Azure frontend pipeline deploys only to UAT and, from the <code>frontend</code> directory, rewrites those URL attributes in <code>dist/index.html</code> before it zips the site (<code>node scripts/set-og-origin.mjs</code>). Do not deploy that UAT zip to production. See <code>frontend/README.md</code> (Social link previews) for how to refresh LinkedIn, Facebook, and X caches.</p>
+<blockquote>
+<p><strong>Why this matters:</strong> if the frontend files are missing from <code>wwwroot-{env}/</code>, or are placed in a different directory, the backend will serve <code>index.html</code> as a fallback for all asset requests (<code>.js</code>, <code>.css</code>, etc.), which causes the application to fail silently in the browser.</p>
+</blockquote>
+<h2 id="smoke-tests-after-deployment">Smoke tests after deployment<a class="headerlink" href="#smoke-tests-after-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="backend_1">Backend<a class="headerlink" href="#backend_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="kiosk/">kiosk.md</a> — kiosk as teller-minted 15-minute codes on a shared browser; not mint-on-read</li>
+<li>Open Swagger at <code>/swagger</code></li>
+<li>verify login via <code>POST /api/Auth/login</code></li>
+<li>verify an authenticated request such as election listing</li>
 </ul>
-<h2 id="l">L<a class="headerlink" href="#l" title="Permanent link">&para;</a></h2>
-<h2 id="m">M<a class="headerlink" href="#m" title="Permanent link">&para;</a></h2>
-<h2 id="n">N<a class="headerlink" href="#n" title="Permanent link">&para;</a></h2>
-<h2 id="o">O<a class="headerlink" href="#o" title="Permanent link">&para;</a></h2>
+<h3 id="frontend_1">Frontend<a class="headerlink" href="#frontend_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="online-ballots/">online-ballots.md</a> - Draft autosave vs Submitted, online acceptance (pending until Accept-all), reserved Online/Imported locations, monitor close countdown, anonymous ballot-page sessions, and random name resolution</li>
+<li>load the landing page</li>
+<li>log in with a valid account</li>
+<li>open an election</li>
+<li>verify at least one CRUD workflow relevant to your deployment</li>
 </ul>
-<h2 id="p">P<a class="headerlink" href="#p" title="Permanent link">&para;</a></h2>
+<h2 id="docker-status">Docker status<a class="headerlink" href="#docker-status" title="Permanent link">&para;</a></h2>
+<p>The repository includes Dockerfiles and compose files, but they should be validated before relying on them for production deployment.</p>
+<p>At the time of this cleanup, the backend Docker assets still reference legacy <code>TallyJ4</code> project filenames instead of the current <code>Backend</code> project naming, so treat them as starting points rather than canonical production instructions.</p>
+<h2 id="operational-notes">Operational notes<a class="headerlink" href="#operational-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="people-import/">people-import.md</a> — three-action import pipeline (not a Next/Previous wizard)</li>
-<li><a href="people/">people.md</a> - person fields; AgeGroup removed (eligibility is V01/X05); cannot-vote lock after accepted ballot; guest Can Add People / Name not in the List; Confidential X is a named ordinary person</li>
+<li>The backend currently exposes Swagger, but no dedicated health-check route is documented in the active API host</li>
+<li>Development seeding should remain disabled in production</li>
+<li>The frontend and backend share localization assets during development; production deployments should ensure the backend has access to the required locale files if server-side localization is used</li>
 </ul>
-<h2 id="q">Q<a class="headerlink" href="#q" title="Permanent link">&para;</a></h2>
-<h2 id="r">R<a class="headerlink" href="#r" title="Permanent link">&para;</a></h2>
+<h2 id="keep-this-file-current-when">Keep this file current when<a class="headerlink" href="#keep-this-file-current-when" title="Permanent link">&para;</a></h2>
+<p>Update this document whenever any of the following changes:</p>
 <ul>
-<li><a href="realtime/">realtime.md</a> — SignalR hub group naming (not a single <code>election-{guid}</code> pattern)</li>
-<li><a href="reports/">reports.md</a> — VotersByArea 18+/18–21 (V01), download-all zip of the existing report list, Front Desk vs analysis voted rule; Analyze SaveManual persists M without re-running Analyze; vote <code>/ tie-break</code> only when a count was entered</li>
+<li>publish command or project names</li>
+<li>required environment variables</li>
+<li>CORS or frontend base URL behavior</li>
+<li>deployment topology</li>
+<li>Docker and compose support status</li>
 </ul>
-<h2 id="s">S<a class="headerlink" href="#s" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="sms-eligibility/">sms-eligibility.md</a> — reject reserved/fictional/malformed phones before paid SMS/voice/WhatsApp; OnlineVoter.SmsStatus; ensure phone row on Person write; person detail phone status and recent SmsLog; Twilio callback auto-learn and delivered OK; send-side SmsLog + StatusCallback; teller manual SmsStatus; Front Desk / people list SMS hint; OnlineVoter.WhatsAppStatus (GreenAPI checkWhatsapp); People list Has WhatsApp filter</li>
-</ul>
-<h2 id="t">T<a class="headerlink" href="#t" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="test-elections/">test-elections.md</a> — duplicate as test copy (<code>ShowAsTest</code>); teller test banner; test-only runtime reset</li>
-<li><a href="theme/">theme.md</a> — dark hairlines, stage chips, name links, leftover warning/fill/inverse surfaces, branch badge, and audit muted text (#285)</li>
-</ul>
-<h2 id="u">U<a class="headerlink" href="#u" title="Permanent link">&para;</a></h2>
-<h2 id="v">V<a class="headerlink" href="#v" title="Permanent link">&para;</a></h2>
-<h2 id="w">W<a class="headerlink" href="#w" title="Permanent link">&para;</a></h2>
-<h2 id="x">X<a class="headerlink" href="#x" title="Permanent link">&para;</a></h2>
-<h2 id="y">Y<a class="headerlink" href="#y" title="Permanent link">&para;</a></h2>
-<h2 id="z">Z<a class="headerlink" href="#z" title="Permanent link">&para;</a></h2>
 
 
 
@@ -1846,7 +1635,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../V3_ANALYSIS_COMPARISON/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Comparing analysis with v3">
+          <a href="../MIGRATION_GUIDE/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migrating from v3">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1856,11 +1645,27 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Comparing analysis with v3
+                Migrating from v3
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../VOTER_AUTHENTICATION_IMPLEMENTATION/" class="md-footer__link md-footer__link--next" aria-label="Next: Voter authentication">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Voter authentication
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

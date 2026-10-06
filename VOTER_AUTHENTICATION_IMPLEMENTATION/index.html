@@ -1,0 +1,2386 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Election management and ballot tallying for Bahá’í communities.">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/VOTER_AUTHENTICATION_IMPLEMENTATION/">
+      
+      
+        <link rel="prev" href="../DEPLOYMENT/">
+      
+      
+        <link rel="next" href="../GOOGLE_OAUTH_FOR_VOTERS/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Voter authentication - TallyJ 4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#voter-authentication-implementation-final-summary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TallyJ 4" class="md-header__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Voter authentication
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TallyJ 4" class="md-nav__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICK_START/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ADMIN_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrator guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MIGRATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating from v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voter authentication
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voter authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-endpoints-no-election-guid-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Endpoints (No Election GUID Required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Endpoints (No Election GUID Required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-request-verification-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Request Verification Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verify-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Verify Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-google-oauth-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Google OAuth Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#election-discovery-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Election Discovery Endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Election Discovery Endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-get-available-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Get Available Elections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voting-endpoints-require-election-guid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Voting Endpoints (Require Election GUID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Voting Endpoints (Require Election GUID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-get-election-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Get Election Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-get-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Get People
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-submit-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Submit Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-appsettingsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend (appsettings.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (.env)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-integration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Integration Example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Integration Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-google-one-tap-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Google One Tap Sign-In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-code-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Code-Based Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-show-available-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Show Available Elections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-proceed-to-vote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Proceed to Vote
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-clients-using-old-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Clients Using Old API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring &amp; Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support &amp; Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GOOGLE_OAUTH_FOR_VOTERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google OAuth for voters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHARED_I18N/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared i18n (.NET + Vue)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../i18n-rich-entries-upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rich i18n locale entries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-v3-vs-v4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs: v3 vs v4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-in-v3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs in v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3_ANALYSIS_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing analysis with v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it is built this way
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Why it is built this way
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Benefits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-endpoints-no-election-guid-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication Endpoints (No Election GUID Required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Endpoints (No Election GUID Required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-request-verification-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Request Verification Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verify-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Verify Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-google-oauth-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Google OAuth Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#election-discovery-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Election Discovery Endpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Election Discovery Endpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-get-available-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Get Available Elections
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voting-endpoints-require-election-guid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Voting Endpoints (Require Election GUID)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Voting Endpoints (Require Election GUID)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-get-election-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Get Election Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-get-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Get People
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-submit-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Submit Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend Components
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-appsettingsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backend (appsettings.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend (.env)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-integration-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend Integration Example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Integration Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-google-one-tap-sign-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Google One Tap Sign-In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-code-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Code-Based Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-show-available-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Show Available Elections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-proceed-to-vote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Proceed to Vote
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration Guide
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-clients-using-old-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Clients Using Old API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deployment Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring &amp; Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support &amp; Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="voter-authentication-implementation-final-summary">Voter Authentication Implementation - Final Summary<a class="headerlink" href="#voter-authentication-implementation-final-summary" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>For AI agents and contributors</strong>: This is one of the best implementation deep-dives in the repo. It explains the security model (zero-knowledge auth, SMS pumping prevention) that affects <code>OnlineVotingController</code>, <code>OnlineVotingService</code>, related DTOs, and the voter JWT flow. Cross-reference with current <code>backend/Controllers/OnlineVotingController.cs</code> and <code>AGENTS.md</code> (response wrappers, claims lookup) when working in this area. Some response examples below are illustrative and may vary slightly from live behavior (many endpoints return lightweight objects rather than full <code>ApiResponse&lt;T&gt;</code> wrappers).</p>
+</blockquote>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This implementation provides a <strong>security-first voter authentication system</strong> for online voting with SMS pumping prevention and Google OAuth support. The key innovation is that voters never need to know election GUIDs upfront - they authenticate first, then the system shows them which elections they're eligible for.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="authentication-flow">Authentication Flow<a class="headerlink" href="#authentication-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>1. Voter visits voting portal (no election ID needed)
+2. Voter authenticates via:
+   - Google OAuth (one-tap sign-in), OR
+   - Email/SMS/Voice verification code
+3. System validates:
+   - Voter is registered in at least one currently open election
+   - Email is verified (for Google OAuth)
+4. Voter receives JWT token (24-hour expiry)
+5. Voter calls GET /availableElections to see eligible elections
+6. Voter selects an election from the list
+7. Voter proceeds to vote in selected election
+</code></pre></div>
+<h3 id="security-benefits">Security Benefits<a class="headerlink" href="#security-benefits" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Zero-Knowledge Architecture</strong></li>
+<li>Voters cannot probe for election IDs they shouldn't know about</li>
+<li>Elections only revealed after successful authentication</li>
+<li>
+<p>Prevents unauthorized election discovery</p>
+</li>
+<li>
+<p><strong>SMS Pumping Prevention</strong></p>
+</li>
+<li>Paid SMS / voice / WhatsApp: reserved/fictional/malformed destinations (NANP 555, bad E.164) are rejected in code before any provider call — see <code>context/sms-eligibility.md</code></li>
+<li><code>OnlineVoter</code> also stores global phone SMS eligibility (<code>SmsStatus</code>: null / <code>"OK"</code> / block reason). For <code>VoterIdType</code> <code>"P"</code> + paid channel, a non-null status other than <code>"OK"</code> skips Twilio and GreenAPI. The lookup is the phone row (<code>VoterId</code> + <code>VoterIdType == "P"</code>). WhatsApp presence is a separate <code>WhatsAppStatus</code> on that same P row (null / <code>"OK"</code> / <code>no-wa</code> / <code>check-failed</code>). When delivery is WhatsApp, a non-null status other than <code>"OK"</code> skips GreenAPI. SMS/voice still send if only <code>WhatsAppStatus</code> is blocked.</li>
+<li>Twilio status callbacks (<code>POST /api/Public/smsStatus</code>, v3 <code>Public/SmsStatus</code>) auto-learn a lasting block on that P row: terminal <code>undelivered</code> / <code>failed</code> plus a selected error code (<code>30003</code>, <code>30004</code>, <code>30005</code>, <code>30006</code>, <code>21211</code>, <code>21614</code>) writes <code>twilio-{code}</code> when current <code>SmsStatus</code> is null or <code>"OK"</code>. Missing or unlisted codes do not write a block. SMS <code>delivered</code> / voice <code>completed</code> on an existing SmsLog SID set that P row to <code>"OK"</code> (overwrites a prior block; the phone worked). <code>sent</code> is not success. No OnlineVoter or SmsLog is created from a callback. The request must present a valid <code>X-Twilio-Signature</code> for <code>Twilio:AuthToken</code> (403 otherwise). A successful paid SMS / voice / WhatsApp send writes <code>SmsLog</code> (SID, phone, times, initial status) and Twilio sets <code>StatusCallback</code> to that endpoint; callbacks update by SID and never insert. Person detail shows recent <code>SmsLog</code> rows for that phone. A teller can set <code>SmsStatus</code> to <code>"OK"</code> or a short block reason on that P row from person detail (same <code>[Authorize]</code> as other People writes; SuperAdmin is not a separate people-edit role). See <code>context/sms-eligibility.md</code>.</li>
+<li>Verification codes only sent to voters registered in open elections</li>
+<li>Validates voter registration BEFORE sending SMS/email</li>
+<li>
+<p>Prevents abuse of communication channels</p>
+</li>
+<li>
+<p><strong>Multi-Factor Options</strong></p>
+</li>
+<li>Google OAuth with verified emails</li>
+<li>Traditional code verification via email/SMS/voice</li>
+<li>
+<p>Consistent security model across both methods</p>
+</li>
+<li>
+<p><strong>Rate Limiting &amp; Abuse Prevention</strong></p>
+</li>
+<li>Maximum 5 failed code verification attempts</li>
+<li>15-minute code expiration</li>
+<li>Comprehensive logging of all authentication attempts</li>
+</ol>
+<h2 id="api-endpoints">API Endpoints<a class="headerlink" href="#api-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="authentication-endpoints-no-election-guid-required">Authentication Endpoints (No Election GUID Required)<a class="headerlink" href="#authentication-endpoints-no-election-guid-required" title="Permanent link">&para;</a></h3>
+<h4 id="1-request-verification-code">1. Request Verification Code<a class="headerlink" href="#1-request-verification-code" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">POST /api/online-voting/requestCode</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  "voterId": "voter@example.com",</span>
+<span class="err">  "voterIdType": "E",  // E=email, P=phone, C=code</span>
+<span class="err">  "deliveryMethod": "email"  // email, sms, or voice</span>
+<span class="err">}</span>
+</code></pre></div>
+<p><strong>Response (current behavior):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"messageKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some.key.for.i18n"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"channelToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"optional-server-issued-status-channel-token"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>channelToken</code> is present only when a send was actually attempted. The voter UI uses it to join <code>/hubs/voter-code</code> for live delivery status. It is not the one-time code. Rejected requests omit it (no enumeration via a joinable channel).</p>
+<p>(The controller still does not reveal whether the address exists outside open elections.)</p>
+<p><strong>Security:</strong> Only sends codes if voter is registered in at least one open election. The service validates before sending.</p>
+<h4 id="2-verify-code">2. Verify Code<a class="headerlink" href="#2-verify-code" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">POST /api/online-voting/verifyCode</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  "voterId": "voter@example.com",</span>
+<span class="err">  "verifyCode": "ABC123"</span>
+<span class="err">}</span>
+</code></pre></div>
+<p><strong>Response (illustrative):</strong>
+The service returns a payload containing the JWT and session info (exact fields are in the corresponding DTO / generated client). On success the controller returns the payload directly (not wrapped in <code>ApiResponse&lt;T&gt;</code> in all cases).</p>
+<p><strong>Security:</strong> 15-minute code expiration, 5-attempt lockout per voterId. See <code>OnlineVotingService</code> for the precise lockout and token generation logic.</p>
+<h4 id="3-google-oauth-authentication">3. Google OAuth Authentication<a class="headerlink" href="#3-google-oauth-authentication" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">POST /api/online-voting/googleAuth</span>
+<span class="err">Content-Type: application/json</span>
+
+<span class="err">{</span>
+<span class="err">  "credential": "google-jwt-token-from-one-tap"</span>
+<span class="err">}</span>
+</code></pre></div>
+<p><strong>Response:</strong>
+Similar session payload to the code-based flow (JWT + voter info). Controller returns it directly on success.</p>
+<p><strong>Security:</strong></p>
+<ul>
+<li>Validates Google JWT token</li>
+<li>Requires verified email (<code>EmailVerified</code>)</li>
+<li>Only accepts if voter is registered in at least one currently open election</li>
+</ul>
+<p><strong>Note:</strong> Facebook OAuth support was added later using a similar pattern (<code>facebookAuth</code> endpoint + <code>FacebookAuthForVoterDto</code>). See the controller for the current set of providers.</p>
+<h3 id="election-discovery-endpoint">Election Discovery Endpoint<a class="headerlink" href="#election-discovery-endpoint" title="Permanent link">&para;</a></h3>
+<h4 id="4-get-available-elections">4. Get Available Elections<a class="headerlink" href="#4-get-available-elections" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">GET /api/online-voting/availableElections?voterId=voter@example.com</span>
+<span class="err">Authorization: Bearer {jwt-token}</span>
+</code></pre></div>
+<p><strong>Response:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"electionGuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guid-1"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Annual Election 2024"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"onlineWhenOpen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T00:00:00Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"onlineWhenClose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-31T23:59:59Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dateOfElection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-15T00:00:00Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"hasVoted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"electionGuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guid-2"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Special Election"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"onlineWhenOpen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-02-01T00:00:00Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"onlineWhenClose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-02-15T23:59:59Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"dateOfElection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-02-10T00:00:00Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"hasVoted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p><strong>Use Case:</strong> Called after authentication to show voter which elections they can participate in.</p>
+<h3 id="voting-endpoints-require-election-guid">Voting Endpoints (Require Election GUID)<a class="headerlink" href="#voting-endpoints-require-election-guid" title="Permanent link">&para;</a></h3>
+<p>After voter selects an election:</p>
+<h4 id="5-get-election-info">5. Get Election Info<a class="headerlink" href="#5-get-election-info" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">GET /api/online-voting/{electionGuid}/electionInfo</span>
+</code></pre></div>
+<h4 id="6-get-people">6. Get People<a class="headerlink" href="#6-get-people" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">GET /api/online-voting/{electionGuid}/people</span>
+</code></pre></div>
+<h4 id="7-submit-ballot">7. Submit Ballot<a class="headerlink" href="#7-submit-ballot" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="err">POST /api/online-voting/{electionGuid}/submitBallot</span>
+</code></pre></div>
+<h2 id="implementation-details">Implementation Details<a class="headerlink" href="#implementation-details" title="Permanent link">&para;</a></h2>
+<h3 id="backend-components">Backend Components<a class="headerlink" href="#backend-components" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>DTOs</strong></li>
+<li><code>RequestCodeDto</code> - Code request (no election GUID)</li>
+<li><code>GoogleAuthForVoterDto</code> - Google auth request (no election GUID)</li>
+<li><code>AvailableElectionDto</code> - Election info for voter</li>
+<li>
+<p><code>OnlineVoterAuthResponse</code> - Authentication response with JWT</p>
+</li>
+<li>
+<p><strong>Services</strong></p>
+</li>
+<li><code>IOnlineVotingService</code> / <code>OnlineVotingService</code></li>
+<li><code>RequestVerificationCodeAsync()</code> - Validates voter is in ANY open election</li>
+<li><code>VerifyCodeAsync()</code> - Verifies code and generates JWT</li>
+<li><code>AuthenticateVoterWithGoogleAsync()</code> - Google OAuth validation</li>
+<li>
+<p><code>GetAvailableElectionsAsync()</code> - Lists voter's elections</p>
+</li>
+<li>
+<p><strong>Controllers</strong></p>
+</li>
+<li><code>OnlineVotingController</code></li>
+<li>All authentication endpoints</li>
+<li>
+<p>Election discovery endpoint</p>
+</li>
+<li>
+<p><strong>Database</strong></p>
+</li>
+<li><code>OnlineVoter</code> - Tracks verification codes and attempts; for phone rows, <code>SmsStatus</code> is the global paid-channel eligibility (null = unchecked, <code>"OK"</code> = allowed, any other short value = blocked). <code>WhatsAppStatus</code> is the separate GreenAPI presence field (null = unchecked, <code>"OK"</code> = has WhatsApp, any other short value such as <code>no-wa</code> / <code>check-failed</code> = do not send WhatsApp). Person create / people import / update with a phone ensures a <code>VoterIdType</code> <code>"P"</code> row (<code>VoterId</code> = the Person phone). Changing the Person phone clears <code>WhatsAppStatus</code> on the new number’s P row so it is re-checked. <code>WhenRegistered</code> stays null until the first successful code request. Person detail looks up that P row (<code>VoterId</code> + <code>VoterIdType == "P"</code>) and shows never-seen vs imported-only vs first registered, last login, SMS status, WhatsApp status, and up to five recent <code>SmsLog</code> rows for that phone (stored string or +/- variant; not election-scoped). A teller can set that P row’s <code>SmsStatus</code> to <code>"OK"</code> or a short reason from person detail, and can run GreenAPI <code>checkWhatsapp</code> for that stored phone (one person, or check-selected on the People list, max 100, election-scoped). The People list can filter visible rows by that WhatsApp hint (Has WhatsApp / Unchecked / No WhatsApp); send still only queues P-row <code>"OK"</code> numbers. A Twilio undelivered/failed callback with a selected lasting-unusable error code stamps <code>twilio-{code}</code> on that P row when status is null or <code>"OK"</code>. A later SMS <code>delivered</code> or voice <code>completed</code> callback for an existing SmsLog SID sets that P row to <code>"OK"</code>.</li>
+<li><code>Person</code> - Voter registration in elections</li>
+<li><code>Election</code> - Election configuration and open/close times</li>
+</ol>
+<h3 id="security-implementation">Security Implementation<a class="headerlink" href="#security-implementation" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Google OAuth</strong></li>
+<li>Uses <code>Google.Apis.Auth</code> package (v1.69.0)</li>
+<li>Validates JWT token signature</li>
+<li>Checks audience matches client ID</li>
+<li>
+<p>Requires verified email (<code>payload.EmailVerified</code>)</p>
+</li>
+<li>
+<p><strong>Code Verification</strong></p>
+</li>
+<li>6-character alphanumeric codes</li>
+<li>15-minute expiration</li>
+<li>5-attempt lockout</li>
+<li>
+<p>Secure random generation</p>
+</li>
+<li>
+<p><strong>JWT Tokens</strong></p>
+</li>
+<li>24-hour expiration</li>
+<li>Claims: voterId, voterIdType, voterType="online"</li>
+<li>HMAC SHA256 signature</li>
+<li>
+<p>Consistent format across auth methods</p>
+</li>
+<li>
+<p><strong>Database Validation</strong></p>
+</li>
+<li>Checks voter registration in Person table</li>
+<li>Validates election is currently open (OnlineWhenOpen &lt;= now &lt;= OnlineWhenClose)</li>
+<li>Prevents duplicate voting (HasOnlineBallot flag)</li>
+</ol>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<p>11 comprehensive integration tests:</p>
+<ol>
+<li><strong>Request Code Tests</strong></li>
+<li>Valid voter in open election</li>
+<li>Voter not in any election</li>
+<li>No open elections</li>
+<li>
+<p>Phone number validation</p>
+</li>
+<li>
+<p><strong>Google OAuth Tests</strong></p>
+</li>
+<li>Endpoint validation</li>
+<li>
+<p>Configuration checks</p>
+</li>
+<li>
+<p><strong>Available Elections Tests</strong></p>
+</li>
+<li>Multiple elections</li>
+<li>No elections</li>
+<li>Only open elections returned</li>
+<li>Field validation</li>
+</ol>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h3 id="backend-appsettingsjson">Backend (appsettings.json)<a class="headerlink" href="#backend-appsettingsjson" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Google"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"ClientId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_GOOGLE_CLIENT_ID"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ClientSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YOUR_GOOGLE_CLIENT_SECRET"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"Jwt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"Key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-secret-key"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Backend"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BackendClient"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="frontend-env">Frontend (.env)<a class="headerlink" href="#frontend-env" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>VITE_GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+VITE_API_URL=http://localhost:5020
+</code></pre></div>
+<h2 id="frontend-integration-example">Frontend Integration Example<a class="headerlink" href="#frontend-integration-example" title="Permanent link">&para;</a></h2>
+<h3 id="1-google-one-tap-sign-in">1. Google One Tap Sign-In<a class="headerlink" href="#1-google-one-tap-sign-in" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://accounts.google.com/gsi/client"</span> <span class="na">async</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Initialize Google One Tap</span>
+<span class="nx">google</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">client_id</span><span class="o">:</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_GOOGLE_CLIENT_ID</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">callback</span><span class="o">:</span><span class="w"> </span><span class="nx">handleGoogleCallback</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="c1">// Show One Tap prompt</span>
+<span class="nx">google</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">id</span><span class="p">.</span><span class="nx">prompt</span><span class="p">();</span>
+
+<span class="c1">// Handle callback</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">handleGoogleCallback</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/api/online-voting/googleAuth`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">credential</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">credential</span><span class="p">,</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Store JWT token</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"voterToken"</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"voterId"</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">voterId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Get available elections</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">showAvailableElections</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">voterId</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Authentication failed:"</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="2-code-based-authentication">2. Code-Based Authentication<a class="headerlink" href="#2-code-based-authentication" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Step 1: Request code</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">requestCode</span><span class="p">(</span><span class="nx">email</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/api/online-voting/requestCode`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">voterId</span><span class="o">:</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">voterIdType</span><span class="o">:</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">deliveryMethod</span><span class="o">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">"Verification code sent to your email"</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"Failed to send code"</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Step 2: Verify code</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">verifyCode</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="nx">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/api/online-voting/verifyCode`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">voterId</span><span class="o">:</span><span class="w"> </span><span class="nx">email</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">verifyCode</span><span class="o">:</span><span class="w"> </span><span class="nx">code</span><span class="p">,</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Store JWT token</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"voterToken"</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"voterId"</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">voterId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Get available elections</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">showAvailableElections</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">voterId</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span><span class="o">?</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"Invalid code"</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-show-available-elections">3. Show Available Elections<a class="headerlink" href="#3-show-available-elections" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">showAvailableElections</span><span class="p">(</span><span class="nx">voterId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">"voterToken"</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span>
+<span class="w">      </span><span class="sb">`</span><span class="si">${</span><span class="nx">API_URL</span><span class="si">}</span><span class="sb">/api/online-voting/availableElections`</span><span class="p">,</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">voterId</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Authorization</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">elections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">elections</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">alert</span><span class="p">(</span><span class="s2">"You are not registered in any currently open elections"</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Show election selection UI</span>
+<span class="w">    </span><span class="nx">displayElectionList</span><span class="p">(</span><span class="nx">elections</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Failed to get elections:"</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">displayElectionList</span><span class="p">(</span><span class="nx">elections</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Show UI with election list</span>
+<span class="w">  </span><span class="nx">elections</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">election</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+<span class="w">      </span><span class="sb">`</span><span class="si">${</span><span class="nx">election</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> - </span><span class="si">${</span><span class="nx">election</span><span class="p">.</span><span class="nx">hasVoted</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"Already voted"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"Not voted yet"</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="4-proceed-to-vote">4. Proceed to Vote<a class="headerlink" href="#4-proceed-to-vote" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">selectElection</span><span class="p">(</span><span class="nx">electionGuid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// User selected an election, proceed to voting</span>
+<span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="sb">`/vote/</span><span class="si">${</span><span class="nx">electionGuid</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
+<h3 id="for-clients-using-old-api">For Clients Using Old API<a class="headerlink" href="#for-clients-using-old-api" title="Permanent link">&para;</a></h3>
+<p><strong>Old Flow (BEFORE):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Had to know election GUID upfront</span>
+<span class="nx">POST</span><span class="w"> </span><span class="o">/</span><span class="nx">api</span><span class="o">/</span><span class="nx">online</span><span class="o">-</span><span class="nx">voting</span><span class="o">/</span><span class="nx">requestCode</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="s2">"electionGuid"</span><span class="o">:</span><span class="w"> </span><span class="s2">"known-guid"</span><span class="p">,</span><span class="w">  </span><span class="c1">// ❌ Security risk</span>
+<span class="w">  </span><span class="s2">"voterId"</span><span class="o">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"voterIdType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"deliveryMethod"</span><span class="o">:</span><span class="w"> </span><span class="s2">"email"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>New Flow (AFTER):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// No election GUID needed</span>
+<span class="nx">POST</span><span class="w"> </span><span class="o">/</span><span class="nx">api</span><span class="o">/</span><span class="nx">online</span><span class="o">-</span><span class="nx">voting</span><span class="o">/</span><span class="nx">requestCode</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="s2">"voterId"</span><span class="o">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"voterIdType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">"deliveryMethod"</span><span class="o">:</span><span class="w"> </span><span class="s2">"email"</span>
+<span class="p">}</span>
+
+<span class="c1">// After authentication, get available elections</span>
+<span class="nx">GET</span><span class="w"> </span><span class="o">/</span><span class="nx">api</span><span class="o">/</span><span class="nx">online</span><span class="o">-</span><span class="nx">voting</span><span class="o">/</span><span class="nx">availableElections</span><span class="o">?</span><span class="nx">voterId</span><span class="o">=</span><span class="nx">email</span>
+
+<span class="c1">// Then proceed with selected election</span>
+</code></pre></div>
+<h2 id="deployment-checklist">Deployment Checklist<a class="headerlink" href="#deployment-checklist" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[ ] Configure Google OAuth credentials in production</li>
+<li>[ ] Set JWT secret key (strong random value)</li>
+<li>[ ] Configure SMTP for email delivery (or use service like SendGrid)</li>
+<li>[ ] Configure SMS provider (Twilio, etc.)</li>
+<li>[ ] Set up proper CORS for frontend domain</li>
+<li>[ ] Enable HTTPS/TLS</li>
+<li>[ ] Configure rate limiting at reverse proxy level</li>
+<li>[ ] Set up monitoring for authentication attempts</li>
+<li>[ ] Test Google OAuth flow end-to-end</li>
+<li>[ ] Test code verification flow end-to-end</li>
+<li>[ ] Verify multi-election support</li>
+<li>[ ] Test with real SMS/email services</li>
+</ul>
+<h2 id="monitoring-logging">Monitoring &amp; Logging<a class="headerlink" href="#monitoring-logging" title="Permanent link">&para;</a></h2>
+<p>All authentication events are logged with context:</p>
+<div class="highlight"><pre><span></span><code>// Successful authentication
+Voter {Email} authenticated successfully via Google OAuth (registered in 2 open election(s))
+
+// Failed authentication
+Login code request rejected: VoterId {VoterId} not found in any open election
+Google OAuth rejected: Email {Email} not verified by Google
+
+// Available elections
+Found 3 available elections for voter {VoterId}
+</code></pre></div>
+<p>Monitor these logs for:</p>
+<ul>
+<li>Unusual authentication patterns</li>
+<li>Failed authentication spikes</li>
+<li>SMS pumping attempts</li>
+<li>Election enumeration attempts</li>
+</ul>
+<h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Rate Limiting</strong>: Implement at reverse proxy level (Nginx, etc.)</li>
+<li><strong>IP Blocking</strong>: Block IPs with excessive failed attempts</li>
+<li><strong>CAPTCHA</strong>: Consider adding for repeated failures</li>
+<li><strong>Monitoring</strong>: Alert on unusual patterns</li>
+<li><strong>Audit Trail</strong>: All auth attempts logged with IP and timestamp</li>
+<li><strong>Token Security</strong>: Use httpOnly cookies or secure storage</li>
+<li><strong>HTTPS Only</strong>: Never transmit credentials over HTTP</li>
+</ol>
+<h2 id="future-enhancements">Future Enhancements<a class="headerlink" href="#future-enhancements" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Biometric Authentication</strong>: Add support for WebAuthn/FIDO2</li>
+<li><strong>Magic Links</strong>: Email-based passwordless login</li>
+<li><strong>Social OAuth</strong>: Add Facebook, Microsoft, Apple sign-in</li>
+<li><strong>Remember Device</strong>: Trusted device management</li>
+<li><strong>Session Management</strong>: Active session monitoring</li>
+<li><strong>Geofencing</strong>: Optional location-based restrictions</li>
+</ol>
+<h2 id="support-documentation">Support &amp; Documentation<a class="headerlink" href="#support-documentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>API Documentation: <code>/swagger</code> endpoint</li>
+<li>Google OAuth Guide: <code>docs/GOOGLE_OAUTH_FOR_VOTERS.md</code></li>
+<li>Testing Guide: <code>Backend.Tests/IntegrationTests/VoterAuthenticationFlowTests.cs</code></li>
+<li>Error Reference: See API responses for detailed error messages</li>
+</ul>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>This implementation provides enterprise-grade security for online voting with:</p>
+<ul>
+<li>✅ SMS pumping prevention</li>
+<li>✅ Google OAuth integration</li>
+<li>✅ Zero-knowledge architecture</li>
+<li>✅ Multi-election support</li>
+<li>✅ Comprehensive testing</li>
+<li>✅ Production-ready code</li>
+</ul>
+<p>The system is ready for deployment with proper configuration and monitoring.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../DEPLOYMENT/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deployment">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Deployment
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../GOOGLE_OAUTH_FOR_VOTERS/" class="md-footer__link md-footer__link--next" aria-label="Next: Google OAuth for voters">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Google OAuth for voters
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

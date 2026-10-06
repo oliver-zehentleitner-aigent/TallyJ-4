@@ -1,0 +1,2818 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Election management and ballot tallying for Bahá’í communities.">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/USER_GUIDE/">
+      
+      
+        <link rel="prev" href="../QUICK_START/">
+      
+      
+        <link rel="next" href="../ADMIN_GUIDE/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>User guide - TallyJ 4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tallyj-4-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TallyJ 4" class="md-header__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TallyJ 4" class="md-nav__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICK_START/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-user-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding User Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recent-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recent Activity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing Elections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing Elections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-new-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a New Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-election-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Election Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-an-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing an Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting an Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing People
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing People">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding People
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-people-from-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importing People from CSV
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-a-person" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing a Person
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searching-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Searching and Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ballot-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ballot Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ballot Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recording-paper-ballots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recording Paper Ballots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ballot-status-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ballot Status Indicators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-a-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing a Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-a-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting a Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tallying-votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tallying Votes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tallying Votes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-the-tally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Tally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-tally-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Tally Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-running-the-tally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-running the Tally
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Viewing Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#election-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Election Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result Sections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-ties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handling Ties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exporting Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teller-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Teller Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-tellers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Tellers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teller-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#location-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Location Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Location Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-voting-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Voting Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registering-computers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registering Computers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigning-voters-to-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Voters to Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports-and-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reports and Export
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reports and Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating a Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chart-visualizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chart Visualizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-and-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips and Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tips and Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        During the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        After the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-entry-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Entry Tips
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keyboard-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyboard Shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ADMIN_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrator guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MIGRATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating from v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VOTER_AUTHENTICATION_IMPLEMENTATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voter authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GOOGLE_OAUTH_FOR_VOTERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google OAuth for voters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHARED_I18N/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared i18n (.NET + Vue)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../i18n-rich-entries-upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rich i18n locale entries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-v3-vs-v4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs: v3 vs v4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-in-v3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs in v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3_ANALYSIS_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing analysis with v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it is built this way
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Why it is built this way
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging In
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-user-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding User Roles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Metrics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recent-activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recent Activity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Actions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-elections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing Elections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing Elections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-new-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating a New Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewing-election-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Election Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-an-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing an Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-an-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting an Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing People
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing People">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding People
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-people-from-csv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importing People from CSV
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-a-person" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing a Person
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searching-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Searching and Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ballot-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ballot Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ballot Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recording-paper-ballots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recording Paper Ballots
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ballot-status-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ballot Status Indicators
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-a-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing a Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-a-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting a Ballot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tallying-votes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tallying Votes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tallying Votes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-the-tally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Tally
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-tally-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Tally Status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-running-the-tally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Re-running the Tally
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing Results
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Viewing Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#election-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Election Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Result Sections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-ties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handling Ties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exporting-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exporting Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teller-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Teller Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-tellers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Tellers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teller-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#location-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Location Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Location Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-voting-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding Voting Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registering-computers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registering Computers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assigning-voters-to-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning Voters to Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reports-and-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reports and Export
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reports and Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available Reports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-a-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating a Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chart-visualizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chart Visualizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-and-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips and Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tips and Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        During the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-the-election" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        After the Election
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-entry-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Entry Tips
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keyboard-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keyboard Shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tallyj-4-user-guide">TallyJ 4 - User Guide<a class="headerlink" href="#tallyj-4-user-guide" title="Permanent link">&para;</a></h1>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#dashboard">Dashboard</a></li>
+<li><a href="#managing-elections">Managing Elections</a></li>
+<li><a href="#managing-people">Managing People</a></li>
+<li><a href="#ballot-entry">Ballot Entry</a></li>
+<li><a href="#tallying-votes">Tallying Votes</a></li>
+<li><a href="#viewing-results">Viewing Results</a></li>
+<li><a href="#teller-management">Teller Management</a></li>
+<li><a href="#location-management">Location Management</a></li>
+<li><a href="#reports-and-export">Reports and Export</a></li>
+<li><a href="#tips-and-best-practices">Tips and Best Practices</a></li>
+</ol>
+<hr />
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="logging-in">Logging In<a class="headerlink" href="#logging-in" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Navigate to the TallyJ website</li>
+<li>Enter your email address and password</li>
+<li>Click <strong>Login</strong></li>
+<li>If you forgot your password, click <strong>Forgot Password</strong> to reset it</li>
+</ol>
+<h3 id="understanding-user-roles">Understanding User Roles<a class="headerlink" href="#understanding-user-roles" title="Permanent link">&para;</a></h3>
+<p>TallyJ has three main user roles:</p>
+<ul>
+<li><strong>Administrator</strong>: Full access to all features, can manage users and system settings</li>
+<li><strong>Election Teller</strong>: Can manage elections, enter ballots, and view results</li>
+<li><strong>Voter</strong>: Can view their election information and submit online ballots (if enabled)</li>
+</ul>
+<hr />
+<h2 id="dashboard">Dashboard<a class="headerlink" href="#dashboard" title="Permanent link">&para;</a></h2>
+<p>The dashboard is your home screen after logging in. It displays:</p>
+<h3 id="key-metrics">Key Metrics<a class="headerlink" href="#key-metrics" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Total Elections</strong>: Number of elections in the system</li>
+<li><strong>Active Elections</strong>: Elections currently in progress</li>
+<li><strong>Total Voters</strong>: Number of registered voters across all elections</li>
+<li><strong>Total Ballots</strong>: Number of ballots entered in the system</li>
+</ul>
+<h3 id="recent-activity">Recent Activity<a class="headerlink" href="#recent-activity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Latest elections created</li>
+<li>Recent ballot entries</li>
+<li>System notifications</li>
+</ul>
+<h3 id="quick-actions">Quick Actions<a class="headerlink" href="#quick-actions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Create New Election</strong>: Start a new election</li>
+<li><strong>View Elections</strong>: See all elections</li>
+<li><strong>Manage People</strong>: Add or edit people</li>
+</ul>
+<hr />
+<h2 id="managing-elections">Managing Elections<a class="headerlink" href="#managing-elections" title="Permanent link">&para;</a></h2>
+<h3 id="creating-a-new-election">Creating a New Election<a class="headerlink" href="#creating-a-new-election" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Click <strong>Elections</strong> in the navigation menu</li>
+<li>Click <strong>Create New Election</strong> button</li>
+<li>Fill in the election details:</li>
+<li><strong>Election Name</strong>: (e.g., "Local Spiritual Assembly 2024")</li>
+<li><strong>Election Date</strong>: Date the election will be held</li>
+<li><strong>Election Type</strong>: LSA, NSA, Convention, etc.</li>
+<li><strong>Number to Elect</strong>: How many people will be elected (e.g., 9 for LSA)</li>
+<li><strong>Number Extra</strong>: Additional positions (if any)</li>
+<li><strong>Tally Method</strong>: STV (recommended) or Condorcet</li>
+<li><strong>Allow Ties</strong>: Whether tie votes are permitted</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="viewing-election-details">Viewing Election Details<a class="headerlink" href="#viewing-election-details" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Elections</strong></li>
+<li>Click on an election name to view details</li>
+<li>View:</li>
+<li>Election configuration</li>
+<li>Number of voters</li>
+<li>Ballot status</li>
+<li>Current results (if tally has been run)</li>
+</ol>
+<h3 id="editing-an-election">Editing an Election<a class="headerlink" href="#editing-an-election" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Elections</strong></li>
+<li>Click the <strong>Edit</strong> button next to the election</li>
+<li>Make your changes</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<p>⚠️ <strong>Note</strong>: Some fields cannot be changed after ballots have been entered.</p>
+<h3 id="deleting-an-election">Deleting an Election<a class="headerlink" href="#deleting-an-election" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Elections</strong></li>
+<li>Click the <strong>Delete</strong> button next to the election</li>
+<li>Confirm deletion</li>
+</ol>
+<p>⚠️ <strong>Warning</strong>: This will permanently delete all associated data (voters, ballots, votes, results).</p>
+<hr />
+<h2 id="managing-people">Managing People<a class="headerlink" href="#managing-people" title="Permanent link">&para;</a></h2>
+<h3 id="adding-people">Adding People<a class="headerlink" href="#adding-people" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>People</strong></li>
+<li>Select the election from the dropdown</li>
+<li>Click <strong>Add New Person</strong></li>
+<li>Fill in the details:</li>
+<li><strong>First Name</strong></li>
+<li><strong>Last Name</strong></li>
+<li><strong>Can Vote</strong>: Check if person can submit a ballot</li>
+<li><strong>Can Receive Votes</strong>: Check if person can be voted for</li>
+<li><strong>Location</strong>: Voting location assignment</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="importing-people-from-csv">Importing People from CSV<a class="headerlink" href="#importing-people-from-csv" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>People</strong></li>
+<li>Click <strong>Import</strong></li>
+<li>Download the CSV template</li>
+<li>Fill in the template with people data</li>
+<li>Upload the completed CSV file</li>
+<li>Map the columns to the correct fields</li>
+<li>Review the preview</li>
+<li>Click <strong>Import</strong></li>
+</ol>
+<p><strong>CSV Format Example:</strong></p>
+<div class="highlight"><pre><span></span><code>FirstName,LastName,Eligibility
+Jane,Smith,
+John,Doe,Youth aged 18/19/20
+</code></pre></div>
+<h3 id="editing-a-person">Editing a Person<a class="headerlink" href="#editing-a-person" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>People</strong></li>
+<li>Find the person in the list</li>
+<li>Click the <strong>Edit</strong> button</li>
+<li>Make your changes</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="searching-and-filtering">Searching and Filtering<a class="headerlink" href="#searching-and-filtering" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use the <strong>Search</strong> box to find people by name</li>
+<li>Use the <strong>Filter</strong> dropdown to show:</li>
+<li>All people</li>
+<li>Voters only</li>
+<li>Eligible to be elected only</li>
+<li>By location</li>
+</ul>
+<hr />
+<h2 id="ballot-entry">Ballot Entry<a class="headerlink" href="#ballot-entry" title="Permanent link">&para;</a></h2>
+<h3 id="recording-paper-ballots">Recording Paper Ballots<a class="headerlink" href="#recording-paper-ballots" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Ballots</strong></li>
+<li>Select the election</li>
+<li>Click <strong>New Ballot</strong></li>
+<li>Enter the ballot details:</li>
+<li><strong>Computer Code</strong>: Location identifier (e.g., "AA", "AB")</li>
+<li><strong>Ballot Number</strong>: Sequential number at that location</li>
+<li>Enter each vote:</li>
+<li>Search for the person's name</li>
+<li>Click to add them to the ballot</li>
+<li>Repeat for each vote (up to the number to elect)</li>
+<li>If there are issues with the ballot:</li>
+<li>Mark as <strong>Spoiled</strong> (ballot error, needs replacement)</li>
+<li>Mark as <strong>Review</strong> (unclear, needs verification)</li>
+<li>Add notes explaining the issue</li>
+<li>Click <strong>Save Ballot</strong></li>
+</ol>
+<h3 id="ballot-status-indicators">Ballot Status Indicators<a class="headerlink" href="#ballot-status-indicators" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>✓ OK</strong>: Ballot is valid and counted</li>
+<li><strong>⚠ Review</strong>: Ballot needs review by teller</li>
+<li><strong>✗ Spoiled</strong>: Ballot is invalid</li>
+<li><strong>📝 InReview</strong>: Ballot is being examined</li>
+</ul>
+<h3 id="editing-a-ballot">Editing a Ballot<a class="headerlink" href="#editing-a-ballot" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Ballots</strong></li>
+<li>Find the ballot in the list</li>
+<li>Click <strong>Edit</strong></li>
+<li>Make necessary changes</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="deleting-a-ballot">Deleting a Ballot<a class="headerlink" href="#deleting-a-ballot" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Ballots</strong></li>
+<li>Click the <strong>Delete</strong> button next to the ballot</li>
+<li>Confirm deletion</li>
+</ol>
+<hr />
+<h2 id="tallying-votes">Tallying Votes<a class="headerlink" href="#tallying-votes" title="Permanent link">&para;</a></h2>
+<h3 id="running-the-tally">Running the Tally<a class="headerlink" href="#running-the-tally" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Tally</strong></li>
+<li>Select the election</li>
+<li>Review the ballot summary:</li>
+<li>Total ballots entered</li>
+<li>Valid ballots</li>
+<li>Spoiled ballots</li>
+<li>Ballots under review</li>
+<li>Click <strong>Start Tally</strong></li>
+<li>The system will:</li>
+<li>Validate all ballots</li>
+<li>Apply the selected voting method (STV or Condorcet)</li>
+<li>Calculate results</li>
+<li>Identify ties (if any)</li>
+<li>View the real-time progress bar</li>
+</ol>
+<h3 id="understanding-tally-status">Understanding Tally Status<a class="headerlink" href="#understanding-tally-status" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Not Started</strong>: Tally has not been run</li>
+<li><strong>In Progress</strong>: Tally is currently running</li>
+<li><strong>Completed</strong>: Tally finished successfully</li>
+<li><strong>Failed</strong>: Tally encountered an error</li>
+</ul>
+<h3 id="re-running-the-tally">Re-running the Tally<a class="headerlink" href="#re-running-the-tally" title="Permanent link">&para;</a></h3>
+<p>If you add or edit ballots after tallying:</p>
+<ol>
+<li>Go to <strong>Tally</strong></li>
+<li>Click <strong>Re-run Tally</strong></li>
+<li>Confirm that you want to recalculate results</li>
+</ol>
+<p>⚠️ <strong>Note</strong>: Previous results will be replaced.</p>
+<hr />
+<h2 id="viewing-results">Viewing Results<a class="headerlink" href="#viewing-results" title="Permanent link">&para;</a></h2>
+<h3 id="election-results">Election Results<a class="headerlink" href="#election-results" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Results</strong></li>
+<li>Select the election</li>
+<li>View the results table showing:</li>
+<li><strong>Rank</strong>: Position in the election</li>
+<li><strong>Name</strong>: Elected name</li>
+<li><strong>Vote Count</strong>: Number of votes received</li>
+<li><strong>Section</strong>: Elected, Extra, or Other</li>
+<li><strong>Tied</strong>: Whether the person is in a tie</li>
+</ol>
+<h3 id="result-sections">Result Sections<a class="headerlink" href="#result-sections" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Elected</strong>: People elected</li>
+<li><strong>Extra</strong>: Those with the next highest number of votes (if configured)</li>
+<li><strong>Other</strong>: People who received votes but were not elected</li>
+</ul>
+<h3 id="handling-ties">Handling Ties<a class="headerlink" href="#handling-ties" title="Permanent link">&para;</a></h3>
+<p>If there are ties:</p>
+<ol>
+<li>Review the tied people (marked with 🔗)</li>
+<li>Re-vote among tied people</li>
+<li>Manually adjust the final ranking in the main election</li>
+</ol>
+<h3 id="exporting-results">Exporting Results<a class="headerlink" href="#exporting-results" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Results</strong></li>
+<li>Click <strong>Export</strong></li>
+<li>Choose format:</li>
+<li><strong>PDF</strong>: Formatted report</li>
+<li><strong>Excel</strong>: Spreadsheet with detailed data</li>
+<li><strong>CSV</strong>: Raw data for further analysis</li>
+</ol>
+<hr />
+<h2 id="teller-management">Teller Management<a class="headerlink" href="#teller-management" title="Permanent link">&para;</a></h2>
+<h3 id="assigning-tellers">Assigning Tellers<a class="headerlink" href="#assigning-tellers" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Tellers</strong></li>
+<li>Select the election</li>
+<li>Click <strong>Add Teller</strong></li>
+<li>Fill in:</li>
+<li><strong>Name</strong>: Teller's name</li>
+<li><strong>Computer Code</strong>: Location code they'll use (e.g., "AA")</li>
+<li><strong>Is Head Teller</strong>: Check if this person is the head teller</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="teller-responsibilities">Teller Responsibilities<a class="headerlink" href="#teller-responsibilities" title="Permanent link">&para;</a></h3>
+<p><strong>Head Teller:</strong></p>
+<ul>
+<li>Oversee the entire election process</li>
+<li>Assign computer codes to tellers</li>
+<li>Review flagged ballots</li>
+<li>Run the tally</li>
+<li>Certify final results</li>
+</ul>
+<p><strong>Regular Teller:</strong></p>
+<ul>
+<li>Enter ballots at assigned location</li>
+<li>Flag unclear ballots for review</li>
+<li>Assist with voter check-in</li>
+</ul>
+<hr />
+<h2 id="location-management">Location Management<a class="headerlink" href="#location-management" title="Permanent link">&para;</a></h2>
+<h3 id="adding-voting-locations">Adding Voting Locations<a class="headerlink" href="#adding-voting-locations" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Locations</strong></li>
+<li>Click <strong>Add Location</strong></li>
+<li>Fill in:</li>
+<li><strong>Location Name</strong>: (e.g., "Main Hall", "Community Center")</li>
+<li><strong>Contact Person</strong>: Person managing this location</li>
+<li><strong>Address</strong>: Physical address</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="registering-computers">Registering Computers<a class="headerlink" href="#registering-computers" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Locations</strong></li>
+<li>Click on a location name</li>
+<li>Click <strong>Register Computer</strong></li>
+<li>The system will generate a computer code (e.g., "AA", "AB", "AC")</li>
+<li>Write this code on the physical computer</li>
+<li>Assign the computer to a teller</li>
+</ol>
+<p><strong>Computer Code Format</strong>: Two letters (AA-ZZ)</p>
+<ul>
+<li>First computer: AA</li>
+<li>Second computer: AB</li>
+<li>Etc.</li>
+</ul>
+<h3 id="assigning-voters-to-locations">Assigning Voters to Locations<a class="headerlink" href="#assigning-voters-to-locations" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>People</strong></li>
+<li>Edit a person</li>
+<li>Select their <strong>Voting Location</strong></li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<p>This helps with:</p>
+<ul>
+<li>Front desk check-in</li>
+<li>Location-based ballot entry</li>
+<li>Voter roll management</li>
+</ul>
+<hr />
+<h2 id="reports-and-export">Reports and Export<a class="headerlink" href="#reports-and-export" title="Permanent link">&para;</a></h2>
+<h3 id="available-reports">Available Reports<a class="headerlink" href="#available-reports" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Election Summary Report</strong></li>
+<li>Overview of election configuration</li>
+<li>Voter and ballot statistics</li>
+<li>
+<p>Final results</p>
+</li>
+<li>
+<p><strong>Detailed Ballot Report</strong></p>
+</li>
+<li>Every ballot with vote-by-vote breakdown</li>
+<li>
+<p>Useful for auditing</p>
+</li>
+<li>
+<p><strong>Voter Roll Report</strong></p>
+</li>
+<li>List of all registered voters</li>
+<li>Organized by location</li>
+<li>
+<p>Check-in status (if front desk used)</p>
+</li>
+<li>
+<p><strong>Statistical Analysis Report</strong></p>
+</li>
+<li>Voting patterns</li>
+<li>Participation rates</li>
+<li>Historical comparisons</li>
+</ol>
+<h3 id="generating-a-report">Generating a Report<a class="headerlink" href="#generating-a-report" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Go to <strong>Reports</strong></li>
+<li>Select the report type</li>
+<li>Choose the election</li>
+<li>Set any filters (date range, location, etc.)</li>
+<li>Click <strong>Generate Report</strong></li>
+<li>Choose export format (PDF, Excel, CSV)</li>
+<li>Download the file</li>
+</ol>
+<h3 id="chart-visualizations">Chart Visualizations<a class="headerlink" href="#chart-visualizations" title="Permanent link">&para;</a></h3>
+<p>Available charts:</p>
+<ul>
+<li><strong>Vote Distribution</strong>: Bar chart showing votes per person</li>
+<li><strong>Participation Rate</strong>: Pie chart of ballots entered vs. registered voters</li>
+<li><strong>Voting Trends</strong>: Line chart for historical elections</li>
+<li><strong>Location Breakdown</strong>: Votes by voting location</li>
+</ul>
+<hr />
+<h2 id="tips-and-best-practices">Tips and Best Practices<a class="headerlink" href="#tips-and-best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="before-the-election">Before the Election<a class="headerlink" href="#before-the-election" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Do:</strong></p>
+<ul>
+<li>Create the election well in advance</li>
+<li>Import or enter all people</li>
+<li>Assign tellers and locations</li>
+<li>Test the system with sample ballots</li>
+<li>Train all tellers on the system</li>
+</ul>
+<p>❌ <strong>Don't:</strong></p>
+<ul>
+<li>Wait until election day to set up</li>
+<li>Forget to assign computer codes</li>
+<li>Skip the test run</li>
+</ul>
+<h3 id="during-the-election">During the Election<a class="headerlink" href="#during-the-election" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Do:</strong></p>
+<ul>
+<li>Enter ballots regularly (don't wait until the end)</li>
+<li>Flag unclear ballots immediately for head teller review</li>
+<li>Use consistent computer codes</li>
+<li>Keep paper ballots organized by computer code</li>
+<li>Save frequently</li>
+</ul>
+<p>❌ <strong>Don't:</strong></p>
+<ul>
+<li>Enter ballots from multiple locations on one computer without changing the code</li>
+<li>Guess at unclear names (flag for review instead)</li>
+<li>Delete ballots without head teller approval</li>
+</ul>
+<h3 id="after-the-election">After the Election<a class="headerlink" href="#after-the-election" title="Permanent link">&para;</a></h3>
+<p>✅ <strong>Do:</strong></p>
+<ul>
+<li>Run the tally multiple times to verify results</li>
+<li>Export results for records</li>
+<li>Keep paper ballots for audit purposes</li>
+<li>Back up the database</li>
+<li>Generate and archive reports</li>
+</ul>
+<p>❌ <strong>Don't:</strong></p>
+<ul>
+<li>Delete the election immediately</li>
+<li>Forget to export results</li>
+<li>Lose the paper ballots</li>
+</ul>
+<h3 id="data-entry-tips">Data Entry Tips<a class="headerlink" href="#data-entry-tips" title="Permanent link">&para;</a></h3>
+<p><strong>Speed up ballot entry:</strong></p>
+<ul>
+<li>Learn keyboard shortcuts</li>
+<li>Use the search autocomplete</li>
+<li>Enter ballots in batches by location</li>
+</ul>
+<p><strong>Reduce errors:</strong></p>
+<ul>
+<li>Double-check each vote before saving</li>
+<li>Have a second person verify unclear ballots</li>
+<li>Use consistent name formats</li>
+</ul>
+<p><strong>Handle common issues:</strong></p>
+<ul>
+<li><strong>Person not found</strong>: Check spelling, add them to People first</li>
+<li><strong>Invalid vote count</strong>: Must match "number to elect"</li>
+<li><strong>Ballot won't save</strong>: Check for duplicate ballot number</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Issue</strong>: "Cannot find person to vote for"</p>
+<ul>
+<li><strong>Solution</strong>: Go to People, add the person, mark "Can Receive Votes"</li>
+</ul>
+<p><strong>Issue</strong>: "Ballot has too many/too few votes"</p>
+<ul>
+<li><strong>Solution</strong>: Check the election's "Number to Elect" setting, ensure ballot matches</li>
+</ul>
+<p><strong>Issue</strong>: "Tally fails to run"</p>
+<ul>
+<li><strong>Solution</strong>: Check for ballots in "Review" status, resolve all issues first</li>
+</ul>
+<p><strong>Issue</strong>: "Results don't match manual count"</p>
+<ul>
+<li><strong>Solution</strong>: Re-run tally, verify all ballots entered correctly, check for duplicates</li>
+</ul>
+<p><strong>Issue</strong>: "Cannot delete election"</p>
+<ul>
+<li><strong>Solution</strong>: You may not have permission, contact administrator</li>
+</ul>
+<hr />
+<h2 id="keyboard-shortcuts">Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Ctrl+N</strong>: New ballot</li>
+<li><strong>Ctrl+S</strong>: Save current form</li>
+<li><strong>Ctrl+F</strong>: Focus search box</li>
+<li><strong>Esc</strong>: Close dialog</li>
+<li><strong>Tab</strong>: Navigate between fields</li>
+</ul>
+<hr />
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<p>For assistance:</p>
+<ul>
+<li>Contact your election administrator</li>
+<li>Check the online help documentation</li>
+<li>Email support (if provided)</li>
+</ul>
+<hr />
+<p><strong>Last Updated:</strong> February 2, 2026<br />
+<strong>Version:</strong> 4.0.0</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../QUICK_START/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quick start">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Quick start
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ADMIN_GUIDE/" class="md-footer__link md-footer__link--next" aria-label="Next: Administrator guide">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Administrator guide
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

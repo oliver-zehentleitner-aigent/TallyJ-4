@@ -1,6 +1,6 @@
 {
  "state-json": 2,
- "generated": "2026-10-06T06:34:05Z",
+ "generated": "2026-10-06T07:23:59Z",
  "bodies": {
   "api-contracts.md#dual-response-wrappers": {
    "text": "Two response patterns are in active use:\n\n1. `ApiResponse<T>` — payload in `.data`\n2. `PaginatedResponse<T>` — `.items` at the root\n\n**Reason:** pagination and simple success payloads evolved with different shapes; callers and generated clients must match the endpoint’s actual wrapper. Assuming every endpoint uses the same envelope causes empty UI data and mapping bugs.\n\n**Rejected alternative:** force every controller onto a single envelope without a coordinated migration. Desirable long-term, but not current truth — code and clients must handle both until unified.",

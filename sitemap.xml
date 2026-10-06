@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/ADMIN_GUIDE/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/DEPLOYMENT/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/GOOGLE_OAUTH_FOR_VOTERS/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/Hubs-in-v3/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/Hubs-v3-vs-v4/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/MIGRATION_GUIDE/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/QUICK_START/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/SHARED_I18N/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/USER_GUIDE/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/V3_ANALYSIS_COMPARISON/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/VOTER_AUTHENTICATION_IMPLEMENTATION/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/i18n-rich-entries-upgrade/</loc>
+         <lastmod>2026-10-06</lastmod>
+    </url>
+    <url>
          <loc>https://oliver-zehentleitner-aigent.github.io/TallyJ-4/</loc>
          <lastmod>2026-10-06</lastmod>
     </url>

@@ -1,0 +1,2135 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Election management and ballot tallying for Bahá’í communities.">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/Hubs-v3-vs-v4/">
+      
+      
+        <link rel="prev" href="../i18n-rich-entries-upgrade/">
+      
+      
+        <link rel="next" href="../Hubs-in-v3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>SignalR hubs: v3 vs v4 - TallyJ 4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#signalr-hubs-v3-vs-v4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TallyJ 4" class="md-header__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SignalR hubs: v3 vs v4
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TallyJ 4" class="md-nav__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICK_START/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ADMIN_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrator guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MIGRATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating from v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VOTER_AUTHENTICATION_IMPLEMENTATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voter authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GOOGLE_OAUTH_FOR_VOTERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google OAuth for voters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHARED_I18N/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared i18n (.NET + Vue)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../i18n-rich-entries-upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rich i18n locale entries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs: v3 vs v4
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs: v3 vs v4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hub-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectural-differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural differences
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architectural differences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-and-connection-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack and connection model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group naming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mainhub-extras-in-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainHub extras in v4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#front-desk-event-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front desk event model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#online-voting-and-public-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online voting and public results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-already-works-v3-parity-ish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What already works (v3 parity-ish)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaps-and-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps and bugs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaps and bugs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-wiring-mismatches-hubs-exist-events-dont-line-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Wiring mismatches (hubs exist; events don’t line up)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Wiring mismatches (hubs exist; events don’t line up)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mainhub-election-status-fixed-227" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MainHub election status — fixed (#227)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-person-list-updates-fixed-232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Person list updates — fixed (#232)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-updateonlineelection-and-post-import-reloadpage-fixed-228" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. updateOnlineElection and post-import reloadPage — fixed (#228)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ballot-import-progress-dual-path-fixed-226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ballot import progress dual path — fixed (#226)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-operator-feature-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Operator feature gaps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-online-voter-realtime-product-gated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Online voter realtime (product-gated)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Deferred
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v3-must-not-lose-matrix-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v3 “must not lose” matrix (status)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-fix-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested fix order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-files-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related files (v4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-in-v3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs in v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3_ANALYSIS_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing analysis with v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it is built this way
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Why it is built this way
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hub-inventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub inventory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectural-differences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural differences
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architectural differences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-and-connection-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack and connection model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group naming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mainhub-extras-in-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainHub extras in v4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#front-desk-event-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front desk event model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#online-voting-and-public-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online voting and public results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-already-works-v3-parity-ish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What already works (v3 parity-ish)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gaps-and-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gaps and bugs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaps and bugs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-wiring-mismatches-hubs-exist-events-dont-line-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Wiring mismatches (hubs exist; events don’t line up)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Wiring mismatches (hubs exist; events don’t line up)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mainhub-election-status-fixed-227" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MainHub election status — fixed (#227)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-person-list-updates-fixed-232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Person list updates — fixed (#232)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-updateonlineelection-and-post-import-reloadpage-fixed-228" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. updateOnlineElection and post-import reloadPage — fixed (#228)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ballot-import-progress-dual-path-fixed-226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ballot import progress dual path — fixed (#226)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-operator-feature-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Operator feature gaps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-online-voter-realtime-product-gated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Online voter realtime (product-gated)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Deferred
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v3-must-not-lose-matrix-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v3 “must not lose” matrix (status)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-fix-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Suggested fix order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-files-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related files (v4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="signalr-hubs-v3-vs-v4">SignalR hubs: v3 vs v4<a class="headerlink" href="#signalr-hubs-v3-vs-v4" title="Permanent link">&para;</a></h1>
+<p>Companion to <a href="../Hubs-in-v3/">Hubs-in-v3.md</a>. Summarizes how TallyJ 4’s realtime model differs from v3, what is already covered, and what still needs work.</p>
+<p><strong>Sources:</strong> v3 hub reference, <code>backend/Hubs/*</code>, <code>SignalRNotificationService</code>, frontend <code>signalrService</code> + stores, <code>context/realtime.md</code>.</p>
+<p><strong>Tracking issue:</strong> <a href="https://github.com/glittle/TallyJ-4/issues/234">glittle/TallyJ-4#234</a></p>
+<p><strong>Explicitly deferred:</strong> RollCallHub (not used in v4 yet).</p>
+<hr />
+<h2 id="hub-inventory">Hub inventory<a class="headerlink" href="#hub-inventory" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>v3 hub</th>
+<th>v4</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MainHub</td>
+<td><code>MainHub</code> (<code>/hubs/main</code>)</td>
+<td>Present; status event wiring gap</td>
+</tr>
+<tr>
+<td>PublicHub</td>
+<td><code>PublicHub</code> (<code>/hubs/public</code>)</td>
+<td>Present; guest-teller join list only</td>
+</tr>
+<tr>
+<td>FrontDeskHub</td>
+<td><code>FrontDeskHub</code> (<code>/hubs/front-desk</code>)</td>
+<td>Present; richer events; some producers/listeners missing</td>
+</tr>
+<tr>
+<td>AnalyzeHub</td>
+<td><code>AnalyzeHub</code> (<code>/hubs/analyze</code>)</td>
+<td>Present; structured tally progress</td>
+</tr>
+<tr>
+<td>ImportHub (people CSV)</td>
+<td><code>PeopleImportHub</code> (<code>/hubs/people-import</code>)</td>
+<td>Renamed; election-scoped groups</td>
+</tr>
+<tr>
+<td>ImportHub (election package load)</td>
+<td><code>ElectionPackageImportHub</code> (<code>/hubs/election-package-import</code>)</td>
+<td>User-scoped <code>loaderStatus</code> (#231)</td>
+</tr>
+<tr>
+<td>BallotImportHub</td>
+<td><code>BallotImportHub</code> (<code>/hubs/ballot-import</code>)</td>
+<td>Present; election-scoped groups</td>
+</tr>
+<tr>
+<td>RollCallHub</td>
+<td>—</td>
+<td>Deferred</td>
+</tr>
+<tr>
+<td>AllVotersHub</td>
+<td><code>AllVotersHub</code> (<code>/hubs/all-voters</code>)</td>
+<td>Global <code>AllVoters</code>; thin <code>updateVoters</code> (#233); <code>JoinElection</code> ballot-page session count (#184)</td>
+</tr>
+<tr>
+<td>VoterPersonalHub</td>
+<td><code>VoterPersonalHub</code> (<code>/hubs/voter-personal</code>)</td>
+<td><code>Voter{voterId}</code> from JWT; thin <code>updateVoter</code> (#233)</td>
+</tr>
+<tr>
+<td>VoterCodeHub</td>
+<td><code>VoterCodeHub</code> (<code>/hubs/voter-code</code>)</td>
+<td>Server-issued channel token; <code>codeDeliveryStatus</code> (#229)</td>
+</tr>
+<tr>
+<td><em>(scaffold)</em> OnlineVotingHub</td>
+<td>—</td>
+<td>Removed on purpose; see <code>context/realtime.md</code></td>
+</tr>
+</tbody>
+</table>
+<p>Mapped in <code>backend/Program.AppPipeline.cs</code> as <code>/hubs/main</code>, <code>/hubs/analyze</code>, <code>/hubs/ballot-import</code>, <code>/hubs/people-import</code>, <code>/hubs/election-package-import</code>, <code>/hubs/front-desk</code>, <code>/hubs/public</code>, <code>/hubs/all-voters</code>, <code>/hubs/voter-personal</code>, <code>/hubs/voter-code</code>.</p>
+<hr />
+<h2 id="architectural-differences">Architectural differences<a class="headerlink" href="#architectural-differences" title="Permanent link">&para;</a></h2>
+<h3 id="stack-and-connection-model">Stack and connection model<a class="headerlink" href="#stack-and-connection-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>v3</th>
+<th>v4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Library</td>
+<td>ASP.NET SignalR 2 (<code>/signalr</code>)</td>
+<td>ASP.NET Core SignalR (<code>/hubs/*</code>)</td>
+</tr>
+<tr>
+<td>Client connections</td>
+<td>One shared hub connection</td>
+<td>Separate connection per hub path</td>
+</tr>
+<tr>
+<td>Join</td>
+<td>AJAX MVC actions with <code>connId</code></td>
+<td>Client invokes hub methods (<code>JoinElection</code>, etc.)</td>
+</tr>
+<tr>
+<td>Hub shape</td>
+<td><code>XxxHub</code> helper + empty <code>XxxHubCore</code></td>
+<td>Single hub class per endpoint</td>
+</tr>
+<tr>
+<td>Server push</td>
+<td>Domain code → hub helpers</td>
+<td>Mostly <code>ISignalRNotificationService</code> (+ direct <code>IHubContext</code> in import services)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>v3</th>
+<th>v4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hub <code>[Authorize]</code></td>
+<td>None on <code>*HubCore</code></td>
+<td><code>MainHub</code> is <code>[Authorize]</code>; Public stays anonymous</td>
+</tr>
+<tr>
+<td>Isolation</td>
+<td>Join-endpoint auth + session + groups</td>
+<td>JWT/auth + groups; guest join gated when no main teller</td>
+</tr>
+<tr>
+<td>Group names</td>
+<td>Server-derived from session</td>
+<td>Server-derived; client passes election GUID on join</td>
+</tr>
+</tbody>
+</table>
+<h3 id="group-naming">Group naming<a class="headerlink" href="#group-naming" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>v3</th>
+<th>v4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main (base)</td>
+<td>— (Known/Guest only)</td>
+<td><code>Main{electionGuid}</code> <strong>and</strong> Known/Guest suffixes</td>
+</tr>
+<tr>
+<td>Main Known/Guest</td>
+<td><code>Main{guid}Known</code> / <code>…Guest</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Front desk</td>
+<td><code>FrontDesk{electionGuid}</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Analyze</td>
+<td><code>Analyze{electionGuid}</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Public</td>
+<td><code>Public</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>People import</td>
+<td><code>Import{loginId}</code> (shared name pattern with ballot import, different hub type)</td>
+<td><code>PeopleImport{electionGuid}</code></td>
+</tr>
+<tr>
+<td>Ballot import</td>
+<td><code>Import{loginId}</code></td>
+<td><code>BallotImport{electionGuid}</code></td>
+</tr>
+<tr>
+<td>Roll call</td>
+<td><code>RollCall{electionGuid}</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>All voters</td>
+<td><code>AllVoters</code> (global)</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Voter personal</td>
+<td><code>Voter{voterId}</code></td>
+<td>Same (server-derived from JWT)</td>
+</tr>
+<tr>
+<td>Voter code</td>
+<td>Client opaque key</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Import scope change:</strong> v3 scoped progress to the <strong>login</strong>; v4 scopes people/ballot import to the <strong>election</strong>. Concurrent tellers on the same election share the stream.</p>
+<h3 id="mainhub-extras-in-v4">MainHub extras in v4<a class="headerlink" href="#mainhub-extras-in-v4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Computer code assignment is part of <code>JoinElection</code> (<code>IComputerAssignmentService</code>).</li>
+<li>Guest cannot join unless a main teller is connected (<code>CanGuestJoin</code>).</li>
+<li>Clients join both base <code>Main{guid}</code> and role suffix group.</li>
+</ul>
+<h3 id="front-desk-event-model">Front desk event model<a class="headerlink" href="#front-desk-event-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>v3:</strong> Primary stream was <code>updatePeople</code>, plus <code>reloadPage</code> and <code>updateOnlineElection</code>.</li>
+<li><strong>v4:</strong> Finer-grained events (<code>PersonCheckedIn</code>, <code>PersonFlagsUpdated</code>, <code>PersonVoteCountUpdated</code>, <code>PersonAdded</code>/<code>PersonUpdated</code>/<code>PersonDeleted</code>, <code>updateBallots</code>, …). Some v3 method names remain on the hub but are not fully wired.</li>
+</ul>
+<h3 id="online-voting-and-public-results">Online voting and public results<a class="headerlink" href="#online-voting-and-public-results" title="Permanent link">&para;</a></h3>
+<p>Documented in <code>context/realtime.md</code>:</p>
+<ul>
+<li>No election-scoped OnlineVotingHub that pushes ballot totals; submit remains HTTP.</li>
+<li>Online voters: AllVotersHub + VoterPersonalHub with thin refetch signals (#233).</li>
+<li>PublicHub is <strong>only</strong> for guest-teller joinable elections — not anonymous results display.</li>
+</ul>
+<hr />
+<h2 id="what-already-works-v3-parity-ish">What already works (v3 parity-ish)<a class="headerlink" href="#what-already-works-v3-parity-ish" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>How in v4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Guest force-out when election closed/unlisted</td>
+<td><code>CloseOutGuestTellers</code> → <code>electionClosed</code> on Guest group; FE logs guest out</td>
+</tr>
+<tr>
+<td>Public joinable election list live</td>
+<td>PublicHub + <code>ElectionListUpdated</code> on teller-join page</td>
+</tr>
+<tr>
+<td>Front desk check-in / flags / vote counts</td>
+<td>FrontDesk producers + Front Desk page / vote-count listeners</td>
+</tr>
+<tr>
+<td>People CSV import progress</td>
+<td>PeopleImportHub + service <code>IHubContext</code></td>
+</tr>
+<tr>
+<td>Ballot import progress</td>
+<td>BallotImportHub + <code>ImportService</code> (camelCase events)</td>
+</tr>
+<tr>
+<td>Analysis / tally progress</td>
+<td>AnalyzeHub: <code>tallyProgress</code> / <code>tallyComplete</code> / <code>statusUpdate</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="gaps-and-bugs">Gaps and bugs<a class="headerlink" href="#gaps-and-bugs" title="Permanent link">&para;</a></h2>
+<h3 id="a-wiring-mismatches-hubs-exist-events-dont-line-up">A. Wiring mismatches (hubs exist; events don’t line up)<a class="headerlink" href="#a-wiring-mismatches-hubs-exist-events-dont-line-up" title="Permanent link">&para;</a></h3>
+<p>These look “implemented” until exercised.</p>
+<h4 id="1-mainhub-election-status-fixed-227">1. MainHub election status — <strong>fixed</strong> (<a href="https://github.com/glittle/TallyJ-4/issues/227">#227</a>)<a class="headerlink" href="#1-mainhub-election-status-fixed-227" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification service</td>
+<td>Sends <strong><code>statusChanged</code></strong> to base <code>Main{guid}</code> (<code>ElectionUpdateDto</code>: name, stage, …)</td>
+</tr>
+<tr>
+<td>Frontend <code>electionStore</code></td>
+<td>Listens for <strong><code>statusChanged</code></strong></td>
+</tr>
+<tr>
+<td>Guest close-out</td>
+<td><strong><code>electionClosed</code></strong> to <code>Main{guid}Guest</code> only (unchanged)</td>
+</tr>
+</tbody>
+</table>
+<p>Unused hub instance methods (<code>StatusChanged</code> / <code>ElectionClosed</code> / <code>CloseOutGuestTellers</code>) were removed; producers use <code>IHubContext</code> via <code>SignalRNotificationService</code> (and computer-assignment timeout for guest kick).</p>
+<h4 id="2-person-list-updates-fixed-232">2. Person list updates — <strong>fixed</strong> (<a href="https://github.com/glittle/TallyJ-4/issues/232">#232</a>)<a class="headerlink" href="#2-person-list-updates-fixed-232" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notification service</td>
+<td><code>PersonAdded</code> / <code>PersonUpdated</code> / <code>PersonDeleted</code> to <code>FrontDesk{guid}</code></td>
+</tr>
+<tr>
+<td><code>peopleStore</code></td>
+<td>Listens for those three events (+ <code>PersonVoteCountUpdated</code>, <code>reloadPage</code>)</td>
+</tr>
+<tr>
+<td>Front desk page</td>
+<td><code>PersonCheckedIn</code>, <code>PersonFlagsUpdated</code>, <code>VoterCountUpdated</code>, and Person* (silent eligible-list refresh)</td>
+</tr>
+<tr>
+<td>Unused hub methods</td>
+<td>Removed (<code>UpdatePeople</code> / <code>ReloadPage</code> / …); producers use <code>IHubContext</code></td>
+</tr>
+</tbody>
+</table>
+<p>Catalog: <code>context/realtime.md</code> § FrontDeskHub event catalog.</p>
+<h4 id="3-updateonlineelection-and-post-import-reloadpage-fixed-228">3. <code>updateOnlineElection</code> and post-import <code>reloadPage</code> — <strong>fixed</strong> (<a href="https://github.com/glittle/TallyJ-4/issues/228">#228</a>)<a class="headerlink" href="#3-updateonlineelection-and-post-import-reloadpage-fixed-228" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Producers</td>
+<td><code>SendOnlineElectionUpdateAsync</code> / <code>RequestFrontDeskReloadAsync</code> on notification service</td>
+</tr>
+<tr>
+<td>Online settings</td>
+<td><code>ElectionService.UpdateElectionAsync</code> when online window/process fields change</td>
+</tr>
+<tr>
+<td>Ballot import</td>
+<td>CSV <code>ImportService</code> + CDN import path call <code>RequestFrontDeskReloadAsync</code> on success</td>
+</tr>
+<tr>
+<td>FE <code>reloadPage</code></td>
+<td>Soft re-fetch in front desk, <code>peopleStore</code>, <code>ballotStore</code> (not full page reload)</td>
+</tr>
+<tr>
+<td>FE <code>updateOnlineElection</code></td>
+<td><code>electionStore</code> patches online fields; monitor page re-fetches</td>
+</tr>
+</tbody>
+</table>
+<p>Catalog: <code>context/realtime.md</code> § FrontDeskHub event catalog.</p>
+<h4 id="4-ballot-import-progress-dual-path-fixed-226">4. Ballot import progress dual path — <strong>fixed</strong> (<a href="https://github.com/glittle/TallyJ-4/issues/226">#226</a>)<a class="headerlink" href="#4-ballot-import-progress-dual-path-fixed-226" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event names</td>
+<td>camelCase only: <code>importProgress</code> / <code>importError</code> / <code>importComplete</code></td>
+</tr>
+<tr>
+<td>Producer</td>
+<td><code>ISignalRNotificationService</code> (ballot + people methods)</td>
+</tr>
+<tr>
+<td>Hubs</td>
+<td>join/leave only; no client-callable broadcast methods</td>
+</tr>
+<tr>
+<td>FE</td>
+<td><code>importStore</code> (ballot) and <code>PeopleImportPage</code> (people)</td>
+</tr>
+</tbody>
+</table>
+<p>Catalog: <code>context/realtime.md</code> § Import hub event catalog.</p>
+<h3 id="b-operator-feature-gaps">B. Operator feature gaps<a class="headerlink" href="#b-operator-feature-gaps" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>v3</th>
+<th>v4</th>
+<th>Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multi-election dashboard listen</td>
+<td>MainHub <code>JoinAll</code> (known tellers)</td>
+<td><strong>Fixed</strong> — <code>JoinElections</code> / dashboard multi-join</td>
+<td><a href="https://github.com/glittle/TallyJ-4/issues/230">#230</a></td>
+</tr>
+<tr>
+<td>Election package load progress</td>
+<td>ImportHub <code>loaderStatus</code></td>
+<td><strong>Fixed</strong> — <code>ElectionPackageImportHub</code> user-scoped <code>loaderStatus</code></td>
+<td><a href="https://github.com/glittle/TallyJ-4/issues/231">#231</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-online-voter-realtime-product-gated">C. Online voter realtime (product-gated)<a class="headerlink" href="#c-online-voter-realtime-product-gated" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>v3</th>
+<th>v4</th>
+<th>Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All voters online window / process</td>
+<td>AllVotersHub</td>
+<td><strong>Fixed</strong> — <code>/hubs/all-voters</code> + <code>updateVoters</code></td>
+<td><a href="https://github.com/glittle/TallyJ-4/issues/233">#233</a></td>
+</tr>
+<tr>
+<td>Personal registration / multi-login</td>
+<td>VoterPersonalHub</td>
+<td><strong>Fixed</strong> — <code>/hubs/voter-personal</code> + <code>updateVoter</code></td>
+<td><a href="https://github.com/glittle/TallyJ-4/issues/233">#233</a></td>
+</tr>
+<tr>
+<td>Code delivery live status</td>
+<td>VoterCodeHub</td>
+<td><strong>Fixed</strong> — <code>/hubs/voter-code</code> + <code>channelToken</code> from <code>requestCode</code></td>
+<td><a href="https://github.com/glittle/TallyJ-4/issues/229">#229</a></td>
+</tr>
+</tbody>
+</table>
+<p>If restored: prefer server-derived groups, high-entropy channel tokens for code status (not short client keys), and thin refetch signals — see <code>context/realtime.md</code>.</p>
+<h3 id="d-deferred">D. Deferred<a class="headerlink" href="#d-deferred" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RollCallHub</td>
+<td>Live roll-call display as registrations change. Not filed; add when product needs it.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="v3-must-not-lose-matrix-status">v3 “must not lose” matrix (status)<a class="headerlink" href="#v3-must-not-lose-matrix-status" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Hub(s) in v3</th>
+<th>v4 status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teller UI live election status</td>
+<td>MainHub</td>
+<td><strong>Yes</strong> — status + multi-election dashboard listen</td>
+</tr>
+<tr>
+<td>Guest kick on close/unlist</td>
+<td>MainHub</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td>Public landing joinable list</td>
+<td>PublicHub</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td>Front desk registration live</td>
+<td>FrontDeskHub</td>
+<td><strong>Mostly</strong> — check-in/flags/counts; person CRUD event mismatch</td>
+</tr>
+<tr>
+<td>Roll call live</td>
+<td>RollCallHub</td>
+<td><strong>Deferred</strong></td>
+</tr>
+<tr>
+<td>Monitor online window</td>
+<td>FrontDeskHub</td>
+<td><strong>No</strong> (no producer/listener)</td>
+</tr>
+<tr>
+<td>Voters online open/close</td>
+<td>AllVotersHub</td>
+<td><strong>Yes</strong> — thin <code>updateVoters</code> → refetch</td>
+</tr>
+<tr>
+<td>Voter personal / multi-login</td>
+<td>VoterPersonalHub</td>
+<td><strong>Yes</strong> — thin <code>updateVoter</code> → refetch / notice</td>
+</tr>
+<tr>
+<td>Voter code delivery status</td>
+<td>VoterCodeHub</td>
+<td><strong>Yes</strong> — status-only channel; server-issued token</td>
+</tr>
+<tr>
+<td>CSV import progress</td>
+<td>ImportHub</td>
+<td><strong>Yes</strong> (PeopleImportHub)</td>
+</tr>
+<tr>
+<td>Election-load progress</td>
+<td>ImportHub</td>
+<td><strong>Yes</strong> (ElectionPackageImportHub, user-scoped)</td>
+</tr>
+<tr>
+<td>Ballot import progress + FD reload</td>
+<td>BallotImportHub + FrontDesk</td>
+<td>Progress <strong>yes</strong>; FD reload <strong>no</strong></td>
+</tr>
+<tr>
+<td>Results analysis progress</td>
+<td>AnalyzeHub</td>
+<td><strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="suggested-fix-order">Suggested fix order<a class="headerlink" href="#suggested-fix-order" title="Permanent link">&para;</a></h2>
+<ol>
+<li>~~<a href="https://github.com/glittle/TallyJ-4/issues/227">#227</a> Main status wiring~~ <strong>fixed</strong>  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/232">#232</a> Person event alignment  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/228">#228</a> Online window + import reload  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/226">#226</a> Import event name cleanup  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/230">#230</a> Multi-election join  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/231">#231</a> Election load progress  </li>
+<li><a href="https://github.com/glittle/TallyJ-4/issues/233">#233</a> / <a href="https://github.com/glittle/TallyJ-4/issues/229">#229</a> when online voter UX needs live push  </li>
+</ol>
+<hr />
+<h2 id="related-files-v4">Related files (v4)<a class="headerlink" href="#related-files-v4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Paths</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hubs</td>
+<td><code>backend/Hubs/*.cs</code></td>
+</tr>
+<tr>
+<td>Map</td>
+<td><code>backend/Program.AppPipeline.cs</code> (<code>MapHub</code>)</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td><code>backend/Services/SignalRNotificationService.cs</code>, <code>ISignalRNotificationService.cs</code></td>
+</tr>
+<tr>
+<td>Frontend service</td>
+<td><code>frontend/src/services/signalrService.ts</code></td>
+</tr>
+<tr>
+<td>Stores</td>
+<td><code>electionStore</code>, <code>peopleStore</code>, <code>importStore</code>, <code>ballotStore</code>, <code>resultStore</code></td>
+</tr>
+<tr>
+<td>Why / decisions</td>
+<td><code>context/realtime.md</code></td>
+</tr>
+<tr>
+<td>v3 reference</td>
+<td><code>docs/Hubs-in-v3.md</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Written from a v3↔v4 hub comparison for rewrite tracking. Update this file when gaps are closed or decisions change.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../i18n-rich-entries-upgrade/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Rich i18n locale entries">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Rich i18n locale entries
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Hubs-in-v3/" class="md-footer__link md-footer__link--next" aria-label="Next: SignalR hubs in v3">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                SignalR hubs in v3
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

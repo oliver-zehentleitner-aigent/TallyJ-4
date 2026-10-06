@@ -1,0 +1,4914 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Election management and ballot tallying for Bahá’í communities.">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/Hubs-in-v3/">
+      
+      
+        <link rel="prev" href="../Hubs-v3-vs-v4/">
+      
+      
+        <link rel="next" href="../V3_ANALYSIS_COMPARISON/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>SignalR hubs in v3 - TallyJ 4</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tallyj-v3-signalr-hubs-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TallyJ 4" class="md-header__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SignalR hubs in v3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TallyJ 4" class="md-nav__button md-logo" aria-label="TallyJ 4" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../QUICK_START/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../USER_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ADMIN_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrator guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MIGRATION_GUIDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating from v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DEPLOYMENT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developer notes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Developer notes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../VOTER_AUTHENTICATION_IMPLEMENTATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Voter authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GOOGLE_OAUTH_FOR_VOTERS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Google OAuth for voters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHARED_I18N/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared i18n (.NET + Vue)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../i18n-rich-entries-upgrade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rich i18n locale entries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Hubs-v3-vs-v4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs: v3 vs v4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs in v3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SignalR hubs in v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-client-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared client infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-roles-used-with-hubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorization roles used with hubs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mainhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MainHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. MainHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api-mainhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API (MainHub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins (clients)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends (server)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-publichub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PublicHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. PublicHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-frontdeskhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. FrontDeskHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FrontDeskHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-rollcallhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. RollCallHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. RollCallHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-allvotershub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. AllVotersHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. AllVotersHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-voterpersonalhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. VoterPersonalHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. VoterPersonalHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods-votehomecshtmljs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods (VoteHome.cshtml.js)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-votercodehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. VoterCodeHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. VoterCodeHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-importhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. ImportHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. ImportHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ballotimporthub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. BallotImportHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. BallotImportHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-analyzehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. AnalyzeHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. AnalyzeHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-interface-istatusupdatehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared interface: IStatusUpdateHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-lifecycle-rewrite-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection lifecycle (rewrite guidance)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-summary-for-the-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security summary for the rewrite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-functional-matrix-must-not-lose-in-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal functional matrix (must not lose in rewrite)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V3_ANALYSIS_COMPARISON/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparing analysis with v3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why it is built this way
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Why it is built this way
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shared-client-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared client infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization-roles-used-with-hubs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorization roles used with hubs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-mainhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MainHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. MainHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api-mainhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API (MainHub)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins (clients)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends (server)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-publichub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. PublicHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. PublicHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-frontdeskhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. FrontDeskHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. FrontDeskHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-rollcallhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. RollCallHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. RollCallHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-allvotershub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. AllVotersHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. AllVotersHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-voterpersonalhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. VoterPersonalHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. VoterPersonalHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods-votehomecshtmljs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods (VoteHome.cshtml.js)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-votercodehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. VoterCodeHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. VoterCodeHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-importhub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. ImportHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. ImportHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ballotimporthub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. BallotImportHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. BallotImportHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-analyzehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. AnalyzeHub
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. AnalyzeHub">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-model_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-api_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-joins_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who joins
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-endpoint_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-methods_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#who-sends_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who sends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-notes_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewrite-checklist_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewrite checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-interface-istatusupdatehub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared interface: IStatusUpdateHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-lifecycle-rewrite-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection lifecycle (rewrite guidance)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-summary-for-the-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security summary for the rewrite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-functional-matrix-must-not-lose-in-rewrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal functional matrix (must not lose in rewrite)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tallyj-v3-signalr-hubs-reference">TallyJ v3 SignalR Hubs Reference<a class="headerlink" href="#tallyj-v3-signalr-hubs-reference" title="Permanent link">&para;</a></h1>
+<p>This document describes every real-time <strong>hub</strong> in TallyJ v3: purpose, group model, who joins, who sends, client handlers, and security. It is intended to support a rewrite (v4) so no hub behavior is lost.</p>
+<p><strong>Stack:</strong> ASP.NET SignalR 2 (<code>Microsoft.AspNet.SignalR</code>), mapped in <code>Site/OwinStartup.cs</code> via <code>app.MapSignalR()</code> (default path <code>/signalr</code>).</p>
+<p><strong>Source folder:</strong> <code>Site/CoreModels/Hubs/</code></p>
+<hr />
+<h2 id="architecture-pattern">Architecture pattern<a class="headerlink" href="#architecture-pattern" title="Permanent link">&para;</a></h2>
+<p>Each hub is implemented as <strong>two classes</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>XxxHub</code></td>
+<td>Server-side helper used by C# code. Obtains <code>IHubContext</code> via <code>GlobalHost.ConnectionManager.GetHubContext&lt;XxxHubCore&gt;()</code>, manages groups, and pushes messages to clients.</td>
+</tr>
+<tr>
+<td><code>XxxHubCore : Hub</code></td>
+<td>Empty (or nearly empty) SignalR hub class. Required so SignalR can expose the hub endpoint and so the JavaScript proxy is generated as <code>$.connection.xxxHubCore</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Clients never call hub methods on the server for business logic.</strong> Flow is:</p>
+<ol>
+<li>Browser starts the shared SignalR connection (<code>$.connection.hub.start()</code> in <code>Site/Scripts/site.js</code> → <code>startSignalR</code>).</li>
+<li>Browser POSTs to an MVC action with <code>connId</code> (and sometimes other keys).</li>
+<li>That action calls <code>XxxHub.Join(...)</code>, which adds the connection to a <strong>named group</strong>.</li>
+<li>Server code later broadcasts with <code>CoreHub.Clients.Group(groupName).clientMethod(...)</code>.</li>
+</ol>
+<p>Security is <strong>not</strong> enforced with <code>[Authorize]</code> on hub classes. Isolation comes from:</p>
+<ul>
+<li>MVC authorization on <strong>join</strong> endpoints</li>
+<li>Session checks when joining</li>
+<li><strong>Group names</strong> that encode election, login, voter, or ephemeral keys</li>
+</ul>
+<p>If a client is not in a group, it does not receive that group’s messages.</p>
+<h3 id="shared-client-infrastructure">Shared client infrastructure<a class="headerlink" href="#shared-client-infrastructure" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Location</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startSignalR(callback)</code></td>
+<td><code>Site/Scripts/site.js</code></td>
+<td>Starts hub, stores <code>site.signalrConnectionId</code>, runs deferred join callbacks</td>
+</tr>
+<tr>
+<td><code>connectToElectionHub([electionGuidList])</code></td>
+<td><code>Site/Scripts/site.js</code></td>
+<td>Joins MainHub for current election, or all listed elections (known teller dashboard)</td>
+</tr>
+<tr>
+<td><code>logoffSignalR()</code></td>
+<td><code>Site/Scripts/site.js</code></td>
+<td>Disconnects on logout / form submit</td>
+</tr>
+</tbody>
+</table>
+<p>Auto-join MainHub: any page with <code>site.electionGuid</code> set runs <code>connectToElectionHub()</code> on load.</p>
+<hr />
+<h2 id="authorization-roles-used-with-hubs">Authorization roles used with hubs<a class="headerlink" href="#authorization-roles-used-with-hubs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Role / flag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Known teller</strong></td>
+<td><code>UserSession.IsKnownTeller</code> — authenticated account teller</td>
+</tr>
+<tr>
+<td><strong>Guest teller</strong></td>
+<td><code>UserSession.IsGuestTeller</code> — joined via public listing + passcode, not a full account</td>
+</tr>
+<tr>
+<td><strong>Voter</strong></td>
+<td><code>UserSession.IsVoter</code> — online voter (email / phone / kiosk identity)</td>
+</tr>
+<tr>
+<td><strong>Anonymous public</strong></td>
+<td>No session election/teller identity</td>
+</tr>
+</tbody>
+</table>
+<p>Relevant MVC attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[AllowTellersInActiveElection]</code></td>
+<td>Known or guest teller; guest only if guests still allowed</td>
+</tr>
+<tr>
+<td><code>[ForAuthenticatedTeller]</code></td>
+<td>Known teller only</td>
+</tr>
+<tr>
+<td><code>[AllowVoter]</code></td>
+<td>Logged-in voter <strong>and</strong> host supports online elections</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quick-index">Quick index<a class="headerlink" href="#quick-index" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Hub</th>
+<th>JS proxy</th>
+<th>Group key pattern</th>
+<th>Primary audience</th>
+<th>Join endpoint auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#1-mainhub">MainHub</a></td>
+<td><code>mainHubCore</code></td>
+<td><code>Main{electionGuid}Known</code> / <code>…Guest</code></td>
+<td>Tellers in an election</td>
+<td>Session election match; <code>JoinAll</code> known only</td>
+</tr>
+<tr>
+<td><a href="#2-publichub">PublicHub</a></td>
+<td><code>publicHubCore</code></td>
+<td><code>Public</code></td>
+<td>Anonymous home page</td>
+<td>Public (none)</td>
+</tr>
+<tr>
+<td><a href="#3-frontdeskhub">FrontDeskHub</a></td>
+<td><code>frontDeskHubCore</code></td>
+<td><code>FrontDesk{electionGuid}</code></td>
+<td>Tellers (front desk, ballots, monitor)</td>
+<td>Tellers in active election</td>
+</tr>
+<tr>
+<td><a href="#4-rollcallhub">RollCallHub</a></td>
+<td><code>rollCallHubCore</code></td>
+<td><code>RollCall{electionGuid}</code></td>
+<td>Tellers on roll-call display</td>
+<td>Tellers in active election</td>
+</tr>
+<tr>
+<td><a href="#5-allvotershub">AllVotersHub</a></td>
+<td><code>allVotersHubCore</code></td>
+<td><code>AllVoters</code></td>
+<td>All connected online voters</td>
+<td>Voter only</td>
+</tr>
+<tr>
+<td><a href="#6-voterpersonalhub">VoterPersonalHub</a></td>
+<td><code>voterPersonalHubCore</code></td>
+<td><code>Voter{voterId}</code></td>
+<td>One voter’s sessions</td>
+<td>Voter only</td>
+</tr>
+<tr>
+<td><a href="#7-votercodehub">VoterCodeHub</a></td>
+<td><code>voterCodeHubCore</code></td>
+<td>Client-supplied <code>key</code></td>
+<td>Voter login (code delivery)</td>
+<td>Public + opaque key</td>
+</tr>
+<tr>
+<td><a href="#8-importhub">ImportHub</a></td>
+<td><code>importHubCore</code></td>
+<td><code>Import{loginId}</code></td>
+<td>Known teller (CSV / election load)</td>
+<td>Known teller</td>
+</tr>
+<tr>
+<td><a href="#9-ballotimporthub">BallotImportHub</a></td>
+<td><code>ballotImportHubCore</code></td>
+<td><code>Import{loginId}</code></td>
+<td>Known teller (ballot import)</td>
+<td>Known teller</td>
+</tr>
+<tr>
+<td><a href="#10-analyzehub">AnalyzeHub</a></td>
+<td><code>analyzeHubCore</code></td>
+<td><code>Analyze{electionGuid}</code></td>
+<td>Known teller (analysis progress)</td>
+<td>Known teller</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-mainhub">1. MainHub<a class="headerlink" href="#1-mainhub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/MainHub.cs</code></p>
+<h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
+<p>Broadcast <strong>election-level status</strong> to tellers working in an election (and to the elections list for known tellers). Kick <strong>guest</strong> tellers when an election is closed or unlisted.</p>
+<h3 id="group-model">Group model<a class="headerlink" href="#group-model" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per election, two groups:</li>
+<li><code>Main{electionGuid}Known</code> — known tellers</li>
+<li><code>Main{electionGuid}Guest</code> — guest tellers</li>
+<li><code>Join</code> places the connection in Known or Guest based on <code>UserSession.IsKnownTeller</code>.</li>
+<li><code>JoinAll</code> (known tellers only) adds the connection to the <strong>Known</strong> group for each election GUID in a comma-separated list (dashboard multi-election listen).</li>
+</ul>
+<p>Also refreshes computer “last contact” on join (<code>ComputerModel.RefreshLastContact()</code>).</p>
+<h3 id="server-api-mainhub">Server API (<code>MainHub</code>)<a class="headerlink" href="#server-api-mainhub" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>Add to current election Known or Guest group</td>
+</tr>
+<tr>
+<td><code>JoinAll(connectionId, electionGuidList)</code></td>
+<td>Known teller only; join many <code>Main{guid}Known</code> groups</td>
+</tr>
+<tr>
+<td><code>StatusChanged(infoForKnown, infoForGuest)</code></td>
+<td>Push <code>statusChanged</code> to both groups of current election</td>
+</tr>
+<tr>
+<td><code>StatusChangedForElection(electionGuid, infoForKnown, infoForGuest)</code></td>
+<td>Same for a specific election</td>
+</tr>
+<tr>
+<td><code>CloseOutGuestTellers()</code> / <code>CloseOutGuestTellers(electionGuid)</code></td>
+<td>Push <code>electionClosed</code> to <strong>Guest</strong> group only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins-clients">Who joins (clients)<a class="headerlink" href="#who-joins-clients" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Any teller page with <code>site.electionGuid</code></td>
+<td><code>site.js</code> → <code>connectToElectionHub()</code> → <code>Public/JoinMainHub</code></td>
+</tr>
+<tr>
+<td>Elections list (dashboard)</td>
+<td><code>ElectionList.cshtml.js</code> → <code>connectToElectionHub(electionGuidList)</code> → <code>Public/JoinMainHubAll</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoints">Join endpoints<a class="headerlink" href="#join-endpoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PublicController.JoinMainHub(connId, electionGuid)</code></td>
+<td><strong>No</strong> <code>[Authorize]</code>. Silently returns if no current election, or if <code>electionGuid</code> ≠ <code>UserSession.CurrentElectionGuid</code>.</td>
+</tr>
+<tr>
+<td><code>PublicController.JoinMainHubAll(connId, electionGuidList)</code></td>
+<td><strong>No</strong> <code>[Authorize]</code>. Silently returns unless <code>UserSession.IsKnownTeller</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods">Client methods<a class="headerlink" href="#client-methods" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Handler</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>statusChanged(info)</code></td>
+<td><code>site.js</code></td>
+<td><code>site.broadcast(electionStatusChanged, info)</code> — UI updates status/online/passcode/listed</td>
+</tr>
+<tr>
+<td><code>electionClosed()</code></td>
+<td><code>site.js</code></td>
+<td>Alert, log off SignalR, redirect to <code>Account/Logoff</code></td>
+</tr>
+</tbody>
+</table>
+<p>Typical <code>info</code> shape (from <code>ElectionHelper.UpdateStatusInBrowsers</code>):</p>
+<div class="highlight"><pre><span></span><code>{ ElectionGuid, StateName, Online, Passcode, Listed }
+</code></pre></div>
+<h3 id="who-sends-server">Who sends (server)<a class="headerlink" href="#who-sends-server" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ElectionHelper.UpdateStatusInBrowsers</code></td>
+<td>Status / online / listing changes</td>
+</tr>
+<tr>
+<td><code>ElectionHelper.CloseElection</code></td>
+<td>Close → guest kick + public list refresh</td>
+</tr>
+<tr>
+<td><code>DashboardController.UpdateListingForElection</code></td>
+<td>Unlist election → close guests; always push status for that election</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-notes">Security notes<a class="headerlink" href="#security-notes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Separation of Known vs Guest allows <strong>closing guests only</strong> while known tellers stay connected.</li>
+<li>Join is soft-gated by session (not hard 401); wrong/missing session → no group membership.</li>
+<li>Payload for known vs guest can differ (<code>infoForKnown</code> / <code>infoForGuest</code>); today many callers send the same object to both.</li>
+</ul>
+<h3 id="rewrite-checklist">Rewrite checklist<a class="headerlink" href="#rewrite-checklist" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Election status push to all open teller UIs for that election  </li>
+<li>[ ] Multi-election listen on dashboard for known tellers  </li>
+<li>[ ] Guest-only force logout when election closed/unlisted  </li>
+<li>[ ] Distinct known/guest channels if different payloads are needed later  </li>
+</ul>
+<hr />
+<h2 id="2-publichub">2. PublicHub<a class="headerlink" href="#2-publichub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/PublicHub.cs</code></p>
+<h3 id="purpose_1">Purpose<a class="headerlink" href="#purpose_1" title="Permanent link">&para;</a></h3>
+<p>Keep the <strong>public home page</strong> election dropdown current: which elections are open for guest tellers to join.</p>
+<h3 id="group-model_1">Group model<a class="headerlink" href="#group-model_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single global group: <code>Public</code></li>
+</ul>
+<h3 id="server-api">Server API<a class="headerlink" href="#server-api" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>Add to <code>Public</code></td>
+</tr>
+<tr>
+<td><code>TellPublicAboutVisibleElections()</code></td>
+<td>Rebuild list via <code>PublicElectionLister.RefreshAndGetListOfAvailableElections()</code> and push <code>ElectionsListUpdated(list)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins">Who joins<a class="headerlink" href="#who-joins" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public home</td>
+<td><code>Views/Public/Home.cshtml.js</code> → <code>Public/PublicHub</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoint">Join endpoint<a class="headerlink" href="#join-endpoint" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PublicController.PublicHub(connId)</code></td>
+<td>Public. Also returns open elections HTML (<code>OpenElections()</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_1">Client methods<a class="headerlink" href="#client-methods_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>electionsListUpdated(listing)</code></td>
+<td>Rebuild <code>#ddlElections</code> options</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends">Who sends<a class="headerlink" href="#who-sends" title="Permanent link">&para;</a></h3>
+<p>Triggered whenever listing visibility may change, including:</p>
+<ul>
+<li><code>AllowTellersInActiveElectionAttribute</code> (known teller traffic keeps <code>ListedForPublicAsOf</code> fresh and notifies public)</li>
+<li><code>DashboardController</code> (index, update listing)</li>
+<li><code>ElectionHelper</code> (save election, close election, related paths)</li>
+<li><code>UserSession</code> / <code>ComputerCacher</code> (session/computer listing side effects)</li>
+</ul>
+<h3 id="security-notes_1">Security notes<a class="headerlink" href="#security-notes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Intentionally public: only <strong>public listing HTML/data</strong>, not private election data.</li>
+<li>Anyone can join the group; content must stay non-sensitive.</li>
+</ul>
+<h3 id="rewrite-checklist_1">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Live refresh of “joinable elections” on the landing page  </li>
+<li>[ ] Same triggers when listing flags / passcodes / open windows change  </li>
+</ul>
+<hr />
+<h2 id="3-frontdeskhub">3. FrontDeskHub<a class="headerlink" href="#3-frontdeskhub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/FrontDeskHub.cs</code></p>
+<h3 id="purpose_2">Purpose<a class="headerlink" href="#purpose_2" title="Permanent link">&para;</a></h3>
+<p>Real-time updates for <strong>front desk</strong> and related teller screens: person registration lines, full page reload after ballot import, and online election open/close times on monitor.</p>
+<h3 id="group-model_2">Group model<a class="headerlink" href="#group-model_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per election: <code>FrontDesk{electionGuid}</code>  </li>
+<li>Requires <code>UserSession.CurrentElectionGuid</code> (asserted non-empty)</li>
+</ul>
+<h3 id="server-api_1">Server API<a class="headerlink" href="#server-api_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>UpdatePeople(message)</code></td>
+<td><code>updatePeople</code></td>
+</tr>
+<tr>
+<td><code>ReloadPage()</code></td>
+<td><code>reloadPage</code></td>
+</tr>
+<tr>
+<td><code>UpdateOnlineElection(message)</code></td>
+<td><code>updateOnlineElection</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_1">Who joins<a class="headerlink" href="#who-joins_1" title="Permanent link">&para;</a></h3>
+<p>All via <code>BeforeController.JoinFrontDeskHub</code> (class: <code>[AllowTellersInActiveElection]</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Client page</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Front desk</td>
+<td><code>Views/Before/FrontDesk.cshtml.js</code></td>
+</tr>
+<tr>
+<td>Ballot entry (normal / single)</td>
+<td><code>Views/Ballots/BallotNormal.cshtml.js</code>, <code>BallotSingle.cshtml.js</code></td>
+</tr>
+<tr>
+<td>Sort ballots</td>
+<td><code>Views/Ballots/SortBallots.cshtml.js</code></td>
+</tr>
+<tr>
+<td>Reconcile</td>
+<td><code>Views/Ballots/Reconcile.cshtml.js</code></td>
+</tr>
+<tr>
+<td>Monitor</td>
+<td><code>Views/After/Monitor.cshtml.js</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_2">Client methods<a class="headerlink" href="#client-methods_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Typical behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>updatePeople(info)</code></td>
+<td>Merge person line changes into local lists / people helper; front desk redraws rows; monitor may refresh if online ballots affected</td>
+</tr>
+<tr>
+<td><code>reloadPage()</code></td>
+<td><code>location.reload()</code> (front desk; used after ballot import)</td>
+</tr>
+<tr>
+<td><code>updateOnlineElection(info)</code></td>
+<td>Monitor updates online open/close display</td>
+</tr>
+</tbody>
+</table>
+<p><code>UpdatePeople</code> payload (from <code>PeopleModel.UpdateFrontDeskListing</code>):</p>
+<div class="highlight"><pre><span></span><code>{ PersonLines: [...], LastRowVersion }
+</code></pre></div>
+<h3 id="who-sends_1">Who sends<a class="headerlink" href="#who-sends_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PeopleModel.UpdateFrontDeskListing</code></td>
+<td>Voting method / flag / person registration changes</td>
+</tr>
+<tr>
+<td><code>ElectionHelper</code> (save online settings, extend close, etc.)</td>
+<td><code>UpdateOnlineElection</code> with open/close times</td>
+</tr>
+<tr>
+<td><code>ImportBallotsModel</code></td>
+<td><code>ReloadPage</code> after import/remove so front desk reloads</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-notes_2">Security notes<a class="headerlink" href="#security-notes_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Join requires teller in active election (known or guest, subject to guest rules).</li>
+<li>Group is election-scoped; clients only see their election’s front-desk traffic.</li>
+</ul>
+<h3 id="rewrite-checklist_2">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] Live person registration updates across front desk, ballot entry, sort, reconcile, monitor  </li>
+<li>[x] Online window time updates on monitor (#228)  </li>
+<li>[x] Force front-desk reload after bulk ballot import (#228; soft re-fetch, not full page reload)  </li>
+</ul>
+<hr />
+<h2 id="4-rollcallhub">4. RollCallHub<a class="headerlink" href="#4-rollcallhub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/RollCallHub.cs</code></p>
+<h3 id="purpose_3">Purpose<a class="headerlink" href="#purpose_3" title="Permanent link">&para;</a></h3>
+<p>Keep the <strong>roll call</strong> display in sync when people are registered / unregistered at the front desk.</p>
+<h3 id="group-model_3">Group model<a class="headerlink" href="#group-model_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per election: <code>RollCall{electionGuid}</code></li>
+</ul>
+<h3 id="server-api_2">Server API<a class="headerlink" href="#server-api_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>UpdateAllConnectedClients(message)</code></td>
+<td><code>updatePeople</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_2">Who joins<a class="headerlink" href="#who-joins_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roll call page</td>
+<td><code>Views/Before/RollCall.cshtml.js</code> → <code>Before/JoinRollCallHub</code></td>
+</tr>
+</tbody>
+</table>
+<p>Controller: <code>BeforeController</code> → <code>[AllowTellersInActiveElection]</code>.</p>
+<h3 id="client-methods_3">Client methods<a class="headerlink" href="#client-methods_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>updatePeople(info)</code></td>
+<td>Apply <code>changed</code> people, <code>removedId</code>, update stamp</td>
+</tr>
+</tbody>
+</table>
+<p>Payload from <code>PeopleModel.UpdateFrontDeskListing</code> (when roll-call data changes):</p>
+<div class="highlight"><pre><span></span><code>{ changed, removedId, newStamp }
+</code></pre></div>
+<h3 id="who-sends_2">Who sends<a class="headerlink" href="#who-sends_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>PeopleModel.UpdateFrontDeskListing</code> (alongside FrontDesk + VoterPersonal updates)</li>
+</ul>
+<h3 id="security-notes_3">Security notes<a class="headerlink" href="#security-notes_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Same teller-in-election gate as FrontDesk.</li>
+<li>Election-scoped group.</li>
+</ul>
+<h3 id="rewrite-checklist_3">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Live roll-call add/remove as voting methods change  </li>
+</ul>
+<hr />
+<h2 id="5-allvotershub">5. AllVotersHub<a class="headerlink" href="#5-allvotershub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/AllVotersHub.cs</code></p>
+<h3 id="purpose_4">Purpose<a class="headerlink" href="#purpose_4" title="Permanent link">&para;</a></h3>
+<p>Notify <strong>all currently connected online voters</strong> of election-wide online settings changes (open/close window, selection process).</p>
+<h3 id="group-model_4">Group model<a class="headerlink" href="#group-model_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single global group: <code>AllVoters</code>  </li>
+<li>Not partitioned by election — <strong>every</strong> connected voter client receives every update.</li>
+</ul>
+<h3 id="server-api_3">Server API<a class="headerlink" href="#server-api_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>UpdateVoters(message)</code></td>
+<td><code>updateVoters</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_3">Who joins<a class="headerlink" href="#who-joins_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Voter home</td>
+<td><code>Views/Vote/VoteHome.cshtml.js</code> → <code>Vote/JoinVoterHubs</code> (also joins VoterPersonalHub)</td>
+</tr>
+</tbody>
+</table>
+<p>Controller: <code>VoteController</code> → <code>[AllowVoter]</code> (and host must support online elections).</p>
+<h3 id="client-methods_4">Client methods<a class="headerlink" href="#client-methods_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>updateVoters(info)</code></td>
+<td>Refresh election list; if <code>OnlineSelectionProcess</code> present, update Vue selection process</td>
+</tr>
+</tbody>
+</table>
+<p>Example payloads from <code>ElectionHelper</code>:</p>
+<div class="highlight"><pre><span></span><code>{ changed, OnlineWhenClose, OnlineWhenOpen, OnlineCloseIsEstimate, OnlineSelectionProcess }
+{ OnlineWhenClose, OnlineWhenOpen, OnlineCloseIsEstimate }
+</code></pre></div>
+<h3 id="who-sends_3">Who sends<a class="headerlink" href="#who-sends_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ElectionHelper</code> when online election settings or close time change</li>
+</ul>
+<h3 id="security-notes_4">Security notes<a class="headerlink" href="#security-notes_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Join restricted to authenticated voters.</li>
+<li>Broadcast is global: clients must ignore elections they are not in (UI refreshes “my elections” list rather than trusting arbitrary election data).</li>
+<li><strong>Rewrite consideration:</strong> global group is simple but chatty/leaky; per-election voter groups may be cleaner if voters should only hear about their elections.</li>
+</ul>
+<h3 id="rewrite-checklist_4">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] Push online open/close / process changes to connected voters (v4 AllVotersHub + <code>updateVoters</code>, #233)</li>
+<li>[x] Re-evaluate global vs per-election groups — kept global for list discovery; see <code>context/realtime.md</code></li>
+</ul>
+<hr />
+<h2 id="6-voterpersonalhub">6. VoterPersonalHub<a class="headerlink" href="#6-voterpersonalhub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/VoterPersonalHub.cs</code></p>
+<h3 id="purpose_5">Purpose<a class="headerlink" href="#purpose_5" title="Permanent link">&para;</a></h3>
+<p>Person-specific voter updates: registration/voting method changes and “logged in elsewhere” notice.</p>
+<h3 id="group-model_5">Group model<a class="headerlink" href="#group-model_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On join: <code>Voter{UserSession.VoterId}</code> where <code>VoterId</code> is email, phone, or kiosk code for the logged-in voter.</li>
+<li>On update: groups <code>Voter{person.Email}</code> and/or <code>Voter{person.Phone}</code> (not kiosk in <code>Update</code>).</li>
+</ul>
+<h3 id="server-api_4">Server API<a class="headerlink" href="#server-api_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>Group = current session voter id</td>
+</tr>
+<tr>
+<td><code>Update(Person person)</code></td>
+<td><code>updateVoter</code> with registration fields to email/phone groups</td>
+</tr>
+<tr>
+<td><code>Login(string voterId)</code></td>
+<td><code>updateVoter</code> with <code>{ login: true }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_4">Who joins<a class="headerlink" href="#who-joins_4" title="Permanent link">&para;</a></h3>
+<p>Same as AllVotersHub: <code>Vote/JoinVoterHubs</code> under <code>[AllowVoter]</code>.</p>
+<h3 id="client-methods-votehomecshtmljs">Client methods (<code>VoteHome.cshtml.js</code>)<a class="headerlink" href="#client-methods-votehomecshtmljs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Payload</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{ updateRegistration, VotingMethod, RegistrationTime, ElectionGuid }</code></td>
+<td>Update registration UI + refresh election list</td>
+</tr>
+<tr>
+<td><code>{ login: true }</code></td>
+<td>Status: logged in on another browser; refresh login history</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends_4">Who sends<a class="headerlink" href="#who-sends_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PeopleModel.UpdateFrontDeskListing</code></td>
+<td>Front desk changes person registration</td>
+</tr>
+<tr>
+<td><code>ElectionHelper</code> (process online ballots)</td>
+<td>After processing a person’s online ballot</td>
+</tr>
+<tr>
+<td><code>VoterCodeHelper</code></td>
+<td>After successful code login (<code>Login(voterId)</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-notes_5">Security notes<a class="headerlink" href="#security-notes_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Join uses session <code>VoterId</code> only (client cannot pick another voter’s group via join API).</li>
+<li><code>Update</code> addresses groups by person email/phone; only clients who joined with that id receive messages.</li>
+<li>Kiosk identities join as <code>Voter{kioskCode}</code> but <code>Update(person)</code> currently only notifies email/phone groups.</li>
+</ul>
+<h3 id="rewrite-checklist_5">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] Per-voter registration push when tellers/process change their status (v4 FrontDesk → <code>updateVoter</code>, #233)</li>
+<li>[x] Multi-device login notification (auth success → <code>login: true</code>)</li>
+<li>[x] Kiosk identity: personal updates target email, phone, <strong>and</strong> kiosk code groups when present</li>
+</ul>
+<hr />
+<h2 id="7-votercodehub">7. VoterCodeHub<a class="headerlink" href="#7-votercodehub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/VoterCodeHub.cs</code></p>
+<h3 id="purpose_6">Purpose<a class="headerlink" href="#purpose_6" title="Permanent link">&para;</a></h3>
+<p>Live status during <strong>voter code login</strong> (email/SMS/voice): “code sent”, Twilio delivery status, errors. Bridges async delivery to the browser that requested the code.</p>
+<h3 id="group-model_6">Group model<a class="headerlink" href="#group-model_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Group name = client-generated <strong>opaque key</strong> (home page: <code>Math.random().toString().slice(-5)</code>).</li>
+<li>Same key is passed to <code>IssueCode</code> / <code>LoginWithCode</code> so server can push to the right browser.</li>
+</ul>
+<h3 id="server-api_5">Server API<a class="headerlink" href="#server-api_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId, key)</code></td>
+<td>Add to group <code>key</code></td>
+</tr>
+<tr>
+<td><code>SetStatus(key, message, twilioStatus?)</code></td>
+<td><code>setStatus</code> (no-op if key empty)</td>
+</tr>
+<tr>
+<td><code>Final(key, okay, message)</code></td>
+<td><code>final</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_5">Who joins<a class="headerlink" href="#who-joins_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public home voter login UI</td>
+<td><code>Home.cshtml.js</code> → <code>Public/VoterCodeHub</code> with <code>{ connId, key }</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoint_1">Join endpoint<a class="headerlink" href="#join-endpoint_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PublicController.VoterCodeHub(connId, key)</code></td>
+<td>Public</td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_5">Client methods<a class="headerlink" href="#client-methods_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setStatus(message, sendingStatus)</code></td>
+<td>Update Vue status; map Twilio/email statuses (<code>delivered</code>, <code>emailSent</code>, <code>completed</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>final(okay, message)</code></td>
+<td>Final success/fail message</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends_5">Who sends<a class="headerlink" href="#who-sends_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>VoterCodeHelper</code> during issue-code and delivery status handling</li>
+</ul>
+<h3 id="security-notes_6">Security notes<a class="headerlink" href="#security-notes_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>No account required; <strong>security is the unguessability of <code>key</code></strong> (short 5-digit random fragment is relatively weak).</li>
+<li>Knowing another user’s key would allow joining their status channel (status messages only, not codes if codes stay out of hub payloads — verify rewrite keeps codes out of hub messages).</li>
+<li>Prefer longer, server-issued channel tokens in a rewrite.</li>
+</ul>
+<h3 id="rewrite-checklist_6">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[x] Real-time code-delivery status for email/SMS/voice login  </li>
+<li>[x] Stronger channel id than 5-digit random  </li>
+<li>[x] Keep one-time codes off the wire where possible  </li>
+</ul>
+<hr />
+<h2 id="8-importhub">8. ImportHub<a class="headerlink" href="#8-importhub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/ImportHub.cs</code><br />
+<strong>Implements:</strong> <code>IStatusUpdateHub</code> (defined in <code>AnalyzeHub.cs</code>)</p>
+<h3 id="purpose_7">Purpose<a class="headerlink" href="#purpose_7" title="Permanent link">&para;</a></h3>
+<p>Progress UI for <strong>people CSV import</strong> and <strong>election package load</strong> (long-running imports).</p>
+<h3 id="group-model_7">Group model<a class="headerlink" href="#group-model_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per login: <code>Import{UserSession.LoginId}</code>  </li>
+<li>Scopes messages to the teller’s account, not the election.</li>
+</ul>
+<h3 id="server-api_6">Server API<a class="headerlink" href="#server-api_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ImportInfo(linesProcessed, peopleAdded)</code></td>
+<td><code>importInfo</code></td>
+</tr>
+<tr>
+<td><code>StatusUpdate(msg, msgIsTemp)</code></td>
+<td><code>loaderStatus</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_6">Who joins<a class="headerlink" href="#who-joins_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import CSV</td>
+<td><code>Views/Setup/ImportCsv.cshtml.js</code> → <code>Elections/JoinImportHub</code></td>
+</tr>
+<tr>
+<td>Elections list (load election)</td>
+<td><code>Views/Dashboard/ElectionList.cshtml.js</code> → same hub for <code>loaderStatus</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoint_2">Join endpoint<a class="headerlink" href="#join-endpoint_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ElectionsController.JoinImportHub</code></td>
+<td><code>[ForAuthenticatedTeller]</code> on action; controller also has <code>[AllowTellersInActiveElection]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_6">Client methods<a class="headerlink" href="#client-methods_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Page</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>importInfo(lines, people)</code></td>
+<td>Import CSV</td>
+<td>Progress message / results</td>
+</tr>
+<tr>
+<td><code>loaderStatus(msg, isTemp)</code></td>
+<td>Election list load</td>
+<td>Scrollable log; temp vs permanent lines</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends_6">Who sends<a class="headerlink" href="#who-sends_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ImportCsvModel</code></td>
+<td>CSV import progress</td>
+</tr>
+<tr>
+<td><code>ExportImport/ElectionLoader</code></td>
+<td>Loading an election package</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-notes_7">Security notes<a class="headerlink" href="#security-notes_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Known teller only to join.</li>
+<li>Group uses <code>LoginId</code> so two tellers do not share progress streams.</li>
+<li><strong>Note:</strong> <code>BallotImportHub</code> uses the <strong>same group name pattern</strong> <code>Import{LoginId}</code> but a <strong>different hub type</strong> (<code>BallotImportHubCore</code> vs <code>ImportHubCore</code>). They are separate SignalR hubs; group names do not collide across hub types.</li>
+</ul>
+<h3 id="rewrite-checklist_7">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Streaming progress for people import  </li>
+<li>[ ] Streaming progress for election load on dashboard  </li>
+</ul>
+<hr />
+<h2 id="9-ballotimporthub">9. BallotImportHub<a class="headerlink" href="#9-ballotimporthub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/BallotImportHub.cs</code><br />
+<strong>Implements:</strong> <code>IStatusUpdateHub</code></p>
+<h3 id="purpose_8">Purpose<a class="headerlink" href="#purpose_8" title="Permanent link">&para;</a></h3>
+<p>Progress log while <strong>importing ballots</strong> (e.g. CDN / external ballot files).</p>
+<h3 id="group-model_8">Group model<a class="headerlink" href="#group-model_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per login: <code>Import{UserSession.LoginId}</code> (same string pattern as ImportHub; different hub)</li>
+</ul>
+<h3 id="server-api_7">Server API<a class="headerlink" href="#server-api_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>StatusUpdate(msg, msgIsTemp)</code></td>
+<td><code>StatusUpdate</code> (PascalCase in C# → client handler name as registered)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_7">Who joins<a class="headerlink" href="#who-joins_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import ballots page</td>
+<td><code>Views/Setup/ImportBallots.cshtml.js</code> → <code>Setup/JoinBallotImportHub</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoint_3">Join endpoint<a class="headerlink" href="#join-endpoint_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SetupController.JoinBallotImportHub</code></td>
+<td><code>[ForAuthenticatedTeller]</code> (+ controller <code>[AllowTellersInActiveElection]</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_7">Client methods<a class="headerlink" href="#client-methods_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StatusUpdate(msg, isTemp)</code></td>
+<td>Append to <code>#log</code> / <code>#tempLog</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends_7">Who sends<a class="headerlink" href="#who-sends_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ImportBallotsModel</code> during import (and related status lines)</li>
+</ul>
+<p>Related side effect (not this hub): after import, <code>FrontDeskHub.ReloadPage()</code> so open front desks refresh.</p>
+<h3 id="security-notes_8">Security notes<a class="headerlink" href="#security-notes_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Known teller only.</li>
+<li>Login-scoped group.</li>
+</ul>
+<h3 id="rewrite-checklist_8">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Ballot import progress streaming  </li>
+<li>[ ] Trigger front desk refresh after successful import  </li>
+</ul>
+<hr />
+<h2 id="10-analyzehub">10. AnalyzeHub<a class="headerlink" href="#10-analyzehub" title="Permanent link">&para;</a></h2>
+<p><strong>Files:</strong> <code>Site/CoreModels/Hubs/AnalyzeHub.cs</code><br />
+<strong>Also defines:</strong> <code>IStatusUpdateHub</code></p>
+<h3 id="purpose_9">Purpose<a class="headerlink" href="#purpose_9" title="Permanent link">&para;</a></h3>
+<p>Live <strong>analysis log</strong> while results analysis runs (can take a while on large elections).</p>
+<h3 id="group-model_9">Group model<a class="headerlink" href="#group-model_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Per election: <code>Analyze{electionGuid}</code>  </li>
+<li>Requires current election GUID.</li>
+</ul>
+<h3 id="server-api_8">Server API<a class="headerlink" href="#server-api_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Client event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Join(connectionId)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>StatusUpdate(msg, msgIsTemp)</code></td>
+<td><code>LoadStatus</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-joins_8">Who joins<a class="headerlink" href="#who-joins_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analyze page</td>
+<td><code>Views/After/Analyze.cshtml.js</code> → <code>Elections/JoinAnalyzeHub</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="join-endpoint_4">Join endpoint<a class="headerlink" href="#join-endpoint_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ElectionsController.JoinAnalyzeHub</code></td>
+<td><code>[ForAuthenticatedTeller]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="client-methods_8">Client methods<a class="headerlink" href="#client-methods_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loadStatus(msg, isTemp)</code></td>
+<td>Clear log on “Starting Analysis…”; append permanent lines; temp line in <code>#tempLog</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="who-sends_8">Who sends<a class="headerlink" href="#who-sends_8" title="Permanent link">&para;</a></h3>
+<p>Analysis pipeline implementing <code>IStatusUpdateHub</code>:</p>
+<ul>
+<li><code>ElectionAnalyzerCore</code> / <code>ElectionAnalyzerNormal</code> / <code>ElectionAnalyzerSingleName</code></li>
+<li>Messages such as: starting analysis, reviewing votes/ballots, processing counts, ties, saving, etc.</li>
+</ul>
+<p>Tests use <code>FakeHub : IStatusUpdateHub</code> (<code>Tests/BusinessTests/AnalyzerFakes.cs</code>).</p>
+<h3 id="security-notes_9">Security notes<a class="headerlink" href="#security-notes_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Known teller only to join.</li>
+<li>Election-scoped group (all known tellers analyzing the same election share the log stream).</li>
+</ul>
+<h3 id="rewrite-checklist_9">Rewrite checklist<a class="headerlink" href="#rewrite-checklist_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>[ ] Streaming analysis progress log  </li>
+<li>[ ] Keep <code>IStatusUpdateHub</code> (or equivalent) injectable for tests  </li>
+</ul>
+<hr />
+<h2 id="shared-interface-istatusupdatehub">Shared interface: <code>IStatusUpdateHub</code><a class="headerlink" href="#shared-interface-istatusupdatehub" title="Permanent link">&para;</a></h2>
+<p>Defined in <code>AnalyzeHub.cs</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IStatusUpdateHub</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">StatusUpdate</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">msgIsTemp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Implemented by:</p>
+<ul>
+<li><code>AnalyzeHub</code> → client <code>LoadStatus</code></li>
+<li><code>ImportHub</code> → client <code>LoaderStatus</code></li>
+<li><code>BallotImportHub</code> → client <code>StatusUpdate</code></li>
+</ul>
+<p>Same server abstraction, different client event names — preserve mapping if reusing one progress abstraction in v4.</p>
+<hr />
+<h2 id="connection-lifecycle-rewrite-guidance">Connection lifecycle (rewrite guidance)<a class="headerlink" href="#connection-lifecycle-rewrite-guidance" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Browser page load
+  → startSignalR()  // shared connection
+  → AJAX Join* (connId [+ key/list])
+  → Groups.Add(connectionId, groupName)
+
+Server domain event
+  → new XxxHub().SomePush(...)
+  → Clients.Group(groupName).clientMethod(payload)
+
+Logout / election closed (guests)
+  → logoffSignalR / electionClosed → disconnect / redirect
+</code></pre></div>
+<p>Reconnect behavior: <code>site.js</code> shows user-facing messages on disconnect / slow connection / inactivity; join is re-invoked only when pages re-run their connect helpers after a full reconnect path.</p>
+<hr />
+<h2 id="security-summary-for-the-rewrite">Security summary for the rewrite<a class="headerlink" href="#security-summary-for-the-rewrite" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>v3 behavior</th>
+<th>Recommendation for v4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hub class auth</td>
+<td>None on <code>*HubCore</code></td>
+<td>Prefer hub <code>[Authorize]</code> + policies <strong>or</strong> keep join-via-API + server-only groups</td>
+</tr>
+<tr>
+<td>Isolation</td>
+<td>SignalR groups</td>
+<td>Keep group-based isolation; prefer server-derived group names only</td>
+</tr>
+<tr>
+<td>Election scope</td>
+<td>Most teller hubs use <code>CurrentElectionGuid</code></td>
+<td>Bind groups to authorized election membership</td>
+</tr>
+<tr>
+<td>Guest vs known</td>
+<td>MainHub split</td>
+<td>Preserve guest kick without disconnecting known tellers</td>
+</tr>
+<tr>
+<td>Public data</td>
+<td>PublicHub only</td>
+<td>Never put private person/ballot data on public groups</td>
+</tr>
+<tr>
+<td>Voter channels</td>
+<td>Session voter id</td>
+<td>Never allow client-supplied voter id for personal groups</td>
+</tr>
+<tr>
+<td>Login codes</td>
+<td>Client random key</td>
+<td>Use longer server-issued channel tokens</td>
+</tr>
+<tr>
+<td>Progress hubs</td>
+<td>Per <code>LoginId</code></td>
+<td>Keep user-scoped so concurrent tellers do not share logs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="file-map">File map<a class="headerlink" href="#file-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Site/CoreModels/Hubs/*.cs</code></td>
+<td>All hub helpers + core classes</td>
+</tr>
+<tr>
+<td><code>Site/OwinStartup.cs</code></td>
+<td><code>app.MapSignalR()</code></td>
+</tr>
+<tr>
+<td><code>Site/Scripts/site.js</code></td>
+<td>Connection helpers, MainHub clients</td>
+</tr>
+<tr>
+<td><code>Site/Scripts/jquery.signalR-2.4.3*.js</code></td>
+<td>SignalR client library</td>
+</tr>
+<tr>
+<td><code>Site/Controllers/PublicController.cs</code></td>
+<td>Public, VoterCode, Main joins</td>
+</tr>
+<tr>
+<td><code>Site/Controllers/BeforeController.cs</code></td>
+<td>FrontDesk, RollCall joins</td>
+</tr>
+<tr>
+<td><code>Site/Controllers/VoteController.cs</code></td>
+<td>AllVoters + VoterPersonal join</td>
+</tr>
+<tr>
+<td><code>Site/Controllers/ElectionsController.cs</code></td>
+<td>Import, Analyze joins</td>
+</tr>
+<tr>
+<td><code>Site/Controllers/SetupController.cs</code></td>
+<td>BallotImport join</td>
+</tr>
+<tr>
+<td><code>Site/CoreModels/ElectionHelper.cs</code></td>
+<td>Many broadcasts (Main, Public, AllVoters, FrontDesk, VoterPersonal)</td>
+</tr>
+<tr>
+<td><code>Site/CoreModels/PeopleModel.cs</code></td>
+<td>FrontDesk, RollCall, VoterPersonal on person changes</td>
+</tr>
+<tr>
+<td><code>Site/CoreModels/Helper/VoterCodeHelper.cs</code></td>
+<td>VoterCode + VoterPersonal.Login</td>
+</tr>
+<tr>
+<td><code>Site/CoreModels/ImportCsvModel.cs</code> / <code>ImportBallotsModel.cs</code> / <code>ExportImport/ElectionLoader.cs</code></td>
+<td>Import progress</td>
+</tr>
+<tr>
+<td><code>Site/CoreModels/ElectionAnalyzer*.cs</code></td>
+<td>Analyze progress</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="minimal-functional-matrix-must-not-lose-in-rewrite">Minimal functional matrix (must not lose in rewrite)<a class="headerlink" href="#minimal-functional-matrix-must-not-lose-in-rewrite" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Hub(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teller UI sees live election status (open/listed/passcode/tally state)</td>
+<td>MainHub</td>
+</tr>
+<tr>
+<td>Guest tellers forced out when election closed/unlisted</td>
+<td>MainHub</td>
+</tr>
+<tr>
+<td>Public landing page election list stays current</td>
+<td>PublicHub</td>
+</tr>
+<tr>
+<td>Front desk / ballot screens update when someone is registered</td>
+<td>FrontDeskHub</td>
+</tr>
+<tr>
+<td>Roll call display tracks registrations</td>
+<td>RollCallHub</td>
+</tr>
+<tr>
+<td>Monitor shows online window changes</td>
+<td>FrontDeskHub</td>
+</tr>
+<tr>
+<td>Voters see online open/close / process changes</td>
+<td>AllVotersHub</td>
+</tr>
+<tr>
+<td>Voter sees their own registration / multi-login</td>
+<td>VoterPersonalHub</td>
+</tr>
+<tr>
+<td>Voter login code delivery status</td>
+<td>VoterCodeHub</td>
+</tr>
+<tr>
+<td>CSV / election-load progress</td>
+<td>ImportHub</td>
+</tr>
+<tr>
+<td>Ballot import progress + front desk reload</td>
+<td>BallotImportHub (+ FrontDeskHub)</td>
+</tr>
+<tr>
+<td>Results analysis progress log</td>
+<td>AnalyzeHub</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Generated from TallyJ v3 source for rewrite reference. Update this document if hub behavior changes before v4 ships.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Hubs-v3-vs-v4/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SignalR hubs: v3 vs v4">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                SignalR hubs: v3 vs v4
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../V3_ANALYSIS_COMPARISON/" class="md-footer__link md-footer__link--next" aria-label="Next: Comparing analysis with v3">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Comparing analysis with v3
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
