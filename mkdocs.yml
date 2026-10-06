@@ -50,6 +50,9 @@ markdown_extensions:
 hooks:
   - tools/mkdocs/site_pages.py
 
+extra_css:
+  - assets/extra.css
+
 # Working notes of coding agents, not documentation.
 exclude_docs: |
   grok-cli-outputs/
