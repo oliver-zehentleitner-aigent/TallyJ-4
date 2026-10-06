@@ -1,0 +1,1010 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/realtime/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Realtime (SignalR) - TallyJ 4 — why it is built this way</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#realtime-signalr" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-header__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4 — why it is built this way
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Realtime (SignalR)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-nav__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4 — why it is built this way
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why this project is built this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hub-specific-group-name-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hub-specific group name patterns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mainhub-status-vs-role-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainHub status vs role groups
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#election-teller-name-list-mainhub-tellerschanged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Election teller name list (MainHub tellersChanged)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mainhub-multi-election-dashboard-listen-joinelections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainHub multi-election dashboard listen (JoinElections)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-owns-main-vs-frontdesk-membership" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who owns Main vs FrontDesk membership
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-election-scoped-onlinevotinghub-ballot-totals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No election-scoped OnlineVotingHub (ballot totals)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-voter-hubs-allvoters-voterpersonal-issue-233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online voter hubs (AllVoters + VoterPersonal) — issue #233
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#votercodehub-live-login-code-delivery-status-issue-229" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VoterCodeHub — live login-code delivery status (issue #229)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-anonymous-public-results-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No anonymous public results display
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontdeskhub-event-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FrontDeskHub event catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontdesk-reloadpage-vs-full-browser-reload-228" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FrontDesk reloadPage vs full browser reload (#228)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import-hub-event-catalog-226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import hub event catalog (#226)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Import hub event catalog (#226)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ballotimporthub-group-ballotimportelectionguid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BallotImportHub — group BallotImport{electionGuid}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peopleimporthub-group-peopleimportelectionguid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PeopleImportHub — group PeopleImport{electionGuid}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#electionpackageimporthub-group-electionpackageimportuserid-231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ElectionPackageImportHub — group ElectionPackageImport{userId} (#231)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="realtime-signalr">Realtime (SignalR)</h1>
+<h2 id="hub-specific-group-name-patterns">Hub-specific group name patterns</h2>
+<p><strong>Id:</strong> 4398139f-ba65-4e6a-a7b3-03b3630f6d25<br />
+<strong>Type:</strong> constraint<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> project agent notes (<code>AGENTS.md</code>); hub <code>GetGroupName</code> helpers; <code>SignalRNotificationService</code><br />
+<strong>Revisit when:</strong> a hub is added/removed, or group naming is unified deliberately</p>
+<p>Do <strong>not</strong> assume a single <code>election-{guid}</code> convention for all realtime traffic. Each hub builds its own group name (via <code>GetGroupName</code> statics) and broadcasts go through matching methods in <code>SignalRNotificationService</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Hub / use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Main{electionGuid}</code> (+ <code>…Known</code> / <code>…Guest</code>)</td>
+<td>MainHub — shared status + teller name list on <strong>base</strong>; role events on suffix</td>
+</tr>
+<tr>
+<td><code>Analyze{electionGuid}</code></td>
+<td>AnalyzeHub — tally progress/complete</td>
+</tr>
+<tr>
+<td><code>FrontDesk{electionGuid}</code></td>
+<td>FrontDeskHub — people, ballots, online election, reload</td>
+</tr>
+<tr>
+<td><code>BallotImport{electionGuid}</code> / <code>PeopleImport{electionGuid}</code></td>
+<td>import hubs (election-scoped)</td>
+</tr>
+<tr>
+<td><code>ElectionPackageImport{userId}</code></td>
+<td>ElectionPackageImportHub — dashboard package load log</td>
+</tr>
+<tr>
+<td><code>Public</code></td>
+<td>PublicHub — guest-teller joinable elections list</td>
+</tr>
+<tr>
+<td><code>AllVoters</code> (global)</td>
+<td>AllVotersHub — online voter list/window refresh</td>
+</tr>
+<tr>
+<td><code>Voter{voterId}</code></td>
+<td>VoterPersonalHub — registration + multi-device login</td>
+</tr>
+<tr>
+<td><code>VoterCode{channelId}</code></td>
+<td>VoterCodeHub — pre-auth login-code delivery status</td>
+</tr>
+</tbody>
+</table>
+<p>Frontend: <code>frontend/src/services/signalrService.ts</code> (<code>connectTo*Hub</code>, <code>joinElection</code>, <code>joinDashboardElections</code>, <code>connectVoterHubs</code>, etc.) and store subscriptions.</p>
+<h2 id="mainhub-status-vs-role-groups">MainHub status vs role groups</h2>
+<p><strong>Id:</strong> 15a379ed-f1bc-4a32-8cc4-a7fe712c5cba<br />
+<strong>Type:</strong> constraint<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #227 fix; <code>SignalRNotificationService.SendElectionUpdateAsync</code>; <code>MainHub.JoinElection</code><br />
+<strong>Revisit when:</strong> Known vs Guest need different status payloads (v3 <code>infoForKnown</code> / <code>infoForGuest</code>)</p>
+<ul>
+<li>Every client that joins an election is added to <strong>base</strong> <code>Main{electionGuid}</code> <strong>and</strong> either <code>…Known</code> or <code>…Guest</code>.</li>
+<li>Shared election status (name, stage) is broadcast as <strong><code>statusChanged</code></strong> to the <strong>base</strong> group only — one payload, no double delivery.</li>
+<li>Role-specific events use suffix groups (guest <strong><code>electionClosed</code></strong> → <code>Main{guid}Guest</code> only).</li>
+<li>Server producers use <code>IHubContext&lt;MainHub&gt;</code> via <code>SignalRNotificationService</code> (and computer-assignment close-out), not client-callable hub methods.</li>
+</ul>
+<h2 id="election-teller-name-list-mainhub-tellerschanged">Election teller name list (MainHub <code>tellersChanged</code>)</h2>
+<p><strong>Id:</strong> f8e458fa-1726-49f0-b7c0-0d62fea526ac<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #287 (teller-name list slice); Teller 1/2 already persist via <code>Teller</code> + Tellers page (evidence: issue #287)<br />
+<strong>Revisit when:</strong> teller names need FrontDesk-only fan-out, or the list grows large enough that a thin refetch is required</p>
+<p>Entering a name in Teller 1 or Teller 2 creates (or no-ops) a row on the existing election <code>Teller</code> table. Clearing the dropdown only clears this browser session’s selection (<code>useActiveTellers</code> / localStorage). It does <strong>not</strong> delete the election name. Admin delete stays on the existing Tellers page (<code>TellersListPage</code> + <code>TellerForm</code>).</p>
+<p>Live distribution uses MainHub <strong>base</strong> group <code>Main{electionGuid}</code> and camelCase <strong><code>tellersChanged</code></strong> (<code>TellerUpdateDto</code>: <code>electionGuid</code>, <code>rowId</code>, <code>name</code>, <code>action</code> = added / updated / deleted). <code>tellerStore</code> patches the in-memory list (idempotent, alphabetical). Both Teller 1/2 dropdowns read that same list.</p>
+<p><strong>Rejected alternative:</strong> FrontDeskHub (PersonAdded-style events). Rejected — Tellers page and other teller computers already have session-wide MainHub membership; FrontDesk is page-owned and is left on ballots/people unmount. A FrontDesk-only event would miss the admin Tellers page unless that page also joined FrontDesk.</p>
+<p><strong>Rejected alternative:</strong> a second “active teller names” table or admin screen. Rejected — the election already has <code>Teller</code> + the Tellers page for add/rename/delete.</p>
+<p><strong>Reason:</strong> every teller computer that has joined the election is already in <code>Main{guid}</code>; one event keeps listing, open-ballot, front desk, and the Tellers page in sync without a new hub or page.</p>
+<p><strong>Rejected alternative:</strong> leave server event as <code>ElectionUpdated</code> while FE listens for <code>statusChanged</code> (broken live updates). <strong>Rejected alternative:</strong> keep unused hub methods <code>StatusChanged</code> / <code>ElectionClosed</code> / <code>CloseOutGuestTellers</code> as the documented push path — they were never called by services and were client-invokable.</p>
+<h2 id="mainhub-multi-election-dashboard-listen-joinelections">MainHub multi-election dashboard listen (JoinElections)</h2>
+<p><strong>Id:</strong> 95c5741d-e14e-466a-aa86-feae16783989<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #230; v3 <code>JoinAll</code> / <code>Public/JoinMainHubAll</code>; <code>MainHub.JoinElections</code> / <code>LeaveElections</code><br />
+<strong>Revisit when:</strong> dashboard needs different events per role, or multi-join is needed outside the elections list</p>
+<ul>
+<li><strong>Who:</strong> known (full) tellers only — guests must not multi-join (v3 parity).</li>
+<li><strong>When:</strong> elections dashboard load joins all managed election GUIDs; unmount and logout leave the multi-join set.</li>
+<li><strong>Groups:</strong> each allowed GUID → base <code>Main{guid}</code> + <code>Main{guid}Known</code> (status is on <strong>base</strong> after #227). No computer-code assignment.</li>
+<li><strong>Auth:</strong> per-GUID membership via <code>JoinElectionUsers</code>; unauthorized GUIDs are skipped (not a hard fail of the whole batch).</li>
+<li><strong>FE:</strong> <code>signalrService.joinDashboardElections</code> / <code>leaveDashboardElections</code>; reconnect re-invokes <code>JoinElections</code> for the tracked set. Leaving multi-join <strong>excludes</strong> the active workstation election (<code>mainElectionGuid</code>) so SignalR group membership is not dropped for the session open election (groups are not refcounted).</li>
+<li><strong>UI effect:</strong> existing <code>statusChanged</code> → <code>electionStore.handleElectionUpdate</code> already patches list cards; multi-join only expands who receives the event.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> loop <code>JoinElection</code> for every dashboard card. Rejected — that assigns computer codes and runs guest-join gates unsuitable for listen-only multi-election status.</p>
+<p><strong>Rejected alternative:</strong> leave multi-join membership for the whole SPA session without leave-on-navigate. Rejected — would keep clients in many groups after leaving the list; v3 scoped multi-listen to the elections list.</p>
+<h2 id="who-owns-main-vs-frontdesk-membership">Who owns Main vs FrontDesk membership</h2>
+<p><strong>Id:</strong> ce71f670-abc2-494e-8684-9b934ea3bb55<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #242 — guest stage redirects stopped after leaving ballots  </p>
+<ul>
+<li><strong>Main hub</strong> (<code>joinElection</code> / <code>leaveElection</code>): owned by <code>electionStore</code> / <code>MainLayout</code> for the active election session (<code>statusChanged</code>, computer code, guest close-out).</li>
+<li><strong>Main hub multi-listen</strong> (<code>joinDashboardElections</code> / <code>leaveDashboardElections</code>): owned by <code>DashboardPage</code> for known tellers only (issue #230).</li>
+<li><strong>FrontDesk hub</strong> (<code>joinFrontDeskElection</code> / <code>leaveFrontDeskElection</code>): owned by page stores that listen for FD events (<code>ballotStore</code>, <code>peopleStore</code>, Front Desk page).</li>
+<li><strong>Do not</strong> call full <code>leaveElection</code> from ballots/people unmount — that drops Main group membership and stops stage updates for the rest of the session.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> page-level stores share <code>joinElection</code>/<code>leaveElection</code> for convenience. Rejected — unmount of one page tears down session-level Main membership.</p>
+<p><strong>Reason:</strong> different surfaces need different fan-out and sometimes different membership (known vs guest). One flat <code>election-{guid}</code> group would over-notify or under-notify and couple unrelated UI areas.</p>
+<p><strong>Rejected alternative:</strong> one shared election group for every event type. Rejected because Main, Front Desk, Analyze, and Public have different listeners and update cadences.</p>
+<h2 id="no-election-scoped-onlinevotinghub-ballot-totals">No election-scoped OnlineVotingHub (ballot totals)</h2>
+<p><strong>Id:</strong> bacadf81-7987-42d0-a9be-84cd55b066f7<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> maintainer review of unused scaffold vs v3 <code>AllVotersHub</code> / <code>VoterPersonalHub</code>; issue #233<br />
+<strong>Revisit when:</strong> product wants per-election voter groups or ballot-submit live counts</p>
+<p>There is still no <code>/hubs/online-voting</code> hub and no <code>online-election-{guid}</code> group that pushes vote totals. Ballot submit confirmation remains the HTTP response.</p>
+<p><strong>Rejected alternative:</strong> scaffolded <code>OnlineVotingHub</code> with <code>online-election-{electionGuid}</code> and client-callable <code>BallotSubmitted</code> (payload including <code>totalVotes</code>). Rejected — mismatched v3 voter model, would push vote totals rather than thin “refetch” signals.</p>
+<h2 id="online-voter-hubs-allvoters-voterpersonal-issue-233">Online voter hubs (AllVoters + VoterPersonal) — issue #233</h2>
+<p><strong>Id:</strong> 52a0297e-105e-41e9-b080-82644f2e6c24<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #233; v3 <code>AllVotersHub</code> / <code>VoterPersonalHub</code>; preferred thin-signal shape above<br />
+<strong>Revisit when:</strong> global <code>AllVoters</code> becomes too chatty, or kiosk multi-login needs different UX</p>
+<p>Online voters use two authenticated hubs (policy <code>OnlineVoter</code> — JWT claims <code>voterType=online</code> + <code>voterId</code>). FE connects with <code>withCredentials</code> only; the httpOnly <code>voter_token</code> cookie is accepted on <code>/hubs/all-voters</code> and <code>/hubs/voter-personal</code> by the same JWT <code>OnMessageReceived</code> path as HTTP. There is no client <code>accessTokenFactory</code> for voters.</p>
+<table>
+<thead>
+<tr>
+<th>Hub</th>
+<th>Path</th>
+<th>Group</th>
+<th>Join</th>
+<th>Events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AllVotersHub</td>
+<td><code>/hubs/all-voters</code></td>
+<td><code>AllVoters</code> (global)</td>
+<td><code>Join</code> / <code>Leave</code>; <code>JoinElection</code> / <code>LeaveElection</code> (ballot-page presence, in-memory count only)</td>
+<td><code>updateVoters</code> — thin <code>OnlineElectionUpdateDto</code> (same fields as FrontDesk <code>updateOnlineElection</code>)</td>
+</tr>
+<tr>
+<td>VoterPersonalHub</td>
+<td><code>/hubs/voter-personal</code></td>
+<td><code>Voter{voterId}</code></td>
+<td><code>Join</code> / <code>Leave</code> (group from JWT only)</td>
+<td><code>updateVoter</code> — thin <code>VoterPersonalUpdateDto</code> (<code>updateRegistration</code> / <code>login</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Producers</strong> (via <code>ISignalRNotificationService</code> only — hubs are join/leave):</p>
+<ul>
+<li>Online window/process change (<code>ElectionService</code> → <code>SendOnlineElectionUpdateAsync</code>) → FrontDesk <strong>and</strong> AllVoters. <code>ResetElectionAsync</code> also notifies when <code>UseOnlineVoting</code> flips (a null window plus that flag is already open).</li>
+<li>Front desk check-in / unregister / envelope (<code>FrontDeskService</code>) → personal <code>updateVoter</code> with <code>updateRegistration</code> to email, phone, and kiosk groups when present.</li>
+<li>Successful online voter auth (<code>OnlineVotingService</code>) → personal <code>updateVoter</code> with <code>login: true</code> (other browsers for that id).</li>
+</ul>
+<p><strong>Client behavior:</strong> thin signal → re-call <code>GET availableElections</code> / vote status. Do not treat hub payloads as authoritative election detail or tallies. Login-elsewhere shows a dismissible notice.</p>
+<p><strong>Why global AllVoters (not per-election):</strong> one join after auth covers list refresh for any election whose online window changes; eligibility filtering stays on <code>GET availableElections</code>. Per-election groups would miss elections the voter has not joined yet.</p>
+<p><code>JoinElection(electionGuid)</code> is <strong>not</strong> a per-election broadcast group. It only records the connection on <code>IOnlineVoterPresenceService</code> so Monitor Progress can show an anonymous ballot-page session count. See <code>context/online-ballots.md</code>.</p>
+<p><strong>Rejected alternative:</strong> per-election voter groups only. Rejected for MVP — discovery of newly opened elections for an already-connected voter would require a second discovery channel.</p>
+<p><strong>Rejected alternative:</strong> use <code>VoterPersonalHub</code> for election presence. Rejected — group is <code>Voter{voterId}</code> (identifying) and the voter JWT has no election claim.</p>
+<p><strong>Security:</strong> personal join never accepts a client-supplied voter id (server uses JWT <code>voterId</code>). Personal updates target only groups for that person's contact identifiers; voter A does not receive voter B events.</p>
+<h2 id="votercodehub-live-login-code-delivery-status-issue-229">VoterCodeHub — live login-code delivery status (issue #229)</h2>
+<p><strong>Id:</strong> 1811432d-67fb-4017-a1a7-a631e4fde669<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #229; product decision 2026-09-20 (live status for SMS/voice and email; do not skip); v3 <code>VoterCodeHub</code> (<code>setStatus</code> / <code>final</code>); owner comment that the channel is downstream of SMS-pumping gates<br />
+<strong>Revisit when:</strong> multi-instance hosts need a shared channel store, WhatsApp gains async delivery callbacks, or join must be strictly single-use with no reconnect</p>
+<p>v4 request/verify stays HTTP. After a send is <strong>actually attempted</strong>, <code>requestCode</code> also returns <code>channelToken</code>. The browser that requested the code joins anonymous <code>/hubs/voter-code</code> and receives <code>codeDeliveryStatus</code> (sending / sent / delivered / failed / final) without polling.</p>
+<ul>
+<li><strong>Token:</strong> 32 cryptographically random bytes, hex-encoded (64 chars). Only the SHA-256 hash is stored. Lifetime <strong>10 minutes</strong> (shorter than the 15-minute OTP).</li>
+<li><strong>Join:</strong> one live connection per token. A second concurrent joiner is rejected. After disconnect/leave, the same token may rejoin until TTL so SignalR reconnect still works. This is stricter than v3’s client <code>Math.random().slice(-5)</code> key and still usable after a drop.</li>
+<li><strong>When issued:</strong> only after pumping / eligibility gates pass and a send is attempted (email, SMS, voice, WhatsApp). Rejected <code>requestCode</code> (invalid phone, blocked SmsStatus, not registered, no open elections, kiosk no-send) returns no token.</li>
+<li><strong>Replay:</strong> statuses are buffered on the channel and replayed to the joiner. <code>requestCode</code> often finishes send (especially email) before the browser can connect; without replay the UI would miss sent/failed/final.</li>
+<li><strong>Wire:</strong> <code>VoterCodeDeliveryStatusDto</code> only (<code>status</code>, <code>messageKey</code>, <code>okay</code>, allow-listed <code>providerStatus</code>). Never the OTP, voter id, phone, or email. Dev OTP echo stays on the HTTP response in Development/Testing only.</li>
+<li><strong>Producers:</strong> <code>OnlineVotingService</code> send-path outcomes; Twilio <code>POST /api/Public/smsStatus</code> when the SID was bound to the channel (SMS/voice). Email and WhatsApp have no async provider callback — send success/fail is <code>sent</code>/<code>failed</code> plus <code>final</code>. When Twilio accepts SMS/voice and writes an <code>SmsLog</code> SID, <code>sent</code> waits for delivered/failed/completed before <code>final</code>. When Twilio is not configured (dev skip, no SID), send success is treated as terminal <code>final</code>.</li>
+<li><strong>Hub:</strong> join/leave only; server push via <code>ISignalRNotificationService.SendVoterCodeDeliveryStatusAsync</code>. Group <code>VoterCode{channelId}</code> (server GUID, not the raw token).</li>
+<li><strong>Store:</strong> process-wide in-memory (<code>VoterCodeDeliveryChannelService</code>). Same-host only, like online-voter presence.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> v3-style client-generated ~5-digit key. Rejected — guessable; knowing another user’s key joined their status channel.</p>
+<p><strong>Rejected alternative:</strong> skip live status for email because SMTP is “fast enough.” Rejected by product: email may complete quickly but the same channel must still report sent/failed.</p>
+<p><strong>Rejected alternative:</strong> polling <code>requestCode</code> as the primary design. Rejected — the product is the channel.</p>
+<p><strong>Rejected alternative:</strong> put the OTP on the hub “for convenience.” Rejected — codes stay off the wire.</p>
+<p><strong>Rejected alternative:</strong> issue a joinable channel for rejected <code>requestCode</code> attempts. Rejected — owner: the channel is UX for legitimate sends and must stay downstream of the pumping gate.</p>
+<p><strong>Rejected alternative:</strong> a second realtime stack. Rejected — extend the existing SignalR + <code>ISignalRNotificationService</code> pattern.</p>
+<h2 id="no-anonymous-public-results-display">No anonymous public results display</h2>
+<p><strong>Id:</strong> 239fbceb-3bea-4797-abae-cb4bb5eb84cc<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> product decision (maintainer)<br />
+<strong>Revisit when:</strong> a deliberate, authenticated presentation product requirement appears</p>
+<p>Anonymous clients must not learn election results (or other election detail) just by knowing a GUID. <code>PublicHub</code> is only for the guest-teller join surface: the static <code>Public</code> group receives list open/close notifications used by teller join.</p>
+<p><strong>Rejected alternative:</strong> per-election <code>public-display-{guid}</code> groups + <code>GET /api/Public/{guid}/publicDisplay</code> + full-screen public results page. Removed — no business need for random users to view election data; authenticated results presentation (e.g. in-app results/presentation views) covers operator needs.</p>
+<p>Election detail over HTTP follows the same rule: <code>GET /api/Elections/{guid}/status</code> (and other election-scoped routes) require <code>ElectionAccess</code> (full or guest teller joined to that election). Anonymous public endpoints stay limited to guest-join discovery (<code>/api/Public/elections</code>, hub <code>Public</code> group) and non-sensitive health/home.</p>
+<h2 id="frontdeskhub-event-catalog">FrontDeskHub event catalog</h2>
+<p><strong>Id:</strong> 7cb3b69a-1416-4a32-8b96-2496bada5bb7<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #232 fix; <code>SignalRNotificationService</code> FrontDesk methods; <code>peopleStore</code> / <code>FrontDeskPage</code> listeners<br />
+<strong>Revisit when:</strong> changing person payload shape, or adding more FrontDesk producers</p>
+<p>Server pushes only via <code>IHubContext&lt;FrontDeskHub&gt;</code> in <code>SignalRNotificationService</code> (and future service producers). The hub exposes <strong>join/leave only</strong> — no client-callable broadcast methods (same pattern as MainHub after #227).</p>
+<p>Group: <code>FrontDesk{electionGuid}</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Payload</th>
+<th>Producer</th>
+<th>Primary listeners</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PersonAdded</code></td>
+<td><code>PersonUpdateDto</code> (<code>action: "added"</code>)</td>
+<td><code>SendPersonUpdateAsync</code> ← PeopleService create</td>
+<td><code>peopleStore</code> (list + ballot cache); Front Desk refreshes eligible list</td>
+</tr>
+<tr>
+<td><code>PersonUpdated</code></td>
+<td><code>PersonUpdateDto</code> (<code>action: "updated"</code>)</td>
+<td><code>SendPersonUpdateAsync</code> ← PeopleService update</td>
+<td>same</td>
+</tr>
+<tr>
+<td><code>PersonDeleted</code></td>
+<td><code>PersonUpdateDto</code> (<code>action: "deleted"</code>)</td>
+<td><code>SendPersonUpdateAsync</code> ← PeopleService delete</td>
+<td>same</td>
+</tr>
+<tr>
+<td><code>PersonCheckedIn</code></td>
+<td><code>FrontDeskVoterDto</code></td>
+<td><code>NotifyPersonCheckedInAsync</code> ← check-in / unregister / envelope</td>
+<td>Front Desk page (row patch)</td>
+</tr>
+<tr>
+<td><code>PersonFlagsUpdated</code></td>
+<td><code>FrontDeskVoterDto</code></td>
+<td><code>SendPersonFlagsUpdatedAsync</code></td>
+<td>Front Desk page</td>
+</tr>
+<tr>
+<td><code>VoterCountUpdated</code></td>
+<td><code>FrontDeskStatsDto</code></td>
+<td><code>NotifyVoterCountUpdatedAsync</code> ← after check-in / unregister</td>
+<td>Front Desk page (<code>frontDeskStats</code>)</td>
+</tr>
+<tr>
+<td><code>PersonVoteCountUpdated</code></td>
+<td><code>PersonVoteCountUpdateDto</code></td>
+<td><code>SendPersonVoteCountUpdateAsync</code></td>
+<td><code>peopleStore</code> ballot cache</td>
+</tr>
+<tr>
+<td><code>updateBallots</code></td>
+<td><code>BallotUpdateDto</code></td>
+<td><code>SendBallotUpdateAsync</code></td>
+<td><code>ballotStore</code></td>
+</tr>
+<tr>
+<td><code>reloadPage</code></td>
+<td>(none)</td>
+<td><code>RequestFrontDeskReloadAsync</code> ← CSV / CDN ballot import success; people import success; delete-all-people</td>
+<td>Front Desk page, <code>peopleStore</code>, <code>ballotStore</code> (soft re-fetch, not <code>location.reload</code>)</td>
+</tr>
+<tr>
+<td><code>updateOnlineElection</code></td>
+<td><code>OnlineElectionUpdateDto</code></td>
+<td><code>SendOnlineElectionUpdateAsync</code> ← <code>ElectionService.UpdateElectionAsync</code> / <code>ResetElectionAsync</code> when online window, process, or <code>UseOnlineVoting</code> changes</td>
+<td><code>electionStore</code> (patch online fields); Monitoring dashboard re-fetches monitor info</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Person list contract:</strong> v4 uses fine-grained <code>PersonAdded</code> / <code>PersonUpdated</code> / <code>PersonDeleted</code>, not v3’s single <code>updatePeople</code> stream. Handlers refetch the affected person (or drop the row on delete) rather than applying a partial patch from the thin DTO.</p>
+<p><strong>Rejected alternative:</strong> re-emit v3 <code>updatePeople</code> from the notification service to match an old <code>peopleStore</code> listener. Rejected — other Front Desk events already use PascalCase names; handlers for add/update/delete already existed; dual event names would keep the contract ambiguous.</p>
+<p><strong>Rejected alternative:</strong> leave unused hub instance methods (<code>UpdatePeople</code>, <code>ReloadPage</code>, …) as the “documented” push path. Rejected — they were client-invokable, never called by services, and misled readers (same lesson as MainHub #227).</p>
+<h2 id="frontdesk-reloadpage-vs-full-browser-reload-228">FrontDesk <code>reloadPage</code> vs full browser reload (#228)</h2>
+<p><strong>Id:</strong> 12512466-5167-49e1-8997-93be2773980f<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #228; v3 used <code>location.reload()</code> after ballot import; v4 prefers soft re-fetch<br />
+<strong>Revisit when:</strong> a bulk op leaves client state that soft re-fetch cannot repair</p>
+<ul>
+<li><strong>Chosen:</strong> server still emits the v3 event name <code>reloadPage</code> (no payload). Clients re-fetch people lists, ballots, and front-desk eligible voters/stats instead of forcing <code>window.location.reload()</code>.</li>
+<li><strong>Why:</strong> full reload is disruptive on multi-station front desk and ballot entry; re-fetch keeps SignalR connections and dialog state.</li>
+<li><strong>Rejected alternative:</strong> keep <code>location.reload()</code> for exact v3 parity. Rejected as unnecessary disruption when list/stats APIs already return authoritative post-import state.</li>
+<li><strong>Also wired:</strong> <code>updateOnlineElection</code> with open/close/estimate/selection process when election online settings change (not on every unrelated election field update).</li>
+<li><strong>People import:</strong> bulk people CSV/XLSX import does <strong>not</strong> emit per-row <code>PersonAdded</code> (would flood the hub). After successful import (or delete-all-people), the server fires the same <code>reloadPage</code> signal so open front desks re-fetch eligible voters — same end result as single-person CRUD, without N SignalR events.</li>
+</ul>
+<h2 id="import-hub-event-catalog-226">Import hub event catalog (#226)</h2>
+<p><strong>Id:</strong> 60f311a8-de19-47b6-8a87-e573e5d7c937<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #226; <code>SignalRNotificationService</code> import methods; <code>importStore</code> / <code>PeopleImportPage</code> listeners<br />
+<strong>Revisit when:</strong> changing progress payload shape, or package-load group key model</p>
+<p>Server pushes only via <code>IHubContext</code> in <code>SignalRNotificationService</code>. Import hubs expose <strong>join/leave only</strong> — no client-callable broadcast methods (same pattern as MainHub / FrontDeskHub after #227 / #232).</p>
+<p>ASP.NET Core SignalR <strong>event names are case-sensitive</strong>. SPA listeners use <strong>camelCase</strong> only.</p>
+<h3 id="ballotimporthub-group-ballotimportelectionguid">BallotImportHub — group <code>BallotImport{electionGuid}</code></h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Payload</th>
+<th>Producer</th>
+<th>Primary listeners</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>importProgress</code></td>
+<td><code>ImportProgressDto</code> (object: processedRows, totalRows, successCount, errorCount, currentStatus, percentComplete, …)</td>
+<td><code>SendImportProgressAsync</code> ← <code>ImportService</code></td>
+<td><code>importStore</code> → <code>ImportProgressDialog</code></td>
+</tr>
+<tr>
+<td><code>importError</code></td>
+<td><code>(errorMessage, rowNumber)</code> two args</td>
+<td><code>SendImportErrorAsync</code> ← <code>ImportService</code></td>
+<td><code>importStore</code></td>
+</tr>
+<tr>
+<td><code>importComplete</code></td>
+<td>summary object (ballotsCreated, votesCreated, …)</td>
+<td><code>SendImportCompleteAsync</code> ← <code>ImportService</code></td>
+<td><code>importStore</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="peopleimporthub-group-peopleimportelectionguid">PeopleImportHub — group <code>PeopleImport{electionGuid}</code></h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Payload</th>
+<th>Producer</th>
+<th>Primary listeners</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>importProgress</code></td>
+<td><code>{ processed, total, status }</code></td>
+<td><code>SendPeopleImportProgressAsync</code> ← <code>PeopleImportService</code></td>
+<td><code>PeopleImportPage</code></td>
+</tr>
+<tr>
+<td><code>importError</code></td>
+<td><code>(errorMessage, rowNumber)</code></td>
+<td><code>SendPeopleImportErrorAsync</code> ← <code>PeopleImportService</code></td>
+<td><code>PeopleImportPage</code></td>
+</tr>
+<tr>
+<td><code>importComplete</code></td>
+<td><code>ImportPeopleResult</code> (success, peopleAdded, …)</td>
+<td><code>SendPeopleImportCompleteAsync</code> ← <code>PeopleImportService</code></td>
+<td><code>PeopleImportPage</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="electionpackageimporthub-group-electionpackageimportuserid-231">ElectionPackageImportHub — group <code>ElectionPackageImport{userId}</code> (#231)</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Payload</th>
+<th>Producer</th>
+<th>Primary listeners</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loaderStatus</code></td>
+<td><code>(message, isTemporary)</code> two args</td>
+<td><code>SendElectionPackageLoaderStatusAsync</code> ← JSON / v3 package loaders</td>
+<td><code>DashboardPage</code> → <code>ElectionPackageLoadDialog</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Who:</strong> known tellers only (<code>JoinSession</code> rejects guests). Group is <strong>user-scoped</strong> (not election-scoped).</li>
+<li><strong>Why user-scoped:</strong> package load creates a new election — no <code>electionGuid</code> yet; concurrent known tellers must not steal each other’s stream (v3 <code>Import{loginId}</code> parity).</li>
+<li><strong>Temp lines:</strong> <code>isTemporary: true</code> may replace the last temporary log line on the client (v3 scrolling log behavior).</li>
+<li><strong>Hub path:</strong> <code>/hubs/election-package-import</code>. FE: <code>signalrService.connectToElectionPackageImportHub</code> / <code>joinElectionPackageImportSession</code>.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> reuse PeopleImportHub / BallotImportHub with election groups. Rejected — no election exists at start of package load; would require inventing a session GUID or broadcasting to the wrong audience.</p>
+<p><strong>Rejected alternative:</strong> dual path — loaders calling <code>IHubContext</code> directly while people/ballot import use the notification service. Rejected — same case-sensitive / producer-drift lesson as #226.</p>
+<p><strong>Rejected alternative:</strong> dual path — <code>ImportService</code> / <code>PeopleImportService</code> calling <code>IHubContext</code> directly while <code>SendImportProgressAsync</code> used different PascalCase names (<code>ImportProgress</code> / <code>ImportComplete</code>). Rejected — case-sensitive mismatch would miss SPA listeners; two producers drift. <strong>Chosen:</strong> one producer (<code>ISignalRNotificationService</code>) with camelCase event names matching the SPA.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

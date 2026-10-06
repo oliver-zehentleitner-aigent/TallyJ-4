@@ -1,0 +1,932 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/sms-eligibility/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Paid SMS / voice / WhatsApp destination eligibility - TallyJ 4 — why it is built this way</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#paid-sms-voice-whatsapp-destination-eligibility" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-header__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4 — why it is built this way
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Paid SMS / voice / WhatsApp destination eligibility
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-nav__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4 — why it is built this way
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why this project is built this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-code-gate-before-any-paid-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-code gate before any paid provider
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durable-onlinevotersmsstatus-second-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Durable OnlineVoter.SmsStatus (second slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ensure-phone-onlinevoter-on-person-write-third-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure phone OnlineVoter on Person write (third slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#person-detail-phone-onlinevoter-status-fourth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Person detail phone OnlineVoter status (fourth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#twilio-status-callback-auto-learn-fifth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Twilio status-callback auto-learn (fifth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#person-detail-recent-smslog-sixth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Person detail recent SmsLog (sixth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send-side-smslog-insert-statuscallback-seventh-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Send-side SmsLog insert + StatusCallback (seventh slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teller-manual-smsstatus-eighth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller manual SmsStatus (eighth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-smsstatus-ok-from-delivered-callback-ninth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set SmsStatus OK from delivered callback (ninth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#front-desk-people-list-sms-hint-tenth-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front Desk / people list SMS hint (tenth slice)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durable-onlinevoterwhatsappstatus-first-slice-of-255" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Durable OnlineVoter.WhatsAppStatus (first slice of #255)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-check-selected-whatsapp-second-slice-of-255" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bulk check selected WhatsApp (second slice of #255)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#head-teller-whatsapp-notify-queue-third-slice-of-255" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Head-teller WhatsApp notify queue (third slice of #255)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#front-desk-people-list-whatsapp-hint-fourth-slice-of-255" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front Desk / people list WhatsApp hint (fourth slice of #255)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notify-people-list-has-whatsapp-filter-fifth-slice-of-255" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notify People list “Has WhatsApp” filter (fifth slice of #255)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="paid-sms-voice-whatsapp-destination-eligibility">Paid SMS / voice / WhatsApp destination eligibility</h1>
+<h2 id="in-code-gate-before-any-paid-provider">In-code gate before any paid provider</h2>
+<p><strong>Id:</strong> 1371035d-9f3b-4db1-9709-6d98503272b8<br />
+<strong>Type:</strong> decision<br />
+<strong>Type:</strong> incident<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 (maintainer); July 555-range send incident described there<br />
+<strong>Revisit when:</strong> NANP reserved-range rules change</p>
+<p>Paid verification (SMS / voice / WhatsApp) must not call Twilio or GreenAPI for reserved, fictional, or malformed destinations. The July incident was ~80 attempts to 555-style numbers that still incurred tiny Twilio charges — the existing “registered in an open election” check does not stop an election owner from loading those numbers and opening the window.</p>
+<p><strong>First slice (issue #254):</strong> a pure in-code helper (<code>PaidDestinationPhone</code>) rejects:</p>
+<ul>
+<li>malformed numbers that are neither true E.164 (<code>+</code> then 8–15 digits) nor the same digit string without a leading <code>+</code></li>
+<li>NANP area code <code>555</code></li>
+<li>NANP exchange <code>555</code> (including the <code>555-01xx</code> fictional block)</li>
+</ul>
+<p>The check runs at the start of <code>RequestVerificationCodeAsync</code> for phone + paid delivery, and again inside <code>PaidVerificationSender</code> so a future caller cannot bypass it. Email, OAuth, and kiosk paths are unchanged. <code>WhenRegistered</code> is not written for a rejected number.</p>
+<p><strong>Rejected alternative:</strong> rely only on the open-election registration check. That stops outsiders requesting codes for arbitrary numbers; it does not stop fictional numbers that are already on a Person row.</p>
+<p><strong>Rejected alternative:</strong> wait for <code>OnlineVoter.SmsStatus</code> (this file’s next section). Status needs a row and a reason vocabulary. 555 / malformed must be blocked with no database work.</p>
+<p><strong>Rejected alternative:</strong> reject only <code>555-01xx</code> and allow other 555 NPA/NXX. The incident and the issue call out area code 555 and exchange 555, with <code>555-01xx</code> as the most important subset.</p>
+<h2 id="durable-onlinevotersmsstatus-second-slice">Durable <code>OnlineVoter.SmsStatus</code> (second slice)</h2>
+<p><strong>Id:</strong> e49ea17f-8271-4164-8bc2-fffcccb76b73<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 (maintainer); July 555-range send incident described there<br />
+<strong>Revisit when:</strong> NANP reserved-range rules change</p>
+<p><code>OnlineVoter</code> is the global phone-status store (key remains <code>VoterId</code>, E.164 when <code>VoterIdType</code> is <code>"P"</code>). Person is per-election; the same phone can appear in many elections, so eligibility cannot live only on Person.</p>
+<p>Field: <code>string? SmsStatus</code>, max 50, non-unicode (<code>varchar(50)</code>).</p>
+<p><strong>Send rule (phone <code>VoterIdType</code> <code>"P"</code> + paid channel only):</strong></p>
+<pre><code class="language-text">if SmsStatus is not null AND SmsStatus != &quot;OK&quot; → do not send
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><code>SmsStatus</code></th>
+<th>Meaning</th>
+<th>Send SMS/voice/WhatsApp?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>null</code></td>
+<td>Not yet checked</td>
+<td>Yes (current behaviour)</td>
+</tr>
+<tr>
+<td><code>"OK"</code></td>
+<td>Checked, valid</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>anything else</td>
+<td>Blocked; value is the reason</td>
+<td><strong>No</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Initial reason vocabulary (not a closed enum — short phrases/codes): <code>555-range</code>, <code>undeliverable</code>, <code>landline</code>, <code>premium</code>, <code>admin</code>, <code>twilio-{code}</code> (auto-learned from selected Twilio errors; see fifth slice), plus in-code <code>malformed-e164</code>.</p>
+<p>Pre-Twilio gate order in <code>RequestVerificationCodeAsync</code> (issue #254):</p>
+<ol>
+<li><code>PaidDestinationPhone</code> (in-code; no DB)</li>
+<li><code>OnlineVoter.SmsStatus</code> when <code>VoterIdType</code> is <code>"P"</code> and the channel is paid, a phone row already exists (<code>VoterId</code> + <code>VoterIdType == "P"</code>), and status is not null / not <code>"OK"</code> (do not create a row just to store status). Email / kiosk identifiers skip this gate.</li>
+<li>Existing open-election registration check (unchanged)</li>
+<li>Then the provider</li>
+</ol>
+<p>Skip logs method + status only (no raw phone or email). Voter-facing message reuses <code>voting.auth.requestCode.invalidPhone</code>. Email / OAuth / kiosk unchanged. <code>WhenRegistered</code> semantics unchanged.</p>
+<p><strong>Rejected alternative (this slice):</strong> rename the column to <code>Status</code> so email/kiosk rows could share it later. The issue field spec and this slice’s contract are <code>SmsStatus</code>; a generic rename can be a later migration if other identifier types need a status.</p>
+<p><strong>Rejected alternative:</strong> persist the in-code <code>PaidDestinationPhone</code> reason onto an existing <code>OnlineVoter</code> row when the format gate rejects. Useful only when a row already exists; creating a row here would pull in <code>EnsureOnlineVoterForPhoneAsync</code> (later slice). Not done.</p>
+<p><strong>Not in this slice (at the time):</strong> Person UI / Front Desk display, <code>EnsureOnlineVoterForPhoneAsync</code> on Person create/import/update, Twilio status-callback auto-learn (now landed; see below), WhatsAppStatus / GreenAPI <code>checkWhatsapp</code> (#255).</p>
+<h2 id="ensure-phone-onlinevoter-on-person-write-third-slice">Ensure phone <code>OnlineVoter</code> on Person write (third slice)</h2>
+<p><strong>Id:</strong> 8f477db8-3d22-49c8-9dd2-0226b4f29fc0<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 (maintainer)<br />
+<strong>Revisit when:</strong> email/kiosk rows need the same ensure</p>
+<p><code>OnlineVoterPhoneHelper.EnsureOnlineVoterForPhoneAsync</code> (and the batch <code>EnsureOnlineVotersForPhonesAsync</code> for import) inserts a <code>VoterIdType = "P"</code> row keyed by <code>VoterId</code> = the phone as stored on <code>Person</code>. Callers: <code>PeopleService</code> create/update, <code>PeopleImportService</code> load batches, and <code>DbSeeder</code> so SeedOnStartup phones are usable locally.</p>
+<p><code>WhenRegistered</code>, <code>WhenLastLogin</code>, and <code>SmsStatus</code> stay null on insert. An existing row is left untouched (no duplicate, no field wipe). Whitespace-only / missing phone does nothing. Email / kiosk / Telegram rows are not created here.</p>
+<p><code>WhenRegistered</code> is stamped in <code>RequestVerificationCodeAsync</code> only after the voter passes the open-election registration check, and only when it is still null. That is the first successful code request — the same moment a brand-new row used to get <code>WhenRegistered</code>. Person write must not set it.</p>
+<p><code>VoterId</code> is the Person phone string as stored. <code>PaidDestinationPhone</code> does not return a normalized E.164 form, and auth still matches <code>Person.Phone == dto.VoterId</code>. This helper does not rewrite Person phones.</p>
+<p><strong>Rejected alternative:</strong> also hook JSON / v2 election-package person import. Those copy an existing election; the issue names Person create / people import / update. Package load can call the same helper later if Person UI needs rows for packaged phones.</p>
+<p><strong>Rejected alternative:</strong> put the helper on <code>OnlineVotingService</code>. People write paths should not take a voting-auth dependency just to insert a global phone row.</p>
+<p><strong>Rejected alternative:</strong> set <code>WhenRegistered</code> when the Person phone is saved. That would mark import/edit as registration and break “never seen vs imported-only” for the Person UI slice.</p>
+<p><strong>Not in this slice (at the time):</strong> Person UI / Front Desk SMS-status display, Twilio status-callback auto-learn (now landed; see below), WhatsAppStatus / GreenAPI <code>checkWhatsapp</code> (#255).</p>
+<h2 id="person-detail-phone-onlinevoter-status-fourth-slice">Person detail phone OnlineVoter status (fourth slice)</h2>
+<p><strong>Id:</strong> e8fb74dd-b103-414f-8595-db88bf7fd8fa<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 (maintainer); this slice’s lookup rule<br />
+<strong>Revisit when:</strong> person-detail WhatsApp display needs a different lookup than the P-row rule</p>
+<p>People Management person detail (<code>GetPersonDetails</code> / <code>PersonDetailDto.PhoneOnlineVoter</code>) shows the global phone OnlineVoter SMS/WhatsApp/auth fields. Lookup is both <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code> (<code>OnlineVoterPhoneHelper.FindPhoneOnlineVoterAsync</code>). <code>IX_OnlineVoter_Id</code> is unique on <code>VoterId</code> alone, but paid-send and this UI are type-scoped to <code>"P"</code>. A non-P row occupying that <code>VoterId</code> is treated as no phone row (never seen); that row’s <code>SmsStatus</code> / <code>WhatsAppStatus</code> are not shown as the phone’s.</p>
+<p>No phone (null/whitespace) → <code>PhoneOnlineVoter</code> is null and the UI hides the block. Phone with no matching P row → <code>HasPhoneRow</code> false (never seen). P row with <code>WhenRegistered</code> null → imported-only / not yet used for auth. <code>WhenRegistered</code> and <code>WhenLastLogin</code> are the stored values from that P row. <code>SmsStatus</code> is unchecked (null) / <code>OK</code> / blocked + the reason string. <code>WhatsAppStatus</code> is unchecked (null) / <code>OK</code> / the stored reason (<code>no-wa</code>, <code>check-failed</code>, …) — first slice of #255.</p>
+<p><code>VoterId</code> is the Person phone string as stored, not a normalized E.164. Logs still must not include raw phone/PII. Email / kiosk / Telegram UI is unchanged.</p>
+<p><strong>Rejected alternative:</strong> look up by <code>VoterId</code> only. That would surface a non-P occupant’s <code>SmsStatus</code> and dates as if they belonged to the phone.</p>
+<p><strong>Rejected alternative:</strong> Front Desk / people list columns in this slice. Optional later; person detail is the required surface.</p>
+<p><strong>Not in this slice (at the time):</strong> Recent <code>SmsLog</code> on person detail is the sixth slice. Manual SmsStatus is the eighth slice. Delivered-callback OK is the ninth slice. Front Desk / list columns are the tenth slice. WhatsAppStatus display landed in the #255 first slice below.</p>
+<h2 id="twilio-status-callback-auto-learn-fifth-slice">Twilio status-callback auto-learn (fifth slice)</h2>
+<p><strong>Id:</strong> a3fd6326-00db-4cab-964d-a3a386e4e277<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 (maintainer); this slice’s callback rules<br />
+<strong>Revisit when:</strong> WhatsApp / GreenAPI #255</p>
+<p>v3 already had one Twilio status callback: <code>PublicController.SmsStatus</code> → <code>TwilioHelper.LogSmsStatus</code> (update the existing <code>SmsLog</code> row by SID). v4 had the <code>SmsLog</code> table but no callback. This slice ports that <strong>single</strong> path to <code>POST /api/Public/smsStatus</code> and hooks auto-learn there. There is no second callback endpoint.</p>
+<p><strong>SmsLog:</strong> if a row exists for the SID (<code>MessageSid</code>, <code>SmsSid</code>, or voice <code>CallSid</code>), update <code>LastStatus</code>, <code>ErrorCode</code>, <code>LastDate</code>, and <code>Phone</code> (v3 <code>LogSmsStatus</code>). Do not insert a log row from a callback. Send-side insert is the seventh slice; auto-learn still does <strong>not</strong> require a log row — it uses Twilio <code>To</code>.</p>
+<p><strong>Auto-learn write rule:</strong></p>
+<pre><code class="language-text">if MessageStatus is undelivered or failed
+   AND ErrorCode is in the lasting-unusable allow-list
+   AND an OnlineVoter row exists with VoterId matching To (see below) AND VoterIdType == &quot;P&quot;
+   AND current SmsStatus is null or &quot;OK&quot;
+→ SmsStatus = &quot;twilio-{code}&quot;
+</code></pre>
+<p>Allow-list (destination lastingly unusable): <code>30003</code> unreachable, <code>30005</code> unknown destination, <code>30006</code> landline/unreachable, <code>30004</code> filtered, <code>21211</code> invalid To, <code>21614</code> not a mobile. Mapped reason is always <code>twilio-{code}</code> (fits <code>varchar(50)</code>). Unlisted or missing <code>ErrorCode</code> on a terminal failure does <strong>not</strong> write (transient failures must not permanently block). <code>queued</code> / <code>sending</code> / <code>sent</code> never write a block. This slice did <strong>not</strong> set <code>SmsStatus</code> to <code>"OK"</code> from a delivered callback.</p>
+<blockquote>
+<p>Superseded 2026-09: delivered/completed on an existing SmsLog SID now sets <code>"OK"</code> — see ninth slice. Failure auto-learn is unchanged.</p>
+</blockquote>
+<p><strong>Lookup:</strong> Twilio <code>To</code> may be E.164 with <code>+</code> while <code>OnlineVoter.VoterId</code> is the Person phone as stored (with or without <code>+</code>). Auth still compares <code>Person.Phone == dto.VoterId</code> exactly. The callback tries the trimmed <code>To</code>, then the +/- variant. The EF query is <code>VoterId == key AND VoterIdType == "P"</code> — same as paid-send and <code>FindTrackedPhoneOnlineVoterAsync</code> (tracked, not the AsNoTracking helper). A non-P occupant of a candidate <code>VoterId</code> is not returned (no convert, no wipe). If no matching P row exists, skip; do not create an <code>OnlineVoter</code> from a callback. Do not rewrite Person phones.</p>
+<p><strong>Signature:</strong> <code>AllowAnonymous</code> is required so Twilio can POST, but the handler can stamp a lasting block. Validate <code>X-Twilio-Signature</code> (HMAC-SHA1 of the request URL + sorted POST params) against <code>Twilio:AuthToken</code> before any SmsLog / SmsStatus write. Missing token (including <code>&lt;placeholder&gt;</code>), missing signature, or mismatch → 403, no leak of whether a voter row exists. v3 did not validate; auto-learn makes an unsigned callback too dangerous to leave open.</p>
+<p>An existing block reason is left alone. A later selected hard failure may overwrite <code>"OK"</code>.</p>
+<p>Logs: method + status/code only. No raw phone or other PII.</p>
+<p><strong>Rejected alternative:</strong> require an <code>SmsLog</code> row before learning. That would make auto-learn a no-op until send-side log inserts land.</p>
+<p><strong>Rejected alternative:</strong> a new dedicated auto-learn endpoint. The issue says to hook the existing status-callback / SmsLog path.</p>
+<p><strong>Rejected alternative:</strong> write <code>undeliverable</code> (or set <code>"OK"</code> on delivered) in this slice. The selected-code vocabulary is <code>twilio-{code}</code>; OK-from-delivered is a later choice.</p>
+<p><strong>Not in this slice:</strong> PaidDestinationPhone, the pre-send SmsStatus gate, <code>EnsureOnlineVoterForPhoneAsync</code>, Person UI, SuperAdmin set, SignalR #229, WhatsApp/GreenAPI #255. Send-side SmsLog insert is the seventh slice.</p>
+<h2 id="person-detail-recent-smslog-sixth-slice">Person detail recent SmsLog (sixth slice)</h2>
+<p><strong>Id:</strong> d7d89021-883c-462f-9424-5ab7812c7072<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #254 Person UI “optional recent SmsLog”; existing +/- phone keys from the fifth slice (evidence: confirmed (surface); inferred (lookup / limit details))<br />
+<strong>Revisit when:</strong> Front Desk should show recent SmsLog (it does not; person detail does)</p>
+<p>Person detail (<code>PersonPhoneOnlineVoterDto.RecentSmsLogs</code>) shows up to five newest <code>SmsLog</code> rows for that Person phone. Lookup is the stored phone plus the +/- E.164 variant (<code>TwilioSmsStatusHelper.VoterIdLookupKeys</code> / <code>SmsLogPhoneHelper.FindRecentForPhoneAsync</code>). Not election-scoped and not by <code>PersonGuid</code> — verification SMS often has neither. Logs are about the phone, so they are attached even when there is no P row (never seen). No phone → <code>PhoneOnlineVoter</code> stays null (no log block).</p>
+<p>DTO fields: <code>SentDate</code>, <code>LastDate</code>, <code>LastStatus</code>, <code>ErrorCode</code>. No phone and no SID (person detail already has the phone; logs must not add extra identifiers). Newest first (<code>SentDate</code>, then <code>RowId</code>). Empty list when none match; the UI hides the section. Status text is the stored <code>LastStatus</code>, or “Sent” when that is null. Rows come from the seventh-slice send insert (and later callback updates of that SID).</p>
+<p><strong>Rejected alternative:</strong> election- or PersonGuid-scoped logs. Request-code SMS is pre-election; those columns are often null.</p>
+<p><strong>Rejected alternative:</strong> require a P row before showing logs. A never-seen phone can still have delivery history; the OnlineVoter auth block and SmsLog are separate.</p>
+<p><strong>Rejected alternative:</strong> include SID in the teller DTO. Not needed to see delivery history; keep the payload to status / times / error code.</p>
+<p><strong>Rejected alternative:</strong> send-side <code>SmsLog</code> insert in this slice. That is the seventh slice.</p>
+<p><strong>Not in this slice:</strong> send-side SmsLog insert (seventh), StatusCallback URL on send, WhatsApp/GreenAPI #255, SignalR #229. Manual SmsStatus is the eighth slice. Delivered-callback OK is the ninth slice. Front Desk / list columns are the tenth slice.</p>
+<h2 id="send-side-smslog-insert-statuscallback-seventh-slice">Send-side SmsLog insert + StatusCallback (seventh slice)</h2>
+<p><strong>Id:</strong> eae6a7e5-8904-4eeb-afb8-49d01a486c54<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 leftover after #325; v3 <code>TwilioHelper.SendSmsAsync</code> / <code>SendVoice</code> insert + <code>twilio-CallbackUrl</code><br />
+<strong>Revisit when:</strong> WhatsApp / GreenAPI #255</p>
+<p>On a successful paid SMS / voice / WhatsApp send, persist an <code>SmsLog</code> so person-detail recent logs (#325 / sixth slice) have real rows. Fields: SID, phone as sent (the request-code <code>VoterId</code>, not a rewritten E.164), <code>SentDate</code> / <code>LastDate</code> UTC now, <code>LastStatus</code> from the provider JSON (<code>status</code> / GreenAPI <code>idMessage</code> send uses <code>"submitted"</code>). <code>ElectionGuid</code> and <code>PersonGuid</code> stay null — <code>requestCode</code> is pre-election; person detail already looks up by phone (+/- variant).</p>
+<p>Do <strong>not</strong> insert when the destination is rejected, the provider is not configured (dev skip still returns success), the HTTP send fails, or the provider body has no SID. A failed log insert must not fail the voter send (code already went out). Logs still must not include raw phone or other PII.</p>
+<p>Twilio SMS and voice set <code>StatusCallback</code> to the existing <code>POST /api/Public/smsStatus</code>. URL order (v3 <code>twilio-CallbackUrl</code>): <code>Twilio:StatusCallbackUrl</code> if it is a usable absolute http(s) URL (origin-only values get the path appended), else <code>ClientEnv:apiUrl</code> + <code>/api/Public/smsStatus</code>, else <code>ClientEnv:frontendUrl</code> + that path (same-host production). Omit the form field when none resolve — the log row is still written. GreenAPI WhatsApp has no Twilio callback.</p>
+<p>The callback still never inserts (fifth slice). Failure auto-learn still uses Twilio <code>To</code> and does not require a log row. Delivered OK (ninth slice) does require that SID. Voice callbacks may send <code>CallSid</code> / <code>CallStatus</code>; those are the same update-by-SID path, not a second endpoint.</p>
+<p><strong>Rejected alternative:</strong> insert a log row from the callback if send forgot one. That inverts v3 <code>LogSmsStatus</code> and would create rows for SIDs we did not send.</p>
+<p><strong>Rejected alternative:</strong> require <code>ElectionGuid</code> / <code>PersonGuid</code> on verification SMS. <code>requestCode</code> is not election-scoped; #325 already looks up by phone for that reason.</p>
+<p><strong>Rejected alternative:</strong> a new callback URL or endpoint. Wire the existing public SmsStatus path.</p>
+<p><strong>Not in this slice:</strong> setting <code>SmsStatus</code> to <code>"OK"</code> from delivered (ninth slice), WhatsApp / GreenAPI product work (#255), SignalR #229, rate limits #192. Manual SmsStatus is the eighth slice. Front Desk / list columns are the tenth slice.</p>
+<h2 id="teller-manual-smsstatus-eighth-slice">Teller manual SmsStatus (eighth slice)</h2>
+<p><strong>Id:</strong> 5830cb54-1ca0-4239-9b7d-017a12ccd97d<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #254 leftover after #327; PeopleController <code>[Authorize]</code> (same as UpdatePerson) (evidence: confirmed (privilege model from existing People routes); inferred (Ensure-if-missing on set))<br />
+<strong>Revisit when:</strong> WhatsApp / GreenAPI #255</p>
+<p>Person detail can set <code>OnlineVoter.SmsStatus</code> on the phone P row (<code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>). Values are <code>"OK"</code> (unblock) or a short block reason (max 50 after trim). Null/unchecked is not set here. Lowercase <code>ok</code> is stored as <code>"OK"</code> so it cannot accidentally become a block reason (<code>AllowsPaidSend</code> is exact <code>"OK"</code>).</p>
+<p>Privilege matches other People writes: <code>[Authorize]</code> only. SuperAdmin is the dashboard email-list policy, not a people-edit role — no new role and no SuperAdmin-only gate. Guest-teller JWT can hit the same People APIs as UpdatePerson if they have a token; People Management is the teller UI.</p>
+<p>Uses the <strong>stored</strong> <code>Person.Phone</code>, not unsaved form edits. If there is no P row, <code>EnsureOnlineVoterForPhoneAsync</code> creates one (same helper as Person write) then sets status. A non-P occupant of that <code>VoterId</code> is not converted; the set fails. <code>WhenRegistered</code> / <code>WhenLastLogin</code> stay as they are. Paid-send still uses <code>if SmsStatus is not null AND SmsStatus != "OK" → do not send</code>.</p>
+<p>A later delivered/completed Twilio callback on an existing SmsLog SID overwrites a teller block to <code>"OK"</code> (ninth slice) — the phone just worked. Failure auto-learn still leaves a teller block alone.</p>
+<p>Not election-scoped and not under <code>ElectionFinalizedWriteGuard</code>: this is global paid-channel eligibility for the phone, not an election-person write.</p>
+<p>Logs: method + status only. No raw phone or other PII.</p>
+<p><strong>Rejected alternative:</strong> SuperAdmin-only (<code>[Authorize(Policy = "SuperAdmin")]</code>). SuperAdmin is not who edits people today; tellers already update Person rows.</p>
+<p><strong>Rejected alternative:</strong> put <code>SmsStatus</code> on <code>UpdatePersonDto</code>. It lives on the global OnlineVoter row; a dedicated action keeps person save (per-election fields) separate from a global eligibility stamp and always uses the stored phone.</p>
+<p><strong>Rejected alternative:</strong> require an existing P row and refuse never-seen phones. Person write already ensures a row; ensuring here covers older data so a teller can still block or unblock from person detail.</p>
+<p><strong>Not in this slice:</strong> WhatsApp / GreenAPI #255, SignalR #229. Setting <code>"OK"</code> from a delivered Twilio callback is the ninth slice. Front Desk / list columns are the tenth slice.</p>
+<h2 id="set-smsstatus-ok-from-delivered-callback-ninth-slice">Set <code>SmsStatus</code> OK from delivered callback (ninth slice)</h2>
+<p><strong>Id:</strong> e8f31b8f-6f20-4f91-912e-b4489a5f26f6<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 leftover after send-side SmsLog + StatusCallback; this slice’s SID + overwrite rules (evidence: leftover after #327; Twilio success statuses)<br />
+<strong>Revisit when:</strong> WhatsApp / GreenAPI #255</p>
+<p>A successful Twilio StatusCallback now sets the matching phone P row to <code>"OK"</code> so a never-seen or previously blocked phone is not stuck until a teller clicks Set OK.</p>
+<p><strong>Write rule:</strong></p>
+<pre><code class="language-text">if MessageStatus / CallStatus is delivered (SMS) or completed (voice)
+   AND an SmsLog row already exists for the SID
+   AND an OnlineVoter row exists with VoterId matching To (+/- variant) AND VoterIdType == &quot;P&quot;
+→ SmsStatus = &quot;OK&quot;
+</code></pre>
+<p>SMS success is <code>delivered</code> (handset received the message). Voice success is <code>completed</code> (call finished). <code>sent</code> / <code>queued</code> / <code>sending</code> / <code>accepted</code> are not success — the carrier accepted the request, not the destination. Voice <code>busy</code> / <code>no-answer</code> / <code>canceled</code> are not lasting-unusable and do not write a block (fifth-slice failure allow-list unchanged).</p>
+<p>The SID must already exist in <code>SmsLog</code> (send-side insert from the seventh slice). Granting eligibility is not the same as learning a block: failure auto-learn still uses Twilio <code>To</code> without a log row; delivered OK does not. Unknown SID still does not insert a log or an OnlineVoter. A non-P occupant of that <code>VoterId</code> is not converted.</p>
+<p><strong>Manual / existing block:</strong> there was no written product rule that a teller block must stay sticky after a later successful delivery. Delivered success overwrites any current reason (<code>admin</code>, <code>landline</code>, <code>twilio-{code}</code>, …) to <code>"OK"</code> — the phone just worked. Teller manual set (eighth slice) is unchanged. Failure auto-learn still leaves an existing block alone (<code>CanLearnFromCallback</code>). A later selected hard failure may overwrite <code>"OK"</code> again.</p>
+<p>Logs: method + status only. No raw phone or other PII. Same signature gate as the fifth slice.</p>
+<p><strong>Rejected alternative:</strong> set OK from <code>To</code> without an SmsLog SID (same as failure auto-learn). Blocking a destination from a signed failure is defensive; marking a phone OK should only follow a message we sent.</p>
+<p><strong>Rejected alternative:</strong> keep a manual block sticky when delivered later succeeds. No such rule was written. The phone working is stronger evidence than the earlier reason.</p>
+<p><strong>Rejected alternative:</strong> treat SMS <code>sent</code> as success. Twilio <code>sent</code> is carrier handoff, not handset delivery.</p>
+<p><strong>Not in this slice:</strong> Front Desk / list columns (tenth slice), #255 WhatsApp, #229 SignalR, #192 UAT SMS. Teller manual set is the eighth slice.</p>
+<h2 id="front-desk-people-list-sms-hint-tenth-slice">Front Desk / people list SMS hint (tenth slice)</h2>
+<p><strong>Id:</strong> 747af2a6-4ff3-4aa9-954f-b30eb4fb1771<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #254 leftover after #331; person-detail lookup rule (evidence: confirmed (P-row contract from person detail); inferred (compact list vocabulary))<br />
+<strong>Revisit when:</strong> Front Desk should open person detail for Set OK / Block</p>
+<p>People list (<code>PersonListDto.PhoneOnlineVoter</code>) and Front Desk (<code>FrontDeskVoterDto.PhoneOnlineVoter</code>) show a compact phone SMS hint for people who have a phone. Same P-row contract as person detail: <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>. A non-P occupant of that <code>VoterId</code> is never seen (<code>HasPhoneRow</code> false; that row’s <code>SmsStatus</code> is not shown). No phone → the property is null and the cell is empty / a dash.</p>
+<p>The list DTO is slim (<code>PersonPhoneSmsHintDto</code>: <code>HasPhoneRow</code>, <code>WhenRegistered</code>, <code>SmsStatus</code>, plus <code>WhatsAppStatus</code> from the #255 list-column slice). It does not include last-login or recent SmsLog — those stay on person detail. Create/update <code>PersonDto</code> carries the same slim hint so the people-list cache is not wiped on save. Front Desk does not add the raw phone to the voter row.</p>
+<p>Compact cell (SMS first): blocked reason / OK / never-seen / imported (<code>HasPhoneRow</code> and <code>WhenRegistered</code> null) / unchecked (registered, <code>SmsStatus</code> still null). Set OK / Block stays on person detail; the list has no new edit surface.</p>
+<p>Batch lookup is <code>FindPhoneOnlineVotersAsync</code> (P rows only) so Front Desk / people list do not N+1.</p>
+<p><strong>Rejected alternative:</strong> look up by <code>VoterId</code> only. Same reason as person detail — a non-P occupant’s status is not the phone’s.</p>
+<p><strong>Rejected alternative:</strong> embed full <code>PersonPhoneOnlineVoterDto</code> (last-login + SmsLog) on every list row. The list only needs the compact hint; logs stay on person detail.</p>
+<p><strong>Rejected alternative:</strong> inline Set OK / Block on Front Desk or the people list. Person detail already has that teller action; Front Desk row-click is check-in, not people edit.</p>
+<p><strong>Rejected alternative:</strong> stack this leftover on the delivered-callback OK work (#332). The list reads status already on main after #331; #332 (ninth slice) can write OK from a delivered callback independently.</p>
+<p><strong>Not in this slice (at the time):</strong> delivered-callback OK is the ninth slice (#332). WhatsApp / GreenAPI #255 first slice is below. The list WhatsApp column landed in the #255 fourth slice. SignalR #229, rate limits #192. #254 stays open.</p>
+<h2 id="durable-onlinevoterwhatsappstatus-first-slice-of-255">Durable <code>OnlineVoter.WhatsAppStatus</code> (first slice of #255)</h2>
+<p><strong>Id:</strong> 05042a1b-df05-431b-a4cb-54c010a34613<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #255 (maintainer); provider comment that v4 stays on GreenAPI<br />
+<strong>Revisit when:</strong> optional rename of <code>PersonPhoneSmsHintDto</code>, or SignalR #229</p>
+<p>WhatsApp stays one voter-facing channel. Backend stays on <strong>GreenAPI</strong> (<code>checkWhatsapp</code> + existing <code>sendMessage</code>). Meta Cloud API and Twilio WhatsApp are out. Presence is stored on <strong>OnlineVoter</strong>, not Person: <code>WhatsAppStatus</code> <code>string?</code> max 50, non-unicode (<code>varchar(50)</code>).</p>
+<table>
+<thead>
+<tr>
+<th><code>WhatsAppStatus</code></th>
+<th>Meaning</th>
+<th>Send WhatsApp?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>null</code></td>
+<td>Not yet checked</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>"OK"</code></td>
+<td>Has WhatsApp</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>anything else</td>
+<td>No / blocked / error (<code>no-wa</code>, <code>check-failed</code>, …)</td>
+<td><strong>No</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Global by phone. Identifier gate is <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>. A non-P occupant of that <code>VoterId</code> is not converted and that row’s <code>WhatsAppStatus</code> is not shown or written.</p>
+<p><code>SmsStatus</code> (#254) stays a separate field: a number can be fine for SMS and not on WhatsApp, or the reverse. The existing <code>SmsStatus</code> paid-channel gate still applies to WhatsApp send too.</p>
+<p><code>CheckWhatsAppAsync</code> (GreenAPI HTTP) is mocked in tests — CI must not depend on a live GreenAPI account. Config keys already exist: <code>GreenApi:IdInstance</code>, <code>ApiToken</code>, <code>BaseUrl</code>. When those are missing or placeholders, do not persist a lasting status (local/dev skip).</p>
+<p>Person write still uses <code>EnsureOnlineVoterForPhoneAsync</code>. On Person phone <strong>change</strong>, clear <code>WhatsAppStatus</code> on the <strong>new</strong> number’s P row (or leave null) so it is re-checked. Do not copy the old number’s status onto a different number. The old number’s row is left as-is.</p>
+<p>Person detail shows unchecked / OK / reason from the P-row lookup, same pattern as SMS status. List / Front Desk columns landed in the fourth slice. This first slice had no Front Desk column, no bulk notify, and no abort queue.</p>
+<p><strong>Rejected alternative:</strong> <code>Person.HasWhatsApp</code> (v3 packed <code>HasWA</code>). Rejected — presence is global by phone, same as <code>SmsStatus</code>.</p>
+<p><strong>Rejected alternative:</strong> Meta Cloud API or Twilio WhatsApp as the v4 provider. Rejected — business verification never landed; this issue stays GreenAPI-shaped.</p>
+<p><strong>Not in this slice (first slice):</strong> bulk <code>CheckMultipleWhatsAppAsync</code>, head-teller notify queue, abort token (later slices), Front Desk / people-list WhatsApp column (fourth slice), SignalR #229, #254 SMS leftovers.</p>
+<h2 id="bulk-check-selected-whatsapp-second-slice-of-255">Bulk check selected WhatsApp (second slice of #255)</h2>
+<p><strong>Id:</strong> 52223ff6-c04e-428e-ab68-2ea9700d12aa<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #255 leftover after #339; this slice’s check-selected contract<br />
+<strong>Revisit when:</strong> optional rename of <code>PersonPhoneSmsHintDto</code>, or SignalR #229</p>
+<p><code>CheckMultipleWhatsAppAsync</code> checks a <strong>selected</strong> list of person GUIDs in <strong>one election</strong>. Same teller <code>[Authorize]</code> as other People writes. Same P-row gate as one-phone check: persist only when <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>. A non-P occupant is skipped, not converted. No phone is skipped. A GUID that is not in that election is ignored (<code>skipped-other-election</code>). GreenAPI is still <code>IGreenApiWhatsAppClient.CheckWhatsAppAsync</code> (production POSTs; tests mock). When GreenAPI is not configured, nothing is persisted.</p>
+<p>The request is bounded (<code>MaxSelectedPeople</code> = 100) on the <strong>raw</strong> person-GUID list as sent (before Distinct) so one call cannot check an entire imported roll. Provider calls are sequential with a 200–400 ms pause between them so a selected list of ~20 does not burst GreenAPI. If the request abort token fires, the service stops remaining checks and can return what finished plus <code>cancelled</code> for the rest — when the HTTP response is still read. This is <strong>not</strong> the head-teller notify send queue.</p>
+<p>The People list (same <code>PeopleTable</code>, not a second grid) has row selection and <strong>Check WhatsApp</strong> for the current selection. Per-row / summary outcomes: OK / no-wa / failed / skipped. <strong>Cancel</strong> aborts the fetch; the client gets AbortError and never reads <code>result.cancelled</code>. That AbortError path is toast + refresh + clear selection (same clear as success). Notify send/abort is a separate People list action (third slice). List / Front Desk WhatsApp columns landed in the fourth slice. The notify “Has WhatsApp” filter is the fifth slice.</p>
+<p>Selected people are checked even if they already have a status — the teller chose this set. v3 skipped already-checked numbers; that is left for a later filter if notify needs “unchecked only.”</p>
+<p><strong>Rejected alternative:</strong> skip already-checked numbers (v3 <code>CheckMultipleWhatsAppAsync</code>). Rejected for this slice — “check selected” means the current selection, including a re-check.</p>
+<p><strong>Rejected alternative:</strong> a second people grid or notify page for the action. Rejected — the existing People list already had leftover bulk-action strings; selection belongs there.</p>
+<p><strong>Rejected alternative:</strong> a dedicated abort-queue endpoint (v3 notify abort). Rejected for this slice — cancel is the HTTP request token only. The People list Cancel button therefore completes as fetch AbortError, not by reading the cancelled DTO.</p>
+<p><strong>Not in this slice (at the time):</strong> head-teller notify send + jitter + abort queue (now landed; see below), Front Desk / people-list WhatsApp column (now landed; see fourth slice), notify “Has WhatsApp” filter (now landed; see fifth slice), SignalR #229, #254 SMS leftovers.</p>
+<h2 id="head-teller-whatsapp-notify-queue-third-slice-of-255">Head-teller WhatsApp notify queue (third slice of #255)</h2>
+<p><strong>Id:</strong> 9683c025-00a2-42c1-b872-46cbea674126<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #255 leftover after #340; v3 <code>SendHeadTellerMessage</code> / <code>AbortQueue</code>; this slice’s send rule<br />
+<strong>Revisit when:</strong> optional rename of <code>PersonPhoneSmsHintDto</code>, or SignalR #229</p>
+<p>v4 has no Setup/Notify page and no email/SMS head-teller blast. The existing People list (same <code>PeopleTable</code> as check-selected) is the notify surface — do not invent a second notify page. Message body is the election’s existing <code>SmsText</code> (edited on Configure this Election), with v3 placeholders <code>{PersonName}</code>, <code>{FirstName}</code>, <code>{VoterContact}</code>, <code>{hostSite}</code>.</p>
+<p>Start queues selected person GUIDs in <strong>one election</strong>. Send only when the phone P row is <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code> <strong>and</strong> <code>WhatsAppStatus == "OK"</code>. Skip unchecked (null), <code>no-wa</code>, <code>check-failed</code>, other non-OK reasons, no-phone, and non-P (do not convert). A GUID not in that election is ignored. <strong><code>SmsStatus</code> is not the WhatsApp allow rule</strong> — a landline/blocked SMS status still sends if WhatsApp is OK.</p>
+<p>Background sequential GreenAPI <code>sendMessage</code> (same client/path as verify-code). 3–15s jitter between provider calls (injectable delay in tests). Abort token stops remaining sends; already-sent stay sent. Successful sends persist <code>SmsLog</code> via <code>SmsLogSendHelper</code> with <code>ElectionGuid</code> + <code>PersonGuid</code> (verify-code logs still leave those null). Bound to 100 selected GUIDs. Same teller <code>[Authorize]</code> as other People writes — <code>HeadTellerAccess</code> is registered but unused on Setup/People writes; SuperAdmin is not a people-edit role.</p>
+<p>No live SignalR progress (#229). The UI polls a per-run summary (sent / skipped / failed / cancelled). Production POSTs when GreenAPI is configured; tests mock HTTP / sender.</p>
+<p><strong>Rejected alternative:</strong> a new Setup/Notify page (v3 <code>Notify.cshtml</code>). Rejected — #340 already put selection on the People list; this slice adds send/abort there.</p>
+<p><strong>Rejected alternative:</strong> reuse <code>AllowsSend</code> (null or OK) for notify. Rejected — notify is only known-OK numbers; unchecked must be skipped until check-selected has run.</p>
+<p><strong>Rejected alternative:</strong> treat <code>SmsStatus</code> as the WhatsApp allow rule. Rejected — the fields stay independent.</p>
+<p><strong>Not in this slice (at the time):</strong> Front Desk / people-list WhatsApp column (now landed; see below), notify “Has WhatsApp” filter (now landed; see fifth slice), email/SMS blast, SignalR #229, #254 SMS leftovers.</p>
+<h2 id="front-desk-people-list-whatsapp-hint-fourth-slice-of-255">Front Desk / people list WhatsApp hint (fourth slice of #255)</h2>
+<p><strong>Id:</strong> 35718c77-593c-433a-a459-40f1a7ca680f<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #255 leftover after #341; SMS list-hint contract from the tenth #254 slice (evidence: confirmed (P-row contract and batch lookup from the SMS list hint); inferred (compact WhatsApp vocabulary matches person detail))<br />
+<strong>Revisit when:</strong> optional rename of <code>PersonPhoneSmsHintDto</code>, or SignalR #229</p>
+<p>People list (<code>PersonListDto.PhoneOnlineVoter</code>) and Front Desk (<code>FrontDeskVoterDto.PhoneOnlineVoter</code>) show a compact WhatsApp column on the <strong>same</strong> <code>PeopleTable</code> / Front Desk voters table as the SMS column. Same P-row contract: <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>. A non-P occupant of that <code>VoterId</code> is never seen (<code>HasPhoneRow</code> false; that row’s <code>WhatsAppStatus</code> is not shown). No phone → <code>PhoneOnlineVoter</code> is null and the cell is empty / a dash. Front Desk still does not expose the raw phone.</p>
+<p><code>PersonPhoneSmsHintDto.WhatsAppStatus</code> rides the existing <code>FindPhoneOnlineVotersAsync</code> / <code>ToListHint</code> batch so SMS and WhatsApp do not N+1. The fields stay independent: a number can be SMS <code>OK</code> and WhatsApp <code>no-wa</code>.</p>
+<p>Compact WhatsApp cell: reason (<code>no-wa</code>, <code>check-failed</code>, other short code) / OK / never-seen / imported / unchecked (registered, <code>WhatsAppStatus</code> still null). Check WhatsApp / Send WhatsApp stay on People (already shipped). The notify “Has WhatsApp” filter is the fifth slice.</p>
+<p><strong>Rejected alternative:</strong> a second people or Front Desk grid for WhatsApp. Rejected — the leftover is a column on the existing tables.</p>
+<p><strong>Rejected alternative:</strong> look up by <code>VoterId</code> only. Same reason as SMS / person detail.</p>
+<p><strong>Rejected alternative:</strong> a Has WhatsApp notify filter in this slice. Rejected — that is the next leftover after the column (fifth slice).</p>
+<p><strong>Not in this slice:</strong> notify “Has WhatsApp” filter (now landed; see fifth slice), SignalR #229, #254 SMS leftovers. #342 Cancel/AbortError is on main.</p>
+<h2 id="notify-people-list-has-whatsapp-filter-fifth-slice-of-255">Notify People list “Has WhatsApp” filter (fifth slice of #255)</h2>
+<p><strong>Id:</strong> efe047c4-2d62-4db1-9233-41cd16912c3c<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #255 leftover after #343; v3 Notify “Has WhatsApp” filter; this slice’s list-hint rule<br />
+<strong>Revisit when:</strong> optional rename of <code>PersonPhoneSmsHintDto</code>, or SignalR #229</p>
+<p>v4 still has no Setup/Notify page. The leftover filter lives on the existing People list (<code>PeopleManagementPage</code> + <code>PeopleTable</code>) next to the name search — an <code>el-select</code> like Dashboard status/type, not a second notify grid and not a Front Desk filter.</p>
+<p>Has WhatsApp is the required option: P-row <code>WhatsAppStatus == "OK"</code>, same compact list hint as the WhatsApp column (<code>phoneWhatsAppListHint === "ok"</code>). Unchecked (P-row, null status — imported or registered-unchecked hints) and No WhatsApp (<code>no-wa</code>) fit that same select. Other reasons (<code>check-failed</code>, …) stay visible on All. Default selected value is All so opening People Management still shows the roll.</p>
+<p>Identifier gate is unchanged: <code>VoterId == Person.Phone</code> and <code>VoterIdType == "P"</code>. Non-P (<code>hasPhoneRow</code> false) and no-phone are not Has WhatsApp. <code>SmsStatus</code> and the SMS column are unused by this filter.</p>
+<p>Selection, Check WhatsApp, and Send WhatsApp still use the current <code>selectedGuids</code>. The filter only changes which rows are visible. Send still only queues <code>WhatsAppStatus == "OK"</code> P-row phones.</p>
+<p><strong>Rejected alternative:</strong> a second notify grid or v3 <code>Notify.cshtml</code> page. Rejected — #340–#343 already put check/send/column on this list.</p>
+<p><strong>Rejected alternative:</strong> default the list to Has WhatsApp. Rejected — People Management is also the roll editor; hiding everyone without a known-OK number on first open would surprise tellers. The leftover needed the Has WhatsApp option, not that default.</p>
+<p><strong>Rejected alternative:</strong> a Front Desk Has WhatsApp filter. Rejected — this leftover is the notify / People list filter.</p>
+<p><strong>Rejected alternative:</strong> change send rules so the filter selects who can be sent. Rejected — send already skips non-OK; the filter is only for finding known-yes numbers.</p>
+<p><strong>Not in this slice:</strong> SignalR #229, optional rename of <code>PersonPhoneSmsHintDto</code>, live GreenAPI, Front Desk filter, email/SMS blast.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="../auth/">auth.md</a> — voter JWT claims (separate from paid-destination rules)</li>
+<li><code>docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md</code> — requestCode flow and SMS pumping</li>
+<li>Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

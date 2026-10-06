@@ -1,0 +1,554 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/front-desk/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Front Desk - TallyJ 4 — why it is built this way</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#front-desk" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-header__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4 — why it is built this way
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Front Desk
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-nav__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4 — why it is built this way
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why this project is built this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ballot-not-received-is-a-hide-received-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ballot Not Received is a hide-received filter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#front-desk-method-codes-and-mixed-method-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front Desk method codes and mixed-method switch
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="front-desk">Front Desk</h1>
+<h2 id="ballot-not-received-is-a-hide-received-filter">Ballot Not Received is a hide-received filter</h2>
+<p><strong>Id:</strong> a196ba42-f6b2-44b6-a274-9012b7c9eca5<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> TallyJ-3.0 <code>Site/Views/Before/FrontDesk.cshtml</code> + <code>.cshtml.less</code> (<code>.NoBallot .Voter:not(.VM-)</code>) (evidence: v3 Front Desk <code>#ifNoBallot</code>)<br />
+<strong>Revisit when:</strong> election setup exposes checklist flags as first-class mailed-ballot tracking</p>
+<p>v3’s <strong>Ballot Not Received</strong> checkbox hid everyone whose voting method was set (ballot received / recorded). Combined with a checklist/flag, that showed who was flagged (for example mailed a ballot) but still had no method.</p>
+<p>v4 already had All / Not registered / Registered radios and method/flag filters. Those cover the same workflow when the default is Not registered, but they did not name the v3 control or apply it on the All list.</p>
+<p>The checkbox is an extra filter on the current list: hide rows with a voting method. Flag filters still apply. Clearing filters turns it off.</p>
+<h2 id="front-desk-method-codes-and-mixed-method-switch">Front Desk method codes and mixed-method switch</h2>
+<p><strong>Id:</strong> c40905c4-dda1-44f4-9fcd-9a61dc9967fd<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #194; Person.VotingMethod varchar(1); reports/analyzer already used P/M/D/O/K/I<br />
+<strong>Revisit when:</strong> election setup exposes VotingMethods as first-class checkboxes instead of a string</p>
+<p><code>Person.VotingMethod</code> is a single letter: <strong>P</strong> in person, <strong>M</strong> mailed, <strong>D</strong> dropped off, <strong>C</strong> called in, <strong>O</strong> online, <strong>K</strong> kiosk, <strong>I</strong> imported, <strong>1/2/3</strong> custom. Election setup may store the same letters concatenated (<code>PMD</code>) or comma-separated aliases (<code>IP,OL</code>). Front Desk buttons come from that string except <strong>O</strong> — Online is voter-initiated, so tellers cannot check anyone in as Online (that would count a Front Desk registration with no ballot). Empty setup defaults to P/M/D. The English word “In Person” is not code <code>I</code> — <code>I</code> is Imported.</p>
+<p>Online ballots stay voter-initiated. Tellers do not create ballots at the Online location. Checking in with a method other than Online while the person has a <strong>Draft</strong> or <strong>Submitted</strong> online row discards that pending row so Accept-all cannot create a second ballot. <strong>Processed</strong> (and <strong>Processing</strong>) online already means they have an accepted/claimed online ballot — Front Desk refuses another method. Draft is not Accept-all pending and does not lock cannot-vote.</p>
+<p><strong>Rejected alternative:</strong> let tellers record <code>O</code> at Front Desk when election setup lists Online. Rejected — that marks the person as voted with no Ballot, breaks Front Desk vs ballots reconciliation, and contradicts voter-initiated online.</p>
+<p><strong>Rejected alternative:</strong> keep Front Desk writing <code>I</code> for in person. Rejected — reports and analysis already count <code>I</code> as Imported and <code>P</code> as In Person.</p>
+<p><strong>Rejected alternative:</strong> leave a Submitted row in place after an in-person/mail/kiosk check-in. Rejected — Analyze stays blocked while any live Submitted exists, and Accept-all could mint a second ballot.</p>
+<p><strong>Reason:</strong> mixed-method elections need the same letters everywhere, and a switch of method must not count two ballots.</p>
+<h1 id="186-names-this-as-online-then-votes-in-person-draft-or-submitted-is-withdrawn-and-the-front-desk-method-is-recorded-processing-refuses-frontdeskerrorsalreadyprocessingonline-processed-refuses-frontdeskerrorsalreadyacceptedonline-covered-in-issue186onlinetheninpersontests">186 names this as “online then votes in person.” Draft or Submitted is withdrawn and the Front Desk method is recorded. Processing refuses (<code>frontDesk.errors.alreadyProcessingOnline</code>). Processed refuses (<code>frontDesk.errors.alreadyAcceptedOnline</code>). Covered in <code>Issue186OnlineThenInPersonTests</code>.</h1>
+<p><strong>Rejected alternative:</strong> treat the Not registered radio as enough and skip the named checkbox. Rejected — #171 names the control, and operators combine it with flags on the full list.</p>
+<h2 id="roll-call-and-envelope-pages-are-not-v4-product-pages">Roll Call and envelope pages are not v4 product pages</h2>
+<p><strong>Id:</strong> 4d5f8864-b352-4f13-a724-b87d102b19d6<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> TallyJ-3.0 <code>Site/Views/menu.xml</code> (Roll Call / Sort Envelopes require <code>BallotProcess=Roll</code>); v4 has no <code>BallotProcess</code> setting (evidence: v3 menu vs v4 routes; <code>docs/Hubs-v3-vs-v4.md</code>)<br />
+<strong>Revisit when:</strong> a projector roll-call display or envelope-sort workflow is requested</p>
+<p>v3 Roll Call and Sort Envelopes existed only for the Roll ballot process. Count Envelopes was <code>Ballots/Reconcile</code>. v4 has no Roll process, no Front Desk roll-call or envelope-count routes, and <strong>RollCallHub is deferred</strong>.</p>
+<p><code>GET .../frontdesk/rollCall</code> is a leftover that returns eligible voters plus check-in stats. Envelope numbers live on Front Desk (<code>ENABLE_ENVELOPE_NUMBERS</code> is still off). Envelope <em>counting</em> is the Analyze count-reconciliation report, not a Gathering page.</p>
+<p><strong>Rejected alternative:</strong> rebuild the v3 projector and envelope pages for #171. Rejected — they depended on a process v4 does not have; the remaining API is covered by tests, not a new UI.</p>
+<h2 id="front-desk-checked-in-count-matches-analysis-voted">Front Desk checked-in count matches analysis voted</h2>
+<p><strong>Id:</strong> e6c4dc57-d36e-4a6b-86b2-0b633b78ce62<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #185; <a href="../reports/">reports.md</a> (evidence: issue #185 count-match leftover)  </p>
+<p>Header stats and <code>IsCheckedIn</code> used <code>RegistrationTime</code> only. Accept-all does not set that field, so processed online voters were missing from Front Desk while analysis and reconciliation counted them.</p>
+<p><strong>Chosen:</strong> checked-in = <code>HasVotedForCounts</code> (recorded method or Processed online). Same rule as analysis <code>NumVoters</code> and VotersByArea <code>Voted</code>.</p>
+<p><strong>Rejected alternative:</strong> leave Front Desk on <code>RegistrationTime</code> and only document the difference. Rejected — #185 asked the three surfaces to match.</p>
+<p>Unregister (and other desk-registration undo) stays on <code>RegistrationTime</code>. Accept-all does not create a Front Desk registration, so the overlay must not offer Unregister for Processed-only rows.</p>
+<p><strong>Rejected alternative:</strong> let Unregister clear Processed online. Rejected — <code>UnregisterVoterAsync</code> still requires <code>RegistrationTime</code>; online acceptance is not a desk check-in.</p>
+<h2 id="repeatable-desk-method-while-registration-is-open">Repeatable desk method while registration is open</h2>
+<p><strong>Id:</strong> 65bb3048-44a6-4fee-b206-59e1d5ce68b2<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #336 after #186 / #334 / #335 (evidence: maintainer, issue #336, 2026-09-13)<br />
+<strong>Revisit when:</strong> tellers need in-place method buttons without Unregister</p>
+<p>A pending online row (Draft / Submitted) can be superseded by a desk method. Check-in still withdraws that row (same #186 path). After that, the teller may change the desk method until registration is done.</p>
+<p><strong>Chosen:</strong> keep Unregister + re-check-in. The overlay already offers Unregister when <code>RegistrationTime</code> is set, hides method buttons while checked in, and shows them again after Unregister. A second check-in records the new method. No in-place “change method” API.</p>
+<p>The withdrawn online row is deleted. Unregister clears only the desk fields; it does not recreate the row. Accept-all therefore has nothing to process for that person, including after a later Unregister or a second method. There is no separate process-one endpoint — Accept-all is the only accept path.</p>
+<p>Processing / Processed stay refused. Unregister is still not offered without <code>RegistrationTime</code>.</p>
+<p><strong>Rejected alternative:</strong> add in-place method-change buttons on the checked-in overlay. Rejected — Unregister + re-check-in already updates the choice and is offered while registration is open.</p>
+<p><strong>Rejected alternative:</strong> invent a new “registration closed” flag or lock Front Desk when leaving Gathering. Rejected — see below.</p>
+<h2 id="registration-done-is-the-finalized-write-lock">Registration-done is the Finalized write lock</h2>
+<p><strong>Id:</strong> 8835686e-dce7-46a5-835d-a93237dd21b7<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> <a href="../election-state/">election-state.md</a>; <code>FrontDeskService</code> check-in / Unregister / flags / envelope (evidence: existing <code>ElectionFinalizedWriteGuard</code>; maintainer, issue #336)  </p>
+<p>There is no separate “end registration” switch. Head tellers already lock people and ballot writes by advancing to <strong>Finalized</strong> (<code>ElectionFinalizedWriteGuard</code>). Check-in and Unregister already throw <code>elections.finalizedWriteBlocked</code>. The overlay uses that same stage: method, Unregister, and flag writes are not actionable while <code>electionStage === Finalized</code>. The notice reuses <code>elections.finalizedWriteBlocked</code> (same phrase as the API).</p>
+<p>Leaving Finalized (confirmed FullTeller stage change) is what reopens those writes. Gathering / Processing / SettingUp do not lock Front Desk.</p>
+<p><strong>Rejected alternative:</strong> a second lock that closes Front Desk when the election leaves GatheringBallots. Rejected — #336 asked to reuse an existing gate; Finalized already is that lock.</p>
+<p><strong>Reason:</strong> one write lock for people/ballot mutations, including changing how someone registered.</p>
+<h2 id="accept-all-vs-front-desk-same-moment-race">Accept-all vs Front Desk same-moment race</h2>
+<p><strong>Id:</strong> aa9a6bfb-bde4-438e-b09b-4ba786f8962a<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #336 leftover after #337 (evidence: issue #336 second slice; SQLite <code>Issue336AcceptAllFrontDeskRaceTests</code>)<br />
+<strong>Revisit when:</strong> Accept-all or check-in grows a third writer of <code>OnlineVotingInfo.Status</code></p>
+<p>Committed order already had one counted vote: check-in first withdraws Draft/Submitted and Accept-all skips; Accept-all first to <strong>Processing</strong> / <strong>Processed</strong> and Front Desk refuses (<code>alreadyProcessingOnline</code> / <code>alreadyAcceptedOnline</code>); pass 2 drops the row if a desk method is already recorded; withdraw + Unregister leaves Accept-all nothing.</p>
+<p>The leftover hole was a Front Desk <code>DbContext</code> that had already tracked <strong>Submitted</strong>. EF identity resolution keeps that Status after another context claims <strong>Processing</strong> or writes <strong>Processed</strong>. Check-in then deleted the claimed/processed row and wrote a desk method — In Person plus an Online ballot.</p>
+<p><strong>Chosen:</strong> no new product lock. Check-in re-reads Status from the database (not the tracker) and withdraws only with <code>DELETE … WHERE Status IN (Draft, Submitted)</code>. 0 rows and the row is now Processing/Processed still throws the existing keys, so a desk method is not recorded on top of a newly Processed online ballot. Accept-all is unchanged.</p>
+<p><strong>Rejected alternative:</strong> a new election-scoped lock that serializes Accept-all with Front Desk. Rejected — #336 said not to invent a product lock; Status compare-and-swap on the existing withdraw/claim is enough.</p>
+<p><strong>Rejected alternative:</strong> tests-only and leave the stale-context write. Rejected — SQLite proved check-in would record a second counted method after Accept-all had already claimed or processed.</p>
+<p><strong>Reason:</strong> one counted vote per person. The desk method wins only while the online row is still Draft or Submitted.</p>
+<p>True same-moment <code>Task.WhenAll</code> of Accept-all + check-in (plus paper entry overlapping Accept-all / Unregister) is <code>Issue191ConcurrentTellerTests</code>. That file does not replace the ordered interleavings above.</p>
+<h2 id="front-desk-sms-column-is-the-phone-p-row-hint">Front Desk SMS column is the phone P-row hint</h2>
+<p><strong>Id:</strong> b92ef9bf-bb5b-4e71-9fe6-c66cf41801a7<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #254 leftover; <a href="../sms-eligibility/">sms-eligibility.md</a> tenth slice<br />
+<strong>Revisit when:</strong> Front Desk should open person detail for Set OK / Block<br />
+<strong>See:</strong> sms-eligibility.md#front-desk--people-list-sms-hint-tenth-slice — 747af2a6-4ff3-4aa9-954f-b30eb4fb1771 — as of 2026-10-05</p>
+<p>Eligible-voter rows include a compact <code>PhoneOnlineVoter</code> hint (never-seen / imported / OK / block reason) for people who have a phone. Lookup is P-row scoped; a non-P occupant’s status is not shown. The raw phone is not added to the Front Desk DTO. Set OK / Block stays on person detail — row-click is still check-in.</p>
+<p><strong>Rejected alternative:</strong> inline SMS edits on Front Desk. Person detail already has that action; Front Desk is check-in.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

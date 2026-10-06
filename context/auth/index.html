@@ -1,0 +1,647 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/auth/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Auth - TallyJ 4 — why it is built this way</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#auth" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-header__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4 — why it is built this way
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Auth
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-nav__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4 — why it is built this way
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why this project is built this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jwt-user-id-claim-lookup-on-net-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT user id claim lookup on .NET 10
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-voter-session-is-a-distinct-httponly-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online-voter session is a distinct httpOnly cookie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#idp-first-teller-signup-issue-347" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IdP-first teller signup (issue #347)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#superadmin-one-time-invite-for-local-emailpassword-signup-issue-347-leftover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SuperAdmin one-time invite for local email/password signup (issue #347 leftover)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxy-aware-auth-rate-limits-issue-192-leftover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proxy-aware auth rate limits (issue #192 leftover)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distinct-voter-verify-error-keys-issue-192-leftover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distinct voter verify error keys (issue #192 leftover)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-auth-voter-code-delivery-channel-issue-229" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-auth voter-code delivery channel (issue #229)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="auth">Auth</h1>
+<h2 id="jwt-user-id-claim-lookup-on-net-10">JWT user id claim lookup on .NET 10</h2>
+<p><strong>Id:</strong> 59d4555d-e5b4-4c12-a6e2-246895efaf15<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> project agent notes (<code>AGENTS.md</code>)<br />
+<strong>Revisit when:</strong> identity/JWT middleware or claim mapping changes, or .NET major upgrade changes claim defaults again</p>
+<p>User IDs are stored in JWT <code>sub</code> claims. Code that reads the current user ID must check both:</p>
+<pre><code class="language-csharp">User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? User.FindFirst(&quot;sub&quot;)?.Value
+</code></pre>
+<p><strong>Reason:</strong> on .NET 10, claim type mapping for the subject claim is not always the same as older stacks; reading only <code>ClaimTypes.NameIdentifier</code> or only <code>"sub"</code> fails depending on token and middleware configuration.</p>
+<p><strong>Rejected alternative:</strong> assume a single claim type everywhere. That breaks in one of the two common configurations and produces hard-to-spot auth bugs (null user id, wrong scoping).</p>
+<h2 id="online-voter-session-is-a-distinct-httponly-cookie">Online-voter session is a distinct httpOnly cookie</h2>
+<p><strong>Id:</strong> b3f354b1-54e8-45dc-b562-7dc5cbc56269<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #250; CodeQL <code>js/clear-text-storage-of-sensitive-data</code> on <code>voter_token</code> / <code>voter_id</code> in localStorage; teller cookie pattern in <code>SecureCookieMiddleware</code><br />
+<strong>Revisit when:</strong> voter JWT lifetime or cookie attributes change, or teller/voter sessions must be mutually exclusive</p>
+<p>Online voters use the same JWT claims as before (<code>voterType=online</code>, <code>voterId</code>, <code>voterIdType</code>). Only transport changed.</p>
+<ul>
+<li><strong>Cookie <code>voter_token</code>:</strong> httpOnly, <strong>always</strong> Secure + SameSite=Strict + host-only (no Domain), Path=/ — the session JWT (24h). Never written to <code>localStorage</code> / <code>sessionStorage</code> and not returned in auth JSON.</li>
+<li><strong>Cookie <code>voter_session=1</code>:</strong> same attributes except <strong>not</strong> httpOnly — a boolean flag so the SPA can detect a session and call <code>GET /api/online-voting/me</code> to restore <code>voterId</code>.</li>
+<li><strong>Cookie name is not <code>auth_token</code>.</strong> Teller and voter JWTs can coexist in one browser. <code>OnMessageReceived</code> prefers <code>voter_token</code> on <code>/api/online-voting/*</code>, <code>/hubs/all-voters</code>, and <code>/hubs/voter-personal</code>; everywhere else it prefers <code>auth_token</code>. Bearer and hub <code>access_token</code> query still win when present (tests / tools).</li>
+<li><strong>Logout:</strong> <code>POST /api/online-voting/logout</code> clears only voter cookies, using the same Secure/Strict/host-only attributes so the browser expires them. Teller logout still clears only teller cookies.</li>
+<li><strong>Dev / prod:</strong> local Vite is HTTPS (<code>:8095</code>) and proxies <code>/api</code> and <code>/hubs</code> to HTTP <code>:5016</code>. The backend therefore sees <code>Request.IsHttps == false</code>. Voter cookies ignore that and stay Secure. UAT/prod are HTTPS.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> copy the teller HTTP-dev exception (<code>Secure</code>/<code>SameSite</code>/<code>Domain</code> from <code>Request.IsHttps</code>). Rejected — Vite already presents HTTPS to the browser; issuing <code>Secure=false</code> voter cookies behind the proxy is not what operators want. Teller cookies keep that exception in this slice.</p>
+<p><strong>Multi-tab:</strong> cookies are shared across tabs on the same origin. Logging out in one tab clears cookies for all tabs; other tabs discover this on the next <code>/me</code> or <code>availableElections</code> call (401 → treat as logged out).</p>
+<p><strong>Multi-device:</strong> each device has its own cookie. A new login still notifies other sessions via VoterPersonal <code>updateVoter</code> (<code>login: true</code>). Logout on device A does not revoke device B’s JWT; B’s cookie lasts until expiry or its own logout.</p>
+<p><strong>Rejected alternative:</strong> reuse <code>auth_token</code> for voters. A teller who then votes (or the reverse) would overwrite the other session.</p>
+<p><strong>Rejected alternative:</strong> keep the JWT in the auth response body and only stop persisting it. XSS can still read the response; teller auth already omits tokens from the body.</p>
+<p><strong>Rejected alternative:</strong> encrypt the JWT in <code>localStorage</code>. Not a fix under XSS (issue #250 / #249).</p>
+<h2 id="idp-first-teller-signup-issue-347">IdP-first teller signup (issue #347)</h2>
+<p><strong>Id:</strong> 2ed5c466-f555-4b97-8c5d-754a9fecd205<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #347; product decision 2026-09-16 (maintainer)<br />
+<strong>Revisit when:</strong> another teller IdP is added, or open register is reconsidered</p>
+<p>New teller/admin accounts are created through Google (teller external auth: <code>google/login</code>, <code>google/one-tap</code>). Open anonymous <code>POST /api/auth/registerAccount</code> is disabled and returns the i18n key <code>auth.errors.openRegisterDisabled</code>. Existing local email/password <strong>login</strong> is unchanged.</p>
+<p>The SPA <code>/register</code> page without an invite query explains Google-first signup and sends the user to Google or <code>/login</code>. Login copy steers new tellers to Google.</p>
+<p><strong>Rejected alternative:</strong> keep v3-style open email/password register and add captcha. Live v3 already sees spam Admin Registered accounts; captcha is not the strategy.</p>
+<blockquote>
+<p>Superseded 2026-09: “build invite-only email signup later.” That leftover is now the SuperAdmin one-time invite path below.</p>
+</blockquote>
+<p><strong>Rejected alternative:</strong> remove <code>POST /api/auth/registerAccount</code> entirely. Leftover clients still get a clear i18n error instead of a silent 404. The endpoint is still rate-limited.</p>
+<p>Testing/Development accept the same <code>dev-google:{email}</code> credential as voter Google tests so teller create/login can be mocked without calling Google.</p>
+<h2 id="superadmin-one-time-invite-for-local-emailpassword-signup-issue-347-leftover">SuperAdmin one-time invite for local email/password signup (issue #347 leftover)</h2>
+<p><strong>Id:</strong> 3f670597-82d5-4528-8136-e462929335e8<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #347 leftover after #348; product rule for communities that cannot use Google<br />
+<strong>Revisit when:</strong> invites should be bound to a pre-filled email, Head Teller should issue them, or captcha is added on this path only</p>
+<p>Communities that cannot use Google get a <strong>one-time invite link</strong>, not open register. SuperAdmin (<code>POST /api/superadmin/account-invites</code>) issues the link. The raw token is returned once and stored only as SHA-256. Anonymous <code>GET /api/auth/account-invite</code> peeks it; <code>POST /api/auth/registerWithInvite</code> consumes it and calls existing <code>LocalAuthService.RegisterAsync</code> (same Identity <code>AppUser</code> store, same verification email). After use or expiry (7 days) the invite is dead. Open <code>registerAccount</code> stays disabled.</p>
+<p><code>/register?invite=</code> shows the email/password form only when peek says the token is still usable. SuperAdmin Users has “Issue email/password invite.”</p>
+<p><strong>Rejected alternative:</strong> let Head Teller issue invites. <code>HeadTellerAccess</code> is election-route-scoped (user + election GUID). Creating a site-wide login account is not an election privilege, so SuperAdmin is the issuer.</p>
+<p><strong>Rejected alternative:</strong> a second user table or a parallel register service. Invite redeem must go through <code>RegisterAsync</code> so password rules, unique email, and verification stay one path.</p>
+<p><strong>Rejected alternative:</strong> bind the invite to a SuperAdmin-chosen email in this slice. The product asked for a one-time link that creates one account; the invitee picks the address. Binding can be added later if leaked-link squat becomes a problem.</p>
+<p><strong>Rejected alternative:</strong> captcha on this path. Optional later hardening only; not the strategy and not in this slice.</p>
+<p><strong>Rejected alternative:</strong> skip email verification on invite create so login works immediately. Invite only authorizes <em>creating</em> the row; proving inbox ownership stays the existing local-account pattern. Tests confirm the email, then password login succeeds.</p>
+<h2 id="proxy-aware-auth-rate-limits-issue-192-leftover">Proxy-aware auth rate limits (issue #192 leftover)</h2>
+<p><strong>Id:</strong> 6c66be65-d553-4625-a555-08c1f10a66bf<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #192 remaining work; PR #328 review — leftmost XFF is client-spoofable; Azure Front Door docs (append socket IP)<br />
+<strong>Revisit when:</strong> ingress changes (no longer App Service / Front Door), venue halls regularly exceed the 60/min IP ceiling, or rate limits move off the in-memory middleware</p>
+<blockquote>
+<p>Superseded 2026-09: keying on the <strong>leftmost</strong> X-Forwarded-For / Forwarded IP. Azure Front Door and App Service <strong>append</strong> the connecting socket IP. Leftmost is whatever the client sent (<code>fake</code> or <code>fake, real</code>), so a new leftmost address opened a new 5/min bucket and bypassed the limit.</p>
+<p>Superseded 2026-09: keying on <code>RemoteIpAddress</code> after <code>UseForwardedHeaders</code> applies XFF with ForwardLimit 2. Tried after the rightmost-public design and reverted — trust-all + a hop limit can still rewrite RemoteIp from a client-controlled chain.</p>
+</blockquote>
+<p>Auth rate-limit keys use the IP the <strong>trusted ingress</strong> saw, not a client-supplied leftmost address.</p>
+<ul>
+<li><strong>No proxy hop</strong> (public <code>RemoteIpAddress</code>): key is that address. XFF / Forwarded are ignored so a direct client cannot pick a bucket.</li>
+<li><strong>Infrastructure peer</strong> (<code>RemoteIpAddress</code> is null, loopback, or private — TestServer, App Service ARR, Docker): parse XFF (else RFC 7239 <code>Forwarded</code>) and take the <strong>rightmost public</strong> IP. That is the socket address the platform appended. Private / loopback / link-local / CGNAT (100.64/10) suffix hops are skipped. Two connecting clients behind one proxy therefore get two buckets; changing only the leftmost XFF stays in the same bucket.</li>
+</ul>
+<p><code>UseForwardedHeaders</code> is proto-only (<code>X-Forwarded-Proto</code>) with KnownProxies / KnownIPNetworks / KnownNetworks cleared so Azure TLS termination still sets <code>Request.IsHttps</code>. It does <strong>not</strong> apply <code>X-Forwarded-For</code>: trust-all + ForwardLimit would rewrite <code>RemoteIpAddress</code> from the client-controlled chain and make spoofing easier. Rate-limit keying reads the headers itself under the infrastructure-peer check above.</p>
+<p>The same in-memory middleware still owns the limits. Teller <code>/api/auth/login</code> (and the disabled register endpoint / 2FA / password / teller OAuth) stay <strong>tight per trusted-ingress IP</strong> (5/min login). Anonymous voter <code>requestCode</code> / <code>verifyCode</code> do <strong>not</strong> use that 5/min IP bucket: elections often share one venue WiFi / community NAT, so a public <code>RemoteIp</code> is the whole hall. Those routes use a <strong>5/min per VoterId</strong> bucket (JSON body peek capped at 16 KiB even when ContentLength is missing / chunked; a fitting body is replaced with a MemoryStream at position 0 so model binding still works) plus a <strong>60/min per trusted-ingress IP</strong> venue ceiling. Oversized / peek-overflow bodies are <strong>413</strong> (<code>error.payloadTooLarge</code>) and do not continue to model binding — they must not be demoted to <code>missing:{ip}</code>, or a padded body with a real voterId would opt out of the cross-IP identifier ceiling. <code>missing:{ip}</code> is only for a genuinely empty, malformed, or absent <code>voterId</code>. Voter OAuth (<code>/api/online-voting/*Auth</code>) has no VoterId in the body — venue IP ceiling only. Teller OAuth stays on the tight IP table.</p>
+<p>429 bodies return the i18n key <code>error.tooManyRequests</code> (same pattern as voter verify keys). That string lives only in <code>frontend/src/locales/en/errors.json</code>; other locales are not given English placeholders (missing keys fall back to English). The SPA resolves those keys instead of a single generic verify message. <code>VerifyAttempts</code> on <code>OnlineVoter</code> still locks five failed codes for that row; the middleware 429 is a cheap pre-service cap. The fifth mismatch returns <code>tooManyAttempts</code> on that call so the row lock is reachable under the 5/min per-VoterId middleware ceiling (a sixth HTTP call would otherwise be 429 first).</p>
+<p><strong>Rejected alternative:</strong> leftmost XFF as “original client.” Front Door’s own docs say an existing XFF is appended; the left side is attacker-controlled.</p>
+<p><strong>Rejected alternative:</strong> <code>UseForwardedHeaders</code> for XFF with KnownProxies cleared and ForwardLimit 2. That trust-all walk can set <code>RemoteIpAddress</code> to a spoofed entry, after which a “use RemoteIp” key is also spoofable.</p>
+<p><strong>Rejected alternative:</strong> keep keying on <code>RemoteIpAddress</code> only. On Azure UAT that address is the platform hop, so one client locks everyone out or the limit never isolates a single attacker.</p>
+<blockquote>
+<p>Superseded 2026-09: treat used and never-issued as one <code>noCodeFound</code> key. A consumed OTP still leaves <code>VerifyCodeDate</code> set after <code>VerifyCode</code> is cleared, so tellers can tell “already used” from “never issued.” See the verify-error keys section below.</p>
+</blockquote>
+<p><strong>Rejected alternative:</strong> split venue clients by trusting leftmost XFF. That reopens the spoof bypass. Two clients Azure actually distinguishes (two public RemoteIps, or two rightmost-public hops behind an infrastructure peer) stay two IP buckets; people behind one real public NAT share the venue ceiling and are separated by VoterId.</p>
+<p><strong>Rejected alternative:</strong> keep 5/min per IP on <code>requestCode</code> / <code>verifyCode</code>. A hall on one public address locks after a few voters — the opposite of the Front Door “one proxy hop” problem.</p>
+<p><strong>Rejected alternative:</strong> treat a too-large peek as a missing voterId (<code>missing:{ip}</code>). The request would still bind and send SMS/email for the real voterId, so padding past 16 KiB evaded the global per-identifier cap (N IPs × 5/min).</p>
+<p><strong>Rejected alternative:</strong> endpoint filter or service-level identifier limit as the primary mechanism. An endpoint filter sees the bound DTO but would split IP vs identifier across two pipeline stages. Service-level already has <code>VerifyAttempts</code>; it runs after routing/DB work and still needs an IP ceiling in middleware. Reading a capped body prefix in the existing middleware keeps both buckets in one place.</p>
+<p><strong>Rejected alternative:</strong> rebuild on ASP.NET <code>RateLimiter</code> or add a new auth flow. #192 said do not rebuild auth; this slice only fixes keying, coverage, and i18n bodies.</p>
+<h2 id="distinct-voter-verify-error-keys-issue-192-leftover">Distinct voter verify error keys (issue #192 leftover)</h2>
+<p><strong>Id:</strong> 0cf32f17-32a1-45fc-a73e-2adc5a2d3a8b<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #192 remaining checklist; existing <code>{ error }</code> 400 bodies and <code>messageKey</code> i18n keys; <code>OnlineVoter.VerifyCodeDate</code> is not cleared on success<br />
+<strong>Revisit when:</strong> used OTPs must be remembered across a later <code>requestCode</code>, or mismatch remaining-attempts should move off the 400 body</p>
+<p><code>POST /api/online-voting/verifyCode</code> keeps the existing <code>{ error }</code> body. The keys are stable phrase keys, not English and not a second error protocol.</p>
+<ul>
+<li><code>voting.auth.verify.codeExpired</code> — live row, code older than 15 minutes</li>
+<li><code>voting.auth.verify.alreadyUsed</code> — <code>VerifyCode</code> empty and <code>VerifyCodeDate</code> set (consumed OTP; date is the issue time of the code that was used)</li>
+<li><code>voting.auth.verify.noCodeFound</code> — <code>VerifyCode</code> empty and <code>VerifyCodeDate</code> null (never issued)</li>
+<li><code>voting.auth.verify.tooManyAttempts</code> — five failed mismatches on that row (<code>VerifyAttempts</code>)</li>
+<li><code>voting.auth.verify.invalidCode</code> — mismatch with attempts left; 400 also includes <code>attempts</code> (remaining). The service still encodes <code>invalidCode:N</code> internally; the controller splits that into the stable key plus <code>attempts</code> so the SPA can interpolate <code>{attempts}</code></li>
+<li><code>error.tooManyRequests</code> — middleware 429, not a verify-row lock</li>
+</ul>
+<p>The voter login page runs those keys through <code>resolveUserFacingApiError</code> (and understands a leftover <code>invalidCode:N</code> string). It does not collapse them into <code>voting.auth.verify.failed</code>.</p>
+<p><strong>Rejected alternative:</strong> keep used and never-issued as one <code>noCodeFound</code>. The issue asked for an “already used” key. Distinguishing them does not need a new column: success clears <code>VerifyCode</code> and leaves <code>VerifyCodeDate</code>.</p>
+<p><strong>Rejected alternative:</strong> keep <code>voting.auth.verify.invalidCode:4</code> as the public <code>error</code> string. That is not a stable i18n key; <code>te()</code> misses it and the UI shows the raw suffix. Remaining count stays a sibling field.</p>
+<p><strong>Rejected alternative:</strong> store a used-code hash so a later <code>requestCode</code> can still say “already used” for the old code. After a new code is issued the old one is simply a mismatch; only a replay with no new request is <code>alreadyUsed</code>.</p>
+<h2 id="pre-auth-voter-code-delivery-channel-issue-229">Pre-auth voter-code delivery channel (issue #229)</h2>
+<p><strong>Id:</strong> 25430887-ee58-442f-bf90-34105b5781d9<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #229 security notes; v3 VoterCodeHub used a short client key; 2026-09-20 product decision to ship live status<br />
+<strong>Revisit when:</strong> channel tokens must survive a multi-instance farm, or join should be one-shot with no reconnect</p>
+<p>Live delivery status for SMS/voice/email login uses an <strong>anonymous</strong> SignalR hub (<code>/hubs/voter-code</code>). Isolation is the unguessability of a <strong>server-issued</strong> token, not JWT (the voter is not authenticated yet).</p>
+<ul>
+<li>Token is 256 bits of CSPRNG, returned once on <code>requestCode</code>, stored only as SHA-256, TTL 10 minutes.</li>
+<li>One live joiner; reconnect after disconnect is allowed until TTL.</li>
+<li>Hub payloads are status + i18n key only. The one-time code is never sent on the hub (dev echo remains HTTP-only in Development/Testing).</li>
+<li>No extra PII: the verify step already shows the contact the voter typed; status strings do not repeat phone/email.</li>
+<li>Rate limits and SMS-pumping gates are unchanged and run <strong>before</strong> a channel exists.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> reuse AllVoters / VoterPersonal (need an online-voter JWT). Rejected — this is the login request, before verify.</p>
+<p><strong>Rejected alternative:</strong> client-generated channel key (v3). Rejected as too weak.</p>
+<p><strong>Why 10 minutes, not 15:</strong> the OTP window is 15 minutes; the status channel only needs to cover send + Twilio callbacks + a reconnect. A leaked token should die before the code does.</p>
+<p>See <code>context/realtime.md</code> for hub groups, replay-on-join, and provider wiring.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

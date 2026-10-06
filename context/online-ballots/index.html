@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/online-ballots/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Online Ballot Acceptance & Name Resolution - TallyJ 4 — why it is built this way</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#online-ballot-acceptance-name-resolution" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-header__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TallyJ 4 — why it is built this way
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Online Ballot Acceptance &amp; Name Resolution
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TallyJ 4 — why it is built this way" class="md-nav__button md-logo" aria-label="TallyJ 4 — why it is built this way" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TallyJ 4 — why it is built this way
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/glittle/TallyJ-4" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    glittle/TallyJ-4
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why this project is built this way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard ↗
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#design-posture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design posture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#draft-autosave-vs-submitted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Draft autosave vs Submitted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accept-all-of-pending-online-ballots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accept-all of pending online ballots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automated-coverage-for-submit-accept-all-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated coverage for submit → Accept-all → counts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pending-vs-accepted-on-the-monitor-counts-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pending vs accepted on the monitor (counts only)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-methods-do-not-accept-a-second-ballot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed methods: do not accept a second ballot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-5-minute-close-countdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor: 5-minute close countdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-connected-online-voters-sessions-not-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor: connected online voters (sessions, not names)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitor-online-voting-layout-status-then-action-then-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitor Online Voting layout (status, then action, then counts)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accept-all-audit-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accept-all audit record
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teller-resolution-of-free-text-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller resolution of free-text names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teller-created-ballots-stay-off-the-online-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teller-created ballots stay off the Online location
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reserved-location-display-online-and-imported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reserved location display (Online and Imported)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online-and-imported-ballot-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online and imported ballot codes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#name-selection-process-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Name selection process codes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="online-ballot-acceptance-name-resolution">Online Ballot Acceptance &amp; Name Resolution</h1>
+<p><strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issues #188 / #169 / #187 / #256; v3 BallotNormal Find flow  </p>
+<p>Highest-risk functionality. Random name resolution and online acceptance introduce failure modes that did not exist (or were rare) in paper-only flows.</p>
+<h3 id="design-posture">Design posture</h3>
+<p>Treat online ballot paths with the same rigor as core analysis. Prefer explicit failure and recovery over silent best-effort behavior.</p>
+<h2 id="draft-autosave-vs-submitted">Draft autosave vs Submitted</h2>
+<p><strong>Id:</strong> e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> maintainer, #303 UAT; voter ballot page  </p>
+<p>While the voter fills names, the ballot page silently autosaves to <code>OnlineVotingInfo</code> as status <strong>Draft</strong> (payload in <code>ListPool</code>). Reload restores those votes. Draft is not Accept-all pending and does not inflate monitor Submitted counts. Clearing the last name overwrites that saved payload (empty Draft, or payload-only if already Submitted) so leave/return does not restore names the voter just removed. Empty <code>Votes</code> is allowed on submit validation for that overwrite. A first visit with no names still does not create a Draft. Monitor <code>TotalOnlineBallots</code> is Submitted + Processing + Processed — Draft is not in that total or in pending.</p>
+<p>The explicit <strong>Submit Ballot</strong> action writes the same payload as <strong>Submitted</strong>. Accept-all still takes only <code>Submitted</code> + <code>Processing</code>.</p>
+<p>Once a row is <strong>Submitted</strong>, later autosaves (reload restore, notify toggle, or a debounced save after Submit) update the payload only. They do not demote Status back to Draft. Allowed writes are Draft→Draft, Draft→Submitted, Submitted→Submitted. The client sends <code>isDraft: false</code> after Submit so it agrees with the server; the server also refuses demotion if a stale Draft flag arrives.</p>
+<p><strong>Rejected alternative:</strong> autosave as <code>Submitted</code>. Incomplete ballots would appear in pending counts and could be Accept-all’d while the voter was still editing.</p>
+<p><strong>Rejected alternative:</strong> follow <code>IsDraft</code> even after Submit. That dropped a finished ballot out of Accept-all pending / monitor Submitted counts on silent autosave.</p>
+<p><strong>Reason:</strong> survive reload without treating an in-progress ballot as ready for tellers, and keep a submitted ballot pending until Accept-all.</p>
+<h2 id="accept-all-of-pending-online-ballots">Accept-all of pending online ballots</h2>
+<p><strong>Id:</strong> c3306353-19d3-43ed-9aa1-2c7b358a5936<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #188, maintainer; v3 <code>ElectionHelper.ProcessOnlineBallots</code>  </p>
+<p>A voter submit stores a pending payload on <code>OnlineVotingInfo</code> (status <code>Submitted</code>). It does not create a regular <code>Ballot</code>. Submit (create or update a pending online ballot) is refused while the election is Finalized (<code>voting.submit.finalized</code>), even if the online window is still open. Window-based open/close still applies when the election is not Finalized.</p>
+<p>Advancing <strong>to</strong> Finalized is refused while that same window is currently open (<code>elections.stageChangeError.onlineVotingStillOpen</code>). Close the window first; Finalize does not close it. <code>UseOnlineVoting</code> plus a null open/close is treated as open (same as submit / available-elections).</p>
+<p>A logged-in teller may Accept-all current pending online ballots while the online voting window is still open, and may do so more than once. Each run only accepts rows that are <code>Submitted</code> or already <code>Processing</code> at that moment.</p>
+<p>An empty Submitted overwrite (voter cleared every name after Submit) stays <code>Submitted</code> — never demoted to Draft. It still counts as pending on the monitor. Accept-all does not claim that payload and does not set <code>Processed</code>: there are no votes to turn into an OL ballot, and finalizing would lock the voter out with nothing counted. That row is pending-but-skipped until names are written again. A leftover <code>Processing</code> claim with an empty payload is restored to <code>Submitted</code> instead of wiped.</p>
+<p>Accept-all creates a regular ballot at the Online location (computer code <code>OL</code>) as if a teller had typed from paper, then wipes the online payload (<code>ListPool</code>, <code>PoolLocked</code>, <code>BallotGuid</code>) and sets status <code>Processed</code>. After that, the voter cannot change the vote. Acceptance is not reversible: we do not keep a link from the online row to the regular ballot.</p>
+<p>v3 required the window to be closed before processing. That was rejected here so tellers can accept current pending ballots up to the last moment without shutting voters out.</p>
+<p>A second overlapping Accept-all for the same election on one host is refused (process-wide election-scoped lock, HTTP 409). That lock is only a fast same-host gate. Two app servers can share one database, so uniqueness is in the row status, not in process memory.</p>
+<p>Accept-all is two passes:</p>
+<ol>
+<li>Load the expected <code>Submitted</code> (and already-<code>Processing</code>) row ids, then persist <code>Processing</code> with <code>UPDATE … SET Status = Processing WHERE Status = Submitted</code>. Another server can see that claim. <code>Processing</code> is a real stored status (varchar(10); the word fits). Empty Submitted rows (no votes, no legacy <code>BallotGuid</code>) are left out of this claim set.</li>
+<li>For each expected id, open a transaction and process <strong>only if the row is still <code>Processing</code></strong> (<code>UPDATE … SET Status = Processed WHERE Status = Processing</code>). 0 rows means the other server already took it. Ballot create and payload wipe share that transaction; a rollback restores <code>Processing</code> so a later run can retry. If the taken row has no votes and no legacy <code>BallotGuid</code>, Status is restored to <code>Submitted</code> (not Draft, not Processed).</li>
+</ol>
+<p>Submit updates with <code>WHERE Status = Submitted AND BallotGuid IS NULL</code>, and rejects when <code>BallotGuid</code> is set or status is <code>Processing</code>/<code>Processed</code>, so it cannot revive a claimed row or mint a second ballot from a legacy submitted row.</p>
+<p>In v3, a second call that started while the first was still creating ballots produced duplicates. The in-process lock serializes Accept-all on one host; the two-pass DB claim is what makes duplicates impossible across instances and vs Submit.</p>
+<p>Rows that already have a <code>BallotGuid</code> from the older submit-creates-ballot path are marked <code>Processed</code> and unlinked without creating a second ballot. The voter cannot resubmit those rows (<code>BallotGuid</code> is not nulled).</p>
+<p><strong>Rejected alternative:</strong> keep creating the regular ballot on voter submit, and treat Accept-all as only a status flip. That would not match “create a new regular ballot and wipe the online content,” and a concurrent accept that also created ballots is the failure mode from #188.</p>
+<p><strong>Rejected alternative:</strong> treat the in-process lock plus a Status re-read as enough to prevent duplicates. Two Azure instances can both read <code>Submitted</code> under READ COMMITTED, and a Submit that loaded <code>Submitted</code> can overwrite <code>Processed</code> if it UPDATEs by primary key only.</p>
+<p><strong>Rejected alternative:</strong> jump <code>Submitted</code> → <code>Processed</code> in one transaction with no stored interim. That CAS is atomic, but while one server is still creating ballots the row still looks <code>Submitted</code> to everyone else until commit. A persisted <code>Processing</code> claim is visible to the other server for the whole run.</p>
+<p><strong>Rejected alternative:</strong> require the online window to be closed before Accept-all (v3). Tellers need to accept what is in hand without closing voting.</p>
+<p><strong>Rejected alternative:</strong> Accept-all an empty Submitted overwrite as <code>Processed</code> with no OL ballot (the path <code>Votes: []</code> opened). That locks the voter out (<code>CannotChangeOnlineVote</code>) with nothing counted if a teller Accept-alls while names are cleared mid-edit.</p>
+<p><strong>Rejected alternative:</strong> demote empty Submitted to Draft so Accept-all ignores it. Draft vs Submitted is never-demote; an emptied resubmit stays Submitted and pending-but-skipped.</p>
+<p><strong>Reason:</strong> pending votes stay changeable until a teller accepts them; accepted votes become ordinary ballots with no remaining online payload.</p>
+<h2 id="automated-coverage-for-submit-accept-all-counts">Automated coverage for submit → Accept-all → counts</h2>
+<p><strong>Id:</strong> 70da22e7-4629-4117-9bb6-1fb851d56d6f<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #169 remaining; HTTP integration in <code>OnlineVotingBallotFlowTests</code><br />
+<strong>See:</strong> election-state.md#concurrent-tellers-automated-coverage-is-sqlite-not-a-browser-driver — c05fa083-2ae0-4c1c-889c-18b9644d53bc — as of 2026-10-05</p>
+<p>Issue #169 is the test script for this process, not a second product build. Coverage is the HTTP integration path (voter submit → teller Accept-all → monitor/summary counts, ListPool wipe, OL regular ballot, tally) plus the existing Accept-all service tests and monitor Vitest counts. That HTTP test uses the shared SQLite <code>CustomWebApplicationFactory</code>, which is relational, so it exercises the <code>ExecuteUpdate</code> claim that in-memory unit tests skip.</p>
+<p><strong>Rejected alternative:</strong> Playwright browser E2E. Frontend tests stay Vitest + jsdom; the monitor already locks counts-only (no named pending/accepted list) and a reload after Accept-all.</p>
+<p><strong>Rejected alternative:</strong> run these automated tests against Azure SQL. Backend.Tests stay on the local SQLite factory. Live cloud-agent app runs use local Docker SQL + migrations + SeedOnStartup, not production Azure SQL.</p>
+<p><strong>Reason:</strong> lock the already-shipped Accept-all contract (including anonymity: counts only) without a browser driver and without a production database.</p>
+<p>Two tellers at once (paper create + Accept-all + Front Desk) is issue #191, not a second Accept-all product. Coverage is SQLite multi-context in <code>Issue191ConcurrentTellerTests</code> (and a small HTTP two-client slice). Ordered Accept-all vs check-in stays #336; two Accept-alls stay <code>OnlineVotingServiceAcceptAllConcurrencyTests</code>. See <a href="../election-state/">election-state.md</a>.</p>
+<h2 id="pending-vs-accepted-on-the-monitor-counts-only">Pending vs accepted on the monitor (counts only)</h2>
+<p><strong>Id:</strong> 7cefe595-8f02-4f93-8a87-1975f6201818<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #188 remaining slice; maintainer, PR #296  </p>
+<blockquote>
+<p>Superseded 2026-09: a named pending/accepted row list (person + WhenStatus) was rejected — see below.</p>
+</blockquote>
+<p>The monitor tells pending from accepted using <code>OnlineVotingInfo.Status</code> counts only:</p>
+<ul>
+<li><strong>Pending</strong> = <code>Submitted</code> + <code>Processing</code> for people who have <strong>no</strong> Front Desk method other than Online (same set Accept-all will take).</li>
+<li><strong>Pending, voted another way</strong> = leftover <code>Submitted</code>/<code>Processing</code> after a paper/mail/kiosk/imported check-in. Count only. Accept-all will not create a ballot.</li>
+<li><strong>Submitted</strong> = still changeable.</li>
+<li><strong>Processing</strong> = claimed by Accept-all; submit is already blocked.</li>
+<li><strong>Accepted</strong> = <code>Processed</code>.</li>
+</ul>
+<p>The same monitor page also shows <strong>ballots by method</strong> (In Person, Mailed, Dropped Off, Kiosk, Online) as people counts. Online includes Processed rows that have no other Front Desk method — v4 Accept-all does not set <code>VotingMethod</code>.</p>
+<p>No person name, email, phone, kiosk, voter id, row id, or WhenStatus is returned or rendered for these rows. Front Desk / people roll may still show who voted; that is a different surface and is not paired with the OL ballots Accept-all creates.</p>
+<p><strong>Rejected alternative:</strong> list person names (or hide names in the UI while the API still sends them). Pairing a named pending/accepted list with the regular OL ballots created by Accept-all identifies how that person voted. Worst when n=1.</p>
+<p><strong>Rejected alternative:</strong> suppress names only when the pending or accepted count is under 10. Watching names (or named rows) move during Accept-all still matches a voter to the new OL ballot.</p>
+<p><strong>Rejected alternative:</strong> keep anonymous per-row Status/WhenStatus lists. A timestamped or shrinking row list can be watched the same way during Accept-all.</p>
+<p><strong>Rejected alternative:</strong> treat the accepted side as a join to the regular <code>Ballot</code>. Acceptance is not reversible and must not reconnect the online row to the counted ballot.</p>
+<p><strong>Reason:</strong> tellers need pending vs accepted (and Submitted vs Processing) across multiple Accept-all runs while the window stays open, without a secret-ballot leak.</p>
+<h2 id="mixed-methods-do-not-accept-a-second-ballot">Mixed methods: do not accept a second ballot</h2>
+<p><strong>Id:</strong> c08032e9-fd86-441f-ba6b-1e17b4111196<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> inferred<br />
+<strong>Source:</strong> issue #194; Accept-all still creates an OL ballot unless skipped; Front Desk check-in used to ignore online status  </p>
+<p>If a voter submits online and then votes another way, the Front Desk method wins for that person: the pending Draft/Submitted row is withdrawn on check-in. Accept-all also skips (and removes) leftover Submitted/Processing rows when the person already has P/M/D/C/I/K/1/2/3. Online submit is refused after those methods. Processed online still locks cannot-vote and refuses Front Desk check-in.</p>
+<p>Kiosk on Front Desk is a recorded method (<code>K</code>), counted separately from Online. Kiosk <em>login</em> (kiosk code → online ballot) is still the online path until a teller records <code>K</code>.</p>
+<p><strong>Rejected alternative:</strong> treat <code>Person.HasOnlineBallot</code> or a Draft row as already voted. Rejected — Draft is restore-only; pending Submitted is still changeable; the accepted signal is Processed or a Front Desk method.</p>
+<p><strong>Rejected alternative:</strong> set <code>VotingMethod=O</code> on Accept-all. Rejected — existing recon/people docs treat Processed without a method as the online record; changing Accept-all would relitigate #188.</p>
+<p><strong>Reason:</strong> real elections mix methods; the counted ballot must be one path per person.</p>
+<h2 id="monitor-5-minute-close-countdown">Monitor: 5-minute close countdown</h2>
+<p><strong>Id:</strong> 29034508-1d83-4704-bc64-7f7e20d71096<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #184 remaining slice; v3 <code>Monitor.cshtml</code> / <code>closeOnline</code>  </p>
+<p>The Monitor Progress Online Voting panel leads with <strong>Open</strong> / <strong>Closing soon</strong> / <strong>Closed</strong>, a relative close line, and a <code>m:ss</code> clock in the last five minutes. Full tellers can <strong>Schedule close in 5 minutes</strong> (firm — <code>OnlineCloseIsEstimate = false</code>), <strong>Close now</strong> (one second ago, estimate unchanged), or <strong>Open for 5 minutes</strong> when already closed (estimate unchanged). Those buttons call the existing online-window API; they do not invent a second close path.</p>
+<p>v3 used “Expected to close” when the close was an estimate and “Will close” when firm. The last-five-minute highlight is <code>minutes &lt;= 5</code> (same as v3 <code>onlineSoon</code>).</p>
+<p><strong>Rejected alternative:</strong> put the 5-minute / close-now buttons only on the header Online Voting drawer. Rejected — v3 tellers used them on Monitor Progress; the header already has the date pickers.</p>
+<p><strong>Rejected alternative:</strong> implement named “active voters building a ballot” in the same slice. Rejected — Draft is restore-only and is not Accept-all pending; a named list next to pending/accepted OL counts would reopen the secret-ballot pairing #188 closed. Anonymous ballot-page sessions are the later #184 item (see below).</p>
+<p><strong>Reason:</strong> tellers need a visible, testable 5-minute close on the monitor without pairing voters to ballots.</p>
+<h2 id="monitor-connected-online-voters-sessions-not-names">Monitor: connected online voters (sessions, not names)</h2>
+<p><strong>Id:</strong> 9896b319-c335-419a-ac05-5057ca6de81e<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #184 remaining slice; Draft autosave exists for restore only; v3 <code>AllVotersHub</code> docs in <code>docs/Hubs-in-v3.md</code> have no connection-count API and no named composing list  </p>
+<p>v3 Monitor (this repo’s hub docs) pushed online window changes via FrontDeskHub. It did not document a named “who is building a ballot” list, and v3 <code>AllVotersHub</code> was a global notify group with no membership-count API.</p>
+<p>v4 Draft is silent autosave only (not Accept-all pending). The monitor still does not list who is composing. “Building a ballot” is not shown as names.</p>
+<p>The monitor count strip includes <strong>Ballot-page sessions</strong>: an anonymous count of AllVotersHub connections that called <code>JoinElection</code> for this election (the voter ballot page). One person with two tabs counts as two. The API and UI return that integer only — no person name, email, phone, kiosk, voter id, row id, or WhenStatus. <code>IOnlineVoterPresenceService</code> stores connection id → election GUID only.</p>
+<p>The count is same-host in-memory. Two app servers do not share it. Auto-refresh (30s) is how tellers see a new number.</p>
+<p><code>VoterPersonalHub</code> cannot do this safely: its group is <code>Voter{voterId}</code> (identifying) and the voter JWT has no election claim.</p>
+<p><strong>Rejected alternative:</strong> a named list of voters on the ballot page. Pairing that list with pending/accepted OL / Accept-all identifies how that person voted.</p>
+<p><strong>Rejected alternative:</strong> put the site-wide <code>AllVoters</code> connection count on a per-election monitor. A voter on another election’s list would inflate this election. Misleading.</p>
+<p><strong>Rejected alternative:</strong> use Draft (or a composing heartbeat) as a named “building a ballot” list. Draft exists for reload restore; putting those names next to pending/accepted OL counts would reopen the secret-ballot pairing #188 closed. Not needed for “is anyone currently on this election’s ballot page?”</p>
+<p><strong>Rejected alternative:</strong> count unique voter ids (hashed) instead of sessions. Rejected for this slice — the product ask is sessions, and storing voter ids next to an election (even hashed) is extra identity surface for no teller gain.</p>
+<p><strong>Reason:</strong> tellers need a live anonymous signal that this election’s voting UI is in use, without a secret-ballot leak and without calling it “building a ballot.”</p>
+<h2 id="monitor-online-voting-layout-status-then-action-then-counts">Monitor Online Voting layout (status, then action, then counts)</h2>
+<p><strong>Id:</strong> 1d98c5c1-96a3-42cb-a566-70bfbd70d5d9<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #345 (evidence: issue #345; monitor UAT screenshot of stacked boxes)  </p>
+<p>The Online Voting block used a header Accept-all, a bordered descriptions row (total / pending / accepted / “enabled”), a separate colored <strong>Closing</strong> box that repeated “Online voting is Open/Closed”, then two more bordered tables (sessions; pending vs accepted) and two anonymity notes. Head tellers could not see window state and the next action at a glance.</p>
+<p>The panel is now one card:</p>
+<ol>
+<li><strong>Status row</strong> — Open / Closing soon / Closed, the close line, last-five-minute clock, and the existing window buttons.</li>
+<li><strong>Count strip</strong> — Pending, Still changeable, Processing, Accepted, Ballot-page sessions, Pending-voted-another-way, and total Online ballots. No second descriptions table.</li>
+<li><strong>One counts-only note</strong> and the Accept-all history.</li>
+</ol>
+<p>Setup <strong>enabled</strong> is not the operational status. It is shown only when online voting is disabled. Accept-all stays in the header as <strong>Accept pending</strong>; the confirm dialog still uses the longer irreversible wording.</p>
+<p><strong>Rejected alternative:</strong> keep the bordered <code>el-descriptions</code> blocks and only tighten copy. The competing boxes were the scan problem.</p>
+<p><strong>Rejected alternative:</strong> drop Accept-all history, sessions, voted-another-way, or total from the monitor. Those are live capabilities, not dead UI.</p>
+<p><strong>Rejected alternative:</strong> change the monitor API so the UI can invent a single “next action” field. Layout was enough; the payload already has window times and the counts.</p>
+<p><strong>Rejected alternative:</strong> restyle the whole Election Monitor page in the same pass. Out of scope for #345.</p>
+<p><strong>Reason:</strong> during an election the teller needs window state and the pending/accept action first; counts and history are secondary and should not each get their own boxed section.</p>
+<h2 id="accept-all-audit-record">Accept-all audit record</h2>
+<p><strong>Id:</strong> ceee6717-4409-4c5b-87d3-455db781ffd7<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #188 remaining slice; <code>SecurityAuditLogs</code> replaced <code>Logs</code> / C_Log in <code>20260713054353_MergeLogsIntoSecurityAuditLogs</code>  </p>
+<p>Each successful Accept-all persists one operational <code>SecurityAuditLog</code> row: who accepted (logged-in teller <code>UserId</code>, plus <code>DisplayName</code> when the account has one), when, and pending / accepted counts before and after that run. A teller may Accept-all more than once; each run is its own row. Failed runs and overlapping 409 refusals do not write a success audit.</p>
+<p>Tellers see those rows on the monitor page (same place as Accept-all). They also appear on the existing Audit Logs page because that page reads <code>SecurityAuditLogs</code>.</p>
+<p><code>OnlineVotingInfo.HistoryStatus</code> is not this record. Accept-all still appends a per-voter <code>Processed|{timestamp}</code> there. That string has no teller identity and no before/after counts.</p>
+<p>The generic <code>AuditMiddleware</code> POST path log is skipped for Accept-all so a second, count-less “success” row is not stored next to the real one.</p>
+<p>The audit stores teller user id and optional display name only. It does not store voter email, phone, kiosk code, or voter id (CodeQL <code>cs/exposure-of-sensitive-information</code> on #294). Teller email is also left off the row.</p>
+<p><strong>Rejected alternative:</strong> treat <code>HistoryStatus</code> as the teller-run audit. It is per voter and cannot answer who accepted or the run counts.</p>
+<p><strong>Rejected alternative:</strong> add a new Accept-all audit table. <code>SecurityAuditLogs</code> with <code>OperationalActivity</code> is already the election activity log that replaced C_Log.</p>
+<p><strong>Reason:</strong> issue #188 asked for a durable who/when/counts record in the existing TallyJ log, visible to tellers, without a parallel system and without voter contact details.</p>
+<h2 id="teller-resolution-of-free-text-names">Teller resolution of free-text names</h2>
+<p><strong>Id:</strong> cc708475-3db0-47a8-a03e-efc448ec9268<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #256, v3 <code>BallotNormal.cshtml.js</code> <code>findWithRawVotePart</code>; maintainer on issue #187  </p>
+<p>In TallyJ, <strong>random name</strong> means a vote on an <strong>online ballot</strong> (selection process random / both) where the voter typed a name. It is not paper teller entry and not a general people-search feature. After Accept-all, those lines become regular votes; tellers resolve the typed name on that ballot — they do not get a new empty line. Import mismatches reuse the same <code>OnlineVoteRaw</code> payload; that is not a paper random-name flow.</p>
+<ul>
+<li>Persist free-text as v3-compatible <code>OnlineRawVote</code> JSON (<code>First</code> / <code>Last</code> / <code>OtherInfo</code>) on <code>Vote.OnlineVoteRaw</code>. Legacy plain strings are still parsed.</li>
+<li>Unresolved votes stay <code>VoteStatus.Raw</code>; the ballot is <code>BallotStatus.Raw</code> until every line has a person or a spoil reason.</li>
+<li>Matching a name <strong>updates that vote</strong> and keeps <code>OnlineVoteRaw</code> so the voter-entered text is never discarded (issue #187).</li>
+<li><strong>Find</strong> copies first + last into search. Each extra click drops the last letter of both names (same as v3). The teller then picks a search hit for the current line and the next unresolved line is selected.</li>
+<li>The open-ballot list marks unresolved <code>OnlineVoteRaw</code> (<code>isUnresolvedRawVote</code>: truthy raw, no person, no spoil). That includes online typed names and CDN/import mismatches. v3 used a saturated peach (<code>#f1b787</code> / <code>rawDonefalse</code>) so unfinished lines jumped out next to matched green. v4 uses a warning-tinted row, left stripe, and <strong>Find</strong> — no text chip. A matched line keeps the original text above the person name. The <strong>raw</strong> line uses <code>--el-color-warning-dark</code>; the matched person name stays the normal vote-name color. Paper votes without <code>onlineVoteRaw</code> are not marked.</li>
+<li>Row fills mix the warning/success token onto <code>--el-bg-color</code> so they stay pale on white and dark on navy. Text on those rows is <code>--color-text-primary</code>. EP <code>*-light-9</code> stays mint/peach in dark while inherited text goes near-white (Glen UAT).</li>
+</ul>
+<p><strong>Rejected alternative:</strong> keep treating free-text as a display-only string and let tellers add new votes underneath. That dropped the v3 process, hid the original names (and treated <code>Raw</code> as spoiled in the UI), and could duplicate lines instead of resolving the submitted vote.</p>
+<p><strong>Rejected alternative:</strong> treat any vote without a person — including paper empty slots — as needing resolution. That would invent a paper random-name flow.</p>
+<p><strong>Rejected alternative:</strong> key the mark off <code>OnlineVoteRaw</code> alone. Matching keeps the original text, so resolved lines would stay highlighted.</p>
+<p><strong>Rejected alternative:</strong> keep the pale <code>warning-light-8</code> / <code>*-light-9</code> fills (with or without a <strong>Needs matching</strong> chip). The chip was redundant with Find + the warning row. Those EP light tints stay pale in dark theme, so <code>--el-text-color-*</code> (near-white) failed contrast.</p>
+<p><strong>Reason:</strong> tellers already know this workflow from v3; shortening is how they widen a misspelled search without retyping. They must also see which raw lines are still unmatched.</p>
+<h2 id="teller-created-ballots-stay-off-the-online-location">Teller-created ballots stay off the Online location</h2>
+<p><strong>Id:</strong> 0efd493f-0abb-47f4-95bf-d2f967e1540f<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #287; maintainer  </p>
+<p>The reserved location is only for voter-initiated ballots (computer code <code>OL</code>). Identify it by <code>LocationTypeCode</code> / <code>LocationType.Online</code>, never by the display name. Names are user-facing and translated; the English word “Online” is not a stable key.</p>
+<p>A teller starting a paper ballot must store it at the location currently selected in that browser. If that selection has type Online, starting is blocked.</p>
+<p>Create used to ignore the requested location and take <code>Locations.FirstOrDefault</code> for the election, so new teller ballots could land on the reserved location.</p>
+<p>Older submit code (and the locations form) could store a row <em>named</em> “Online” with a null type. <code>LocationTypeEnum</code> treats a missing code as Manual, so that row is a normal paper location as far as create-ballot is concerned.</p>
+<p><strong>Rejected alternative:</strong> allow tellers to create ballots at the Online-typed location (the original #287 wording). Mixing teller-entered paper ballots into the voter-submitted set hides which ballots came from voters.</p>
+<p><strong>Rejected alternative:</strong> treat a location named “Online” as reserved. The product is multilingual; English names cannot be used as identifiers.</p>
+<p><strong>Reason:</strong> the browser location is the teller's workstation context; the Online <em>type</em> is not a paper station.</p>
+<p>The typed Online location is added when setup enables online voting, and removed if online voting is turned off and that location has no ballots (or computers). Voter submit still ensures the row exists if setup enabled voting but the location is missing.</p>
+<p><strong>Rejected alternative:</strong> create the location only on the first voter ballot. Tellers would not see it in the location list until a vote arrived, and disabling unused online voting would leave an empty reserved location behind.</p>
+<h2 id="reserved-location-display-online-and-imported">Reserved location display (Online and Imported)</h2>
+<p><strong>Id:</strong> c400f5ef-292a-446c-8e35-cee95be9ee24<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #287; maintainer, 4 Sep 2026; Imported parity, maintainer, #303 UAT  </p>
+<p>Online and Imported are both reserved <code>LocationType</code> rows. Identity is the type code, never the stored name. Display uses the current-language label (<code>locations.typeOnline</code> / <code>locations.typeImported</code> via <code>formatLocationLabel</code> / <code>LocationDisplayHelper</code>). The stored <code>Name</code> is a fallback for reports and logs, not what tellers edit.</p>
+<p>On the Locations page each reserved row is a single i18n tag (no text+badge duplicate), contact shows <code>-</code>, and the row is highlighted by type. A paper location whose name happens to be “Online” or “Imported” is not that row.</p>
+<p>Editing a reserved row may change sort order only. Name is read-only (the i18n label). Contact, latitude, and longitude are not offered. The API ignores those fields on a reserved-type update and refuses delete. Teller create never assigns Online or Imported; <code>OnlineLocationHelper</code> creates Online, and CDN ballot import creates Imported.</p>
+<p>Teller-started paper ballots are blocked at both reserved locations (FE start checks + <code>BallotService.CreateBallotAsync</code>). Online remains voter-initiated (<code>OL</code>); Imported remains import-initiated (<code>IM</code>).</p>
+<p><strong>Rejected alternative:</strong> treat a location named “Online” / “Imported” as reserved, or POST the translated label as the stored name. Names are user-facing and translated; writing the current language back would change the stored fallback and still would not identify the row.</p>
+<p><strong>Rejected alternative:</strong> give Imported a weaker Locations UX than Online (editable name/contact while Online is locked). Both are system-managed stations; tellers should not dress them up as paper locations.</p>
+<p>Ballot entry panels and the votes dialog load locations when the ballot’s <code>locationGuid</code> is not already in the location store, so <code>formatLocationLabel</code> can use type. If that fetch fails, the stored <code>locationName</code> remains the display fallback.</p>
+<p>The ballots report projects location name + type with <code>AsNoTracking</code> instead of materializing the full ballot/location/vote/person graph, then formats reserved types the same way. That keeps the report label correct without tracking entities for a read-only export.</p>
+<p><strong>Rejected alternative:</strong> rely only on <code>ballot.locationName</code> in the UI, or keep <code>Include</code> graphs for the report. The stored name is the English (or setup-time) fallback and can disagree with the teller’s language; the Include path also tracked entities the report never updates.</p>
+<p><strong>Reason:</strong> tellers need to see which rows are system stations, in their language, without being able to rename them or start paper ballots there.</p>
+<h2 id="online-and-imported-ballot-codes">Online and imported ballot codes</h2>
+<p><strong>Id:</strong> 5d6a1f72-a02d-4b2f-bd48-ad982f02225f<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #256 follow-up; v3 used <code>OL</code> / <code>IM</code>  </p>
+<p>Online ballots use reserved computer code <code>OL</code> and a per-location sequence (<code>OL1</code>, <code>OL2</code>, …). Imported ballots use <code>IM</code>. Tellers see <strong>Online 3</strong> / <strong>Imported 3</strong>, not <code>OL3</code> or <code>WW0</code>.</p>
+<p><code>WW</code> was a leftover stand-in for “online” and every new ballot was stored as number <code>0</code>, so they all displayed as <code>WW0</code>. Existing <code>WW</code> / <code>0</code> online ballots are renumbered when the election’s ballots are loaded or another online ballot is submitted.</p>
+<p><strong>Rejected alternative:</strong> treat <code>WW</code> as a normal workstation code and keep <code>WW03</code>. That collides with teller computers (<code>A</code>–<code>ZZ</code>) and hides that these ballots did not come from a paper station.</p>
+<p>Tellers do not delete votes, delete the ballot, or drag-reorder names on online/imported ballots. Those lines arrived as a submitted set; the work is to match names, not edit the set.</p>
+<p>A missing name or spoiled vote (U01 / U02) is applied <strong>to the selected line</strong>. <strong>Set as spoiled vote or new name</strong> stays hidden until the teller is finding a name for that line (Find / Change), then appears above <strong>Start another ballot</strong>. The drawer shows the voter-entered name and, for a new person, prefills first and last from that text. A small <strong>Swap</strong> on the person form (ballot drawer and People Management) reverses first and last when the split guessed the order wrong. Eligibility starts empty and must be chosen — a write-in is not assumed eligible. Search matches work the same way: they replace the selected vote instead of appending a new one.</p>
+<p><strong>Rejected alternative:</strong> keep the paper flow (always show the button and add a new line). That would grow a submitted set instead of resolving the line the voter already sent.</p>
+<h2 id="name-selection-process-codes">Name selection process codes</h2>
+<p><strong>Id:</strong> f42026a2-8b80-405d-b08b-31d5434da878<br />
+<strong>Type:</strong> decision<br />
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> voter ballot page, seed data, <code>OnlineElectionInfoDto</code>  </p>
+<p>v4 stores <code>OnlineSelectionProcess</code> as <code>A</code> (list), <code>B</code> (random / free text), or <code>C</code> (both). v3 stored <code>L</code> / <code>R</code> / <code>B</code> for the same three modes.</p>
+<p><strong>Rejected alternative:</strong> keep v3's <code>L</code>/<code>R</code>/<code>B</code> letters. Existing v4 elections, seeders, and the voter UI already use <code>A</code>/<code>B</code>/<code>C</code>.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li>Ballot validation</li>
+<li>Election state management</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
