@@ -1,0 +1,79 @@
+# Documentation site for TallyJ 4, published to GitHub Pages by
+# .github/workflows/docs.yml together with the Keep the Why dashboard
+# on /dashboard/live/.
+#
+# The pages come from where they already live: docs/*.md as they are,
+# README.md as the home page and context/*.md as "Why it is built this way"
+# (both generated at build time by tools/mkdocs/site_pages.py, no copies).
+#
+# Local preview: pip install "mkdocs>=1.6.1,<2" mkdocs-material && mkdocs serve
+site_name: TallyJ 4
+site_description: Election management and ballot tallying for Bahá’í communities.
+site_url: https://glittle.github.io/TallyJ-4/
+repo_url: https://github.com/glittle/TallyJ-4
+repo_name: glittle/TallyJ-4
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+hooks:
+  - tools/mkdocs/site_pages.py
+
+# Working notes of coding agents, not documentation.
+exclude_docs: |
+  grok-cli-outputs/
+
+# Reached from the context index, not listed one by one.
+not_in_nav: |
+  context/*
+
+nav:
+  - Home: index.md
+  - Guides:
+      - Quick start: QUICK_START.md
+      - User guide: USER_GUIDE.md
+      - Administrator guide: ADMIN_GUIDE.md
+      - Migrating from v3: MIGRATION_GUIDE.md
+      - Deployment: DEPLOYMENT.md
+  - Developer notes:
+      - Voter authentication: VOTER_AUTHENTICATION_IMPLEMENTATION.md
+      - Google OAuth for voters: GOOGLE_OAUTH_FOR_VOTERS.md
+      - Shared i18n (.NET + Vue): SHARED_I18N.md
+      - Rich i18n locale entries: i18n-rich-entries-upgrade.md
+      - "SignalR hubs: v3 vs v4": Hubs-v3-vs-v4.md
+      - SignalR hubs in v3: Hubs-in-v3.md
+      - Comparing analysis with v3: V3_ANALYSIS_COMPARISON.md
+  - Why it is built this way:
+      - Context index: context/index.md
+      - "Dashboard ↗": https://glittle.github.io/TallyJ-4/dashboard/live/

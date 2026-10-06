@@ -79,5 +79,5 @@ terminals/*
 _agent_out/*
 .grok/plans/*
 
-# Keep the Why site build output (mkdocs -f .github/keep-the-why-site/mkdocs.yml)
+# MkDocs build output (mkdocs build)
 /site/
