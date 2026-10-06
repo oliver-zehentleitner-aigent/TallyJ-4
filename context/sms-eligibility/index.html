@@ -876,6 +876,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#in-code-gate-before-any-paid-provider" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1040,17 +1051,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1069,6 +1069,12 @@
 
 
 <h1 id="paid-sms-voice-whatsapp-destination-eligibility">Paid SMS / voice / WhatsApp destination eligibility<a class="headerlink" href="#paid-sms-voice-whatsapp-destination-eligibility" title="Permanent link">&para;</a></h1>
+<h3 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../auth/">auth.md</a> — voter JWT claims (separate from paid-destination rules)</li>
+<li><a href="../../VOTER_AUTHENTICATION_IMPLEMENTATION/"><code>docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md</code></a> — requestCode flow and SMS pumping</li>
+<li>Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity</li>
+</ul>
 <h2 id="in-code-gate-before-any-paid-provider">In-code gate before any paid provider<a class="headerlink" href="#in-code-gate-before-any-paid-provider" title="Permanent link">&para;</a></h2>
 <p><strong>Id:</strong> 1371035d-9f3b-4db1-9709-6d98503272b8<br />
 <strong>Type:</strong> decision<br />
@@ -1380,12 +1386,6 @@
 <p><strong>Rejected alternative:</strong> a Front Desk Has WhatsApp filter. Rejected — this leftover is the notify / People list filter.</p>
 <p><strong>Rejected alternative:</strong> change send rules so the filter selects who can be sent. Rejected — send already skips non-OK; the filter is only for finding known-yes numbers.</p>
 <p><strong>Not in this slice:</strong> SignalR #229, optional rename of <code>PersonPhoneSmsHintDto</code>, live GreenAPI, Front Desk filter, email/SMS blast.</p>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../auth/">auth.md</a> — voter JWT claims (separate from paid-destination rules)</li>
-<li><code>docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md</code> — requestCode flow and SMS pumping</li>
-<li>Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity</li>
-</ul>
 
 
 

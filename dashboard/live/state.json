@@ -1,6 +1,6 @@
 {
  "state-json": 2,
- "generated": "2026-10-06T07:26:38Z",
+ "generated": "2026-10-06T07:28:26Z",
  "dashboard": "0.7.0",
  "linter": "0.20.0.0",
  "project": {
@@ -29,8 +29,8 @@
   "children": [],
   "git": {
    "available": true,
-   "head": "5497ea75",
-   "head_full": "5497ea757c7b98c1f910f7eac2ec79ca73252993",
+   "head": "fae3a1ae",
+   "head_full": "fae3a1aeb1dae2f149a8ec82da7f69dc1ee0fc92",
    "branch": "HEAD",
    "remote": "github.com/oliver-zehentleitner-aigent/TallyJ-4",
    "upstream": "github.com/glittle/TallyJ-4",
@@ -79,9 +79,7 @@
    "refs_out": [
     "realtime.md"
    ],
-   "refs_in": [
-    "sms-eligibility.md"
-   ],
+   "refs_in": [],
    "status": {
     "active": 7
    },
@@ -189,24 +187,22 @@
    "file": "kiosk.md",
    "title": "Kiosk voting",
    "index_line": "kiosk as teller-minted 15-minute codes on a shared browser; not mint-on-read",
-   "entries": 5,
+   "entries": 4,
    "refs_out": [],
    "refs_in": [],
    "status": {
-    "active": 4,
-    "": 1
+    "active": 4
    },
    "evidence": {
     "confirmed": 2,
-    "inferred": 2,
-    "": 1
+    "inferred": 2
    }
   },
   {
    "file": "online-ballots.md",
    "title": "Online Ballot Acceptance & Name Resolution",
    "index_line": "Draft autosave vs Submitted, online acceptance (pending until Accept-all), reserved Online/Imported locations, monitor close countdown, anonymous ballot-page sessions, and random name resolution",
-   "entries": 15,
+   "entries": 14,
    "refs_out": [
     "election-state.md"
    ],
@@ -214,13 +210,11 @@
     "realtime.md"
    ],
    "status": {
-    "active": 14,
-    "": 1
+    "active": 14
    },
    "evidence": {
     "confirmed": 13,
-    "inferred": 1,
-    "": 1
+    "inferred": 1
    }
   },
   {
@@ -294,21 +288,17 @@
    "file": "sms-eligibility.md",
    "title": "Paid SMS / voice / WhatsApp destination eligibility",
    "index_line": "reject reserved/fictional/malformed phones before paid SMS/voice/WhatsApp; OnlineVoter.SmsStatus; ensure phone row on Person write; person detail phone status and recent SmsLog; Twilio callback auto-learn and delivered OK; send-side SmsLog + StatusCallback; teller manual SmsStatus; Front Desk / people list SMS hint; OnlineVoter.WhatsAppStatus (GreenAPI checkWhatsapp); People list Has WhatsApp filter",
-   "entries": 16,
-   "refs_out": [
-    "auth.md"
-   ],
+   "entries": 15,
+   "refs_out": [],
    "refs_in": [
     "front-desk.md"
    ],
    "status": {
-    "active": 15,
-    "": 1
+    "active": 15
    },
    "evidence": {
     "confirmed": 11,
-    "inferred": 4,
-    "": 1
+    "inferred": 4
    }
   },
   {
@@ -1762,8 +1752,8 @@
    "id": "kiosk.md#login-window-is-15-minutes-and-teller-renewed",
    "uuid": "9ba42aac-9edf-4aef-b9cb-360db06828ce",
    "file": "kiosk.md",
-   "line": 9,
-   "end_line": 26,
+   "line": 15,
+   "end_line": 32,
    "title": "Login window is 15 minutes and teller-renewed",
    "type": [
     "decision"
@@ -1802,8 +1792,8 @@
    "id": "kiosk.md#shared-kiosk-browser-must-not-keep-the-previous-voter",
    "uuid": "df6e2735-50de-4e4b-9e98-c3d01d93140c",
    "file": "kiosk.md",
-   "line": 27,
-   "end_line": 46,
+   "line": 33,
+   "end_line": 52,
    "title": "Shared kiosk browser must not keep the previous voter",
    "type": [
     "decision"
@@ -1842,8 +1832,8 @@
    "id": "kiosk.md#login-window-is-election-scoped",
    "uuid": "93885246-fefa-402e-8a45-1076f0c01c9b",
    "file": "kiosk.md",
-   "line": 47,
-   "end_line": 62,
+   "line": 53,
+   "end_line": 68,
    "title": "Login window is election-scoped",
    "type": [
     "decision"
@@ -1882,8 +1872,8 @@
    "id": "kiosk.md#setup-toggle-writes-k-on-votingmethods",
    "uuid": "e7d442de-8a37-41a2-b04a-fd737da67499",
    "file": "kiosk.md",
-   "line": 63,
-   "end_line": 72,
+   "line": 69,
+   "end_line": 77,
    "title": "Setup toggle writes `K` on `VotingMethods`",
    "type": [
     "decision"
@@ -1919,49 +1909,11 @@
    "findings": []
   },
   {
-   "id": "kiosk.md#related",
-   "uuid": null,
-   "file": "kiosk.md",
-   "line": 73,
-   "end_line": 77,
-   "title": "Related",
-   "type": [],
-   "status": "",
-   "evidence": "",
-   "source": null,
-   "verification": null,
-   "revisit_when": null,
-   "see": [],
-   "superseded_by": null,
-   "refs": [],
-   "git": {
-    "created": {
-     "author": "Glen Little",
-     "date": "2026-09-12",
-     "commit": "bfec9f4e"
-    },
-    "last_touched": {
-     "author": "Glen Little",
-     "date": "2026-09-12",
-     "commit": "bfec9f4"
-    },
-    "status_history": []
-   },
-   "findings": [
-    {
-     "severity": "warning",
-     "code": "W102",
-     "line": 73,
-     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-    }
-   ]
-  },
-  {
    "id": "online-ballots.md#draft-autosave-vs-submitted",
    "uuid": "e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1",
    "file": "online-ballots.md",
-   "line": 13,
-   "end_line": 32,
+   "line": 18,
+   "end_line": 37,
    "title": "Draft autosave vs Submitted",
    "type": [
     "decision"
@@ -2000,8 +1952,8 @@
    "id": "online-ballots.md#accept-all-of-pending-online-ballots",
    "uuid": "c3306353-19d3-43ed-9aa1-2c7b358a5936",
    "file": "online-ballots.md",
-   "line": 33,
-   "end_line": 79,
+   "line": 38,
+   "end_line": 84,
    "title": "Accept-all of pending online ballots",
    "type": [
     "decision"
@@ -2040,8 +1992,8 @@
    "id": "online-ballots.md#automated-coverage-for-submit-accept-all-counts",
    "uuid": "70da22e7-4629-4117-9bb6-1fb851d56d6f",
    "file": "online-ballots.md",
-   "line": 80,
-   "end_line": 98,
+   "line": 85,
+   "end_line": 103,
    "title": "Automated coverage for submit → Accept-all → counts",
    "type": [
     "decision"
@@ -2091,8 +2043,8 @@
    "id": "online-ballots.md#pending-vs-accepted-on-the-monitor-counts-only",
    "uuid": "7cefe595-8f02-4f93-8a87-1975f6201818",
    "file": "online-ballots.md",
-   "line": 99,
-   "end_line": 130,
+   "line": 104,
+   "end_line": 135,
    "title": "Pending vs accepted on the monitor (counts only)",
    "type": [
     "decision"
@@ -2131,8 +2083,8 @@
    "id": "online-ballots.md#mixed-methods-do-not-accept-a-second-ballot",
    "uuid": "c08032e9-fd86-441f-ba6b-1e17b4111196",
    "file": "online-ballots.md",
-   "line": 131,
-   "end_line": 148,
+   "line": 136,
+   "end_line": 153,
    "title": "Mixed methods: do not accept a second ballot",
    "type": [
     "decision"
@@ -2171,8 +2123,8 @@
    "id": "online-ballots.md#monitor-5-minute-close-countdown",
    "uuid": "29034508-1d83-4704-bc64-7f7e20d71096",
    "file": "online-ballots.md",
-   "line": 149,
-   "end_line": 166,
+   "line": 154,
+   "end_line": 171,
    "title": "Monitor: 5-minute close countdown",
    "type": [
     "decision"
@@ -2211,8 +2163,8 @@
    "id": "online-ballots.md#monitor-connected-online-voters-sessions-not-names",
    "uuid": "9896b319-c335-419a-ac05-5057ca6de81e",
    "file": "online-ballots.md",
-   "line": 167,
-   "end_line": 194,
+   "line": 172,
+   "end_line": 199,
    "title": "Monitor: connected online voters (sessions, not names)",
    "type": [
     "decision"
@@ -2251,8 +2203,8 @@
    "id": "online-ballots.md#monitor-online-voting-layout-status-then-action-then-counts",
    "uuid": "1d98c5c1-96a3-42cb-a566-70bfbd70d5d9",
    "file": "online-ballots.md",
-   "line": 195,
-   "end_line": 222,
+   "line": 200,
+   "end_line": 227,
    "title": "Monitor Online Voting layout (status, then action, then counts)",
    "type": [
     "decision"
@@ -2291,8 +2243,8 @@
    "id": "online-ballots.md#accept-all-audit-record",
    "uuid": "ceee6717-4409-4c5b-87d3-455db781ffd7",
    "file": "online-ballots.md",
-   "line": 223,
-   "end_line": 246,
+   "line": 228,
+   "end_line": 251,
    "title": "Accept-all audit record",
    "type": [
     "decision"
@@ -2331,8 +2283,8 @@
    "id": "online-ballots.md#teller-resolution-of-free-text-names",
    "uuid": "cc708475-3db0-47a8-a03e-efc448ec9268",
    "file": "online-ballots.md",
-   "line": 247,
-   "end_line": 273,
+   "line": 252,
+   "end_line": 278,
    "title": "Teller resolution of free-text names",
    "type": [
     "decision"
@@ -2371,8 +2323,8 @@
    "id": "online-ballots.md#teller-created-ballots-stay-off-the-online-location",
    "uuid": "0efd493f-0abb-47f4-95bf-d2f967e1540f",
    "file": "online-ballots.md",
-   "line": 274,
-   "end_line": 299,
+   "line": 279,
+   "end_line": 304,
    "title": "Teller-created ballots stay off the Online location",
    "type": [
     "decision"
@@ -2411,8 +2363,8 @@
    "id": "online-ballots.md#reserved-location-display-online-and-imported",
    "uuid": "c400f5ef-292a-446c-8e35-cee95be9ee24",
    "file": "online-ballots.md",
-   "line": 300,
-   "end_line": 327,
+   "line": 305,
+   "end_line": 332,
    "title": "Reserved location display (Online and Imported)",
    "type": [
     "decision"
@@ -2451,8 +2403,8 @@
    "id": "online-ballots.md#online-and-imported-ballot-codes",
    "uuid": "5d6a1f72-a02d-4b2f-bd48-ad982f02225f",
    "file": "online-ballots.md",
-   "line": 328,
-   "end_line": 347,
+   "line": 333,
+   "end_line": 352,
    "title": "Online and imported ballot codes",
    "type": [
     "decision"
@@ -2491,8 +2443,8 @@
    "id": "online-ballots.md#name-selection-process-codes",
    "uuid": "f42026a2-8b80-405d-b08b-31d5434da878",
    "file": "online-ballots.md",
-   "line": 348,
-   "end_line": 359,
+   "line": 353,
+   "end_line": 363,
    "title": "Name selection process codes",
    "type": [
     "decision"
@@ -2526,44 +2478,6 @@
     ]
    },
    "findings": []
-  },
-  {
-   "id": "online-ballots.md#related",
-   "uuid": null,
-   "file": "online-ballots.md",
-   "line": 360,
-   "end_line": 363,
-   "title": "Related",
-   "type": [],
-   "status": "",
-   "evidence": "",
-   "source": null,
-   "verification": null,
-   "revisit_when": null,
-   "see": [],
-   "superseded_by": null,
-   "refs": [],
-   "git": {
-    "created": {
-     "author": "Glen Little",
-     "date": "2026-08-07",
-     "commit": "f1b10763"
-    },
-    "last_touched": {
-     "author": "Glen Little",
-     "date": "2026-08-15",
-     "commit": "43330b2"
-    },
-    "status_history": []
-   },
-   "findings": [
-    {
-     "severity": "warning",
-     "code": "W102",
-     "line": 360,
-     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-    }
-   ]
   },
   {
    "id": "people-import.md#three-explicit-actions-not-a-wizard",
@@ -3753,8 +3667,8 @@
    "id": "sms-eligibility.md#in-code-gate-before-any-paid-provider",
    "uuid": "1371035d-9f3b-4db1-9709-6d98503272b8",
    "file": "sms-eligibility.md",
-   "line": 3,
-   "end_line": 28,
+   "line": 9,
+   "end_line": 34,
    "title": "In-code gate before any paid provider",
    "type": [
     "decision",
@@ -3794,8 +3708,8 @@
    "id": "sms-eligibility.md#durable-onlinevoter-smsstatus-second-slice",
    "uuid": "e49ea17f-8271-4164-8bc2-fffcccb76b73",
    "file": "sms-eligibility.md",
-   "line": 29,
-   "end_line": 70,
+   "line": 35,
+   "end_line": 76,
    "title": "Durable `OnlineVoter.SmsStatus` (second slice)",
    "type": [
     "decision"
@@ -3834,8 +3748,8 @@
    "id": "sms-eligibility.md#ensure-phone-onlinevoter-on-person-write-third-slice",
    "uuid": "8f477db8-3d22-49c8-9dd2-0226b4f29fc0",
    "file": "sms-eligibility.md",
-   "line": 71,
-   "end_line": 95,
+   "line": 77,
+   "end_line": 101,
    "title": "Ensure phone `OnlineVoter` on Person write (third slice)",
    "type": [
     "decision"
@@ -3874,8 +3788,8 @@
    "id": "sms-eligibility.md#person-detail-phone-onlinevoter-status-fourth-slice",
    "uuid": "e8fb74dd-b103-414f-8595-db88bf7fd8fa",
    "file": "sms-eligibility.md",
-   "line": 96,
-   "end_line": 116,
+   "line": 102,
+   "end_line": 122,
    "title": "Person detail phone OnlineVoter status (fourth slice)",
    "type": [
     "decision"
@@ -3914,8 +3828,8 @@
    "id": "sms-eligibility.md#twilio-status-callback-auto-learn-fifth-slice",
    "uuid": "a3fd6326-00db-4cab-964d-a3a386e4e277",
    "file": "sms-eligibility.md",
-   "line": 117,
-   "end_line": 159,
+   "line": 123,
+   "end_line": 165,
    "title": "Twilio status-callback auto-learn (fifth slice)",
    "type": [
     "decision"
@@ -3954,8 +3868,8 @@
    "id": "sms-eligibility.md#person-detail-recent-smslog-sixth-slice",
    "uuid": "d7d89021-883c-462f-9424-5ab7812c7072",
    "file": "sms-eligibility.md",
-   "line": 160,
-   "end_line": 182,
+   "line": 166,
+   "end_line": 188,
    "title": "Person detail recent SmsLog (sixth slice)",
    "type": [
     "decision"
@@ -3994,8 +3908,8 @@
    "id": "sms-eligibility.md#send-side-smslog-insert-statuscallback-seventh-slice",
    "uuid": "eae6a7e5-8904-4eeb-afb8-49d01a486c54",
    "file": "sms-eligibility.md",
-   "line": 183,
-   "end_line": 207,
+   "line": 189,
+   "end_line": 213,
    "title": "Send-side SmsLog insert + StatusCallback (seventh slice)",
    "type": [
     "decision"
@@ -4034,8 +3948,8 @@
    "id": "sms-eligibility.md#teller-manual-smsstatus-eighth-slice",
    "uuid": "5830cb54-1ca0-4239-9b7d-017a12ccd97d",
    "file": "sms-eligibility.md",
-   "line": 208,
-   "end_line": 236,
+   "line": 214,
+   "end_line": 242,
    "title": "Teller manual SmsStatus (eighth slice)",
    "type": [
     "decision"
@@ -4074,8 +3988,8 @@
    "id": "sms-eligibility.md#set-smsstatus-ok-from-delivered-callback-ninth-slice",
    "uuid": "e8f31b8f-6f20-4f91-912e-b4489a5f26f6",
    "file": "sms-eligibility.md",
-   "line": 237,
-   "end_line": 272,
+   "line": 243,
+   "end_line": 278,
    "title": "Set `SmsStatus` OK from delivered callback (ninth slice)",
    "type": [
     "decision"
@@ -4114,8 +4028,8 @@
    "id": "sms-eligibility.md#front-desk-people-list-sms-hint-tenth-slice",
    "uuid": "747af2a6-4ff3-4aa9-954f-b30eb4fb1771",
    "file": "sms-eligibility.md",
-   "line": 273,
-   "end_line": 299,
+   "line": 279,
+   "end_line": 305,
    "title": "Front Desk / people list SMS hint (tenth slice)",
    "type": [
     "decision"
@@ -4154,8 +4068,8 @@
    "id": "sms-eligibility.md#durable-onlinevoter-whatsappstatus-first-slice-of-255",
    "uuid": "05042a1b-df05-431b-a4cb-54c010a34613",
    "file": "sms-eligibility.md",
-   "line": 300,
-   "end_line": 332,
+   "line": 306,
+   "end_line": 338,
    "title": "Durable `OnlineVoter.WhatsAppStatus` (first slice of #255)",
    "type": [
     "decision"
@@ -4194,8 +4108,8 @@
    "id": "sms-eligibility.md#bulk-check-selected-whatsapp-second-slice-of-255",
    "uuid": "52223ff6-c04e-428e-ab68-2ea9700d12aa",
    "file": "sms-eligibility.md",
-   "line": 333,
-   "end_line": 357,
+   "line": 339,
+   "end_line": 363,
    "title": "Bulk check selected WhatsApp (second slice of #255)",
    "type": [
     "decision"
@@ -4234,8 +4148,8 @@
    "id": "sms-eligibility.md#head-teller-whatsapp-notify-queue-third-slice-of-255",
    "uuid": "9683c025-00a2-42c1-b872-46cbea674126",
    "file": "sms-eligibility.md",
-   "line": 358,
-   "end_line": 382,
+   "line": 364,
+   "end_line": 388,
    "title": "Head-teller WhatsApp notify queue (third slice of #255)",
    "type": [
     "decision"
@@ -4274,8 +4188,8 @@
    "id": "sms-eligibility.md#front-desk-people-list-whatsapp-hint-fourth-slice-of-255",
    "uuid": "35718c77-593c-433a-a459-40f1a7ca680f",
    "file": "sms-eligibility.md",
-   "line": 383,
-   "end_line": 405,
+   "line": 389,
+   "end_line": 411,
    "title": "Front Desk / people list WhatsApp hint (fourth slice of #255)",
    "type": [
     "decision"
@@ -4314,8 +4228,8 @@
    "id": "sms-eligibility.md#notify-people-list-has-whatsapp-filter-fifth-slice-of-255",
    "uuid": "efe047c4-2d62-4db1-9233-41cd16912c3c",
    "file": "sms-eligibility.md",
-   "line": 406,
-   "end_line": 432,
+   "line": 412,
+   "end_line": 437,
    "title": "Notify People list “Has WhatsApp” filter (fifth slice of #255)",
    "type": [
     "decision"
@@ -4349,46 +4263,6 @@
     ]
    },
    "findings": []
-  },
-  {
-   "id": "sms-eligibility.md#related",
-   "uuid": null,
-   "file": "sms-eligibility.md",
-   "line": 433,
-   "end_line": 437,
-   "title": "Related",
-   "type": [],
-   "status": "",
-   "evidence": "",
-   "source": null,
-   "verification": null,
-   "revisit_when": null,
-   "see": [],
-   "superseded_by": null,
-   "refs": [
-    "auth.md"
-   ],
-   "git": {
-    "created": {
-     "author": "Glen Little",
-     "date": "2026-08-30",
-     "commit": "e5ed21a6"
-    },
-    "last_touched": {
-     "author": "Glen Little",
-     "date": "2026-08-30",
-     "commit": "e5ed21a"
-    },
-    "status_history": []
-   },
-   "findings": [
-    {
-     "severity": "warning",
-     "code": "W102",
-     "line": 433,
-     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-    }
-   ]
   },
   {
    "id": "test-elections.md#duplicate-copies-settings-people-and-locations-not-ballots-or-runtime-state",
@@ -4874,15 +4748,14 @@
  "authors": [
   {
    "name": "Glen Little",
-   "created": 112,
-   "touched": 3,
+   "created": 109,
+   "touched": 0,
    "superseded": 0,
    "first": "2026-08-07",
    "last": "2026-10-02",
    "evidence": {
     "confirmed": 82,
-    "inferred": 27,
-    "": 3
+    "inferred": 27
    }
   },
   {
@@ -4898,30 +4771,8 @@
  "anonymized": false,
  "findings": {
   "errors": 0,
-  "warnings": 3,
-  "items": [
-   {
-    "severity": "warning",
-    "code": "W102",
-    "path": "context/kiosk.md",
-    "line": 73,
-    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-   },
-   {
-    "severity": "warning",
-    "code": "W102",
-    "path": "context/online-ballots.md",
-    "line": 360,
-    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-   },
-   {
-    "severity": "warning",
-    "code": "W102",
-    "path": "context/sms-eligibility.md",
-    "line": 433,
-    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
-   }
-  ]
+  "warnings": 0,
+  "items": []
  },
  "exported": true,
  "bodies": "state.body.json"

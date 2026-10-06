@@ -887,6 +887,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#draft-autosave-vs-submitted" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1040,17 +1051,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1075,6 +1075,11 @@
 <p>Highest-risk functionality. Random name resolution and online acceptance introduce failure modes that did not exist (or were rare) in paper-only flows.</p>
 <h3 id="design-posture">Design posture<a class="headerlink" href="#design-posture" title="Permanent link">&para;</a></h3>
 <p>Treat online ballot paths with the same rigor as core analysis. Prefer explicit failure and recovery over silent best-effort behavior.</p>
+<h3 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../ballot-validation/">Ballot validation</a></li>
+<li><a href="../election-state/">Election state management</a></li>
+</ul>
 <h2 id="draft-autosave-vs-submitted">Draft autosave vs Submitted<a class="headerlink" href="#draft-autosave-vs-submitted" title="Permanent link">&para;</a></h2>
 <p><strong>Id:</strong> e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1<br />
 <strong>Type:</strong> decision<br />
@@ -1293,11 +1298,6 @@
 <strong>Source:</strong> voter ballot page, seed data, <code>OnlineElectionInfoDto</code>  </p>
 <p>v4 stores <code>OnlineSelectionProcess</code> as <code>A</code> (list), <code>B</code> (random / free text), or <code>C</code> (both). v3 stored <code>L</code> / <code>R</code> / <code>B</code> for the same three modes.</p>
 <p><strong>Rejected alternative:</strong> keep v3's <code>L</code>/<code>R</code>/<code>B</code> letters. Existing v4 elections, seeders, and the voter UI already use <code>A</code>/<code>B</code>/<code>C</code>.</p>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Ballot validation</li>
-<li>Election state management</li>
-</ul>
 
 
 

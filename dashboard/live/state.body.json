@@ -1,6 +1,6 @@
 {
  "state-json": 2,
- "generated": "2026-10-06T07:26:38Z",
+ "generated": "2026-10-06T07:28:26Z",
  "bodies": {
   "api-contracts.md#dual-response-wrappers": {
    "text": "Two response patterns are in active use:\n\n1. `ApiResponse<T>` — payload in `.data`\n2. `PaginatedResponse<T>` — `.items` at the root\n\n**Reason:** pagination and simple success payloads evolved with different shapes; callers and generated clients must match the endpoint’s actual wrapper. Assuming every endpoint uses the same envelope causes empty UI data and mapping bugs.\n\n**Rejected alternative:** force every controller onto a single envelope without a coordinated migration. Desirable long-term, but not current truth — code and clients must handle both until unified.",
@@ -433,14 +433,6 @@
    "considered": null,
    "why_open": null
   },
-  "kiosk.md#related": {
-   "text": "- Auth (voter cookie)\n- Online ballots\n- People records",
-   "reason": null,
-   "rejected": [],
-   "consequence": null,
-   "considered": null,
-   "why_open": null
-  },
   "online-ballots.md#draft-autosave-vs-submitted": {
    "text": "While the voter fills names, the ballot page silently autosaves to `OnlineVotingInfo` as status **Draft** (payload in `ListPool`). Reload restores those votes. Draft is not Accept-all pending and does not inflate monitor Submitted counts. Clearing the last name overwrites that saved payload (empty Draft, or payload-only if already Submitted) so leave/return does not restore names the voter just removed. Empty `Votes` is allowed on submit validation for that overwrite. A first visit with no names still does not create a Draft. Monitor `TotalOnlineBallots` is Submitted + Processing + Processed — Draft is not in that total or in pending.\n\nThe explicit **Submit Ballot** action writes the same payload as **Submitted**. Accept-all still takes only `Submitted` + `Processing`.\n\nOnce a row is **Submitted**, later autosaves (reload restore, notify toggle, or a debounced save after Submit) update the payload only. They do not demote Status back to Draft. Allowed writes are Draft→Draft, Draft→Submitted, Submitted→Submitted. The client sends `isDraft: false` after Submit so it agrees with the server; the server also refuses demotion if a stale Draft flag arrives.\n\n**Rejected alternative:** autosave as `Submitted`. Incomplete ballots would appear in pending counts and could be Accept-all’d while the voter was still editing.\n\n**Rejected alternative:** follow `IsDraft` even after Submit. That dropped a finished ballot out of Accept-all pending / monitor Submitted counts on silent autosave.\n\n**Reason:** survive reload without treating an in-progress ballot as ready for tellers, and keep a submitted ballot pending until Accept-all.",
    "reason": "survive reload without treating an in-progress ballot as ready for tellers, and keep a submitted ballot pending until Accept-all.",
@@ -604,14 +596,6 @@
    "rejected": [
     "keep v3's `L`/`R`/`B` letters. Existing v4 elections, seeders, and the voter UI already use `A`/`B`/`C`."
    ],
-   "consequence": null,
-   "considered": null,
-   "why_open": null
-  },
-  "online-ballots.md#related": {
-   "text": "- Ballot validation\n- Election state management",
-   "reason": null,
-   "rejected": [],
    "consequence": null,
    "considered": null,
    "why_open": null
@@ -1095,14 +1079,6 @@
     "a Front Desk Has WhatsApp filter. Rejected — this leftover is the notify / People list filter.",
     "change send rules so the filter selects who can be sent. Rejected — send already skips non-OK; the filter is only for finding known-yes numbers."
    ],
-   "consequence": null,
-   "considered": null,
-   "why_open": null
-  },
-  "sms-eligibility.md#related": {
-   "text": "- [auth.md](auth.md) — voter JWT claims (separate from paid-destination rules)\n- `docs/VOTER_AUTHENTICATION_IMPLEMENTATION.md` — requestCode flow and SMS pumping\n- Issue #254 remaining work; #255 for WhatsApp / GreenAPI status parity",
-   "reason": null,
-   "rejected": [],
    "consequence": null,
    "considered": null,
    "why_open": null

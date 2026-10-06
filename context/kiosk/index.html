@@ -876,6 +876,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#login-window-is-15-minutes-and-teller-renewed" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -919,17 +930,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -952,6 +952,12 @@
 <strong>Evidence:</strong> confirmed<br />
 <strong>Source:</strong> TallyJ-3.0 <code>VoterCodeHelper.GenerateKioskCode</code> / <code>EditPerson</code> copy; issue #182  </p>
 <p>Kiosk is the path for voters without email or phone. A teller enables it on Setup, mints a short code from the person record, and the voter types that code on a shared browser.</p>
+<h3 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../auth/">Auth</a> (voter cookie)</li>
+<li><a href="../online-ballots/">Online ballots</a></li>
+<li><a href="../people/">People records</a></li>
+</ul>
 <h2 id="login-window-is-15-minutes-and-teller-renewed">Login window is 15 minutes and teller-renewed<a class="headerlink" href="#login-window-is-15-minutes-and-teller-renewed" title="Permanent link">&para;</a></h2>
 <p><strong>Id:</strong> 9ba42aac-9edf-4aef-b9cb-360db06828ce<br />
 <strong>Type:</strong> decision<br />
@@ -992,12 +998,6 @@
 <strong>Evidence:</strong> inferred<br />
 <strong>Source:</strong> v3 <code>VotingMethodsContains(Kiosk)</code>; v4 already gated person-form kiosk UI on that string  </p>
 <p>The Setup switch adds or removes <code>K</code> (or the <code>KI</code> alias) without replacing the other tokens. Turning kiosk on also sets <code>UseOnlineVoting</code>, because kiosk auth uses the same open-window rule as email/phone.</p>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Auth (voter cookie)</li>
-<li>Online ballots</li>
-<li>People records</li>
-</ul>
 
 
 
