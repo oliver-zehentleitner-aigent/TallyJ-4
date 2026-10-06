@@ -9,8 +9,8 @@ TallyJ 4 is a full-stack election management and ballot tallying system for Bah√
 - `backend/` - ASP.NET Core Web API host (contains all controllers, services, DTOs, entities, MainDbContext, identity models, enumerations, and most business logic)
 - `Backend.Tests/` - xUnit unit and integration tests
 - `frontend/` - Vue 3 + TypeScript SPA
-- `docs/` - deployment documentation only
-- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); readable on the [site](https://glittle.github.io/TallyJ-4/) and the [dashboard](https://glittle.github.io/TallyJ-4/dashboard/live/))
+- `docs/` - user, administrator, deployment and developer guides, published as the [documentation site](https://glittle.github.io/TallyJ-4/) (`mkdocs.yml`)
+- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); readable on the [documentation site](https://glittle.github.io/TallyJ-4/context/) and the [dashboard](https://glittle.github.io/TallyJ-4/dashboard/live/))
 - `.zenflow/tasks/` - historical planning and reverse-engineering artifacts; useful for background, but not the source of truth for current commands or runtime configuration
 
 ## Local development
@@ -100,7 +100,7 @@ Use `npm run start` when you need to regenerate the OpenAPI client before starti
 
 ## Documentation map
 
-These are the canonical docs to keep current:
+These are the canonical docs to keep current. Everything in `docs/`, this README and `context/` is also published as the [documentation site](https://glittle.github.io/TallyJ-4/).
 
 - `backend/README.md` - backend setup and local configuration
 - `frontend/README.md` - frontend development workflow
