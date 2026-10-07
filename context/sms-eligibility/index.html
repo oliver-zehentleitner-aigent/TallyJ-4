@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/sms-eligibility/">
+        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/context/sms-eligibility/">
       
       
       
@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -821,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -1104,7 +1104,7 @@
 <p><code>OnlineVoter</code> is the global phone-status store (key remains <code>VoterId</code>, E.164 when <code>VoterIdType</code> is <code>"P"</code>). Person is per-election; the same phone can appear in many elections, so eligibility cannot live only on Person.</p>
 <p>Field: <code>string? SmsStatus</code>, max 50, non-unicode (<code>varchar(50)</code>).</p>
 <p><strong>Send rule (phone <code>VoterIdType</code> <code>"P"</code> + paid channel only):</strong></p>
-<div class="highlight"><pre><span></span><code>if SmsStatus is not null AND SmsStatus != "OK" → do not send
+<div class="highlight"><pre><span></span><code>if SmsStatus is not null AND SmsStatus != &quot;OK&quot; → do not send
 </code></pre></div>
 <table>
 <thead>
@@ -1184,9 +1184,9 @@
 <p><strong>Auto-learn write rule:</strong></p>
 <div class="highlight"><pre><span></span><code>if MessageStatus is undelivered or failed
    AND ErrorCode is in the lasting-unusable allow-list
-   AND an OnlineVoter row exists with VoterId matching To (see below) AND VoterIdType == "P"
-   AND current SmsStatus is null or "OK"
-→ SmsStatus = "twilio-{code}"
+   AND an OnlineVoter row exists with VoterId matching To (see below) AND VoterIdType == &quot;P&quot;
+   AND current SmsStatus is null or &quot;OK&quot;
+→ SmsStatus = &quot;twilio-{code}&quot;
 </code></pre></div>
 <p>Allow-list (destination lastingly unusable): <code>30003</code> unreachable, <code>30005</code> unknown destination, <code>30006</code> landline/unreachable, <code>30004</code> filtered, <code>21211</code> invalid To, <code>21614</code> not a mobile. Mapped reason is always <code>twilio-{code}</code> (fits <code>varchar(50)</code>). Unlisted or missing <code>ErrorCode</code> on a terminal failure does <strong>not</strong> write (transient failures must not permanently block). <code>queued</code> / <code>sending</code> / <code>sent</code> never write a block. This slice did <strong>not</strong> set <code>SmsStatus</code> to <code>"OK"</code> from a delivered callback.</p>
 <blockquote>
@@ -1257,8 +1257,8 @@
 <p><strong>Write rule:</strong></p>
 <div class="highlight"><pre><span></span><code>if MessageStatus / CallStatus is delivered (SMS) or completed (voice)
    AND an SmsLog row already exists for the SID
-   AND an OnlineVoter row exists with VoterId matching To (+/- variant) AND VoterIdType == "P"
-→ SmsStatus = "OK"
+   AND an OnlineVoter row exists with VoterId matching To (+/- variant) AND VoterIdType == &quot;P&quot;
+→ SmsStatus = &quot;OK&quot;
 </code></pre></div>
 <p>SMS success is <code>delivered</code> (handset received the message). Voice success is <code>completed</code> (call finished). <code>sent</code> / <code>queued</code> / <code>sending</code> / <code>accepted</code> are not success — the carrier accepted the request, not the destination. Voice <code>busy</code> / <code>no-answer</code> / <code>canceled</code> are not lasting-unusable and do not write a block (fifth-slice failure allow-list unchanged).</p>
 <p>The SID must already exist in <code>SmsLog</code> (send-side insert from the seventh slice). Granting eligibility is not the same as learning a block: failure auto-learn still uses Twilio <code>To</code> without a log row; delivered OK does not. Unknown SID still does not insert a log or an OnlineVoter. A non-P occupant of that <code>VoterId</code> is not converted.</p>
@@ -1446,7 +1446,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

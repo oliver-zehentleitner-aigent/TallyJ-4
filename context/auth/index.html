@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/auth/">
+        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/context/auth/">
       
       
       
@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -821,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -942,6 +942,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#online-ballot-identity-is-the-voter-session-issue-371-slice-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Online ballot identity is the voter session (issue #371 slice 0)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guest-teller-login-lockout-issue-371-slice-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guest teller login lockout (issue #371 slice 1)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pre-auth-voter-code-delivery-channel-issue-229" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -978,7 +1000,7 @@
 <strong>Source:</strong> project agent notes (<code>AGENTS.md</code>)<br />
 <strong>Revisit when:</strong> identity/JWT middleware or claim mapping changes, or .NET major upgrade changes claim defaults again</p>
 <p>User IDs are stored in JWT <code>sub</code> claims. Code that reads the current user ID must check both:</p>
-<div class="highlight"><pre><span></span><code><span class="n">User</span><span class="p">.</span><span class="n">FindFirst</span><span class="p">(</span><span class="n">ClaimTypes</span><span class="p">.</span><span class="n">NameIdentifier</span><span class="p">)</span><span class="o">?.</span><span class="n">Value</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">User</span><span class="p">.</span><span class="n">FindFirst</span><span class="p">(</span><span class="s">"sub"</span><span class="p">)</span><span class="o">?.</span><span class="n">Value</span>
+<div class="highlight"><pre><span></span><code><span class="n">User</span><span class="p">.</span><span class="n">FindFirst</span><span class="p">(</span><span class="n">ClaimTypes</span><span class="p">.</span><span class="n">NameIdentifier</span><span class="p">)</span><span class="o">?.</span><span class="n">Value</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="n">User</span><span class="p">.</span><span class="n">FindFirst</span><span class="p">(</span><span class="s">&quot;sub&quot;</span><span class="p">)</span><span class="o">?.</span><span class="n">Value</span>
 </code></pre></div>
 <p><strong>Reason:</strong> on .NET 10, claim type mapping for the subject claim is not always the same as older stacks; reading only <code>ClaimTypes.NameIdentifier</code> or only <code>"sub"</code> fails depending on token and middleware configuration.</p>
 <p><strong>Rejected alternative:</strong> assume a single claim type everywhere. That breaks in one of the two common configurations and produces hard-to-spot auth bugs (null user id, wrong scoping).</p>
@@ -1049,7 +1071,7 @@
 <li><strong>Infrastructure peer</strong> (<code>RemoteIpAddress</code> is null, loopback, or private — TestServer, App Service ARR, Docker): parse XFF (else RFC 7239 <code>Forwarded</code>) and take the <strong>rightmost public</strong> IP. That is the socket address the platform appended. Private / loopback / link-local / CGNAT (100.64/10) suffix hops are skipped. Two connecting clients behind one proxy therefore get two buckets; changing only the leftmost XFF stays in the same bucket.</li>
 </ul>
 <p><code>UseForwardedHeaders</code> is proto-only (<code>X-Forwarded-Proto</code>) with KnownProxies / KnownIPNetworks / KnownNetworks cleared so Azure TLS termination still sets <code>Request.IsHttps</code>. It does <strong>not</strong> apply <code>X-Forwarded-For</code>: trust-all + ForwardLimit would rewrite <code>RemoteIpAddress</code> from the client-controlled chain and make spoofing easier. Rate-limit keying reads the headers itself under the infrastructure-peer check above.</p>
-<p>The same in-memory middleware still owns the limits. Teller <code>/api/auth/login</code> (and the disabled register endpoint / 2FA / password / teller OAuth) stay <strong>tight per trusted-ingress IP</strong> (5/min login). Anonymous voter <code>requestCode</code> / <code>verifyCode</code> do <strong>not</strong> use that 5/min IP bucket: elections often share one venue WiFi / community NAT, so a public <code>RemoteIp</code> is the whole hall. Those routes use a <strong>5/min per VoterId</strong> bucket (JSON body peek capped at 16 KiB even when ContentLength is missing / chunked; a fitting body is replaced with a MemoryStream at position 0 so model binding still works) plus a <strong>60/min per trusted-ingress IP</strong> venue ceiling. Oversized / peek-overflow bodies are <strong>413</strong> (<code>error.payloadTooLarge</code>) and do not continue to model binding — they must not be demoted to <code>missing:{ip}</code>, or a padded body with a real voterId would opt out of the cross-IP identifier ceiling. <code>missing:{ip}</code> is only for a genuinely empty, malformed, or absent <code>voterId</code>. Voter OAuth (<code>/api/online-voting/*Auth</code>) has no VoterId in the body — venue IP ceiling only. Teller OAuth stays on the tight IP table.</p>
+<p>The same in-memory middleware still owns the limits. Account <code>POST /api/auth/login</code> and guest teller <code>POST /api/auth/teller-login</code> count <strong>failed attempts only</strong> (<code>LoginIpMaxRequests</code> and <code>TellerLoginIpMaxRequests</code>, 20 per minute per trusted-ingress IP). A successful login does not consume the bucket. The middleware still returns 429 <code>error.tooManyRequests</code> up front when that bucket is already full, and it records the timestamp only after the endpoint runs and only for a counted failure: bad credentials or an invalid two-factor code on login, or an unknown election / wrong passcode on teller-login. Not-open, no-main-teller, and locked teller replies do not count, and neither do account-locked or unverified-email replies. An invalid two-factor code on <code>POST /api/auth/login</code> does count. That failure also calls <code>AccessFailedAsync</code>, so the account locks after <code>MaxFailedAccessAttempts</code> (5), the same as a bad password. The attempt that crosses that lock returns the account-locked reply and does not also consume the IP bucket. Only a full success clears the access-failed count: the password, and the two-factor code when one is required. A correct password with no code is the prompt. It does not count as a failure and it does not clear the count. Clearing it there would let a password holder send four wrong codes, one empty-code request, and repeat, including from rotating IPs, and the account would never lock. A user without two-factor still has the count cleared by a successful password login. Venues often share one public IP behind NAT, so counting every request, including a successful teller join, would 429 the next person in the hall. The failure is recorded after the endpoint returns, so parallel failures from one IP can all pass the check before any is recorded and a burst can go past 20. The per-IP cap is approximate under concurrency. The per-election lockout (10 consecutive wrong passcodes) and the account lockout are the real guards; see the guest teller login lockout section. Other teller routes (the disabled register endpoint, 2FA, password reset, teller OAuth) stay <strong>tight per trusted-ingress IP</strong> and still count every request. Anonymous voter <code>requestCode</code> / <code>verifyCode</code> do <strong>not</strong> use that login IP bucket: elections often share one venue WiFi / community NAT, so a public <code>RemoteIp</code> is the whole hall. Those routes use a <strong>5/min per VoterId</strong> bucket (JSON body peek capped at 16 KiB even when ContentLength is missing / chunked; a fitting body is replaced with a MemoryStream at position 0 so model binding still works) plus a <strong>60/min per trusted-ingress IP</strong> venue ceiling. Oversized / peek-overflow bodies are <strong>413</strong> (<code>error.payloadTooLarge</code>) and do not continue to model binding — they must not be demoted to <code>missing:{ip}</code>, or a padded body with a real voterId would opt out of the cross-IP identifier ceiling. <code>missing:{ip}</code> is only for a genuinely empty, malformed, or absent <code>voterId</code>. Voter OAuth (<code>/api/online-voting/*Auth</code>) has no VoterId in the body — venue IP ceiling only. Teller OAuth stays on the tight IP table.</p>
 <p>429 bodies return the i18n key <code>error.tooManyRequests</code> (same pattern as voter verify keys). That string lives only in <code>frontend/src/locales/en/errors.json</code>; other locales are not given English placeholders (missing keys fall back to English). The SPA resolves those keys instead of a single generic verify message. <code>VerifyAttempts</code> on <code>OnlineVoter</code> still locks five failed codes for that row; the middleware 429 is a cheap pre-service cap. The fifth mismatch returns <code>tooManyAttempts</code> on that call so the row lock is reachable under the 5/min per-VoterId middleware ceiling (a sixth HTTP call would otherwise be 429 first).</p>
 <p><strong>Rejected alternative:</strong> leftmost XFF as “original client.” Front Door’s own docs say an existing XFF is appended; the left side is attacker-controlled.</p>
 <p><strong>Rejected alternative:</strong> <code>UseForwardedHeaders</code> for XFF with KnownProxies cleared and ForwardLimit 2. That trust-all walk can set <code>RemoteIpAddress</code> to a spoofed entry, after which a “use RemoteIp” key is also spoofable.</p>
@@ -1062,6 +1084,9 @@
 <p><strong>Rejected alternative:</strong> treat a too-large peek as a missing voterId (<code>missing:{ip}</code>). The request would still bind and send SMS/email for the real voterId, so padding past 16 KiB evaded the global per-identifier cap (N IPs × 5/min).</p>
 <p><strong>Rejected alternative:</strong> endpoint filter or service-level identifier limit as the primary mechanism. An endpoint filter sees the bound DTO but would split IP vs identifier across two pipeline stages. Service-level already has <code>VerifyAttempts</code>; it runs after routing/DB work and still needs an IP ceiling in middleware. Reading a capped body prefix in the existing middleware keeps both buckets in one place.</p>
 <p><strong>Rejected alternative:</strong> rebuild on ASP.NET <code>RateLimiter</code> or add a new auth flow. #192 said do not rebuild auth; this slice only fixes keying, coverage, and i18n bodies.</p>
+<blockquote>
+<p>Superseded 2026-10: count every <code>POST /api/auth/login</code> and <code>POST /api/auth/teller-login</code> request, including successes, at 5 per minute per trusted-ingress IP. See the guest teller login lockout section.</p>
+</blockquote>
 <h2 id="distinct-voter-verify-error-keys-issue-192-leftover">Distinct voter verify error keys (issue #192 leftover)<a class="headerlink" href="#distinct-voter-verify-error-keys-issue-192-leftover" title="Permanent link">&para;</a></h2>
 <p><strong>Id:</strong> 0cf32f17-32a1-45fc-a73e-2adc5a2d3a8b<br />
 <strong>Type:</strong> decision<br />
@@ -1082,6 +1107,50 @@
 <p><strong>Rejected alternative:</strong> keep used and never-issued as one <code>noCodeFound</code>. The issue asked for an “already used” key. Distinguishing them does not need a new column: success clears <code>VerifyCode</code> and leaves <code>VerifyCodeDate</code>.</p>
 <p><strong>Rejected alternative:</strong> keep <code>voting.auth.verify.invalidCode:4</code> as the public <code>error</code> string. That is not a stable i18n key; <code>te()</code> misses it and the UI shows the raw suffix. Remaining count stays a sibling field.</p>
 <p><strong>Rejected alternative:</strong> store a used-code hash so a later <code>requestCode</code> can still say “already used” for the old code. After a new code is issued the old one is simply a mismatch; only a replay with no new request is <code>alreadyUsed</code>.</p>
+<h2 id="online-ballot-identity-is-the-voter-session-issue-371-slice-0">Online ballot identity is the voter session (issue #371 slice 0)<a class="headerlink" href="#online-ballot-identity-is-the-voter-session-issue-371-slice-0" title="Permanent link">&para;</a></h2>
+<p><strong>Id:</strong> 1d57307c-9bc3-41cb-8f82-25921b3e2518
+<strong>Type:</strong> decision
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #371; product rule that a pending online ballot stays editable until a teller Accept-all (#188)<br />
+<strong>Revisit when:</strong> voter JWTs are pinned to one election, or <code>submitBallot</code> / <code>voteStatus</code> drop the client voter id from the contract</p>
+<p><code>POST /api/online-voting/{electionGuid}/submitBallot</code> and <code>GET /api/online-voting/{electionGuid}/{voterId}/voteStatus</code> require policy <code>OnlineVoter</code>. The person is the <code>voterId</code> claim on the httpOnly <code>voter_token</code> (or a Bearer voter JWT in tests). A body or route id that is present and not exactly that claim is 403. Unknown election and “not on this election’s list” are the same 403 body (<code>error: forbidden</code>) — no phrase key and no id. No voter session is 401. A teller JWT is authenticated but fails <code>OnlineVoter</code> (403); it is not a voter session.</p>
+<p>List membership is a <code>Person</code> row on that election (email, phone, or kiosk code). A missing person does not create an <code>OnlineVotingInfo</code> under a new guid. Email and phone sessions are not pinned to one election: one login may submit on every open election that lists that address (<code>availableElections</code>). A kiosk id already embeds its election; using it on another election is the same 403. Window, Finalized, and “already processed” still apply only after the person is on the list. Vote status for that person stays readable when the window is closed. Accept-all stays a teller action and does not take a voter id.</p>
+<p><strong>Rejected alternative:</strong> ignore a mismatched client id and silently write the session’s ballot. A wrong id must fail, so a buggy client cannot look like success while the request named someone else.</p>
+<p><strong>Rejected alternative:</strong> remove <code>voterId</code> from the route and submit DTO in this slice. The server never uses a non-matching value, and the SPA already sends the session id. Dropping it is a client regen with no extra safety.</p>
+<p><strong>Rejected alternative:</strong> put <code>electionGuid</code> on the voter JWT. Email and phone voters pick among every open election that lists them. Kiosk scope stays inside the voter id.</p>
+<h2 id="guest-teller-login-lockout-issue-371-slice-1">Guest teller login lockout (issue #371 slice 1)<a class="headerlink" href="#guest-teller-login-lockout-issue-371-slice-1" title="Permanent link">&para;</a></h2>
+<p><strong>Id:</strong> 76f3b231-6e06-4d9d-9b03-b0467cd18d24
+<strong>Type:</strong> decision
+<strong>Status:</strong> active<br />
+<strong>Evidence:</strong> confirmed<br />
+<strong>Source:</strong> issue #371 slice 1; PR #374 review<br />
+<strong>Revisit when:</strong> shared passcodes are stored hashed, or lockout should notify the owner by email</p>
+<p>Guest tellers sign in with <code>POST /api/auth/teller-login</code> and the election's shared passcode. That path had no rate limit and no lockout. Account login for owners and admins is not covered by this lockout row and still works while guest teller login is locked.</p>
+<ul>
+<li><strong>Per trusted-ingress IP:</strong> 20 failed attempts per minute, in <code>RateLimitingMiddleware</code> (<code>TellerLoginIpMaxRequests</code>). Successes do not consume the bucket. An unknown election or a wrong passcode counts; not-open, no-main-teller, and locked replies do not. The middleware records the failure after the action and still rejects with 429 <code>error.tooManyRequests</code> before the action when the bucket is already full; that 429 is not a passcode failure. Many tellers at one venue share a public IP behind NAT, so the cap counts failures only. The per-election lockout is the guessing guard. This cap is a code constant, like the other teller routes, not a config value. Account login uses the same failure-only shape at <code>LoginIpMaxRequests</code> (20 per minute). A bad password or an invalid two-factor code counts. The per-IP cap is approximate under concurrency, because the failure is recorded after the endpoint returns; the per-election lockout and the account lockout are the real guards.</li>
+<li><strong>Per election, across IPs:</strong> table <code>TellerLoginLockouts</code> (migration <code>AddTellerLoginLockouts</code>), one row keyed by <code>ElectionGuid</code>. After <code>TellerLoginProtection:MaxConsecutiveFailures</code> wrong passcodes in a row (default 10), guest teller login stays locked until <code>LockedUntil</code> (<code>CooldownMinutes</code>, default 15). A successful login sets the count back to 0 and clears <code>LockedUntil</code>. When <code>LockedUntil</code> is already in the past, the next wrong passcode starts the count at 1. Only the statement that crosses the threshold writes one <code>TellerLoginLocked</code> audit row (details include the UTC end time and the failure count). Later attempts during the lock do not write another lockout row.</li>
+<li><strong>Atomic count on SQL Server:</strong> <code>RecordPasscodeFailureAsync</code> is one <code>UPDATE ... OUTPUT inserted.ConsecutiveFailures, inserted.LockedUntil, deleted.LockedUntil</code>. <code>ConsecutiveFailures</code> becomes 1 when <code>LockedUntil</code> is already in the past, otherwise it increments. <code>LockedUntil</code> stays put while that lock is still in the future, and is set only when the new count reaches the threshold and no lock is active. A missing row is inserted, and a duplicate-key error is retried. <code>LockoutStarted</code> is true only for the update that crossed the threshold. A failure never writes <code>LockedUntil = NULL</code> over a lock that is still active.</li>
+<li><strong>SQLite tests cannot show that race.</strong> The test host has no <code>OUTPUT deleted.*</code>. Its <code>UPDATE</code> only matches a row whose lock is missing or already expired, and <code>RETURNING</code> is the values that statement wrote. A parallel test still asserts one <code>TellerLoginLocked</code> row and a count no higher than the failures that were processed. It does not prove the SQL Server statement is free of lost updates.</li>
+<li><strong>Who is locked:</strong> only the shared-passcode path. While locked, every teller-login attempt for that election returns 400 <code>auth.tellerJoin.locked</code>, including a correct passcode. <code>GET</code> election sets <code>tellerLoginLockedUntil</code> when the lock is still in the future. The guest-teller share control shows <code>elections.tellerLoginLocked</code>.</li>
+<li><strong>Check order:</strong> load the election; a missing election returns <code>auth.tellerJoin.invalidElection</code> (the compare against a placeholder still runs). <code>IsGuestTellerAccessOpen</code> and <code>HasActiveMainTeller</code> run next, before the passcode compare and before the lockout counter. A closed election returns <code>auth.tellerJoin.notOpen</code>. No connected main teller returns <code>auth.tellerJoin.noMainTeller</code>. Those two are not passcode failures. A wrong passcode on an open election returns the same <code>auth.tellerJoin.invalidElection</code> body as a missing election. <code>TellerJoinPage</code> shows the server text, so those replies are phrase keys.</li>
+<li><strong>Owner remedy:</strong> <code>GET /api/public/elections</code> lists the GUIDs of open elections, so a caller who is not a guest teller can keep posting wrong passcodes and hold the lock. Changing the passcode to a different value in <code>UpdateElectionAsync</code> resets that election's lockout row. <code>TellerLoginUnlocked</code> is written only when that row had a failure count or a lock. <code>POST /api/elections/{guid}/teller-login-unlock</code> (<code>FullTellerAccess</code>: election Owner or Admin, or a global Admin) clears the same row and writes the audit even when nothing was locked, and the share drawer has an Unlock button beside the lockout alert. Unlock alone does not stop the next burst; changing the passcode does, because the old code no longer matches.</li>
+<li><strong>Compare:</strong> <code>CryptographicOperations.FixedTimeEquals</code> on UTF-8 bytes. Unequal lengths still run that compare (the stored bytes against themselves) and then return false. An empty stored passcode does not match.</li>
+<li><strong>Minimum length:</strong> <code>TellerLoginProtection:MinimumPasscodeLength</code> (default 6) applies when an owner creates or changes the passcode. Empty clears it. Saving the same stored value is allowed when that value is already shorter. Login still accepts a stored short passcode. The validation message is <code>elections.form.electionPasscodeMinLength</code>. The update check reads the stored passcode with a synchronous query: ASP.NET automatic validation cannot run <code>MustAsync</code>. The SPA constant and that English sentence are fixed at 6; the client is not sent <code>MinimumPasscodeLength</code>. JSON import and Duplicate clear a passcode shorter than that length, leave it blank, and return <code>elections.form.electionPasscodeNotCopied</code>. The dashboard shows that key as a warning toast after the success message. The package-import log sends the same key; the loader dialog translates a line when <code>te(line.message)</code> is true, and leaves ordinary English loader lines as they are. v2 package import (<code>TallyJv2ElectionImportService</code>) is unchanged and can still store a short passcode.</li>
+</ul>
+<p><strong>Rejected alternative:</strong> count every login and teller-login request, including successes, at 5 per minute per IP. A venue behind one NAT then 429s the next teller who has the right passcode. The per-election row, not that IP bucket, is what stops passcode guessing.</p>
+<blockquote>
+<p>Superseded 2026-10 — earlier rule, replaced: an invalid two-factor code on account login did not consume the per-IP bucket, and a correct password cleared the access-failed count before the code was checked. That is no longer the rule. <code>VerifyAsync</code> had no attempt counter, so guessing a TOTP on <code>POST /api/auth/login</code> was unlimited per IP and per user. TOTP accepts any of 11 codes in a ±5 step window, which made that route easier than <code>/api/auth/verify2fa</code> (still 10 requests a minute, every request).</p>
+</blockquote>
+<p><strong>Rejected alternative:</strong> leave a wrong TOTP off the IP bucket and off <code>AccessFailedAsync</code>, because the password was already correct. The login body would stay an easier guess than <code>verify2fa</code>.</p>
+<p><strong>Rejected alternative:</strong> clear the access-failed count when the password is correct and no two-factor code is sent, because that request is only the prompt. A password holder can then send that request between guesses and the account never locks, including from rotating IPs.</p>
+<p><strong>Rejected alternative:</strong> an in-memory per-election bucket in <code>RateLimitStore</code> (the issue's first sketch was a fail window inside the existing limiter). That count resets on restart and is not shared by a second instance, and a per-IP bucket does not stop an attacker who rotates addresses.</p>
+<p><strong>Rejected alternative:</strong> rebuild this limit on ASP.NET <code>RateLimiter</code>. The IP cap stays on the middleware that already keys teller routes; the lockout needs a row that outlives the process.</p>
+<p><strong>Rejected alternative:</strong> enforce the minimum length at login. Elections that already stored a shorter passcode would be unable to sign tellers in.</p>
+<p><strong>Rejected alternative:</strong> leave the failure count at the threshold after the cooldown, so the next wrong passcode locks again immediately. The cooldown is the penalty; the next run of consecutive failures starts at 1.</p>
+<p><strong>Rejected alternative:</strong> <code>SELECT ... WITH (UPDLOCK, HOLDLOCK)</code> or a <code>rowversion</code> retry around the read-increment-save. One <code>UPDATE ... OUTPUT</code> is the increment and the lock decision, so two requests cannot both observe the old count.</p>
+<p><strong>Rejected alternative:</strong> compare the passcode before the open and main-teller checks, so a closed election can return "not open" only when the code matches. That reply is different from a wrong code, so the passcode can be guessed while the election is closed.</p>
+<p><strong>Rejected alternative:</strong> send <code>MinimumPasscodeLength</code> to the client. The create and edit forms and <code>elections.form.electionPasscodeMinLength</code> stay fixed at the default of 6.</p>
 <h2 id="pre-auth-voter-code-delivery-channel-issue-229">Pre-auth voter-code delivery channel (issue #229)<a class="headerlink" href="#pre-auth-voter-code-delivery-channel-issue-229" title="Permanent link">&para;</a></h2>
 <p><strong>Id:</strong> 25430887-ee58-442f-bf90-34105b5781d9<br />
 <strong>Type:</strong> decision<br />
@@ -1161,7 +1230,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

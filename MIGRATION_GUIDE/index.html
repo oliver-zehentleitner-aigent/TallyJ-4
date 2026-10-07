@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/MIGRATION_GUIDE/">
+        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/MIGRATION_GUIDE/">
       
       
         <link rel="prev" href="../ADMIN_GUIDE/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1408,7 +1408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -2208,7 +2208,7 @@
 
 <span class="c1">-- Step 1: Backup v3 database</span>
 <span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ3</span>
-<span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ3_PreMigration.bak'</span><span class="p">;</span>
+<span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ3_PreMigration.bak&#39;</span><span class="p">;</span>
 
 <span class="c1">-- Step 2: Create v4 database</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">;</span>
@@ -2231,18 +2231,18 @@
 <span class="w">    </span><span class="n">Name</span><span class="p">,</span>
 <span class="w">    </span><span class="k">CAST</span><span class="p">(</span><span class="n">DateOfElection</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">DATETIME2</span><span class="p">),</span>
 <span class="w">    </span><span class="k">CASE</span><span class="w"> </span><span class="n">ElectionType</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'LSA'</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'NSA'</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'Convention'</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'Other'</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;LSA&#39;</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;NSA&#39;</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Convention&#39;</span>
+<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;Other&#39;</span>
 <span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ElectionType</span><span class="p">,</span>
 <span class="w">    </span><span class="n">NumberToElect</span><span class="p">,</span>
 <span class="w">    </span><span class="k">ISNULL</span><span class="p">(</span><span class="n">NumberExtra</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
 <span class="w">    </span><span class="k">CASE</span><span class="w"> </span><span class="n">Status</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'Setup'</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'InProgress'</span>
-<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">'Finalized'</span>
-<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">'Setup'</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Setup&#39;</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;InProgress&#39;</span>
+<span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Finalized&#39;</span>
+<span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;Setup&#39;</span>
 <span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">TallyStatus</span><span class="p">,</span>
 <span class="w">    </span><span class="k">NULL</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">OwnerGuid</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Will need to be set manually</span>
 <span class="w">    </span><span class="n">CreatedDate</span><span class="p">,</span>
@@ -2285,13 +2285,13 @@
 <span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">#</span><span class="n">ElectionMapping</span><span class="p">;</span>
 
 <span class="c1">-- Step 8: Verify counts</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'Elections'</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">v3Count</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Elections</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Elections&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">v3Count</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Elections</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'Elections'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Election</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Elections&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Election</span><span class="p">;</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'People'</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">People</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;People&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Entity</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">People</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'People'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Person</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;People&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Person</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>⚠️ Important Notes:</strong></p>
 <ul>
@@ -2372,7 +2372,7 @@
 <ol>
 <li><strong>Backup v3 Database</strong></li>
 </ol>
-<div class="highlight"><pre><span></span><code>sqlcmd<span class="w"> </span>-S<span class="w"> </span>server<span class="w"> </span>-Q<span class="w"> </span><span class="s2">"BACKUP DATABASE TallyJ3 TO DISK='C:\Backups\TallyJ3.bak'"</span>
+<div class="highlight"><pre><span></span><code>sqlcmd<span class="w"> </span>-S<span class="w"> </span>server<span class="w"> </span>-Q<span class="w"> </span><span class="s2">&quot;BACKUP DATABASE TallyJ3 TO DISK=&#39;C:\Backups\TallyJ3.bak&#39;&quot;</span>
 </code></pre></div>
 <ol>
 <li><strong>Export Current Data</strong></li>
@@ -2490,21 +2490,21 @@
 <h2 id="post-migration-verification">Post-Migration Verification<a class="headerlink" href="#post-migration-verification" title="Permanent link">&para;</a></h2>
 <h3 id="data-integrity-checklist">Data Integrity Checklist<a class="headerlink" href="#data-integrity-checklist" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Compare record counts</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v3 Elections'</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">Source</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">Count</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Elections</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v3 Elections&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">Source</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">Count</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Elections</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v4 Elections'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Election</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v4 Elections&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Election</span><span class="p">;</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v3 People'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">People</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v3 People&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">People</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v4 People'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Person</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v4 People&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Person</span><span class="p">;</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v3 Ballots'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Ballots</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v3 Ballots&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Ballots</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v4 Ballots'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Ballot</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v4 Ballots&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Ballot</span><span class="p">;</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v3 Votes'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Votes</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v3 Votes&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ3</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Votes</span>
 <span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">'v4 Votes'</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Vote</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;v4 Votes&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">Vote</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="functional-testing">Functional Testing<a class="headerlink" href="#functional-testing" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2526,7 +2526,7 @@
 <li><strong>Restore v3 Database</strong></li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ3</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ3.bak'</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ3.bak&#39;</span>
 <span class="k">WITH</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">;</span>
 </code></pre></div>
 <ol>
@@ -2786,7 +2786,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
