@@ -165,6 +165,7 @@ The voter login page runs those keys through `resolveUserFacingApiError` (and un
 ## Online ballot identity is the voter session (issue #371 slice 0)
 
 **Id:** 1d57307c-9bc3-41cb-8f82-25921b3e2518
+**Type:** decision
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371; product rule that a pending online ballot stays editable until a teller Accept-all (#188)  
@@ -183,6 +184,7 @@ List membership is a `Person` row on that election (email, phone, or kiosk code)
 ## Guest teller login lockout (issue #371 slice 1)
 
 **Id:** 76f3b231-6e06-4d9d-9b03-b0467cd18d24
+**Type:** decision
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371 slice 1; PR #374 review  
