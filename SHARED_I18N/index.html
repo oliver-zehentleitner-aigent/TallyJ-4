@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/SHARED_I18N/">
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/SHARED_I18N/">
       
       
         <link rel="prev" href="../GOOGLE_OAUTH_FOR_VOTERS/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1012,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -1242,21 +1242,21 @@
   fr/auth.json          ← translators; not English placeholders
   bundled/              ← generated; gitignored; frontend prod only
 backend/appsettings.json
-  Localization:ResourcesPath = &quot;../frontend/src/locales&quot;
+  Localization:ResourcesPath = "../frontend/src/locales"
 </code></pre></div>
 <hr />
 <h2 id="file-format-flat-dotted-keys-rich-leaves">File format: flat dotted keys, rich leaves<a class="headerlink" href="#file-format-flat-dotted-keys-rich-leaves" title="Permanent link">&para;</a></h2>
 <p>Keys stay flat dotted strings. Each message leaf is <code>{ t, s, w }</code>, not a bare string and not a nested message tree:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;common.appTitle&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TallyJ v4&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;s&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-09-23T17:00:00Z&quot;</span>
+<span class="w">  </span><span class="nt">"common.appTitle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TallyJ v4"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"source"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"w"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-23T17:00:00Z"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;auth.errors.invalidCredentials&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid email or password&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;s&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-09-23T17:00:00Z&quot;</span>
+<span class="w">  </span><span class="nt">"auth.errors.invalidCredentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid email or password"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"source"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"w"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-23T17:00:00Z"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1273,11 +1273,11 @@ backend/appsettings.json
 <h2 id="two-ways-to-use-a-key">Two ways to use a key<a class="headerlink" href="#two-ways-to-use-a-key" title="Permanent link">&para;</a></h2>
 <p>Pick one per string. Mixing them on the same key is how you get double-translation or untranslated keys in the UI.</p>
 <h3 id="1-server-looks-up-the-json-auth-errors-emails-totp-issuer-report-section-titles">1. Server looks up the JSON (auth errors, emails, TOTP issuer, report section titles)<a class="headerlink" href="#1-server-looks-up-the-json-auth-errors-emails-totp-issuer-report-section-titles" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">_localizer</span><span class="p">[</span><span class="s">&quot;auth.errors.invalidCredentials&quot;</span><span class="p">],</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">_localizer</span><span class="p">[</span><span class="s">"auth.errors.invalidCredentials"</span><span class="p">],</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
 </code></pre></div>
 <p>Use this when the <strong>API must emit a human string</strong>: login failure, password-reset email, authenticator issuer name, a heading written into a generated document.</p>
 <h3 id="2-server-returns-the-key-vue-translates-most-ui">2. Server returns the key; Vue translates (most UI)<a class="headerlink" href="#2-server-returns-the-key-vue-translates-most-ui" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">BallotsNeedReview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;elections.stageChangeError.ballotsNeedReview&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">BallotsNeedReview</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"elections.stageChangeError.ballotsNeedReview"</span><span class="p">;</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">t</span><span class="p">(</span><span class="nx">dto</span><span class="p">.</span><span class="nx">messageKey</span><span class="p">,</span><span class="w"> </span><span class="nx">dto</span><span class="p">.</span><span class="nx">parameters</span><span class="p">)</span>
 </code></pre></div>
@@ -1302,10 +1302,10 @@ backend/appsettings.json
 <hr />
 <h2 id="backend-aspnet-core-no-resx">Backend (ASP.NET Core, no .resx)<a class="headerlink" href="#backend-aspnet-core-no-resx" title="Permanent link">&para;</a></h2>
 <p>A small custom <code>IStringLocalizer</code> stack reads <code>{ResourcesPath}/{culture}/*.json</code>, merges, and caches.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;Localization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;ResourcesPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../frontend/src/locales&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;DefaultCulture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;SupportedCultures&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fr&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;es&quot;</span><span class="w"> </span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="nt">"Localization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"ResourcesPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../frontend/src/locales"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"DefaultCulture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"SupportedCultures"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w"> </span><span class="s2">"fr"</span><span class="p">,</span><span class="w"> </span><span class="s2">"es"</span><span class="w"> </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Wire-up:</p>
@@ -1527,7 +1527,7 @@ backend/appsettings.json
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/ADMIN_GUIDE/">
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/ADMIN_GUIDE/">
       
       
         <link rel="prev" href="../USER_GUIDE/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1429,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -2105,7 +2105,7 @@
 <li>
 <p><strong>Via Database (Initial Setup):</strong>
    <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">AspNetUsers</span><span class="w"> </span><span class="p">(</span><span class="n">Id</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="p">,</span><span class="w"> </span><span class="n">UserName</span><span class="p">,</span><span class="w"> </span><span class="n">EmailConfirmed</span><span class="p">,</span><span class="w"> </span><span class="n">SecurityStamp</span><span class="p">)</span>
-<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">NEWID</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">NEWID</span><span class="p">());</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">NEWID</span><span class="p">(),</span><span class="w"> </span><span class="s1">'user@example.com'</span><span class="p">,</span><span class="w"> </span><span class="s1">'user@example.com'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">NEWID</span><span class="p">());</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -2121,8 +2121,8 @@
 - <code>Teller</code>: Enter ballots, view results
 - <code>Voter</code>: View elections, submit online ballots</p>
 <p><strong>Assign Role via Database:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">UserId</span><span class="w"> </span><span class="n">UNIQUEIDENTIFIER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AspNetUsers</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">);</span>
-<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">RoleId</span><span class="w"> </span><span class="n">UNIQUEIDENTIFIER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AspNetRoles</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Teller&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">UserId</span><span class="w"> </span><span class="n">UNIQUEIDENTIFIER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AspNetUsers</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user@example.com'</span><span class="p">);</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">RoleId</span><span class="w"> </span><span class="n">UNIQUEIDENTIFIER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">AspNetRoles</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Teller'</span><span class="p">);</span>
 
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">AspNetUserRoles</span><span class="w"> </span><span class="p">(</span><span class="n">UserId</span><span class="p">,</span><span class="w"> </span><span class="n">RoleId</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">UserId</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">RoleId</span><span class="p">);</span>
@@ -2131,30 +2131,30 @@
 <p><strong>Via API:</strong>
 <div class="highlight"><pre><span></span><code><span class="c1"># Request password reset token</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:5016/auth/forgot-password<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;email&quot;: &quot;user@example.com&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"email": "user@example.com"}'</span>
 
 <span class="c1"># Reset password with token</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:5016/auth/reset-password<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
-<span class="s1">    &quot;email&quot;: &quot;user@example.com&quot;,</span>
-<span class="s1">    &quot;token&quot;: &quot;RESET_TOKEN&quot;,</span>
-<span class="s1">    &quot;newPassword&quot;: &quot;NewSecurePassword123!&quot;</span>
-<span class="s1">  }&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span>
+<span class="s1">    "email": "user@example.com",</span>
+<span class="s1">    "token": "RESET_TOKEN",</span>
+<span class="s1">    "newPassword": "NewSecurePassword123!"</span>
+<span class="s1">  }'</span>
 </code></pre></div></p>
 <p><strong>Direct Database Reset (Emergency Only):</strong>
 <div class="highlight"><pre><span></span><code><span class="c1">// Use ASP.NET Core Identity UserManager in C# code</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_userManager</span><span class="p">.</span><span class="n">FindByEmailAsync</span><span class="p">(</span><span class="s">&quot;user@example.com&quot;</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_userManager</span><span class="p">.</span><span class="n">FindByEmailAsync</span><span class="p">(</span><span class="s">"user@example.com"</span><span class="p">);</span>
 <span class="kt">var</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">_userManager</span><span class="p">.</span><span class="n">GeneratePasswordResetTokenAsync</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
-<span class="k">await</span><span class="w"> </span><span class="n">_userManager</span><span class="p">.</span><span class="n">ResetPasswordAsync</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewPassword123!&quot;</span><span class="p">);</span>
+<span class="k">await</span><span class="w"> </span><span class="n">_userManager</span><span class="p">.</span><span class="n">ResetPasswordAsync</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="s">"NewPassword123!"</span><span class="p">);</span>
 </code></pre></div></p>
 <h3 id="deactivating-user-accounts">Deactivating User Accounts<a class="headerlink" href="#deactivating-user-accounts" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Lock out user account</span>
 <span class="k">UPDATE</span><span class="w"> </span><span class="n">AspNetUsers</span>
 <span class="k">SET</span><span class="w"> </span><span class="n">LockoutEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">    </span><span class="n">LockoutEnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DATEADD</span><span class="p">(</span><span class="k">YEAR</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">())</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;user@example.com&#39;</span><span class="p">;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'user@example.com'</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="viewing-active-users">Viewing Active Users<a class="headerlink" href="#viewing-active-users" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Get all active users with roles</span>
@@ -2170,8 +2170,8 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
 <h3 id="connection-string-configuration">Connection String Configuration<a class="headerlink" href="#connection-string-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>Production (appsettings.Production.json):</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;TallyJ4&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Server=production-server;Database=TallyJ4;User Id=tallyj_app;Password=***;Encrypt=True;TrustServerCertificate=False&quot;</span>
+<span class="w">  </span><span class="nt">"ConnectionStrings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"TallyJ4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Server=production-server;Database=TallyJ4;User Id=tallyj_app;Password=***;Encrypt=True;TrustServerCertificate=False"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -2197,13 +2197,13 @@ dotnet<span class="w"> </span>ef<span class="w"> </span>migrations<span class="w
 <h3 id="database-maintenance">Database Maintenance<a class="headerlink" href="#database-maintenance" title="Permanent link">&para;</a></h3>
 <p><strong>Rebuild Indexes (Monthly):</strong>
 <div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">TallyJ4</span><span class="p">;</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_MSforeachtable</span><span class="w"> </span><span class="o">@</span><span class="n">command1</span><span class="o">=</span><span class="ss">&quot;DBCC DBREINDEX(&#39;?&#39;)&quot;</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sp_MSforeachtable</span><span class="w"> </span><span class="o">@</span><span class="n">command1</span><span class="o">=</span><span class="ss">"DBCC DBREINDEX('?')"</span><span class="p">;</span>
 </code></pre></div></p>
 <p><strong>Update Statistics (Weekly):</strong>
 <div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_updatestats</span><span class="p">;</span>
 </code></pre></div></p>
 <p><strong>Check Database Integrity:</strong>
-<div class="highlight"><pre><span></span><code><span class="n">DBCC</span><span class="w"> </span><span class="n">CHECKDB</span><span class="p">(</span><span class="s1">&#39;TallyJ4&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">NO_INFOMSGS</span><span class="p">,</span><span class="w"> </span><span class="n">ALL_ERRORMSGS</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">DBCC</span><span class="w"> </span><span class="n">CHECKDB</span><span class="p">(</span><span class="s1">'TallyJ4'</span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">NO_INFOMSGS</span><span class="p">,</span><span class="w"> </span><span class="n">ALL_ERRORMSGS</span><span class="p">;</span>
 </code></pre></div></p>
 <h3 id="data-retention">Data Retention<a class="headerlink" href="#data-retention" title="Permanent link">&para;</a></h3>
 <p><strong>Archive Old Elections:</strong>
@@ -2221,11 +2221,11 @@ dotnet<span class="w"> </span>ef<span class="w"> </span>migrations<span class="w
 <h3 id="jwt-configuration">JWT Configuration<a class="headerlink" href="#jwt-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>appsettings.Production.json:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;Jwt&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-minimum-32-character-secret-key-here&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Issuer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://api.yourdomain.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Audience&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://yourdomain.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ExpiryMinutes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">  </span><span class="nt">"Jwt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"Key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your-minimum-32-character-secret-key-here"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Issuer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.yourdomain.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Audience"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourdomain.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ExpiryMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -2242,16 +2242,16 @@ openssl<span class="w"> </span>rand<span class="w"> </span>-base64<span class="w
 <p><strong>Program.cs:</strong>
 <div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="n">AddCors</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">AddPolicy</span><span class="p">(</span><span class="s">&quot;Production&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">AddPolicy</span><span class="p">(</span><span class="s">"Production"</span><span class="p">,</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="o">=&gt;</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">policy</span><span class="p">.</span><span class="n">WithOrigins</span><span class="p">(</span><span class="s">&quot;https://yourdomain.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://www.yourdomain.com&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">policy</span><span class="p">.</span><span class="n">WithOrigins</span><span class="p">(</span><span class="s">"https://yourdomain.com"</span><span class="p">,</span><span class="w"> </span><span class="s">"https://www.yourdomain.com"</span><span class="p">)</span>
 <span class="w">              </span><span class="p">.</span><span class="n">AllowAnyMethod</span><span class="p">()</span>
 <span class="w">              </span><span class="p">.</span><span class="n">AllowAnyHeader</span><span class="p">()</span>
 <span class="w">              </span><span class="p">.</span><span class="n">AllowCredentials</span><span class="p">();</span>
 <span class="w">    </span><span class="p">});</span>
 <span class="p">});</span>
 
-<span class="n">app</span><span class="p">.</span><span class="n">UseCors</span><span class="p">(</span><span class="s">&quot;Production&quot;</span><span class="p">);</span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseCors</span><span class="p">(</span><span class="s">"Production"</span><span class="p">);</span>
 </code></pre></div></p>
 <h3 id="https-enforcement">HTTPS Enforcement<a class="headerlink" href="#https-enforcement" title="Permanent link">&para;</a></h3>
 <p><strong>Program.cs:</strong>
@@ -2282,12 +2282,12 @@ openssl<span class="w"> </span>rand<span class="w"> </span>-base64<span class="w
 <p><strong>Program.cs or Middleware:</strong>
 <div class="highlight"><pre><span></span><code><span class="n">app</span><span class="p">.</span><span class="n">Use</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;X-Frame-Options&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SAMEORIGIN&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;X-Content-Type-Options&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nosniff&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;X-XSS-Protection&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1; mode=block&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Referrer-Policy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;strict-origin-when-cross-origin&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Content-Security-Policy&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">        </span><span class="s">&quot;default-src &#39;self&#39;; script-src &#39;self&#39; &#39;unsafe-inline&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"X-Frame-Options"</span><span class="p">,</span><span class="w"> </span><span class="s">"SAMEORIGIN"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"X-Content-Type-Options"</span><span class="p">,</span><span class="w"> </span><span class="s">"nosniff"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"X-XSS-Protection"</span><span class="p">,</span><span class="w"> </span><span class="s">"1; mode=block"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Referrer-Policy"</span><span class="p">,</span><span class="w"> </span><span class="s">"strict-origin-when-cross-origin"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">Headers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Content-Security-Policy"</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="s">"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nf">next</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div></p>
@@ -2314,29 +2314,29 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 <h3 id="database-backup-strategy">Database Backup Strategy<a class="headerlink" href="#database-backup-strategy" title="Permanent link">&para;</a></h3>
 <p><strong>Daily Full Backup:</strong>
 <div class="highlight"><pre><span></span><code><span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ4</span>
-<span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ4_Full_&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">CONVERT</span><span class="p">(</span><span class="nb">VARCHAR</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="mi">112</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.bak&#39;</span>
+<span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ4_Full_'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">CONVERT</span><span class="p">(</span><span class="nb">VARCHAR</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="mi">112</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">'.bak'</span>
 <span class="k">WITH</span><span class="w"> </span><span class="n">COMPRESSION</span><span class="p">,</span><span class="w"> </span><span class="n">INIT</span><span class="p">;</span>
 </code></pre></div></p>
 <p><strong>Automated Backup Script (PowerShell):</strong>
 <div class="highlight"><pre><span></span><code><span class="c"># backup-database.ps1</span>
-<span class="nv">$date</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&quot;yyyyMMdd_HHmmss&quot;</span>
-<span class="nv">$backupPath</span> <span class="p">=</span> <span class="s2">&quot;C:\Backups\TallyJ4_$date.bak&quot;</span>
+<span class="nv">$date</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">"yyyyMMdd_HHmmss"</span>
+<span class="nv">$backupPath</span> <span class="p">=</span> <span class="s2">"C:\Backups\TallyJ4_$date.bak"</span>
 
-<span class="nb">Invoke-Sqlcmd</span> <span class="n">-Query</span> <span class="sh">@&quot;</span>
+<span class="nb">Invoke-Sqlcmd</span> <span class="n">-Query</span> <span class="sh">@"</span>
 <span class="sh">BACKUP DATABASE TallyJ4</span>
-<span class="sh">TO DISK = &#39;$backupPath&#39;</span>
+<span class="sh">TO DISK = '$backupPath'</span>
 <span class="sh">WITH COMPRESSION, INIT;</span>
-<span class="sh">&quot;@</span>
+<span class="sh">"@</span>
 
 <span class="c"># Keep only last 30 days of backups</span>
-<span class="nb">Get-ChildItem</span> <span class="s2">&quot;C:\Backups\TallyJ4_*.bak&quot;</span> <span class="p">|</span> 
+<span class="nb">Get-ChildItem</span> <span class="s2">"C:\Backups\TallyJ4_*.bak"</span> <span class="p">|</span> 
     <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">LastWriteTime</span> <span class="o">-lt</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="n">AddDays</span><span class="p">(-</span><span class="n">30</span><span class="p">)</span> <span class="p">}</span> <span class="p">|</span>
     <span class="nb">Remove-Item</span>
 </code></pre></div></p>
 <p><strong>Schedule with Task Scheduler:</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">$action</span> <span class="p">=</span> <span class="nb">New-ScheduledTaskAction</span> <span class="n">-Execute</span> <span class="s1">&#39;PowerShell.exe&#39;</span> <span class="n">-Argument</span> <span class="s1">&#39;-File C:\Scripts\backup-database.ps1&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="nv">$action</span> <span class="p">=</span> <span class="nb">New-ScheduledTaskAction</span> <span class="n">-Execute</span> <span class="s1">'PowerShell.exe'</span> <span class="n">-Argument</span> <span class="s1">'-File C:\Scripts\backup-database.ps1'</span>
 <span class="nv">$trigger</span> <span class="p">=</span> <span class="nb">New-ScheduledTaskTrigger</span> <span class="n">-Daily</span> <span class="n">-At</span> <span class="n">2am</span>
-<span class="nb">Register-ScheduledTask</span> <span class="n">-Action</span> <span class="nv">$action</span> <span class="n">-Trigger</span> <span class="nv">$trigger</span> <span class="n">-TaskName</span> <span class="s2">&quot;TallyJ Backup&quot;</span> <span class="n">-Description</span> <span class="s2">&quot;Daily database backup&quot;</span>
+<span class="nb">Register-ScheduledTask</span> <span class="n">-Action</span> <span class="nv">$action</span> <span class="n">-Trigger</span> <span class="nv">$trigger</span> <span class="n">-TaskName</span> <span class="s2">"TallyJ Backup"</span> <span class="n">-Description</span> <span class="s2">"Daily database backup"</span>
 </code></pre></div></p>
 <h3 id="application-backup">Application Backup<a class="headerlink" href="#application-backup" title="Permanent link">&para;</a></h3>
 <p><strong>Backup Checklist:</strong>
@@ -2353,7 +2353,7 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 
 <span class="c1">-- Restore database</span>
 <span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ4</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ4_20260202.bak&#39;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ4_20260202.bak'</span>
 <span class="k">WITH</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">;</span>
 
 <span class="c1">-- Set back to multi-user mode</span>
@@ -2362,12 +2362,12 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 <p><strong>Point-in-Time Restore:</strong>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Requires transaction log backups</span>
 <span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">TallyJ4</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ4_Full.bak&#39;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ4_Full.bak'</span>
 <span class="k">WITH</span><span class="w"> </span><span class="n">NORECOVERY</span><span class="p">;</span>
 
 <span class="n">RESTORE</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="n">TallyJ4</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\TallyJ4_Log.trn&#39;</span>
-<span class="k">WITH</span><span class="w"> </span><span class="n">RECOVERY</span><span class="p">,</span><span class="w"> </span><span class="n">STOPAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2026-02-02 14:30:00&#39;</span><span class="p">;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'C:\Backups\TallyJ4_Log.trn'</span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">RECOVERY</span><span class="p">,</span><span class="w"> </span><span class="n">STOPAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2026-02-02 14:30:00'</span><span class="p">;</span>
 </code></pre></div></p>
 <h3 id="disaster-recovery-plan">Disaster Recovery Plan<a class="headerlink" href="#disaster-recovery-plan" title="Permanent link">&para;</a></h3>
 <p><strong>Recovery Time Objective (RTO):</strong> 4 hours<br />
@@ -2394,21 +2394,21 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 <h3 id="logging-configuration">Logging Configuration<a class="headerlink" href="#logging-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>Serilog (appsettings.Production.json):</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;Serilog&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;MinimumLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;Default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;Override&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;Microsoft&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;System&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span>
+<span class="w">  </span><span class="nt">"Serilog"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"MinimumLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"Default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Override"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"Microsoft"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"System"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;WriteTo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"WriteTo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;logs/tallyj4-.log&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;rollingInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Day&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;retainedFileCountLimit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">        </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"Args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"logs/tallyj4-.log"</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"rollingInterval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Day"</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"retainedFileCountLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">]</span>
@@ -2435,7 +2435,7 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">DatabaseName</span><span class="p">,</span>
 <span class="w">    </span><span class="p">(</span><span class="k">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">SizeMB</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">master_files</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">database_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DB_ID</span><span class="p">(</span><span class="s1">&#39;TallyJ4&#39;</span><span class="p">);</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">database_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DB_ID</span><span class="p">(</span><span class="s1">'TallyJ4'</span><span class="p">);</span>
 </code></pre></div></p>
 <p><strong>Active Connections:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
@@ -2450,22 +2450,22 @@ npm<span class="w"> </span>audit<span class="w"> </span>fix
 <h3 id="email-configuration">Email Configuration<a class="headerlink" href="#email-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>SMTP Settings (appsettings.Production.json):</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;Email&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;SmtpHost&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;SmtpPort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">587</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;UseSsl&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;noreply@yourdomain.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;Password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;***&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;FromAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;noreply@yourdomain.com&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;FromName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TallyJ&quot;</span>
+<span class="w">  </span><span class="nt">"Email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"SmtpHost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"SmtpPort"</span><span class="p">:</span><span class="w"> </span><span class="mi">587</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"UseSsl"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noreply@yourdomain.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"Password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"***"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"FromAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noreply@yourdomain.com"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"FromName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TallyJ"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <h3 id="feature-flags">Feature Flags<a class="headerlink" href="#feature-flags" title="Permanent link">&para;</a></h3>
 <p><strong>Database Seeding:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;Database&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;SeedOnStartup&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1">// Set to false in production</span>
+<span class="w">  </span><span class="nt">"Database"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"SeedOnStartup"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1">// Set to false in production</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -2650,7 +2650,7 @@ dotnet<span class="w"> </span>ef<span class="w"> </span>database<span class="w">
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

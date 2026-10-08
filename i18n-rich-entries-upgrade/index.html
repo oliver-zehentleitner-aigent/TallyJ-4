@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/i18n-rich-entries-upgrade/">
+        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/i18n-rich-entries-upgrade/">
       
       
         <link rel="prev" href="../SHARED_I18N/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1012,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://glittle.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
         
   
   
@@ -1230,15 +1230,15 @@
 <p>Stop storing translations as bare strings. Store <strong>text + provenance</strong> so human edits are not overwritten by later AI/MT passes, and so stale translations can be detected when English changes.</p>
 <h3 id="before-leaf-values">Before (leaf values)<a class="headerlink" href="#before-leaf-values" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;ballots.addBallot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Agregar Boleta&quot;</span>
+<span class="w">  </span><span class="nt">"ballots.addBallot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agregar Boleta"</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="after-leaf-values">After (leaf values)<a class="headerlink" href="#after-leaf-values" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;ballots.addBallot&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Agregar Boleta&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;s&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ai&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-15T15:35:00Z&quot;</span>
+<span class="w">  </span><span class="nt">"ballots.addBallot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agregar Boleta"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"w"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-15T15:35:00Z"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1310,10 +1310,10 @@
 <h2 id="english-source-locale">English / source locale<a class="headerlink" href="#english-source-locale" title="Permanent link">&para;</a></h2>
 <p>English (or whatever is <code>fallbackLocale</code>) must use the <strong>same object shape</strong>:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;ballots.addBallot&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;t&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Add Ballot&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;s&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-09-23T17:00:00Z&quot;</span>
+<span class="w">  </span><span class="nt">"ballots.addBallot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"t"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Add Ballot"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"s"</span><span class="p">:</span><span class="w"> </span><span class="s2">"source"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"w"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-23T17:00:00Z"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1474,7 +1474,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "content.code.copy", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
