@@ -1,6 +1,6 @@
 {
  "state-json": 2,
- "generated": "2026-10-11T12:47:10Z",
+ "generated": "2026-10-11T12:47:34Z",
  "dashboard": "0.10.0",
  "linter": "0.20.1.0",
  "project": {
@@ -29,8 +29,8 @@
   "children": [],
   "git": {
    "available": true,
-   "head": "298fb759",
-   "head_full": "298fb759bd27803afaccdc22aaecbd3098f062b7",
+   "head": "57c870ed",
+   "head_full": "57c870ede181e05316961a7ed57159eecf3be3ce",
    "branch": "keep-the-why-0.20.1",
    "remote": "github.com/oliver-zehentleitner-aigent/TallyJ-4",
    "upstream": "github.com/glittle/TallyJ-4",
@@ -5328,17 +5328,9 @@
  ],
  "anonymized": false,
  "findings": {
-  "errors": 1,
+  "errors": 0,
   "warnings": 0,
-  "items": [
-   {
-    "severity": "error",
-    "code": "E006",
-    "path": ".keep-the-why",
-    "line": 15,
-    "message": "pinned-path '.agents/skills/keep-the-why/SKILL.md' does not exist in the repository"
-   }
-  ]
+  "items": []
  },
  "exported": true,
  "bodies": "state.body.json"
