@@ -1,23 +1,23 @@
 {
  "state-json": 2,
- "generated": "2026-10-11T12:21:28Z",
+ "generated": "2026-10-11T12:45:13Z",
  "dashboard": "0.10.0",
  "linter": "0.20.1.0",
  "project": {
   "id": "glittle---TallyJ-4",
   "name": "tallyj-4",
   "context": "context/",
-  "schema": "0.20.0",
+  "schema": "0.20.1",
   "config": {
    "id": "glittle---TallyJ-4",
    "context": "`context/`",
    "init": "complete",
-   "context-schema": "0.20.0",
+   "context-schema": "0.20.1",
    "capture-confirmation": "confirm-when-unsure",
    "source-reference": "never",
    "canonical": "https://github.com/glittle/TallyJ-4",
    "dashboard-state": "https://glittle.github.io/TallyJ-4/dashboard/live/state.json",
-   "pinned-version": "0.20.0",
+   "pinned-version": "0.20.1",
    "pinned-path": ".agents/skills/keep-the-why/SKILL.md"
   },
   "personal_defaults": {},
@@ -29,9 +29,9 @@
   "children": [],
   "git": {
    "available": true,
-   "head": "9c31eb41",
-   "head_full": "9c31eb410e59656e898c627a0c724cae79b20eae",
-   "branch": "keep-the-why-0.20.0",
+   "head": "508fcb27",
+   "head_full": "508fcb27e45984db14b2fc88d91541ab6dbc8b2b",
+   "branch": "HEAD",
    "remote": "github.com/oliver-zehentleitner-aigent/TallyJ-4",
    "upstream": "github.com/glittle/TallyJ-4",
    "fork": {
@@ -43,6 +43,23 @@
   }
  },
  "topics": [
+  {
+   "file": "anti-abuse.md",
+   "title": "Paid sends and voter-list abuse",
+   "index_line": "owner approval before SMS, voice, and WhatsApp codes; election allowance, owner daily cap, and phone-prefix cap; neutral requestCode reply; freeze; masked send log; super-admin alerts",
+   "entries": 6,
+   "refs_out": [],
+   "refs_in": [
+    "auth.md",
+    "sms-eligibility.md"
+   ],
+   "status": {
+    "active": 6
+   },
+   "evidence": {
+    "confirmed": 6
+   }
+  },
   {
    "file": "api-contracts.md",
    "title": "API contracts",
@@ -75,16 +92,19 @@
    "file": "auth.md",
    "title": "Auth",
    "index_line": "JWT identity claims (`sub` / `NameIdentifier`); teller vs online-voter cookie transport; online ballot identity is the voter session; guest teller login is rate-limited per IP and locked per election; IdP-first teller signup; SuperAdmin one-time invite for local email/password",
-   "entries": 9,
+   "entries": 11,
    "refs_out": [
-    "realtime.md"
+    "realtime.md",
+    "anti-abuse.md"
    ],
-   "refs_in": [],
+   "refs_in": [
+    "sms-eligibility.md"
+   ],
    "status": {
-    "active": 9
+    "active": 11
    },
    "evidence": {
-    "confirmed": 8,
+    "confirmed": 10,
     "inferred": 1
    }
   },
@@ -187,22 +207,24 @@
    "file": "kiosk.md",
    "title": "Kiosk voting",
    "index_line": "kiosk as teller-minted 15-minute codes on a shared browser; not mint-on-read",
-   "entries": 4,
+   "entries": 5,
    "refs_out": [],
    "refs_in": [],
    "status": {
-    "active": 4
+    "active": 4,
+    "": 1
    },
    "evidence": {
     "confirmed": 2,
-    "inferred": 2
+    "inferred": 2,
+    "": 1
    }
   },
   {
    "file": "online-ballots.md",
    "title": "Online Ballot Acceptance & Name Resolution",
    "index_line": "Draft autosave vs Submitted, online acceptance (pending until Accept-all), reserved Online/Imported locations, monitor close countdown, anonymous ballot-page sessions, and random name resolution",
-   "entries": 14,
+   "entries": 15,
    "refs_out": [
     "election-state.md"
    ],
@@ -210,11 +232,13 @@
     "realtime.md"
    ],
    "status": {
-    "active": 14
+    "active": 14,
+    "": 1
    },
    "evidence": {
     "confirmed": 13,
-    "inferred": 1
+    "inferred": 1,
+    "": 1
    }
   },
   {
@@ -249,10 +273,24 @@
    }
   },
   {
+   "file": "privacy.md",
+   "title": "Privacy of page loads and voter screens",
+   "index_line": "self-hosted Lora (no Google Fonts); Session Replay stays off online-voter routes",
+   "entries": 2,
+   "refs_out": [],
+   "refs_in": [],
+   "status": {
+    "active": 2
+   },
+   "evidence": {
+    "confirmed": 2
+   }
+  },
+  {
    "file": "realtime.md",
    "title": "Realtime (SignalR)",
    "index_line": "SignalR hub group naming (not a single `election-{guid}` pattern)",
-   "entries": 12,
+   "entries": 13,
    "refs_out": [
     "online-ballots.md"
    ],
@@ -261,10 +299,10 @@
     "election-state.md"
    ],
    "status": {
-    "active": 12
+    "active": 13
    },
    "evidence": {
-    "confirmed": 12
+    "confirmed": 13
    }
   },
   {
@@ -288,17 +326,22 @@
    "file": "sms-eligibility.md",
    "title": "Paid SMS / voice / WhatsApp destination eligibility",
    "index_line": "reject reserved/fictional/malformed phones before paid SMS/voice/WhatsApp; OnlineVoter.SmsStatus; ensure phone row on Person write; person detail phone status and recent SmsLog; Twilio callback auto-learn and delivered OK; send-side SmsLog + StatusCallback; teller manual SmsStatus; Front Desk / people list SMS hint; OnlineVoter.WhatsAppStatus (GreenAPI checkWhatsapp); People list Has WhatsApp filter",
-   "entries": 15,
-   "refs_out": [],
+   "entries": 16,
+   "refs_out": [
+    "anti-abuse.md",
+    "auth.md"
+   ],
    "refs_in": [
     "front-desk.md"
    ],
    "status": {
-    "active": 15
+    "active": 15,
+    "": 1
    },
    "evidence": {
     "confirmed": 11,
-    "inferred": 4
+    "inferred": 4,
+    "": 1
    }
   },
   {
@@ -334,15 +377,319 @@
  ],
  "entries": [
   {
+   "id": "anti-abuse.md#owner-paid-send-gate-issue-371-slice-3a",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 3,
+   "end_line": 23,
+   "title": "Owner paid-send gate (issue #371 slice 3a)",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371 comments of 2026-10-06 (owner abuse, flagged-upload threshold, block Online)",
+   "verification": null,
+   "revisit_when": "a second paid provider is added, or email codes should also wait for approval",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb2"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-07",
+      "commit": "7faba33e"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 3,
+     "message": "'Owner paid-send gate (issue #371 slice 3a)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Owner paid-send gate (issue #371 slice 3a)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "anti-abuse.md#caps-and-the-kill-switch",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 24,
+   "end_line": 38,
+   "title": "Caps and the kill switch",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371 slice 3a",
+   "verification": null,
+   "revisit_when": "the daily cap should follow the election timezone instead of UTC",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-07",
+      "commit": "7faba33e"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 24,
+     "message": "'Caps and the kill switch': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 24,
+     "message": "'Caps and the kill switch': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "anti-abuse.md#alerts",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 39,
+   "end_line": 49,
+   "title": "Alerts",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371; Sentry ASP.NET Core default `MinimumEventLevel` is Error",
+   "verification": null,
+   "revisit_when": "Sentry is configured to capture warnings as events",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-07",
+      "commit": "7faba33e"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 39,
+     "message": "'Alerts': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 39,
+     "message": "'Alerts': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "anti-abuse.md#voter-list-flag",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 50,
+   "end_line": 66,
+   "title": "Voter-list flag",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371 slice 3a",
+   "verification": null,
+   "revisit_when": "the disposable-domain file is refreshed",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb2"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-07",
+      "commit": "7faba33e"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 50,
+     "message": "'Voter-list flag': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 50,
+     "message": "'Voter-list flag': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "anti-abuse.md#neutral-requestcode-reply-issue-371-slice-2",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 67,
+   "end_line": 81,
+   "title": "Neutral requestCode reply (issue #371 slice 2)",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371",
+   "verification": null,
+   "revisit_when": "requestCode is scoped to one election link",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb27"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb2"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-09",
+      "commit": "508fcb27"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 67,
+     "message": "'Neutral requestCode reply (issue #371 slice 2)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 67,
+     "message": "'Neutral requestCode reply (issue #371 slice 2)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "anti-abuse.md#phone-prefix-cap-issue-371",
+   "uuid": null,
+   "file": "anti-abuse.md",
+   "line": 82,
+   "end_line": 95,
+   "title": "Phone-prefix cap (issue #371)",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "issue #371",
+   "verification": null,
+   "revisit_when": "the prefix length or the default cap blocks a real congregation",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb27"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "508fcb2"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-09",
+      "commit": "508fcb27"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 82,
+     "message": "'Phone-prefix cap (issue #371)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 82,
+     "message": "'Phone-prefix cap (issue #371)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
    "id": "api-contracts.md#dual-response-wrappers",
    "uuid": "09294dd2-80a5-4806-a7b0-c963c0321892",
    "file": "api-contracts.md",
    "line": 3,
-   "end_line": 20,
+   "end_line": 19,
    "title": "Dual response wrappers",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "project agent notes (`AGENTS.md`)",
@@ -358,31 +705,29 @@
      "commit": "f1b10763"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "f1b10763"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Dual response wrappers': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "api-contracts.md#openapi-typescript-client-regeneration",
    "uuid": "a3edfe7d-c661-441f-8a47-b18e853bd245",
    "file": "api-contracts.md",
-   "line": 21,
-   "end_line": 35,
+   "line": 20,
+   "end_line": 33,
    "title": "OpenAPI TypeScript client regeneration",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "project agent notes (`AGENTS.md`); `frontend/openApi/config.backend.ts`",
@@ -398,31 +743,29 @@
      "commit": "f1b10763"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "f1b10763"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 20,
+     "message": "'OpenAPI TypeScript client regeneration': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "api-contracts.md#generated-client-error-shape-hey-api",
    "uuid": "d9ea0e2b-6504-4b4b-89bb-8c43defc4111",
    "file": "api-contracts.md",
-   "line": 36,
-   "end_line": 49,
+   "line": 34,
+   "end_line": 46,
    "title": "Generated client error shape (hey-api)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "`frontend/src/api/gen/configService/client/client.gen.ts` (`throw jsonError`); incident on Calculate Tally showing raw `elections.stageChangeError.*|count=N`",
@@ -438,31 +781,29 @@
      "commit": "8df990db"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-05",
-      "commit": "8df990db"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 34,
+     "message": "'Generated client error shape (hey-api)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "architecture.md#single-backend-host-after-domain-consolidation",
    "uuid": "c64c71f5-797d-4204-87d0-d459938dc06b",
    "file": "architecture.md",
    "line": 3,
-   "end_line": 17,
+   "end_line": 16,
    "title": "Single backend host after domain consolidation",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "project agent notes (`AGENTS.md`); domain consolidation, May 2025",
@@ -478,31 +819,29 @@
      "commit": "f1b10763"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "f1b10763"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Single backend host after domain consolidation': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "architecture.md#social-preview-urls-are-static-and-pinned-to-production",
    "uuid": "3cdc2a17-78bd-4178-888f-4fc00ba3c15a",
    "file": "architecture.md",
-   "line": 18,
-   "end_line": 43,
+   "line": 17,
+   "end_line": 41,
    "title": "Social preview URLs are static and pinned to production",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "production host in `ClientEnvResolver` tests (`https://v4.tallyj.com`); UAT host `https://uat.v4.tallyj.com`; `MapFallbackToFile` serves `index.html` for unknown routes",
@@ -518,31 +857,29 @@
      "commit": "bea5654e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-10-02",
-      "commit": "bea5654e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 17,
+     "message": "'Social preview URLs are static and pinned to production': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#jwt-user-id-claim-lookup-on-net-10",
    "uuid": "59d4555d-e5b4-4c12-a6e2-246895efaf15",
    "file": "auth.md",
    "line": 3,
-   "end_line": 21,
+   "end_line": 20,
    "title": "JWT user id claim lookup on .NET 10",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "project agent notes (`AGENTS.md`)",
@@ -558,31 +895,29 @@
      "commit": "f1b10763"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "f1b10763"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'JWT user id claim lookup on .NET 10': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#online-voter-session-is-a-distinct-httponly-cookie",
    "uuid": "b3f354b1-54e8-45dc-b562-7dc5cbc56269",
    "file": "auth.md",
-   "line": 22,
-   "end_line": 50,
+   "line": 21,
+   "end_line": 48,
    "title": "Online-voter session is a distinct httpOnly cookie",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #250; CodeQL `js/clear-text-storage-of-sensitive-data` on `voter_token` / `voter_id` in localStorage; teller cookie pattern in `SecureCookieMiddleware`",
@@ -598,31 +933,29 @@
      "commit": "ae0b1e8d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-30",
-      "commit": "ae0b1e8d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'Online-voter session is a distinct httpOnly cookie': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#idp-first-teller-signup-issue-347",
    "uuid": "2ed5c466-f555-4b97-8c5d-754a9fecd205",
    "file": "auth.md",
-   "line": 51,
-   "end_line": 71,
+   "line": 49,
+   "end_line": 68,
    "title": "IdP-first teller signup (issue #347)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #347; product decision 2026-09-16 (maintainer)",
@@ -638,31 +971,29 @@
      "commit": "ea96cc41"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-17",
-      "commit": "ea96cc41"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 49,
+     "message": "'IdP-first teller signup (issue #347)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#superadmin-one-time-invite-for-local-email-password-signup-issue-347-leftover",
    "uuid": "3f670597-82d5-4528-8136-e462929335e8",
    "file": "auth.md",
-   "line": 72,
-   "end_line": 94,
+   "line": 69,
+   "end_line": 90,
    "title": "SuperAdmin one-time invite for local email/password signup (issue #347 leftover)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #347 leftover after #348; product rule for communities that cannot use Google",
@@ -678,31 +1009,29 @@
      "commit": "4a57207e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-17",
-      "commit": "4a57207e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 69,
+     "message": "'SuperAdmin one-time invite for local email/password signup (issue #347 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#proxy-aware-auth-rate-limits-issue-192-leftover",
    "uuid": "6c66be65-d553-4625-a555-08c1f10a66bf",
    "file": "auth.md",
-   "line": 95,
-   "end_line": 138,
+   "line": 91,
+   "end_line": 133,
    "title": "Proxy-aware auth rate limits (issue #192 leftover)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #192 remaining work; PR #328 review — leftmost XFF is client-spoofable; Azure Front Door docs (append socket IP)",
@@ -718,31 +1047,29 @@
      "commit": "cc810f33"
     },
     "last_touched": {
-     "author": "Glen Little",
-     "date": "2026-10-07",
-     "commit": "9ed7e43"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "cc810f33"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 91,
+     "message": "'Proxy-aware auth rate limits (issue #192 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#distinct-voter-verify-error-keys-issue-192-leftover",
    "uuid": "0cf32f17-32a1-45fc-a73e-2adc5a2d3a8b",
    "file": "auth.md",
-   "line": 139,
-   "end_line": 164,
+   "line": 134,
+   "end_line": 158,
    "title": "Distinct voter verify error keys (issue #192 leftover)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #192 remaining checklist; existing `{ error }` 400 bodies and `messageKey` i18n keys; `OnlineVoter.VerifyCodeDate` is not cleared on success",
@@ -758,31 +1085,29 @@
      "commit": "97fc9117"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-21",
-      "commit": "97fc9117"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 134,
+     "message": "'Distinct voter verify error keys (issue #192 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#online-ballot-identity-is-the-voter-session-issue-371-slice-0",
    "uuid": "1d57307c-9bc3-41cb-8f82-25921b3e2518",
    "file": "auth.md",
-   "line": 165,
-   "end_line": 183,
+   "line": 159,
+   "end_line": 176,
    "title": "Online ballot identity is the voter session (issue #371 slice 0)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #371; product rule that a pending online ballot stays editable until a teller Accept-all (#188)",
@@ -798,31 +1123,29 @@
      "commit": "83fe1707"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-07",
-     "commit": "9c31eb4"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-10-06",
-      "commit": "83fe1707"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 159,
+     "message": "'Online ballot identity is the voter session (issue #371 slice 0)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#guest-teller-login-lockout-issue-371-slice-1",
    "uuid": "76f3b231-6e06-4d9d-9b03-b0467cd18d24",
    "file": "auth.md",
-   "line": 184,
-   "end_line": 226,
+   "line": 177,
+   "end_line": 218,
    "title": "Guest teller login lockout (issue #371 slice 1)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #371 slice 1; PR #374 review",
@@ -838,31 +1161,29 @@
      "commit": "9ed7e437"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-07",
-     "commit": "9c31eb4"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-10-07",
-      "commit": "9ed7e437"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 177,
+     "message": "'Guest teller login lockout (issue #371 slice 1)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "auth.md#pre-auth-voter-code-delivery-channel-issue-229",
    "uuid": "25430887-ee58-442f-bf90-34105b5781d9",
    "file": "auth.md",
-   "line": 227,
-   "end_line": 250,
+   "line": 219,
+   "end_line": 242,
    "title": "Pre-auth voter-code delivery channel (issue #229)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #229 security notes; v3 VoterCodeHub used a short client key; 2026-09-20 product decision to ship live status",
@@ -880,31 +1201,119 @@
      "commit": "3656ee76"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-20",
-      "commit": "3656ee76"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 219,
+     "message": "'Pre-auth voter-code delivery channel (issue #229)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "auth.md#site-wide-super-admin-is-an-email-list-issue-371",
+   "uuid": null,
+   "file": "auth.md",
+   "line": 243,
+   "end_line": 257,
+   "title": "Site-wide super admin is an email list (issue #371)",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "existing `SuperAdmin:Emails` policy; issue #371 slice 3a",
+   "verification": null,
+   "revisit_when": "super admin should be a database role instead of a config list",
+   "see": [],
+   "superseded_by": null,
+   "refs": [
+    "anti-abuse.md"
+   ],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-07",
+     "commit": "7faba33e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "bad5105"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 243,
+     "message": "'Site-wide super admin is an email list (issue #371)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 243,
+     "message": "'Site-wide super admin is an email list (issue #371)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "auth.md#teller-apis-are-election-scoped",
+   "uuid": null,
+   "file": "auth.md",
+   "line": 258,
+   "end_line": 286,
+   "title": "Teller APIs are election-scoped",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "launch review of teller controllers that used only `[Authorize]`; existing `DuplicateElection_WhenUserIsNotOwner_ReturnsForbidden` and `ResetElection_WhenUserIsNotOwner_ReturnsForbidden` (403); `ResultsControllerTests.CalculateTally_WithInvalidElectionGuid_ReturnsNotFound` (404 when the election row is absent)",
+   "verification": null,
+   "revisit_when": "guest-teller permissions change, or a missing election on a route policy should be 403 instead of reaching the action",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "bad5105d"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "bad5105"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 258,
+     "message": "'Teller APIs are election-scoped': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 258,
+     "message": "'Teller APIs are election-scoped': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "ballot-validation.md#count-reconciliation-report-issue-190",
    "uuid": "20743a60-9337-4e2e-93d7-d08ab12f5134",
    "file": "ballot-validation.md",
    "line": 20,
-   "end_line": 54,
+   "end_line": 53,
    "title": "Count reconciliation report (issue #190)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #190 remaining items + current v4 data model; v3 Reconcile page is not in this repo",
@@ -920,31 +1329,29 @@
      "commit": "b30b54b7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-04",
-      "commit": "b30b54b7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 20,
+     "message": "'Count reconciliation report (issue #190)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-analysis.md#v3-comparison-is-a-harness-not-an-engine-rewrite",
    "uuid": "de0b2500-5a5c-46fa-be7d-0cf7eba6b4a8",
    "file": "election-analysis.md",
    "line": 21,
-   "end_line": 41,
+   "end_line": 40,
    "title": "v3 comparison is a harness, not an engine rewrite",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #168 (evidence: issue #168 remaining checklist; no v3 packages in this repo)",
@@ -960,31 +1367,29 @@
      "commit": "c3b4c5de"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "c3b4c5de"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'v3 comparison is a harness, not an engine rewrite': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-analysis.md#tie-break-counts-save-0-and-unset",
    "uuid": "41bc2d5c-90a3-4e98-8b4d-27615fc7fec2",
    "file": "election-analysis.md",
-   "line": 42,
-   "end_line": 67,
+   "line": 41,
+   "end_line": 65,
    "title": "Tie-break counts: save, 0, and unset",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #198; TallyJ-3.0 `Analyze.cshtml.js` `saveTieCounts` and `ElectionAnalyzerCore.AnalyzeTieGroup` (evidence: v3 `SaveTieCounts` + `ElectionAnalyzerCore`; issue #198 remaining items)",
@@ -1000,31 +1405,29 @@
      "commit": "195ecd43"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "195ecd43"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 41,
+     "message": "'Tie-break counts: save, 0, and unset': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-analysis.md#analyze-manual-voter-counts-persist-m-without-re-running-analyze",
    "uuid": "113c7b29-ae99-4ded-ae04-3b13dccc5f97",
    "file": "election-analysis.md",
-   "line": 68,
-   "end_line": 91,
+   "line": 66,
+   "end_line": 88,
    "title": "Analyze manual voter counts persist M without re-running Analyze",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "TallyJ-3.0 Analyze count table (Calculated / Override / Final); v4 count-reconciliation gate (evidence: v3 `AfterController.SaveManual` / `ResultsModel.SaveManualResults`; issue #186)",
@@ -1040,31 +1443,29 @@
      "commit": "b3133108"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "b3133108"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 66,
+     "message": "'Analyze manual voter counts persist M without re-running Analyze': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#lock-after-analysis-is-the-finalized-stage",
    "uuid": "878a188a-c68b-4274-8488-e337ee479362",
    "file": "election-state.md",
    "line": 15,
-   "end_line": 44,
+   "end_line": 43,
    "title": "Lock after analysis is the Finalized stage",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "inferred (issue #172 names; implementation in `ElectionService.ChangeElectionStageAsync`); people/ballot write gate and online-submit refusal confirmed by issue #308",
@@ -1080,31 +1481,29 @@
      "commit": "dfc7fb91"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-07",
-      "commit": "dfc7fb91"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 15,
+     "message": "'Lock after analysis is the Finalized stage': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#move-all-tellers-to-this-state-is-the-stage-broadcast",
    "uuid": "3535467f-d73b-40c1-84e5-21e2dd34028f",
    "file": "election-state.md",
-   "line": 45,
-   "end_line": 67,
+   "line": 44,
+   "end_line": 65,
    "title": "“Move all tellers to this state” is the stage broadcast",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "inferred (issue #172 names; no separate move-tellers API); FullTeller opt-in confirmed by issue #310",
@@ -1120,31 +1519,29 @@
      "commit": "dfc7fb91"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-07",
-      "commit": "dfc7fb91"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 44,
+     "message": "'“Move all tellers to this state” is the stage broadcast': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#guestteller-page-on-stage-change",
    "uuid": "dda5a858-1d0a-4ac3-b5ea-662cf95e3644",
    "file": "election-state.md",
-   "line": 68,
-   "end_line": 94,
+   "line": 66,
+   "end_line": 91,
    "title": "GuestTeller page on stage change",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #242",
@@ -1162,31 +1559,29 @@
      "commit": "ea91188d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "ea91188d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 66,
+     "message": "'GuestTeller page on stage change': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#teller-1-2-names-vs-the-election-teller-list",
    "uuid": "a0267983-42e3-4d0f-8eaa-4c9461565f66",
    "file": "election-state.md",
-   "line": 95,
-   "end_line": 106,
+   "line": 92,
+   "end_line": 102,
    "title": "Teller 1/2 names vs the election teller list",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #287",
@@ -1202,31 +1597,29 @@
      "commit": "f70ed91f"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "f70ed91f"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 92,
+     "message": "'Teller 1/2 names vs the election teller list': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#session-teller-1-2-on-an-open-ballot",
    "uuid": "57f811e5-7cc8-438e-a6cc-ac108e47379e",
    "file": "election-state.md",
-   "line": 107,
-   "end_line": 124,
+   "line": 103,
+   "end_line": 119,
    "title": "Session Teller 1/2 on an open ballot",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #287",
@@ -1242,31 +1635,29 @@
      "commit": "efe51fd6"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "efe51fd6"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 103,
+     "message": "'Session Teller 1/2 on an open ballot': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "election-state.md#concurrent-tellers-automated-coverage-is-sqlite-not-a-browser-driver",
    "uuid": "c05fa083-2ae0-4c1c-889c-18b9644d53bc",
    "file": "election-state.md",
-   "line": 125,
-   "end_line": 146,
+   "line": 120,
+   "end_line": 140,
    "title": "Concurrent tellers: automated coverage is SQLite, not a browser driver",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #191; same SQLite two-context approach as #336 / Accept-all CAS (evidence: issue #191 leftover; tests named under #191)",
@@ -1282,31 +1673,29 @@
      "commit": "d8f2f514"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-19",
-      "commit": "d8f2f514"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 120,
+     "message": "'Concurrent tellers: automated coverage is SQLite, not a browser driver': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#ballot-not-received-is-a-hide-received-filter",
    "uuid": "a196ba42-f6b2-44b6-a274-9012b7c9eca5",
    "file": "front-desk.md",
    "line": 3,
-   "end_line": 17,
+   "end_line": 16,
    "title": "Ballot Not Received is a hide-received filter",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "TallyJ-3.0 `Site/Views/Before/FrontDesk.cshtml` + `.cshtml.less` (`.NoBallot .Voter:not(.VM-)`) (evidence: v3 Front Desk `#ifNoBallot`)",
@@ -1322,31 +1711,29 @@
      "commit": "ba33a193"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-10",
-      "commit": "ba33a193"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Ballot Not Received is a hide-received filter': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#front-desk-method-codes-and-mixed-method-switch",
    "uuid": "c40905c4-dda1-44f4-9fcd-9a61dc9967fd",
    "file": "front-desk.md",
-   "line": 18,
-   "end_line": 42,
+   "line": 17,
+   "end_line": 40,
    "title": "Front Desk method codes and mixed-method switch",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #194; Person.VotingMethod varchar(1); reports/analyzer already used P/M/D/O/K/I",
@@ -1362,31 +1749,29 @@
      "commit": "5861bafe"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "5861bafe"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 17,
+     "message": "'Front Desk method codes and mixed-method switch': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#roll-call-and-envelope-pages-are-not-v4-product-pages",
    "uuid": "4d5f8864-b352-4f13-a724-b87d102b19d6",
    "file": "front-desk.md",
-   "line": 43,
-   "end_line": 57,
+   "line": 41,
+   "end_line": 54,
    "title": "Roll Call and envelope pages are not v4 product pages",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "TallyJ-3.0 `Site/Views/menu.xml` (Roll Call / Sort Envelopes require `BallotProcess=Roll`); v4 has no `BallotProcess` setting (evidence: v3 menu vs v4 routes; `docs/Hubs-v3-vs-v4.md`)",
@@ -1402,31 +1787,29 @@
      "commit": "ba33a193"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-10",
-      "commit": "ba33a193"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 41,
+     "message": "'Roll Call and envelope pages are not v4 product pages': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#front-desk-checked-in-count-matches-analysis-voted",
    "uuid": "e6c4dc57-d36e-4a6b-86b2-0b633b78ce62",
    "file": "front-desk.md",
-   "line": 58,
-   "end_line": 75,
+   "line": 55,
+   "end_line": 71,
    "title": "Front Desk checked-in count matches analysis voted",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #185; [reports.md](reports.md) (evidence: issue #185 count-match leftover)",
@@ -1442,31 +1825,29 @@
      "commit": "2eb17a99"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "2eb17a99"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 55,
+     "message": "'Front Desk checked-in count matches analysis voted': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#repeatable-desk-method-while-registration-is-open",
    "uuid": "65bb3048-44a6-4fee-b206-59e1d5ce68b2",
    "file": "front-desk.md",
-   "line": 76,
-   "end_line": 96,
+   "line": 72,
+   "end_line": 91,
    "title": "Repeatable desk method while registration is open",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #336 after #186 / #334 / #335 (evidence: maintainer, issue #336, 2026-09-13)",
@@ -1482,31 +1863,29 @@
      "commit": "837fdcc4"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "837fdcc4"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 72,
+     "message": "'Repeatable desk method while registration is open': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#registration-done-is-the-finalized-write-lock",
    "uuid": "8835686e-dce7-46a5-835d-a93237dd21b7",
    "file": "front-desk.md",
-   "line": 97,
-   "end_line": 112,
+   "line": 92,
+   "end_line": 106,
    "title": "Registration-done is the Finalized write lock",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "[election-state.md](election-state.md); `FrontDeskService` check-in / Unregister / flags / envelope (evidence: existing `ElectionFinalizedWriteGuard`; maintainer, issue #336)",
@@ -1522,31 +1901,29 @@
      "commit": "837fdcc4"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "837fdcc4"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 92,
+     "message": "'Registration-done is the Finalized write lock': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#accept-all-vs-front-desk-same-moment-race",
    "uuid": "aa9a6bfb-bde4-438e-b09b-4ba786f8962a",
    "file": "front-desk.md",
-   "line": 113,
-   "end_line": 135,
+   "line": 107,
+   "end_line": 128,
    "title": "Accept-all vs Front Desk same-moment race",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #336 leftover after #337 (evidence: issue #336 second slice; SQLite `Issue336AcceptAllFrontDeskRaceTests`)",
@@ -1562,31 +1939,29 @@
      "commit": "d44e73df"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "d44e73df"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 107,
+     "message": "'Accept-all vs Front Desk same-moment race': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "front-desk.md#front-desk-sms-column-is-the-phone-p-row-hint",
    "uuid": "b92ef9bf-bb5b-4e71-9fe6-c66cf41801a7",
    "file": "front-desk.md",
-   "line": 136,
-   "end_line": 148,
+   "line": 129,
+   "end_line": 140,
    "title": "Front Desk SMS column is the phone P-row hint",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 leftover; [sms-eligibility.md](sms-eligibility.md) tenth slice",
@@ -1613,31 +1988,29 @@
      "commit": "1d552ee5"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "1d552ee5"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 129,
+     "message": "'Front Desk SMS column is the phone P-row hint': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "i18n-rich-entries.md#leaves-keep-text-and-provenance-together",
    "uuid": "c8e71dd9-b423-4625-9c3a-487bcf302d5a",
    "file": "i18n-rich-entries.md",
    "line": 3,
-   "end_line": 21,
+   "end_line": 20,
    "title": "Leaves keep text and provenance together",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #359",
@@ -1648,36 +2021,34 @@
    "refs": [],
    "git": {
     "created": {
-     "author": "Glen Little",
-     "date": "2026-09-23",
-     "commit": "7e5866ca"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-23",
-      "commit": "7e5866ca"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Leaves keep text and provenance together': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "i18n-rich-entries.md#ai-may-refresh-only-ai-drafts",
    "uuid": "cf424972-df92-4563-9e31-e5877733ae2a",
    "file": "i18n-rich-entries.md",
-   "line": 22,
-   "end_line": 35,
+   "line": 21,
+   "end_line": 33,
    "title": "AI may refresh only `ai` drafts",
-   "type": [
-    "constraint"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #359",
@@ -1693,31 +2064,29 @@
      "commit": "7e5866ca"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Oliver Zehentleitner AIgent",
-      "date": "2026-10-05",
-      "commit": "340758cc"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'AI may refresh only `ai` drafts': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "i18n.md#document-dir-is-set-with-lang",
    "uuid": "b9a79126-8a25-4cea-8dd9-07db906c0564",
    "file": "i18n.md",
    "line": 5,
-   "end_line": 21,
+   "end_line": 20,
    "title": "Document `dir` is set with `lang`",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #299 (Bahazid Aref v4 Beta review); `frontend/src/locales/localeDirection.ts`",
@@ -1733,31 +2102,29 @@
      "commit": "c7678859"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-04",
-      "commit": "c7678859"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 5,
+     "message": "'Document `dir` is set with `lang`': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "i18n.md#version-label-one-string-no-beta-weight-span",
    "uuid": "00815d97-922d-4b4d-884c-35d9964bac53",
    "file": "i18n.md",
-   "line": 22,
-   "end_line": 38,
+   "line": 21,
+   "end_line": 36,
    "title": "Version label: one string, no Beta weight span",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #299; maintainer follow-up — do not give “Beta” a different font weight",
@@ -1773,31 +2140,29 @@
      "commit": "c7678859"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-04",
-      "commit": "c7678859"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'Version label: one string, no Beta weight span': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "i18n.md#public-dark-header-text-is-a-narrow-token-fix",
    "uuid": "733b2887-169a-4373-a54d-82c0fb001c8e",
    "file": "i18n.md",
-   "line": 39,
-   "end_line": 48,
+   "line": 37,
+   "end_line": 45,
    "title": "Public dark header text is a narrow token fix",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #299 dark-mode note; `#285` owns the designer pass",
@@ -1813,31 +2178,29 @@
      "commit": "c7678859"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-04",
-      "commit": "c7678859"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 37,
+     "message": "'Public dark header text is a narrow token fix': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "kiosk.md#login-window-is-15-minutes-and-teller-renewed",
    "uuid": "9ba42aac-9edf-4aef-b9cb-360db06828ce",
    "file": "kiosk.md",
-   "line": 15,
-   "end_line": 32,
+   "line": 9,
+   "end_line": 25,
    "title": "Login window is 15 minutes and teller-renewed",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "v3 Setup: “Make or renew a Kiosk Code” / “Code will expire after 15 minutes.”; issue #182",
@@ -1853,31 +2216,29 @@
      "commit": "bfec9f4e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "bfec9f4e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 9,
+     "message": "'Login window is 15 minutes and teller-renewed': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "kiosk.md#shared-kiosk-browser-must-not-keep-the-previous-voter",
    "uuid": "df6e2735-50de-4e4b-9e98-c3d01d93140c",
    "file": "kiosk.md",
-   "line": 33,
-   "end_line": 52,
+   "line": 26,
+   "end_line": 44,
    "title": "Shared kiosk browser must not keep the previous voter",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #182; v3 cookie was non-persistent",
@@ -1893,31 +2254,29 @@
      "commit": "bfec9f4e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "bfec9f4e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 26,
+     "message": "'Shared kiosk browser must not keep the previous voter': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "kiosk.md#login-window-is-election-scoped",
    "uuid": "93885246-fefa-402e-8a45-1076f0c01c9b",
    "file": "kiosk.md",
-   "line": 53,
-   "end_line": 68,
+   "line": 45,
+   "end_line": 59,
    "title": "Login window is election-scoped",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "`IX_PersonKioskCode` is `(ElectionGuid, KioskCode)`; `OnlineVoter.VoterId` is globally unique",
@@ -1933,31 +2292,29 @@
      "commit": "bfec9f4e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "bfec9f4e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 45,
+     "message": "'Login window is election-scoped': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "kiosk.md#setup-toggle-writes-k-on-votingmethods",
    "uuid": "e7d442de-8a37-41a2-b04a-fd737da67499",
    "file": "kiosk.md",
-   "line": 69,
-   "end_line": 77,
+   "line": 60,
+   "end_line": 68,
    "title": "Setup toggle writes `K` on `VotingMethods`",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "v3 `VotingMethodsContains(Kiosk)`; v4 already gated person-form kiosk UI on that string",
@@ -1973,31 +2330,67 @@
      "commit": "bfec9f4e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "bfec9f4e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 60,
+     "message": "'Setup toggle writes `K` on `VotingMethods`': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "kiosk.md#related",
+   "uuid": null,
+   "file": "kiosk.md",
+   "line": 69,
+   "end_line": 73,
+   "title": "Related",
+   "type": [],
+   "status": "",
+   "evidence": "",
+   "source": null,
+   "verification": null,
+   "revisit_when": null,
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-09-12",
+     "commit": "bfec9f4e"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-09-12",
+     "commit": "bfec9f4"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W102",
+     "line": 69,
+     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#draft-autosave-vs-submitted",
    "uuid": "e531f6ee-65eb-4d30-b7b7-8fbd3df01ac1",
    "file": "online-ballots.md",
-   "line": 18,
-   "end_line": 37,
+   "line": 13,
+   "end_line": 31,
    "title": "Draft autosave vs Submitted",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "maintainer, #303 UAT; voter ballot page",
@@ -2013,31 +2406,29 @@
      "commit": "5fc19025"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-11",
-      "commit": "5fc19025"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 13,
+     "message": "'Draft autosave vs Submitted': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#accept-all-of-pending-online-ballots",
    "uuid": "c3306353-19d3-43ed-9aa1-2c7b358a5936",
    "file": "online-ballots.md",
-   "line": 38,
-   "end_line": 84,
+   "line": 32,
+   "end_line": 77,
    "title": "Accept-all of pending online ballots",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #188, maintainer; v3 `ElectionHelper.ProcessOnlineBallots`",
@@ -2053,31 +2444,29 @@
      "commit": "04a6c711"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-02",
-      "commit": "04a6c711"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 32,
+     "message": "'Accept-all of pending online ballots': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#automated-coverage-for-submit-accept-all-counts",
    "uuid": "70da22e7-4629-4117-9bb6-1fb851d56d6f",
    "file": "online-ballots.md",
-   "line": 85,
-   "end_line": 103,
+   "line": 78,
+   "end_line": 95,
    "title": "Automated coverage for submit → Accept-all → counts",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #169 remaining; HTTP integration in `OnlineVotingBallotFlowTests`",
@@ -2099,36 +2488,34 @@
    ],
    "git": {
     "created": {
-     "author": "Glen Little",
-     "date": "2026-09-07",
-     "commit": "4c3fe36b"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-07",
-      "commit": "4c3fe36b"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 78,
+     "message": "'Automated coverage for submit → Accept-all → counts': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#pending-vs-accepted-on-the-monitor-counts-only",
    "uuid": "7cefe595-8f02-4f93-8a87-1975f6201818",
    "file": "online-ballots.md",
-   "line": 104,
-   "end_line": 135,
+   "line": 96,
+   "end_line": 126,
    "title": "Pending vs accepted on the monitor (counts only)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #188 remaining slice; maintainer, PR #296",
@@ -2144,31 +2531,29 @@
      "commit": "e3525a6c"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-02",
-      "commit": "e3525a6c"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 96,
+     "message": "'Pending vs accepted on the monitor (counts only)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#mixed-methods-do-not-accept-a-second-ballot",
    "uuid": "c08032e9-fd86-441f-ba6b-1e17b4111196",
    "file": "online-ballots.md",
-   "line": 136,
-   "end_line": 153,
+   "line": 127,
+   "end_line": 143,
    "title": "Mixed methods: do not accept a second ballot",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #194; Accept-all still creates an OL ballot unless skipped; Front Desk check-in used to ignore online status",
@@ -2184,31 +2569,29 @@
      "commit": "5861bafe"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-12",
-      "commit": "5861bafe"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 127,
+     "message": "'Mixed methods: do not accept a second ballot': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#monitor-5-minute-close-countdown",
    "uuid": "29034508-1d83-4704-bc64-7f7e20d71096",
    "file": "online-ballots.md",
-   "line": 154,
-   "end_line": 171,
+   "line": 144,
+   "end_line": 160,
    "title": "Monitor: 5-minute close countdown",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #184 remaining slice; v3 `Monitor.cshtml` / `closeOnline`",
@@ -2224,31 +2607,29 @@
      "commit": "82d599b9"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-06",
-      "commit": "82d599b9"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 144,
+     "message": "'Monitor: 5-minute close countdown': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#monitor-connected-online-voters-sessions-not-names",
    "uuid": "9896b319-c335-419a-ac05-5057ca6de81e",
    "file": "online-ballots.md",
-   "line": 172,
-   "end_line": 199,
+   "line": 161,
+   "end_line": 187,
    "title": "Monitor: connected online voters (sessions, not names)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #184 remaining slice; Draft autosave exists for restore only; v3 `AllVotersHub` docs in `docs/Hubs-in-v3.md` have no connection-count API and no named composing list",
@@ -2264,31 +2645,29 @@
      "commit": "bd2ea938"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-07",
-      "commit": "bd2ea938"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 161,
+     "message": "'Monitor: connected online voters (sessions, not names)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#monitor-online-voting-layout-status-then-action-then-counts",
    "uuid": "1d98c5c1-96a3-42cb-a566-70bfbd70d5d9",
    "file": "online-ballots.md",
-   "line": 200,
-   "end_line": 227,
+   "line": 188,
+   "end_line": 214,
    "title": "Monitor Online Voting layout (status, then action, then counts)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #345 (evidence: issue #345; monitor UAT screenshot of stacked boxes)",
@@ -2304,31 +2683,29 @@
      "commit": "9e563b37"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-20",
-      "commit": "9e563b37"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 188,
+     "message": "'Monitor Online Voting layout (status, then action, then counts)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#accept-all-audit-record",
    "uuid": "ceee6717-4409-4c5b-87d3-455db781ffd7",
    "file": "online-ballots.md",
-   "line": 228,
-   "end_line": 251,
+   "line": 215,
+   "end_line": 237,
    "title": "Accept-all audit record",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #188 remaining slice; `SecurityAuditLogs` replaced `Logs` / C_Log in `20260713054353_MergeLogsIntoSecurityAuditLogs`",
@@ -2344,31 +2721,29 @@
      "commit": "982cfc9a"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-02",
-      "commit": "982cfc9a"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 215,
+     "message": "'Accept-all audit record': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#teller-resolution-of-free-text-names",
    "uuid": "cc708475-3db0-47a8-a03e-efc448ec9268",
    "file": "online-ballots.md",
-   "line": 252,
-   "end_line": 278,
+   "line": 238,
+   "end_line": 263,
    "title": "Teller resolution of free-text names",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #256, v3 `BallotNormal.cshtml.js` `findWithRawVotePart`; maintainer on issue #187",
@@ -2384,31 +2759,29 @@
      "commit": "43330b22"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-15",
-      "commit": "43330b22"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 238,
+     "message": "'Teller resolution of free-text names': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#teller-created-ballots-stay-off-the-online-location",
    "uuid": "0efd493f-0abb-47f4-95bf-d2f967e1540f",
    "file": "online-ballots.md",
-   "line": 279,
-   "end_line": 304,
+   "line": 264,
+   "end_line": 288,
    "title": "Teller-created ballots stay off the Online location",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #287; maintainer",
@@ -2424,31 +2797,29 @@
      "commit": "900402d8"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "900402d8"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 264,
+     "message": "'Teller-created ballots stay off the Online location': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#reserved-location-display-online-and-imported",
    "uuid": "c400f5ef-292a-446c-8e35-cee95be9ee24",
    "file": "online-ballots.md",
-   "line": 305,
-   "end_line": 332,
+   "line": 289,
+   "end_line": 315,
    "title": "Reserved location display (Online and Imported)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #287; maintainer, 4 Sep 2026; Imported parity, maintainer, #303 UAT",
@@ -2464,31 +2835,29 @@
      "commit": "5fc19025"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-06",
-      "commit": "66f55e03"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 289,
+     "message": "'Reserved location display (Online and Imported)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#online-and-imported-ballot-codes",
    "uuid": "5d6a1f72-a02d-4b2f-bd48-ad982f02225f",
    "file": "online-ballots.md",
-   "line": 333,
-   "end_line": 352,
+   "line": 316,
+   "end_line": 334,
    "title": "Online and imported ballot codes",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #256 follow-up; v3 used `OL` / `IM`",
@@ -2504,31 +2873,29 @@
      "commit": "43330b22"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-15",
-      "commit": "43330b22"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 316,
+     "message": "'Online and imported ballot codes': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "online-ballots.md#name-selection-process-codes",
    "uuid": "f42026a2-8b80-405d-b08b-31d5434da878",
    "file": "online-ballots.md",
-   "line": 353,
-   "end_line": 363,
+   "line": 335,
+   "end_line": 345,
    "title": "Name selection process codes",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "voter ballot page, seed data, `OnlineElectionInfoDto`",
@@ -2544,31 +2911,67 @@
      "commit": "43330b22"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-15",
-      "commit": "43330b22"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 335,
+     "message": "'Name selection process codes': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "online-ballots.md#related",
+   "uuid": null,
+   "file": "online-ballots.md",
+   "line": 346,
+   "end_line": 349,
+   "title": "Related",
+   "type": [],
+   "status": "",
+   "evidence": "",
+   "source": null,
+   "verification": null,
+   "revisit_when": null,
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-08-07",
+     "commit": "f1b10763"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-08-15",
+     "commit": "43330b2"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W102",
+     "line": 346,
+     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+    }
+   ]
   },
   {
    "id": "people-import.md#three-explicit-actions-not-a-wizard",
    "uuid": "61abd86e-a37a-465f-94a1-d6d8b12f06b0",
    "file": "people-import.md",
    "line": 3,
-   "end_line": 21,
+   "end_line": 20,
    "title": "Three explicit actions, not a wizard",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #241; maintainer review of the Import People page",
@@ -2584,31 +2987,29 @@
      "commit": "1aaafff7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-13",
-      "commit": "1aaafff7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Three explicit actions, not a wizard': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#parse-preview-is-per-column-samples-not-the-first-n-rows",
    "uuid": "cc385bfb-b4b8-4240-97f1-071b84bc5476",
    "file": "people-import.md",
-   "line": 22,
-   "end_line": 34,
+   "line": 21,
+   "end_line": 32,
    "title": "Parse preview is per-column samples, not the first N rows",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "mapping UI review; `2021-04-22-with units.csv` has empty MiddleName / FormerName / Nickname on the first rows",
@@ -2624,31 +3025,29 @@
      "commit": "1aaafff7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-13",
-      "commit": "1aaafff7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'Parse preview is per-column samples, not the first N rows': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#header-auto-match-ignores-punctuation-and-accents",
    "uuid": "eb948c15-f058-4bfe-9901-b3d43f282907",
    "file": "people-import.md",
-   "line": 35,
-   "end_line": 46,
+   "line": 33,
+   "end_line": 43,
    "title": "Header auto-match ignores punctuation and accents",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "`\"Baha'i ID\"` failed to map to TallyJ Baha'i ID because aliases were compared as raw strings (`baha'iid` ≠ `bahaiid` / `baha'i id`)",
@@ -2664,31 +3063,29 @@
      "commit": "1aaafff7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-13",
-      "commit": "1aaafff7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 33,
+     "message": "'Header auto-match ignores punctuation and accents': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#mapping-must-be-saved-before-load",
    "uuid": "f32ffe59-b3c8-4735-80d2-ae2f2f7f080a",
    "file": "people-import.md",
-   "line": 47,
-   "end_line": 60,
+   "line": 44,
+   "end_line": 56,
    "title": "Mapping must be saved before load",
-   "type": [
-    "constraint"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "`PeopleImportService.ImportPeopleAsync` requires `ColumnsToRead`",
@@ -2704,31 +3101,29 @@
      "commit": "1aaafff7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-13",
-      "commit": "1aaafff7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 44,
+     "message": "'Mapping must be saved before load': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#hard-spaces-from-excel-word-are-regular-spaces",
    "uuid": "49cd9178-f84d-4435-b881-6a27375d8885",
    "file": "people-import.md",
-   "line": 61,
-   "end_line": 75,
+   "line": 57,
+   "end_line": 70,
    "title": "Hard spaces from Excel/Word are regular spaces",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #170 (evidence: v3 import bug class named on #170; Excel/Word emit U+00A0)",
@@ -2744,31 +3139,29 @@
      "commit": "78ffb577"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-11",
-      "commit": "78ffb577"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 57,
+     "message": "'Hard spaces from Excel/Word are regular spaces': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#empty-files-and-invalid-lines-do-not-abort-the-load",
    "uuid": "596058c3-8938-4a8c-9a3e-65be1f442184",
    "file": "people-import.md",
-   "line": 76,
-   "end_line": 90,
+   "line": 71,
+   "end_line": 84,
    "title": "Empty files and invalid lines do not abort the load",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #170; `PeopleImportController.UploadFile`; `PeopleImportService.ImportPeopleAsync` (evidence: controller already refused 0-byte upload; import skips validation failures without `errorsFound`)",
@@ -2784,31 +3177,29 @@
      "commit": "78ffb577"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-11",
-      "commit": "78ffb577"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 71,
+     "message": "'Empty files and invalid lines do not abort the load': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#people-list-export-is-the-package-voter-reports",
    "uuid": "bdb97d14-f591-4772-b3c5-407f86b309f4",
    "file": "people-import.md",
-   "line": 91,
-   "end_line": 109,
+   "line": 85,
+   "end_line": 102,
    "title": "People list export is the package + voter reports",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #170 (evidence: no People-page CSV download in v4; #170 asked to test export, not add one)",
@@ -2824,31 +3215,29 @@
      "commit": "78ffb577"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-11",
-      "commit": "78ffb577"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 85,
+     "message": "'People list export is the package + voter reports': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people-import.md#eligibility-import-uses-person-form-codes-not-four-invented-statuses",
    "uuid": "a7a174a2-1ea0-4064-a98e-c582b7f36a78",
    "file": "people-import.md",
-   "line": 110,
-   "end_line": 127,
+   "line": 103,
+   "end_line": 119,
    "title": "Eligibility import uses person-form codes, not four invented statuses",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #262",
@@ -2864,31 +3253,29 @@
      "commit": "bb05c1fb"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-15",
-      "commit": "bb05c1fb"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 103,
+     "message": "'Eligibility import uses person-form codes, not four invented statuses': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people.md#agegroup-is-not-stored",
    "uuid": "d585fe81-960b-4d0f-8aa9-4613a5d8458a",
    "file": "people.md",
    "line": 3,
-   "end_line": 19,
+   "end_line": 18,
    "title": "AgeGroup is not stored",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "maintainer decision after review of eligibility vs leftover v2/v3 metadata",
@@ -2904,31 +3291,29 @@
      "commit": "43330b22"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-15",
-      "commit": "43330b22"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'AgeGroup is not stored': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people.md#person-eligibility-is-stored-as-a-short-code",
    "uuid": "3e3a9ae9-4412-4ef9-bb10-3e2929d94a57",
    "file": "people.md",
-   "line": 20,
-   "end_line": 36,
+   "line": 19,
+   "end_line": 34,
    "title": "Person eligibility is stored as a short code",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #263",
@@ -2944,31 +3329,29 @@
      "commit": "b47253f6"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-16",
-      "commit": "b47253f6"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 19,
+     "message": "'Person eligibility is stored as a short code': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people.md#cannot-mark-cannot-vote-after-a-ballot-is-accepted",
    "uuid": "5d447e9c-d56d-4f09-86f3-0ba09933baee",
    "file": "people.md",
-   "line": 37,
-   "end_line": 55,
+   "line": 35,
+   "end_line": 52,
    "title": "Cannot mark cannot-vote after a ballot is accepted",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "TallyJ-3.0 `Site/Views/Setup/EditPerson.cshtml.js` (`updateReasons(!!VotingMethod)`); v4 write gate in `PeopleService.UpdatePersonAsync` (evidence: v3 `EditPerson.updateReasons`; issue #171)",
@@ -2984,31 +3367,29 @@
      "commit": "ba33a193"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-10",
-      "commit": "ba33a193"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 35,
+     "message": "'Cannot mark cannot-vote after a ballot is accepted': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people.md#guest-tellers-add-people-only-when-can-add-people-is-on",
    "uuid": "72c0df24-e281-4b4b-803e-1b5242c703a8",
    "file": "people.md",
-   "line": 56,
-   "end_line": 72,
+   "line": 53,
+   "end_line": 68,
    "title": "Guest tellers add people only when Can Add People is on",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "TallyJ-3.0 `PeopleModel.SavePerson`, `BallotNormal.cshtml.js` `prepareReasons`, Setup “Can Add People?” (evidence: v3 ExtraSetting GA / `Election.GuestTellersCanAddPeople`; issue #186)",
@@ -3024,31 +3405,29 @@
      "commit": "b3133108"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "b3133108"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 53,
+     "message": "'Guest tellers add people only when Can Add People is on': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "people.md#confidential-voters-are-ordinary-people-named-confidential-x",
    "uuid": "e2225935-2bda-4308-b35d-895ac46c7444",
    "file": "people.md",
-   "line": 73,
-   "end_line": 86,
+   "line": 69,
+   "end_line": 81,
    "title": "Confidential voters are ordinary people named Confidential X",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "v3 convention (Add New Person + Front Desk check-in) (evidence: maintainer product correction on #186 / PR #334; no Confidential feature in v3 code)",
@@ -3064,31 +3443,131 @@
      "commit": "b3133108"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 69,
+     "message": "'Confidential voters are ordinary people named Confidential X': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "privacy.md#lora-is-self-hosted",
+   "uuid": null,
+   "file": "privacy.md",
+   "line": 3,
+   "end_line": 12,
+   "title": "Lora is self-hosted",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": null,
+   "verification": null,
+   "revisit_when": "the landing page stops using Lora, or a font host is added that does not receive the visitor IP",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "1d0ba398"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "1d0ba39"
     },
     "status_history": [
      {
       "status": "active",
       "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "b3133108"
+      "date": "2026-10-09",
+      "commit": "1d0ba398"
      }
     ]
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 3,
+     "message": "'Lora is self-hosted': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Lora is self-hosted': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "privacy.md#session-replay-stays-off-online-voter-routes",
+   "uuid": null,
+   "file": "privacy.md",
+   "line": 13,
+   "end_line": 25,
+   "title": "Session Replay stays off online-voter routes",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": null,
+   "verification": null,
+   "revisit_when": "voter ballot choices are no longer a list of names in a stable order, or Session Replay is removed",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "1d0ba398"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "1d0ba39"
+    },
+    "status_history": [
+     {
+      "status": "active",
+      "author": "Glen Little",
+      "date": "2026-10-09",
+      "commit": "1d0ba398"
+     }
+    ]
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 13,
+     "message": "'Session Replay stays off online-voter routes': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 13,
+     "message": "'Session Replay stays off online-voter routes': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#hub-specific-group-name-patterns",
    "uuid": "4398139f-ba65-4e6a-a7b3-03b3630f6d25",
    "file": "realtime.md",
    "line": 3,
-   "end_line": 27,
+   "end_line": 26,
    "title": "Hub-specific group name patterns",
-   "type": [
-    "constraint"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "project agent notes (`AGENTS.md`); hub `GetGroupName` helpers; `SignalRNotificationService`",
@@ -3104,31 +3583,29 @@
      "commit": "f1b10763"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "f1b10763"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Hub-specific group name patterns': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#mainhub-status-vs-role-groups",
    "uuid": "15a379ed-f1bc-4a32-8cc4-a7fe712c5cba",
    "file": "realtime.md",
-   "line": 28,
-   "end_line": 41,
+   "line": 27,
+   "end_line": 39,
    "title": "MainHub status vs role groups",
-   "type": [
-    "constraint"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #227 fix; `SignalRNotificationService.SendElectionUpdateAsync`; `MainHub.JoinElection`",
@@ -3144,31 +3621,29 @@
      "commit": "8163f4c7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "8163f4c7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 27,
+     "message": "'MainHub status vs role groups': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#election-teller-name-list-mainhub-tellerschanged",
    "uuid": "f8e458fa-1726-49f0-b7c0-0d62fea526ac",
    "file": "realtime.md",
-   "line": 42,
-   "end_line": 62,
+   "line": 40,
+   "end_line": 59,
    "title": "Election teller name list (MainHub `tellersChanged`)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #287 (teller-name list slice); Teller 1/2 already persist via `Teller` + Tellers page (evidence: issue #287)",
@@ -3184,31 +3659,29 @@
      "commit": "f70ed91f"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "f70ed91f"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 40,
+     "message": "'Election teller name list (MainHub `tellersChanged`)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#mainhub-multi-election-dashboard-listen-joinelections",
    "uuid": "95c5741d-e14e-466a-aa86-feae16783989",
    "file": "realtime.md",
-   "line": 63,
-   "end_line": 82,
+   "line": 60,
+   "end_line": 78,
    "title": "MainHub multi-election dashboard listen (JoinElections)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #230; v3 `JoinAll` / `Public/JoinMainHubAll`; `MainHub.JoinElections` / `LeaveElections`",
@@ -3224,31 +3697,29 @@
      "commit": "316e98d9"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "316e98d9"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 60,
+     "message": "'MainHub multi-election dashboard listen (JoinElections)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#who-owns-main-vs-frontdesk-membership",
    "uuid": "ce71f670-abc2-494e-8684-9b934ea3bb55",
    "file": "realtime.md",
-   "line": 83,
-   "end_line": 101,
+   "line": 79,
+   "end_line": 96,
    "title": "Who owns Main vs FrontDesk membership",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #242 — guest stage redirects stopped after leaving ballots",
@@ -3259,36 +3730,34 @@
    "refs": [],
    "git": {
     "created": {
-     "author": "Glen Little",
-     "date": "2026-08-08",
-     "commit": "ea91188d"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "ea91188d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 79,
+     "message": "'Who owns Main vs FrontDesk membership': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#no-election-scoped-onlinevotinghub-ballot-totals",
    "uuid": "bacadf81-7987-42d0-a9be-84cd55b066f7",
    "file": "realtime.md",
-   "line": 102,
-   "end_line": 114,
+   "line": 97,
+   "end_line": 108,
    "title": "No election-scoped OnlineVotingHub (ballot totals)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "maintainer review of unused scaffold vs v3 `AllVotersHub` / `VoterPersonalHub`; issue #233",
@@ -3304,31 +3773,29 @@
      "commit": "d1a962b6"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "fe59c69f"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 97,
+     "message": "'No election-scoped OnlineVotingHub (ballot totals)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#online-voter-hubs-allvoters-voterpersonal-issue-233",
    "uuid": "52a0297e-105e-41e9-b080-82644f2e6c24",
    "file": "realtime.md",
-   "line": 115,
-   "end_line": 148,
+   "line": 109,
+   "end_line": 141,
    "title": "Online voter hubs (AllVoters + VoterPersonal) — issue #233",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #233; v3 `AllVotersHub` / `VoterPersonalHub`; preferred thin-signal shape above",
@@ -3346,31 +3813,29 @@
      "commit": "d1a962b6"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "d1a962b6"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 109,
+     "message": "'Online voter hubs (AllVoters + VoterPersonal) — issue #233': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#votercodehub-live-login-code-delivery-status-issue-229",
    "uuid": "1811432d-67fb-4017-a1a7-a631e4fde669",
    "file": "realtime.md",
-   "line": 149,
-   "end_line": 180,
+   "line": 142,
+   "end_line": 172,
    "title": "VoterCodeHub — live login-code delivery status (issue #229)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #229; product decision 2026-09-20 (live status for SMS/voice and email; do not skip); v3 `VoterCodeHub` (`setStatus` / `final`); owner comment that the channel is downstream of SMS-pumping gates",
@@ -3386,31 +3851,29 @@
      "commit": "3656ee76"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-20",
-      "commit": "3656ee76"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 142,
+     "message": "'VoterCodeHub — live login-code delivery status (issue #229)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#no-anonymous-public-results-display",
    "uuid": "239fbceb-3bea-4797-abae-cb4bb5eb84cc",
    "file": "realtime.md",
-   "line": 181,
-   "end_line": 195,
+   "line": 173,
+   "end_line": 186,
    "title": "No anonymous public results display",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "product decision (maintainer)",
@@ -3426,31 +3889,29 @@
      "commit": "0fe294bd"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-07",
-      "commit": "0fe294bd"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 173,
+     "message": "'No anonymous public results display': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#frontdeskhub-event-catalog",
    "uuid": "7cb3b69a-1416-4a32-8b96-2496bada5bb7",
    "file": "realtime.md",
-   "line": 196,
-   "end_line": 227,
+   "line": 187,
+   "end_line": 217,
    "title": "FrontDeskHub event catalog",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #232 fix; `SignalRNotificationService` FrontDesk methods; `peopleStore` / `FrontDeskPage` listeners",
@@ -3466,31 +3927,29 @@
      "commit": "f8169ab7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "f8169ab7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 187,
+     "message": "'FrontDeskHub event catalog': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#frontdesk-reloadpage-vs-full-browser-reload-228",
    "uuid": "12512466-5167-49e1-8997-93be2773980f",
    "file": "realtime.md",
-   "line": 228,
-   "end_line": 242,
+   "line": 218,
+   "end_line": 231,
    "title": "FrontDesk `reloadPage` vs full browser reload (#228)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #228; v3 used `location.reload()` after ballot import; v4 prefers soft re-fetch",
@@ -3506,31 +3965,29 @@
      "commit": "9fd2cf8e"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "9fd2cf8e"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 218,
+     "message": "'FrontDesk `reloadPage` vs full browser reload (#228)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "realtime.md#import-hub-event-catalog-226",
    "uuid": "60f311a8-de19-47b6-8a87-e573e5d7c937",
    "file": "realtime.md",
-   "line": 243,
-   "end_line": 287,
+   "line": 232,
+   "end_line": 276,
    "title": "Import hub event catalog (#226)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #226; `SignalRNotificationService` import methods; `importStore` / `PeopleImportPage` listeners",
@@ -3546,31 +4003,73 @@
      "commit": "601eebaf"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-08",
-      "commit": "601eebaf"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 232,
+     "message": "'Import hub event catalog (#226)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "realtime.md#election-hub-joins-require-election-access",
+   "uuid": null,
+   "file": "realtime.md",
+   "line": 277,
+   "end_line": 288,
+   "title": "Election hub joins require election access",
+   "type": [],
+   "status": "active",
+   "evidence": "confirmed",
+   "source": "same election-scoped authorization pass as teller APIs; `MainHub.JoinElections` already filtered `JoinElectionUsers`",
+   "verification": null,
+   "revisit_when": "a new election-scoped hub is added",
+   "see": [],
+   "superseded_by": null,
+   "refs": [],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "bad5105d"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-10-09",
+     "commit": "bad5105"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "error",
+     "code": "E114",
+     "line": 277,
+     "message": "'Election hub joins require election access': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+    },
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 277,
+     "message": "'Election hub joins require election access': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "reports.md#votersbyarea-18-18-21-use-v01-not-agegroup",
    "uuid": "9cb1b5ec-5f84-4a2d-a64b-e60155df3ddb",
    "file": "reports.md",
    "line": 3,
-   "end_line": 22,
+   "end_line": 21,
    "title": "VotersByArea 18+ / 18–21 use V01, not AgeGroup",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #185 remaining checklist; TallyJ-3.0 `Site/Reports/VotersByArea.cshtml` (evidence: issue #185 names the columns; AgeGroup was removed — see [people.md](people.md))",
@@ -3597,31 +4096,29 @@
      "commit": "2eb17a99"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "2eb17a99"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'VotersByArea 18+ / 18–21 use V01, not AgeGroup': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "reports.md#one-click-download-is-the-existing-report-list-as-csv-zip",
    "uuid": "5e71f356-394a-4284-bf96-73ddfb94aea8",
    "file": "reports.md",
-   "line": 23,
-   "end_line": 37,
+   "line": 22,
+   "end_line": 35,
    "title": "One-click download is the existing report list as CSV zip",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #185; TallyJ-3.0 `Site/Views/After/Reports.cshtml` (evidence: issue #185 “if missing”; v3 Reports page is print + per-report CSV only)",
@@ -3637,31 +4134,29 @@
      "commit": "2eb17a99"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "2eb17a99"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 22,
+     "message": "'One-click download is the existing report list as CSV zip': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "reports.md#vote-counts-show-tie-break-only-when-a-count-was-entered",
    "uuid": "3bffd907-8743-4f14-8ef9-3c18493b4c7d",
    "file": "reports.md",
-   "line": 38,
-   "end_line": 52,
+   "line": 36,
+   "end_line": 49,
    "title": "Vote counts show `/ tie-break` only when a count was entered",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #198; [election-analysis.md](election-analysis.md) (evidence: follows #198 unset vs explicit 0; #322 persist/analyze already shipped)",
@@ -3688,31 +4183,29 @@
      "commit": "edf11c00"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-20",
-      "commit": "edf11c00"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 36,
+     "message": "'Vote counts show `/ tie-break` only when a count was entered': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "reports.md#front-desk-ballots-analysis-share-one-voted-rule",
    "uuid": "73ec28be-455a-41b2-b14b-954b4922c518",
    "file": "reports.md",
-   "line": 53,
-   "end_line": 65,
+   "line": 50,
+   "end_line": 61,
    "title": "Front Desk / ballots / analysis share one voted rule",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #185; [ballot-validation.md](ballot-validation.md); [online-ballots.md](online-ballots.md) (evidence: issue #185 “verify counts match”; Accept-all does not set `VotingMethod` or `RegistrationTime`)",
@@ -3728,32 +4221,29 @@
      "commit": "2eb17a99"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "2eb17a99"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 50,
+     "message": "'Front Desk / ballots / analysis share one voted rule': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#in-code-gate-before-any-paid-provider",
    "uuid": "1371035d-9f3b-4db1-9709-6d98503272b8",
    "file": "sms-eligibility.md",
-   "line": 9,
-   "end_line": 34,
+   "line": 3,
+   "end_line": 26,
    "title": "In-code gate before any paid provider",
-   "type": [
-    "decision",
-    "incident"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 (maintainer); July 555-range send incident described there",
@@ -3764,36 +4254,34 @@
    "refs": [],
    "git": {
     "created": {
-     "author": "Glen Little",
-     "date": "2026-08-30",
-     "commit": "e5ed21a6"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Oliver Zehentleitner AIgent",
-      "date": "2026-10-05",
-      "commit": "340758cc"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'In-code gate before any paid provider': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#durable-onlinevoter-smsstatus-second-slice",
    "uuid": "e49ea17f-8271-4164-8bc2-fffcccb76b73",
    "file": "sms-eligibility.md",
-   "line": 35,
-   "end_line": 76,
+   "line": 27,
+   "end_line": 67,
    "title": "Durable `OnlineVoter.SmsStatus` (second slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 (maintainer); July 555-range send incident described there",
@@ -3801,7 +4289,9 @@
    "revisit_when": "NANP reserved-range rules change",
    "see": [],
    "superseded_by": null,
-   "refs": [],
+   "refs": [
+    "anti-abuse.md"
+   ],
    "git": {
     "created": {
      "author": "Glen Little",
@@ -3809,31 +4299,29 @@
      "commit": "238f9164"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Oliver Zehentleitner AIgent",
-      "date": "2026-10-05",
-      "commit": "340758cc"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 27,
+     "message": "'Durable `OnlineVoter.SmsStatus` (second slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#ensure-phone-onlinevoter-on-person-write-third-slice",
    "uuid": "8f477db8-3d22-49c8-9dd2-0226b4f29fc0",
    "file": "sms-eligibility.md",
-   "line": 77,
-   "end_line": 101,
+   "line": 68,
+   "end_line": 91,
    "title": "Ensure phone `OnlineVoter` on Person write (third slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 (maintainer)",
@@ -3849,31 +4337,29 @@
      "commit": "e68fbb58"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-30",
-      "commit": "e68fbb58"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 68,
+     "message": "'Ensure phone `OnlineVoter` on Person write (third slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#person-detail-phone-onlinevoter-status-fourth-slice",
    "uuid": "e8fb74dd-b103-414f-8595-db88bf7fd8fa",
    "file": "sms-eligibility.md",
-   "line": 102,
-   "end_line": 122,
+   "line": 92,
+   "end_line": 111,
    "title": "Person detail phone OnlineVoter status (fourth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 (maintainer); this slice’s lookup rule",
@@ -3889,31 +4375,29 @@
      "commit": "aea89948"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-30",
-      "commit": "aea89948"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 92,
+     "message": "'Person detail phone OnlineVoter status (fourth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#twilio-status-callback-auto-learn-fifth-slice",
    "uuid": "a3fd6326-00db-4cab-964d-a3a386e4e277",
    "file": "sms-eligibility.md",
-   "line": 123,
-   "end_line": 165,
+   "line": 112,
+   "end_line": 153,
    "title": "Twilio status-callback auto-learn (fifth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 (maintainer); this slice’s callback rules",
@@ -3929,31 +4413,29 @@
      "commit": "8cb82dc0"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-30",
-      "commit": "8cb82dc0"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 112,
+     "message": "'Twilio status-callback auto-learn (fifth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#person-detail-recent-smslog-sixth-slice",
    "uuid": "d7d89021-883c-462f-9424-5ab7812c7072",
    "file": "sms-eligibility.md",
-   "line": 166,
-   "end_line": 188,
+   "line": 154,
+   "end_line": 175,
    "title": "Person detail recent SmsLog (sixth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #254 Person UI “optional recent SmsLog”; existing +/- phone keys from the fifth slice (evidence: confirmed (surface); inferred (lookup / limit details))",
@@ -3969,31 +4451,29 @@
      "commit": "717daf28"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "717daf28"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 154,
+     "message": "'Person detail recent SmsLog (sixth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#send-side-smslog-insert-statuscallback-seventh-slice",
    "uuid": "eae6a7e5-8904-4eeb-afb8-49d01a486c54",
    "file": "sms-eligibility.md",
-   "line": 189,
-   "end_line": 213,
+   "line": 176,
+   "end_line": 199,
    "title": "Send-side SmsLog insert + StatusCallback (seventh slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 leftover after #325; v3 `TwilioHelper.SendSmsAsync` / `SendVoice` insert + `twilio-CallbackUrl`",
@@ -4009,31 +4489,29 @@
      "commit": "942a72e1"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "942a72e1"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 176,
+     "message": "'Send-side SmsLog insert + StatusCallback (seventh slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#teller-manual-smsstatus-eighth-slice",
    "uuid": "5830cb54-1ca0-4239-9b7d-017a12ccd97d",
    "file": "sms-eligibility.md",
-   "line": 214,
-   "end_line": 242,
+   "line": 200,
+   "end_line": 227,
    "title": "Teller manual SmsStatus (eighth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #254 leftover after #327; PeopleController `[Authorize]` (same as UpdatePerson) (evidence: confirmed (privilege model from existing People routes); inferred (Ensure-if-missing on set))",
@@ -4049,31 +4527,29 @@
      "commit": "a7e2afbf"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "a7e2afbf"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 200,
+     "message": "'Teller manual SmsStatus (eighth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#set-smsstatus-ok-from-delivered-callback-ninth-slice",
    "uuid": "e8f31b8f-6f20-4f91-912e-b4489a5f26f6",
    "file": "sms-eligibility.md",
-   "line": 243,
-   "end_line": 278,
+   "line": 228,
+   "end_line": 262,
    "title": "Set `SmsStatus` OK from delivered callback (ninth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #254 leftover after send-side SmsLog + StatusCallback; this slice’s SID + overwrite rules (evidence: leftover after #327; Twilio success statuses)",
@@ -4089,31 +4565,29 @@
      "commit": "11e15030"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "11e15030"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 228,
+     "message": "'Set `SmsStatus` OK from delivered callback (ninth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#front-desk-people-list-sms-hint-tenth-slice",
    "uuid": "747af2a6-4ff3-4aa9-954f-b30eb4fb1771",
    "file": "sms-eligibility.md",
-   "line": 279,
-   "end_line": 305,
+   "line": 263,
+   "end_line": 288,
    "title": "Front Desk / people list SMS hint (tenth slice)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #254 leftover after #331; person-detail lookup rule (evidence: confirmed (P-row contract from person detail); inferred (compact list vocabulary))",
@@ -4129,31 +4603,29 @@
      "commit": "1d552ee5"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "1d552ee5"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 263,
+     "message": "'Front Desk / people list SMS hint (tenth slice)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#durable-onlinevoter-whatsappstatus-first-slice-of-255",
    "uuid": "05042a1b-df05-431b-a4cb-54c010a34613",
    "file": "sms-eligibility.md",
-   "line": 306,
-   "end_line": 338,
+   "line": 289,
+   "end_line": 320,
    "title": "Durable `OnlineVoter.WhatsAppStatus` (first slice of #255)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #255 (maintainer); provider comment that v4 stays on GreenAPI",
@@ -4169,31 +4641,29 @@
      "commit": "e3897769"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "e3897769"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 289,
+     "message": "'Durable `OnlineVoter.WhatsAppStatus` (first slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#bulk-check-selected-whatsapp-second-slice-of-255",
    "uuid": "52223ff6-c04e-428e-ab68-2ea9700d12aa",
    "file": "sms-eligibility.md",
-   "line": 339,
-   "end_line": 363,
+   "line": 321,
+   "end_line": 344,
    "title": "Bulk check selected WhatsApp (second slice of #255)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #255 leftover after #339; this slice’s check-selected contract",
@@ -4209,31 +4679,29 @@
      "commit": "d1243445"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "d1243445"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 321,
+     "message": "'Bulk check selected WhatsApp (second slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#head-teller-whatsapp-notify-queue-third-slice-of-255",
    "uuid": "9683c025-00a2-42c1-b872-46cbea674126",
    "file": "sms-eligibility.md",
-   "line": 364,
-   "end_line": 388,
+   "line": 345,
+   "end_line": 368,
    "title": "Head-teller WhatsApp notify queue (third slice of #255)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #255 leftover after #340; v3 `SendHeadTellerMessage` / `AbortQueue`; this slice’s send rule",
@@ -4249,31 +4717,29 @@
      "commit": "30804625"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-13",
-      "commit": "30804625"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 345,
+     "message": "'Head-teller WhatsApp notify queue (third slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#front-desk-people-list-whatsapp-hint-fourth-slice-of-255",
    "uuid": "35718c77-593c-433a-a459-40f1a7ca680f",
    "file": "sms-eligibility.md",
-   "line": 389,
-   "end_line": 411,
+   "line": 369,
+   "end_line": 390,
    "title": "Front Desk / people list WhatsApp hint (fourth slice of #255)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #255 leftover after #341; SMS list-hint contract from the tenth #254 slice (evidence: confirmed (P-row contract and batch lookup from the SMS list hint); inferred (compact WhatsApp vocabulary matches person detail))",
@@ -4289,31 +4755,29 @@
      "commit": "3950addb"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-14",
-      "commit": "3950addb"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 369,
+     "message": "'Front Desk / people list WhatsApp hint (fourth slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "sms-eligibility.md#notify-people-list-has-whatsapp-filter-fifth-slice-of-255",
    "uuid": "efe047c4-2d62-4db1-9233-41cd16912c3c",
    "file": "sms-eligibility.md",
-   "line": 412,
-   "end_line": 437,
+   "line": 391,
+   "end_line": 416,
    "title": "Notify People list “Has WhatsApp” filter (fifth slice of #255)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #255 leftover after #343; v3 Notify “Has WhatsApp” filter; this slice’s list-hint rule",
@@ -4329,31 +4793,69 @@
      "commit": "313996b7"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-14",
-      "commit": "313996b7"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 391,
+     "message": "'Notify People list “Has WhatsApp” filter (fifth slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
+  },
+  {
+   "id": "sms-eligibility.md#related",
+   "uuid": null,
+   "file": "sms-eligibility.md",
+   "line": 417,
+   "end_line": 421,
+   "title": "Related",
+   "type": [],
+   "status": "",
+   "evidence": "",
+   "source": null,
+   "verification": null,
+   "revisit_when": null,
+   "see": [],
+   "superseded_by": null,
+   "refs": [
+    "auth.md"
+   ],
+   "git": {
+    "created": {
+     "author": "Glen Little",
+     "date": "2026-08-30",
+     "commit": "e5ed21a6"
+    },
+    "last_touched": {
+     "author": "Glen Little",
+     "date": "2026-08-30",
+     "commit": "e5ed21a"
+    },
+    "status_history": []
+   },
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W102",
+     "line": 417,
+     "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+    }
+   ]
   },
   {
    "id": "test-elections.md#duplicate-copies-settings-people-and-locations-not-ballots-or-runtime-state",
    "uuid": "49d031ca-8491-4c54-bdd8-10c37ed9976d",
    "file": "test-elections.md",
    "line": 3,
-   "end_line": 21,
+   "end_line": 20,
    "title": "Duplicate copies settings, people, and locations — not ballots or runtime state",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #193; v4 `CreateElectionAsync` / `JoinElectionUser` ownership; v3 `ElectionHelper.Copy` (commented; guest tellers denied; SQL `CloneElection`) (evidence: issue #193 first slice)",
@@ -4369,31 +4871,29 @@
      "commit": "7955ae82"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "7955ae82"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Duplicate copies settings, people, and locations — not ballots or runtime state': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "test-elections.md#teller-pages-show-a-persistent-test-election-banner",
    "uuid": "7c5462d9-a134-4f8c-bebb-b490e7801870",
    "file": "test-elections.md",
-   "line": 22,
-   "end_line": 44,
+   "line": 21,
+   "end_line": 42,
    "title": "Teller pages show a persistent Test Election banner",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #193; PR #284 UAT (evidence: issue #193 second slice; UAT: gather orange, not error red)",
@@ -4409,31 +4909,29 @@
      "commit": "cced14a6"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "cced14a6"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 21,
+     "message": "'Teller pages show a persistent Test Election banner': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "test-elections.md#default-copy-name",
    "uuid": "8c1d875b-0f9c-4e56-97c1-b47cbdb382be",
    "file": "test-elections.md",
-   "line": 45,
-   "end_line": 55,
+   "line": 43,
+   "end_line": 52,
    "title": "Default copy name",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "v3 copy was “copy of …” in the issue hunches; no live v3 `CloneElection` script in the TallyJ-3.0 repo",
@@ -4449,31 +4947,29 @@
      "commit": "7955ae82"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "7955ae82"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 43,
+     "message": "'Default copy name': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "test-elections.md#reset-wipes-runtime-data-only-on-showastest-elections",
    "uuid": "9b11b606-9bae-4fbf-b31e-53500c33c325",
    "file": "test-elections.md",
-   "line": 56,
-   "end_line": 88,
+   "line": 53,
+   "end_line": 84,
    "title": "Reset wipes runtime data only on ShowAsTest elections",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #193; v4 `DuplicateElectionAsync` wipe/start list; `GetAvailableElectionsAsync` null-window rule (evidence: confirmed for the test-only gate (issue #193; `ShowAsTest` must be true). Inferred for wipe list, `SettingUp`, and window-close matching duplicate (no live v3 reset found).)",
@@ -4489,31 +4985,29 @@
      "commit": "dbf74df3"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-08-31",
-      "commit": "dbf74df3"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 53,
+     "message": "'Reset wipes runtime data only on ShowAsTest elections': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#dark-hairlines-must-win-over-later-root-remaps",
    "uuid": "823d1f54-cdc6-43d0-8f2b-0cabb90a5dcb",
    "file": "theme.md",
    "line": 3,
-   "end_line": 19,
+   "end_line": 18,
    "title": "Dark hairlines must win over later `:root` remaps",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #285 leftover after PR #293; `style.less` import order is `tokens.less` → `tokens-dark.less` → `element-plus.less`",
@@ -4529,31 +5023,29 @@
      "commit": "2d522a95"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-20",
-      "commit": "2d522a95"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 3,
+     "message": "'Dark hairlines must win over later `:root` remaps': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#dark-theme-hairlines-follow-the-light-mode-scale",
    "uuid": "0faedcdc-7832-447d-9ab0-e35b208c1a15",
    "file": "theme.md",
-   "line": 20,
-   "end_line": 32,
+   "line": 19,
+   "end_line": 30,
    "title": "Dark theme hairlines follow the light-mode scale",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #285 (dashboard/setup screenshots); `tokens-dark.less` previously mapped `--el-border-color-extra-light` to `--color-gray-400`",
@@ -4569,31 +5061,29 @@
      "commit": "e424da0d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-01",
-      "commit": "e424da0d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 19,
+     "message": "'Dark theme hairlines follow the light-mode scale': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#dark-current-page-chip-is-fill-plus-light-text",
    "uuid": "ac1d2f22-940f-487e-aeb2-a1c087621019",
    "file": "theme.md",
-   "line": 33,
-   "end_line": 49,
+   "line": 31,
+   "end_line": 46,
    "title": "Dark current-page chip is fill plus light text",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #285 current-menu highlight; PR review of the `#2563a8` + orange pairing",
@@ -4609,31 +5099,29 @@
      "commit": "e424da0d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-01",
-      "commit": "e424da0d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 31,
+     "message": "'Dark current-page chip is fill plus light text': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#election-stage-chips-use-fill-tokens-not-light-only-white",
    "uuid": "7308864a-faae-4226-8df5-55d7f823c091",
    "file": "theme.md",
-   "line": 50,
-   "end_line": 62,
+   "line": 47,
+   "end_line": 58,
    "title": "Election-stage chips use fill tokens, not light-only white",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #285; `StageControl.vue` had `#fff` / `#dcdfe6` / `#606266`",
@@ -4649,31 +5137,29 @@
      "commit": "e424da0d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-01",
-      "commit": "e424da0d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 47,
+     "message": "'Election-stage chips use fill tokens, not light-only white': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#names-use-color-text-link-not-el-color-primary",
    "uuid": "95d387c9-d866-466f-bb7d-2aebf7bf3dd3",
    "file": "theme.md",
-   "line": 63,
-   "end_line": 75,
+   "line": 59,
+   "end_line": 70,
    "title": "Names use `--color-text-link`, not `--el-color-primary`",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "inferred",
    "source": "issue #285 names-list contrast; People table uses `el-button type=\"primary\" link`",
@@ -4689,31 +5175,29 @@
      "commit": "e424da0d"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-01",
-      "commit": "e424da0d"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 59,
+     "message": "'Names use `--color-text-link`, not `--el-color-primary`': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#leftover-screens-use-the-same-tokens-front-desk-voter-profile-join",
    "uuid": "ffa02eb3-c78f-4bae-b975-762704681a55",
    "file": "theme.md",
-   "line": 76,
-   "end_line": 103,
+   "line": 71,
+   "end_line": 97,
    "title": "Leftover screens use the same tokens (Front Desk / voter / profile / join)",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #285 follow-up after PR #354; local hex on Front Desk filters, voter elections/ballot, Profile QR, Teller join, CardSkeleton, tie cards",
@@ -4729,31 +5213,29 @@
      "commit": "4438ea07"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-23",
-      "commit": "4438ea07"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 71,
+     "message": "'Leftover screens use the same tokens (Front Desk / voter / profile / join)': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#warning-banners-and-leftover-fills-use-semantic-tokens",
    "uuid": "6f960578-449c-4c61-a23f-dc3b0987c8f6",
    "file": "theme.md",
-   "line": 104,
-   "end_line": 126,
+   "line": 98,
+   "end_line": 119,
    "title": "Warning banners and leftover fills use semantic tokens",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #285 follow-up after PR #356; AppSidebar / LandingPage had a `:root.dark` hex override that did not cover LanguageFlagsSelector or the sidebar status link",
@@ -4769,31 +5251,29 @@
      "commit": "81eda682"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-23",
-      "commit": "81eda682"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 98,
+     "message": "'Warning banners and leftover fills use semantic tokens': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   },
   {
    "id": "theme.md#branch-badge-and-audit-muted-dashes-use-shared-tokens",
    "uuid": "0eb2305d-0796-44ee-9380-cab851812c2c",
    "file": "theme.md",
-   "line": 127,
-   "end_line": 144,
+   "line": 120,
+   "end_line": 136,
    "title": "Branch badge and audit muted dashes use shared tokens",
-   "type": [
-    "decision"
-   ],
+   "type": [],
    "status": "active",
    "evidence": "confirmed",
    "source": "issue #285 follow-up after the warning/fill/inverse slice (`81eda682`); `App.vue` `.bottomCorner` was `#f0f0f0` / `#666`; Audit Logs `.text-muted` was `#909399`",
@@ -4809,50 +5289,1055 @@
      "commit": "b36380cc"
     },
     "last_touched": {
-     "author": "Oliver Zehentleitner AIgent",
-     "date": "2026-10-06",
-     "commit": "79f11a1"
+     "author": "working tree",
+     "date": "",
+     "commit": ""
     },
-    "status_history": [
-     {
-      "status": "active",
-      "author": "Glen Little",
-      "date": "2026-09-23",
-      "commit": "b36380cc"
-     }
-    ]
+    "status_history": []
    },
-   "findings": []
+   "findings": [
+    {
+     "severity": "warning",
+     "code": "W101",
+     "line": 120,
+     "message": "'Branch badge and audit muted dashes use shared tokens': no **Type:** field — fill it in the next time the entry is touched"
+    }
+   ]
   }
  ],
  "authors": [
   {
    "name": "Glen Little",
-   "created": 111,
-   "touched": 1,
+   "created": 121,
+   "touched": 14,
    "superseded": 0,
    "first": "2026-08-07",
-   "last": "2026-10-07",
+   "last": "2026-10-09",
    "evidence": {
-    "confirmed": 84,
-    "inferred": 27
+    "confirmed": 91,
+    "inferred": 27,
+    "": 3
    }
   },
   {
-   "name": "Oliver Zehentleitner AIgent",
-   "created": 0,
-   "touched": 110,
+   "name": "working tree",
+   "created": 4,
+   "touched": 111,
    "superseded": 0,
-   "first": "2026-10-06",
-   "last": "2026-10-07",
-   "evidence": {}
+   "first": "",
+   "last": "",
+   "evidence": {
+    "confirmed": 4
+   }
   }
  ],
  "anonymized": false,
  "findings": {
-  "errors": 0,
-  "warnings": 0,
-  "items": []
+  "errors": 18,
+  "warnings": 125,
+  "items": [
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 3,
+    "message": "'Owner paid-send gate (issue #371 slice 3a)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 3,
+    "message": "'Owner paid-send gate (issue #371 slice 3a)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 24,
+    "message": "'Caps and the kill switch': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 24,
+    "message": "'Caps and the kill switch': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 39,
+    "message": "'Alerts': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 39,
+    "message": "'Alerts': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 50,
+    "message": "'Voter-list flag': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 50,
+    "message": "'Voter-list flag': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 67,
+    "message": "'Neutral requestCode reply (issue #371 slice 2)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 67,
+    "message": "'Neutral requestCode reply (issue #371 slice 2)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/anti-abuse.md",
+    "line": 82,
+    "message": "'Phone-prefix cap (issue #371)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/anti-abuse.md",
+    "line": 82,
+    "message": "'Phone-prefix cap (issue #371)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/api-contracts.md",
+    "line": 3,
+    "message": "'Dual response wrappers': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/api-contracts.md",
+    "line": 20,
+    "message": "'OpenAPI TypeScript client regeneration': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/api-contracts.md",
+    "line": 34,
+    "message": "'Generated client error shape (hey-api)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/architecture.md",
+    "line": 3,
+    "message": "'Single backend host after domain consolidation': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/architecture.md",
+    "line": 17,
+    "message": "'Social preview URLs are static and pinned to production': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 3,
+    "message": "'JWT user id claim lookup on .NET 10': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 21,
+    "message": "'Online-voter session is a distinct httpOnly cookie': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 49,
+    "message": "'IdP-first teller signup (issue #347)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 69,
+    "message": "'SuperAdmin one-time invite for local email/password signup (issue #347 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 91,
+    "message": "'Proxy-aware auth rate limits (issue #192 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 134,
+    "message": "'Distinct voter verify error keys (issue #192 leftover)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 159,
+    "message": "'Online ballot identity is the voter session (issue #371 slice 0)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 177,
+    "message": "'Guest teller login lockout (issue #371 slice 1)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 219,
+    "message": "'Pre-auth voter-code delivery channel (issue #229)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/auth.md",
+    "line": 243,
+    "message": "'Site-wide super admin is an email list (issue #371)': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 243,
+    "message": "'Site-wide super admin is an email list (issue #371)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/auth.md",
+    "line": 258,
+    "message": "'Teller APIs are election-scoped': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/auth.md",
+    "line": 258,
+    "message": "'Teller APIs are election-scoped': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/ballot-validation.md",
+    "line": 20,
+    "message": "'Count reconciliation report (issue #190)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-analysis.md",
+    "line": 21,
+    "message": "'v3 comparison is a harness, not an engine rewrite': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-analysis.md",
+    "line": 41,
+    "message": "'Tie-break counts: save, 0, and unset': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-analysis.md",
+    "line": 66,
+    "message": "'Analyze manual voter counts persist M without re-running Analyze': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 15,
+    "message": "'Lock after analysis is the Finalized stage': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 44,
+    "message": "'“Move all tellers to this state” is the stage broadcast': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 66,
+    "message": "'GuestTeller page on stage change': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 92,
+    "message": "'Teller 1/2 names vs the election teller list': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 103,
+    "message": "'Session Teller 1/2 on an open ballot': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/election-state.md",
+    "line": 120,
+    "message": "'Concurrent tellers: automated coverage is SQLite, not a browser driver': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 3,
+    "message": "'Ballot Not Received is a hide-received filter': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 17,
+    "message": "'Front Desk method codes and mixed-method switch': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 41,
+    "message": "'Roll Call and envelope pages are not v4 product pages': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 55,
+    "message": "'Front Desk checked-in count matches analysis voted': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 72,
+    "message": "'Repeatable desk method while registration is open': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 92,
+    "message": "'Registration-done is the Finalized write lock': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 107,
+    "message": "'Accept-all vs Front Desk same-moment race': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/front-desk.md",
+    "line": 129,
+    "message": "'Front Desk SMS column is the phone P-row hint': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/i18n-rich-entries.md",
+    "line": 3,
+    "message": "'Leaves keep text and provenance together': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/i18n-rich-entries.md",
+    "line": 21,
+    "message": "'AI may refresh only `ai` drafts': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/i18n.md",
+    "line": 5,
+    "message": "'Document `dir` is set with `lang`': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/i18n.md",
+    "line": 21,
+    "message": "'Version label: one string, no Beta weight span': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/i18n.md",
+    "line": 37,
+    "message": "'Public dark header text is a narrow token fix': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E204",
+    "path": "context/index.md",
+    "line": 27,
+    "message": "index entries are not sorted alphabetically by filename (convention since 0.10.0)"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 32,
+    "message": "'realtime.md' is listed under `## A`, its heading is `## R`"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 34,
+    "message": "'election-analysis.md' is listed under `## A`, its heading is `## E`"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 35,
+    "message": "'reports.md' is listed under `## A`, its heading is `## R`"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 103,
+    "message": "'i18n.md' is listed under `## T`, its heading is `## I`"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 104,
+    "message": "'i18n-rich-entries.md' is listed under `## T`, its heading is `## I`"
+   },
+   {
+    "severity": "error",
+    "code": "E206",
+    "path": "context/index.md",
+    "line": 105,
+    "message": "'privacy.md' is listed under `## T`, its heading is `## P`"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/kiosk.md",
+    "line": 9,
+    "message": "'Login window is 15 minutes and teller-renewed': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/kiosk.md",
+    "line": 26,
+    "message": "'Shared kiosk browser must not keep the previous voter': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/kiosk.md",
+    "line": 45,
+    "message": "'Login window is election-scoped': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/kiosk.md",
+    "line": 60,
+    "message": "'Setup toggle writes `K` on `VotingMethods`': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W102",
+    "path": "context/kiosk.md",
+    "line": 69,
+    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 13,
+    "message": "'Draft autosave vs Submitted': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 32,
+    "message": "'Accept-all of pending online ballots': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 78,
+    "message": "'Automated coverage for submit → Accept-all → counts': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 96,
+    "message": "'Pending vs accepted on the monitor (counts only)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 127,
+    "message": "'Mixed methods: do not accept a second ballot': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 144,
+    "message": "'Monitor: 5-minute close countdown': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 161,
+    "message": "'Monitor: connected online voters (sessions, not names)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 188,
+    "message": "'Monitor Online Voting layout (status, then action, then counts)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 215,
+    "message": "'Accept-all audit record': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 238,
+    "message": "'Teller resolution of free-text names': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 264,
+    "message": "'Teller-created ballots stay off the Online location': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 289,
+    "message": "'Reserved location display (Online and Imported)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 316,
+    "message": "'Online and imported ballot codes': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/online-ballots.md",
+    "line": 335,
+    "message": "'Name selection process codes': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W102",
+    "path": "context/online-ballots.md",
+    "line": 346,
+    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 3,
+    "message": "'Three explicit actions, not a wizard': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 21,
+    "message": "'Parse preview is per-column samples, not the first N rows': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 33,
+    "message": "'Header auto-match ignores punctuation and accents': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 44,
+    "message": "'Mapping must be saved before load': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 57,
+    "message": "'Hard spaces from Excel/Word are regular spaces': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 71,
+    "message": "'Empty files and invalid lines do not abort the load': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 85,
+    "message": "'People list export is the package + voter reports': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people-import.md",
+    "line": 103,
+    "message": "'Eligibility import uses person-form codes, not four invented statuses': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people.md",
+    "line": 3,
+    "message": "'AgeGroup is not stored': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people.md",
+    "line": 19,
+    "message": "'Person eligibility is stored as a short code': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people.md",
+    "line": 35,
+    "message": "'Cannot mark cannot-vote after a ballot is accepted': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people.md",
+    "line": 53,
+    "message": "'Guest tellers add people only when Can Add People is on': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/people.md",
+    "line": 69,
+    "message": "'Confidential voters are ordinary people named Confidential X': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/privacy.md",
+    "line": 3,
+    "message": "'Lora is self-hosted': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/privacy.md",
+    "line": 3,
+    "message": "'Lora is self-hosted': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/privacy.md",
+    "line": 13,
+    "message": "'Session Replay stays off online-voter routes': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/privacy.md",
+    "line": 13,
+    "message": "'Session Replay stays off online-voter routes': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 3,
+    "message": "'Hub-specific group name patterns': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 27,
+    "message": "'MainHub status vs role groups': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 40,
+    "message": "'Election teller name list (MainHub `tellersChanged`)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 60,
+    "message": "'MainHub multi-election dashboard listen (JoinElections)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 79,
+    "message": "'Who owns Main vs FrontDesk membership': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 97,
+    "message": "'No election-scoped OnlineVotingHub (ballot totals)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 109,
+    "message": "'Online voter hubs (AllVoters + VoterPersonal) — issue #233': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 142,
+    "message": "'VoterCodeHub — live login-code delivery status (issue #229)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 173,
+    "message": "'No anonymous public results display': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 187,
+    "message": "'FrontDeskHub event catalog': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 218,
+    "message": "'FrontDesk `reloadPage` vs full browser reload (#228)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 232,
+    "message": "'Import hub event catalog (#226)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "error",
+    "code": "E114",
+    "path": "context/realtime.md",
+    "line": 277,
+    "message": "'Election hub joins require election access': entry has no **Id:** field — every entry carries a UUID since 0.18.0 (references/migrations.md)"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/realtime.md",
+    "line": 277,
+    "message": "'Election hub joins require election access': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/reports.md",
+    "line": 3,
+    "message": "'VotersByArea 18+ / 18–21 use V01, not AgeGroup': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/reports.md",
+    "line": 22,
+    "message": "'One-click download is the existing report list as CSV zip': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/reports.md",
+    "line": 36,
+    "message": "'Vote counts show `/ tie-break` only when a count was entered': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/reports.md",
+    "line": 50,
+    "message": "'Front Desk / ballots / analysis share one voted rule': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 3,
+    "message": "'In-code gate before any paid provider': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 27,
+    "message": "'Durable `OnlineVoter.SmsStatus` (second slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 68,
+    "message": "'Ensure phone `OnlineVoter` on Person write (third slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 92,
+    "message": "'Person detail phone OnlineVoter status (fourth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 112,
+    "message": "'Twilio status-callback auto-learn (fifth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 154,
+    "message": "'Person detail recent SmsLog (sixth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 176,
+    "message": "'Send-side SmsLog insert + StatusCallback (seventh slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 200,
+    "message": "'Teller manual SmsStatus (eighth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 228,
+    "message": "'Set `SmsStatus` OK from delivered callback (ninth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 263,
+    "message": "'Front Desk / people list SMS hint (tenth slice)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 289,
+    "message": "'Durable `OnlineVoter.WhatsAppStatus` (first slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 321,
+    "message": "'Bulk check selected WhatsApp (second slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 345,
+    "message": "'Head-teller WhatsApp notify queue (third slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 369,
+    "message": "'Front Desk / people list WhatsApp hint (fourth slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/sms-eligibility.md",
+    "line": 391,
+    "message": "'Notify People list “Has WhatsApp” filter (fifth slice of #255)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W102",
+    "path": "context/sms-eligibility.md",
+    "line": 417,
+    "message": "'Related': level-2 heading without any schema fields — fine for a prose section, an error if this was meant to be an entry"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/test-elections.md",
+    "line": 3,
+    "message": "'Duplicate copies settings, people, and locations — not ballots or runtime state': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/test-elections.md",
+    "line": 21,
+    "message": "'Teller pages show a persistent Test Election banner': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/test-elections.md",
+    "line": 43,
+    "message": "'Default copy name': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/test-elections.md",
+    "line": 53,
+    "message": "'Reset wipes runtime data only on ShowAsTest elections': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 3,
+    "message": "'Dark hairlines must win over later `:root` remaps': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 19,
+    "message": "'Dark theme hairlines follow the light-mode scale': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 31,
+    "message": "'Dark current-page chip is fill plus light text': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 47,
+    "message": "'Election-stage chips use fill tokens, not light-only white': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 59,
+    "message": "'Names use `--color-text-link`, not `--el-color-primary`': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 71,
+    "message": "'Leftover screens use the same tokens (Front Desk / voter / profile / join)': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 98,
+    "message": "'Warning banners and leftover fills use semantic tokens': no **Type:** field — fill it in the next time the entry is touched"
+   },
+   {
+    "severity": "warning",
+    "code": "W101",
+    "path": "context/theme.md",
+    "line": 120,
+    "message": "'Branch badge and audit muted dashes use shared tokens': no **Type:** field — fill it in the next time the entry is touched"
+   }
+  ]
  },
  "exported": true,
  "bodies": "state.body.json"
