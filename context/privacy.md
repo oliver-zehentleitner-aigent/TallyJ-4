@@ -2,6 +2,8 @@
 
 ## Lora is self-hosted
 
+**Id:** cc74c1c0-0a1f-401a-94e5-83d9a2003f7a  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Revisit when:** the landing page stops using Lora, or a font host is added that does not receive the visitor IP
@@ -12,6 +14,8 @@ The landing page uses Lora. Loading it from Google's font servers sends every vi
 
 ## Session Replay stays off online-voter routes
 
+**Id:** f86754b6-80d0-4590-8f20-2b89d1315126  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Revisit when:** voter ballot choices are no longer a list of names in a stable order, or Session Replay is removed

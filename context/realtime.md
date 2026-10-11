@@ -288,6 +288,8 @@ ASP.NET Core SignalR **event names are case-sensitive**. SPA listeners use **cam
 
 ## Election hub joins require election access
 
+**Id:** 4c78d066-3e5b-45a0-a164-3a47f37d4b16  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** same election-scoped authorization pass as teller APIs; `MainHub.JoinElections` already filtered `JoinElectionUsers`  

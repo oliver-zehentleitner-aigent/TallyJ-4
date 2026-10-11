@@ -2,6 +2,8 @@
 
 ## Owner paid-send gate (issue #371 slice 3a)
 
+**Id:** 297c7abf-3aac-4b2c-aa6e-5b5bd767bbcc  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371 comments of 2026-10-06 (owner abuse, flagged-upload threshold, block Online)  
@@ -23,6 +25,8 @@ A blocked `requestCode` returns the same phrase key as a successful send (`votin
 
 ## Caps and the kill switch
 
+**Id:** 5092d617-43cd-4e4e-823d-76ac6e75a89c  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371 slice 3a  
@@ -38,6 +42,8 @@ Every outcome is a `CodeSendLogs` row: election, owner, channel, masked destinat
 
 ## Alerts
 
+**Id:** c7a619a6-afe2-4605-9a9e-1770078f099d  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371; Sentry ASP.NET Core default `MinimumEventLevel` is Error  
@@ -49,6 +55,8 @@ A flagged election, a cap hit, and an owner's first paid send email `AntiAbuse:A
 
 ## Voter-list flag
 
+**Id:** 6f65bc23-5c5c-43b5-b548-f56d07384c89  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371 slice 3a  
@@ -66,6 +74,8 @@ Active rows are stored in `VoterContactFlags` (masked value truncated to 80 char
 
 ## Neutral requestCode reply (issue #371 slice 2)
 
+**Id:** 388c0333-af97-4375-97f8-373d1dc9fbaa  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371  
@@ -81,6 +91,8 @@ The reply waits at least `AntiAbuse:RequestCodeMinimumMilliseconds` (default 200
 
 ## Phone-prefix cap (issue #371)
 
+**Id:** da2ada9a-7de3-4293-a418-98ca82048e53  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** issue #371  

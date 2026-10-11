@@ -251,6 +251,8 @@ See `context/realtime.md` for hub groups, replay-on-join, and provider wiring.
 
 ## Site-wide super admin is an email list (issue #371)
 
+**Id:** a6654ec6-7310-4d47-b28a-c9d95b90d134  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** existing `SuperAdmin:Emails` policy; issue #371 slice 3a  
@@ -266,6 +268,8 @@ Paid-send caps, the kill switch, and voter-list flags are in `context/anti-abuse
 
 ## Teller APIs are election-scoped
 
+**Id:** 97d15564-3d65-4e0d-8f2c-7c0bfb4183fb  
+**Type:** decision  
 **Status:** active  
 **Evidence:** confirmed  
 **Source:** launch review of teller controllers that used only `[Authorize]`; existing `DuplicateElection_WhenUserIsNotOwner_ReturnsForbidden` and `ResetElection_WhenUserIsNotOwner_ReturnsForbidden` (403); `ResultsControllerTests.CalculateTally_WithInvalidElectionGuid_ReturnsNotFound` (404 when the election row is absent)  
