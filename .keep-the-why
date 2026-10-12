@@ -10,7 +10,7 @@ README, for what Keep the Why actually is.
 - capture-confirmation: confirm-when-unsure
 - source-reference: never
 - canonical: https://github.com/glittle/TallyJ-4
-- dashboard-state: https://glittle.github.io/TallyJ-4/dashboard/live/state.json
+- dashboard-state: https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/state.json
 - pinned-version: 0.20.1
 - pinned-path: .agents/skills/keep-the-why/SKILL.md
 <!-- /keep-the-why:config -->

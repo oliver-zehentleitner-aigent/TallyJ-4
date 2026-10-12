@@ -2,7 +2,7 @@ name: docs
 
 # Documentation site on GitHub Pages: docs/, README.md as the home page and
 # context/ as "Why it is built this way" (mkdocs.yml), plus the Keep the Why
-# dashboard on /dashboard/live/ — context/ with its Git history, the live
+# dashboard on /keep-the-why-dashboard/ — context/ with its Git history, the live
 # badges and state.json. Pull requests that touch any of it build only, as a
 # check; a push to main (or a manual run) builds and deploys. Pages must be
 # set to "GitHub Actions" as its source (Settings → Pages → Build and
@@ -43,11 +43,11 @@ jobs:
         run: |
           pip install --quiet "mkdocs>=1.6.1,<2" "mkdocs-material>=9.7"
           mkdocs build --strict
-      - name: Export the Keep the Why dashboard into site/dashboard/live
+      - name: Export the Keep the Why dashboard into site/keep-the-why-dashboard
         run: |
           pip install --quiet keep-the-why-dashboard
-          ktw-dashboard --export site/dashboard/live .
-          test -s site/dashboard/live/index.html
+          ktw-dashboard --export site/keep-the-why-dashboard .
+          test -s site/keep-the-why-dashboard/index.html
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site

@@ -1,6 +1,6 @@
 # TallyJ 4
 
-[![Keep the Why · live](https://glittle.github.io/TallyJ-4/dashboard/live/badge-entries.svg)](https://glittle.github.io/TallyJ-4/dashboard/live/)
+[![Keep the Why · live](https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/badge-entries.svg)](https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/)
 
 TallyJ 4 is a full-stack election management and ballot tallying system for Bahá’í communities. The current repository contains a .NET 10 backend API, a Vue 3 + Vite frontend, shared localization assets, and xUnit/Vitest test suites.
 
@@ -10,7 +10,7 @@ TallyJ 4 is a full-stack election management and ballot tallying system for Bah�
 - `Backend.Tests/` - xUnit unit and integration tests
 - `frontend/` - Vue 3 + TypeScript SPA
 - `docs/` - user, administrator, deployment and developer guides, published as the [documentation site](https://glittle.github.io/TallyJ-4/) (`mkdocs.yml`)
-- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); readable on the [documentation site](https://glittle.github.io/TallyJ-4/context/) and the [dashboard](https://glittle.github.io/TallyJ-4/dashboard/live/))
+- `context/` - why the project is built the way it is: decisions, rejected alternatives, constraints ([Keep the Why](https://keepthewhy.com); readable on the [documentation site](https://glittle.github.io/TallyJ-4/context/) and the [dashboard](https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/))
 - `.zenflow/tasks/` - historical planning and reverse-engineering artifacts; useful for background, but not the source of truth for current commands or runtime configuration
 
 ## Local development
