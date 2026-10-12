@@ -6,11 +6,11 @@ README, for what Keep the Why actually is.
 - id: glittle---TallyJ-4
 - context: `context/`
 - init: complete
-- context-schema: 0.20.1
+- context-schema: 0.20.2
 - capture-confirmation: confirm-when-unsure
 - source-reference: never
 - canonical: https://github.com/glittle/TallyJ-4
 - dashboard-state: https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/state.json
-- pinned-version: 0.20.1
+- pinned-version: 0.20.2
 - pinned-path: .agents/skills/keep-the-why/SKILL.md
 <!-- /keep-the-why:config -->
