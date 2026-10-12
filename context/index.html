@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/">
+        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/context/">
       
       
         <link rel="prev" href="../V3_ANALYSIS_COMPARISON/">
@@ -1268,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/" class="md-nav__link">
         
   
   
@@ -1749,9 +1749,10 @@
 <h2 id="9">9<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
 <h2 id="a">A<a class="headerlink" href="#a" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="anti-abuse/">anti-abuse.md</a> — owner approval before SMS, voice, and WhatsApp codes; election allowance, owner daily cap, and phone-prefix cap; neutral requestCode reply; freeze; masked send log; super-admin alerts</li>
 <li><a href="api-contracts/">api-contracts.md</a> — dual API response wrappers and OpenAPI client regeneration</li>
 <li><a href="architecture/">architecture.md</a> — single backend host after domain consolidation; where code lives; social preview URLs are static HTML pinned to production</li>
-<li><a href="auth/">auth.md</a> — JWT identity claims (<code>sub</code> / <code>NameIdentifier</code>); teller vs online-voter cookie transport; IdP-first teller signup; SuperAdmin one-time invite for local email/password</li>
+<li><a href="auth/">auth.md</a> — JWT identity claims (<code>sub</code> / <code>NameIdentifier</code>); teller vs online-voter cookie transport; online ballot identity is the voter session; guest teller login is rate-limited per IP and locked per election; IdP-first teller signup; SuperAdmin one-time invite for local email/password; site-wide super admin is <code>SuperAdmin:Emails</code>; teller APIs require election membership</li>
 </ul>
 <h2 id="b">B<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1791,11 +1792,12 @@
 <ul>
 <li><a href="people-import/">people-import.md</a> — three-action import pipeline (not a Next/Previous wizard)</li>
 <li><a href="people/">people.md</a> - person fields; AgeGroup removed (eligibility is V01/X05); cannot-vote lock after accepted ballot; guest Can Add People / Name not in the List; Confidential X is a named ordinary person</li>
+<li><a href="privacy/">privacy.md</a> — self-hosted Lora (no Google Fonts); Session Replay stays off online-voter routes</li>
 </ul>
 <h2 id="q">Q<a class="headerlink" href="#q" title="Permanent link">&para;</a></h2>
 <h2 id="r">R<a class="headerlink" href="#r" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="realtime/">realtime.md</a> — SignalR hub group naming (not a single <code>election-{guid}</code> pattern)</li>
+<li><a href="realtime/">realtime.md</a> — SignalR hub group naming (not a single <code>election-{guid}</code> pattern); election hub joins require election access</li>
 <li><a href="reports/">reports.md</a> — VotersByArea 18+/18–21 (V01), download-all zip of the existing report list, Front Desk vs analysis voted rule; Analyze SaveManual persists M without re-running Analyze; vote <code>/ tie-break</code> only when a count was entered</li>
 </ul>
 <h2 id="s">S<a class="headerlink" href="#s" title="Permanent link">&para;</a></h2>

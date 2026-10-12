@@ -1,6 +1,6 @@
 {
  "state-json": 2,
- "generated": "2026-10-11T15:39:18Z",
+ "generated": "2026-10-12T10:44:43Z",
  "dashboard": "0.11.0",
  "linter": "0.20.1.0",
  "project": {
@@ -16,7 +16,7 @@
    "capture-confirmation": "confirm-when-unsure",
    "source-reference": "never",
    "canonical": "https://github.com/glittle/TallyJ-4",
-   "dashboard-state": "https://glittle.github.io/TallyJ-4/dashboard/live/state.json",
+   "dashboard-state": "https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/state.json",
    "pinned-version": "0.20.1",
    "pinned-path": ".agents/skills/keep-the-why/SKILL.md"
   },
@@ -25,12 +25,12 @@
   "canonical": "https://github.com/glittle/TallyJ-4",
   "root": "",
   "parent": "",
-  "dashboard_state": "https://glittle.github.io/TallyJ-4/dashboard/live/state.json",
+  "dashboard_state": "https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/state.json",
   "children": [],
   "git": {
    "available": true,
-   "head": "def24f62",
-   "head_full": "def24f6223222e59ef0422f391f25aaa198cdc2f",
+   "head": "49a07077",
+   "head_full": "49a0707722ea482bbfbbc592c89c7ab9798f9c29",
    "branch": "keep-the-why-0.20.1",
    "remote": "github.com/oliver-zehentleitner-aigent/TallyJ-4",
    "upstream": "github.com/glittle/TallyJ-4",

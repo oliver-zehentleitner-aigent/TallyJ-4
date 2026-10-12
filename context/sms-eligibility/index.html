@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/context/sms-eligibility/">
+        <link rel="canonical" href="https://glittle.github.io/TallyJ-4/context/sms-eligibility/">
       
       
       
@@ -821,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="https://oliver-zehentleitner-aigent.github.io/TallyJ-4/dashboard/live/" class="md-nav__link">
+      <a href="https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/" class="md-nav__link">
         
   
   
@@ -1140,7 +1140,7 @@
 <li>Existing open-election registration check (unchanged)</li>
 <li>Then the provider</li>
 </ol>
-<p>Skip logs method + status only (no raw phone or email). Voter-facing message reuses <code>voting.auth.requestCode.invalidPhone</code>. Email / OAuth / kiosk unchanged. <code>WhenRegistered</code> semantics unchanged.</p>
+<p>Skip logs method + status only (no raw phone or email). The voter-facing <code>requestCode</code> reply is the neutral key in <code>context/anti-abuse.md</code>. Email / OAuth / kiosk unchanged. <code>WhenRegistered</code> semantics unchanged.</p>
 <p><strong>Rejected alternative (this slice):</strong> rename the column to <code>Status</code> so email/kiosk rows could share it later. The issue field spec and this slice’s contract are <code>SmsStatus</code>; a generic rename can be a later migration if other identifier types need a status.</p>
 <p><strong>Rejected alternative:</strong> persist the in-code <code>PaidDestinationPhone</code> reason onto an existing <code>OnlineVoter</code> row when the format gate rejects. Useful only when a row already exists; creating a row here would pull in <code>EnsureOnlineVoterForPhoneAsync</code> (later slice). Not done.</p>
 <p><strong>Not in this slice (at the time):</strong> Person UI / Front Desk display, <code>EnsureOnlineVoterForPhoneAsync</code> on Person create/import/update, Twilio status-callback auto-learn (now landed; see below), WhatsAppStatus / GreenAPI <code>checkWhatsapp</code> (#255).</p>
