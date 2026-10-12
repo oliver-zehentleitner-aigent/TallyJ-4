@@ -1,23 +1,23 @@
 {
  "state-json": 2,
- "generated": "2026-10-12T12:48:01Z",
+ "generated": "2026-10-12T14:48:22Z",
  "dashboard": "0.11.1",
  "linter": "0.20.2.0",
  "project": {
   "id": "glittle---TallyJ-4",
   "name": "tallyj-4",
   "context": "context/",
-  "schema": "0.20.1",
+  "schema": "0.20.2",
   "config": {
    "id": "glittle---TallyJ-4",
    "context": "`context/`",
    "init": "complete",
-   "context-schema": "0.20.1",
+   "context-schema": "0.20.2",
    "capture-confirmation": "confirm-when-unsure",
    "source-reference": "never",
    "canonical": "https://github.com/glittle/TallyJ-4",
    "dashboard-state": "https://glittle.github.io/TallyJ-4/keep-the-why-dashboard/state.json",
-   "pinned-version": "0.20.1",
+   "pinned-version": "0.20.2",
    "pinned-path": ".agents/skills/keep-the-why/SKILL.md"
   },
   "personal_defaults": {},
@@ -29,9 +29,9 @@
   "children": [],
   "git": {
    "available": true,
-   "head": "49a07077",
-   "head_full": "49a0707722ea482bbfbbc592c89c7ab9798f9c29",
-   "branch": "keep-the-why-0.20.1",
+   "head": "3110abcc",
+   "head_full": "3110abcc68982744a9412d2c46cf82388c2d25c3",
+   "branch": "keep-the-why-0.20.2",
    "remote": "github.com/oliver-zehentleitner-aigent/TallyJ-4",
    "upstream": "github.com/glittle/TallyJ-4",
    "fork": {
