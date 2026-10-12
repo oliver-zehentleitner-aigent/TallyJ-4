@@ -1,8 +1,8 @@
 {
  "state-json": 2,
- "generated": "2026-10-12T10:44:43Z",
- "dashboard": "0.11.0",
- "linter": "0.20.1.0",
+ "generated": "2026-10-12T12:48:01Z",
+ "dashboard": "0.11.1",
+ "linter": "0.20.2.0",
  "project": {
   "id": "glittle---TallyJ-4",
   "name": "tallyj-4",
